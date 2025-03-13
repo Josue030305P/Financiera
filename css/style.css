@@ -696,9 +696,7 @@ ol {
   list-style-type: none;
 }
 
-img {
-  max-width: 100%;
-}
+
 
 :focus {
   outline-width: 0;
@@ -1153,63 +1151,13 @@ body {
   height: 24px;
 }
 
-.thumbnail {
-  background-image: url(../img/svg/thumbnail.svg);
-  width: 60px;
-  height: 60px;
-}
 
-.time-circle {
-  background-image: url(../img/svg/Bulk/TimeCircle.svg);
-  width: 24px;
-  height: 24px;
-}
-
-.google-drive {
-  background-image: url(../img/svg/GoogleDrive.svg);
-  width: 24px;
-  height: 24px;
-}
-
-.dropbox {
-  background-image: url(../img/svg/dropbox.svg);
-  width: 24px;
-  height: 24px;
-}
-
-.star {
-  background-image: url(../img/svg/Bulk/Star.svg);
-  width: 24px;
-  height: 24px;
-}
-
-.delete {
-  background-image: url(../img/svg/Bulk/Delete.svg);
-  width: 24px;
-  height: 24px;
-}
-
-.search-wrapper svg {
-  stroke: #D6D7E3;
-  position: absolute;
-  left: 11px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  z-index: 1;
-}
 
 .lang-switcher svg {
   stroke: #B9B9B9;
 }
 
-.theme-switcher svg {
-  width: 24px;
-  height: 24px;
-}
+
 
 .theme-switcher circle {
   fill: #D6D7E3;
@@ -1862,9 +1810,7 @@ label {
   padding: 5px 16px;
 }
 
-.users {
-  /* Users Table */
-}
+/*ESTILOS PARA LA TABLA DE LEADS*/
 
 .users-table table {
   width: 100%;
@@ -1876,6 +1822,8 @@ label {
   -webkit-transition: none;
   -o-transition: none;
   transition: none;
+  white-space: nowrap;
+  
 }
 
 .users-table-info {
@@ -1889,26 +1837,10 @@ label {
 
 .users-table-info th {
   font-weight: 500;
+  padding: 10px;
 }
 
-.users-table__checkbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  cursor: pointer;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
 
-.users-table__checkbox input {
-  margin-right: 20px;
-}
 
 .users-table td {
   background-color: #fff;
@@ -1916,6 +1848,7 @@ label {
   border-bottom: 1px solid #EEEEEE;
   padding-top: 15px;
   padding-bottom: 15px;
+  padding: 10px;
 }
 
 .users-table td:first-child {
@@ -1926,38 +1859,11 @@ label {
   font-size: 14px;
 }
 
-.users-table tbody tr.active td {
-  background-color: rgba(47, 73, 209, 0.1);
-}
+
 
 .users-table tbody tr:last-child .users-item-dropdown {
   bottom: 250%;
   top: auto;
-}
-
-.users-table tbody tr:last-child .users-item-dropdown::before {
-  bottom: -10px;
-  top: auto;
-  border-width: 15px 15px 0 15px;
-  border-color: #fff transparent transparent transparent;
-}
-
-.users-table .users-item-dropdown {
-  right: -9px;
-  top: 150%;
-}
-
-.users-table picture {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.users-table img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 7px;
 }
 
 .table-wrapper {
@@ -1978,6 +1884,8 @@ label {
   min-width: 483px;
 }
 
+
+/*Estilos para el menú lateral*/
 .sidebar {
   position: -webkit-sticky;
   position: sticky;
@@ -3258,6 +3166,8 @@ label {
   border-radius: 6px;
 }
 
+
+/*Estilos para el modo oscuro*/
 .darkmode {
   background-color: #11111d;
   /* Navigation */
@@ -4140,6 +4050,33 @@ label {
     max-height: 370px;
   }
 }
+
+
+
+
+/*Estilos propios*/
+
+.text-primary {
+  color:#0061f7;
+  font-weight: bold;
+}
+.text-secondary {
+ color: #444;
+ font-weight: bold;
+}
+.text-danger {
+  color: #f00;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 1199.98px) {
   .sidebar {
