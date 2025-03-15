@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,7 +10,8 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="./css/style.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  
 </head>
 
 <body>
@@ -26,7 +28,7 @@
                 <span class="icon logo" aria-hidden="true"></span>
                 <div class="logo-text">
                     <span class="logo-title">Yonda</span>
-                    <span class="logo-subtitle">Dashboard</span>
+                    <span class="logo-subtitle">Leads</span>
                 </div>
 
             </a>
@@ -38,11 +40,11 @@
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="/"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
+                    <a class="active" href="/"><span class="icon home" aria-hidden="true"></span>Leads</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
-                        <span class="icon document" aria-hidden="true"></span>Posts
+                        <span class="icon document" aria-hidden="true"></span>Contratos
                         <span class="category__btn transparent-btn" title="Open list">
                             <span class="sr-only">Open list</span>
                             <span class="icon arrow-down" aria-hidden="true"></span>
@@ -50,16 +52,16 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="posts.html">All Posts</a>
+                            <a href="app/views/contratos/contratos.add.php">Nuevos contratos</a>
                         </li>
                         <li>
-                            <a href="new-post.html">Add new post</a>
+                            <a href="#">Lista de contratos</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
-                        <span class="icon folder" aria-hidden="true"></span>Categories
+                        <span class="icon folder" aria-hidden="true"></span>Inversionistas
                         <span class="category__btn transparent-btn" title="Open list">
                             <span class="sr-only">Open list</span>
                             <span class="icon arrow-down" aria-hidden="true"></span>
@@ -73,7 +75,7 @@
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
-                        <span class="icon image" aria-hidden="true"></span>Media
+                        <span class="icon image" aria-hidden="true"></span>Contactibilidad
                         <span class="category__btn transparent-btn" title="Open list">
                             <span class="sr-only">Open list</span>
                             <span class="icon arrow-down" aria-hidden="true"></span>
@@ -295,234 +297,129 @@
         <h2 class="main-title">Lista de Leads</h2>
         
         <div class="row">
-          <div class="col-lg-9">
-         
-            <div class="users-table table-wrapper">
-              <table class="posts-table">
+          <div class="table-header">
+            <button class="create-lead">+ Nuevo lead</button>
+            <div class="search-container">
+                <input type="text" placeholder="Buscar lead 🔍">
+               
+            </div>
+            <button class="import-btn">Importar</button>
+            <button class="delete-btn">🗑</button>
+        </div>
+
+
+
+
+
+
+        
+<!-- FORMULARIO PARA AGREGAR UN NUEVO LEAD Y PARA EDITAR -->
+<div id="lead-form" class="form-container">
+  <div class="form-header h2">
+      <h2>Agregar Nuevo Lead</h2>
+      <span class="close-btn">✖</span>
+  </div>
+  
+  <div class="form-body">
+      <label>Nombre</label>
+      <input type="text" placeholder="Ingrese nombre">
+      
+      <label>Email</label>
+      <input type="email" placeholder="Ingrese email">
+      
+      <label>Teléfono</label>
+      <input type="text" placeholder="Ingrese teléfono">
+      
+      <label>Empresa</label>
+      <input type="text" placeholder="Ingrese empresa">
+      
+      <label>Designación</label>
+      <input type="text" placeholder="Ingrese designación">
+      
+      <label>Estado del Lead</label>
+      <select>
+          <option>Seleccionar estado</option>
+          <option>Nuevo</option>
+          <option>En proceso</option>
+          <option>Convertido</option>
+      </select>
+      
+      <label>Información Personal</label>
+      <textarea placeholder="Ingrese información personal"></textarea>
+      
+      <div class="form-footer">
+          <button class="add-btn">+ Agregar Contacto</button>
+          <button class="close-btn">Cerrar</button>
+      </div>
+  </div>
+</div>
+
+
+        <div class="users-table table-wrapper">
+            <table class="posts-table">
                 <thead>
-                  <tr class="users-table-info">
-                    <th>
-                      <label class="users-table__checkbox ms-20">
-                        <input type="checkbox" class="check-all">Thumbnail
-                      </label>
-                    </th>
-                    <th>Comentarios</th>
-                    <th>Apellidos y nombres</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>Action</th>
-                  </tr>
+                    <tr class="users-table-info">
+                        <th>Fecha de Cita</th>
+                        <th>Hora</th>
+                        <th>Prioridad</th>
+                        <th>Ocupación</th>
+                        <th>Apellidos y Nombres</th>
+                        <th>Teléfono</th>
+                        <th>Correo Electrónico</th>
+                        <th>Domicilio</th>
+                        <th>Referencia</th>
+                        <th>Tipo de Documento</th>
+                        <th>Número de Documento</th>
+                        <th>Persona Encargada</th>
+                        <th>Acciones</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="./img/categories/01.webp" type="image/webp"><img src="./img/categories/01.jpg" alt="category"></picture>
-                        </div>
-                      </label>
+                    <tr>
+                        <td>15/03/2025</td>
+                        <td>10:30 AM</td>
+                        <td>Alta</td>
+                        <td>Consulta de mantenimiento</td>
+                        <td>González Pérez, Juan</td>
+                        <td>987654321</td>
+                        <td>juan.gonzalez@example.com</td>
+                        <td>Av. Siempre Viva 742</td>
+                        <td>Frente al parque</td>
+                        <td>DNI</td>
+                        <td>12345678</td>
+                        <td>María López</td>
+                        <td>
+                          <img src="public/icons/edit.svg" alt="Editar edit">
+                          <img src="public/icons/trash.svg" alt="Eliminar lead">
+                        </td>
+                    </tr>
+
+                    <tr>
+                      <td>15/03/2025</td>
+                      <td>10:30 AM</td>
+                      <td>Alta</td>
+                      <td>Consulta de mantenimiento</td>
+                      <td>González Pérez, Juan</td>
+                      <td></td>
+                      <td>987654321</td>
+                      <td>juan.gonzalez@example.com</td>
+                      <td>Av. Siempre Viva 742</td>
+                      <td>Frente al parque</td>
+                      <td>DNI</td>
+                      <td>12345678</td>
+                      <td>María López</td>
+                      <td class="row-actions">
+                        <img src="public/icons/edit.svg" alt="Editar lead" class="edit-lead">
+                        <img src="public/icons/trash.svg" alt="Eliminar lead" class="delete-lead">
                     </td>
-                    <td>
-                      Starting your traveling blog with Vasco
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-04.webp" type="image/webp"><img src="./img/avatar/avatar-face-04.png" alt="User Name"></picture>
-                        Jenny Wilson
-                      </div>
-                    </td>
-                    <td><span class="badge-pending">Pending</span></td>
-                    <td>17.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="./img/categories/02.webp" type="image/webp"><img src="./img/categories/02.jpg" alt="category"></picture>
-                        </div>
-                      </label>
-                    </td>
-                    <td>
-                      Start a blog to reach your creative peak
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name"></picture>
-                        Annette Black
-                      </div>
-                    </td>
-                    <td><span class="badge-pending">Pending</span></td>
-                    <td>23.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="./img/categories/03.webp" type="image/webp"><img src="./img/categories/03.jpg" alt="category"></picture>
-                        </div>
-                      </label>
-                    </td>
-                    <td>
-                      Helping a local business reinvent itself
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-02.webp" type="image/webp"><img src="./img/avatar/avatar-face-02.png" alt="User Name"></picture>
-                        Kathryn Murphy
-                      </div>
-                    </td>
-                    <td><span class="badge-active">Active</span></td>
-                    <td>17.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="./img/categories/04.webp" type="image/webp"><img src="./img/categories/04.jpg" alt="category"></picture>
-                        </div>
-                      </label>
-                    </td>
-                    <td>
-                      Caring is the new marketing
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-05.webp" type="image/webp"><img src="./img/avatar/avatar-face-05.png" alt="User Name"></picture>
-                        Guy Hawkins
-                      </div>
-                    </td>
-                    <td><span class="badge-active">Active</span></td>
-                    <td>17.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="./img/categories/01.webp" type="image/webp"><img src="./img/categories/01.jpg" alt="category"></picture>
-                        </div>
-                      </label>
-                    </td>
-                    <td>
-                      How to build a loyal community online and offline
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name"></picture>
-                        Robert Fox
-                      </div>
-                    </td>
-                    <td><span class="badge-active">Active</span></td>
-                    <td>17.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                          <picture><source srcset="./img/categories/03.webp" type="image/webp"><img src="./img/categories/03.jpg" alt="category"></picture>
-                        </div>
-                      </label>
-                    </td>
-                    <td>
-                      How to build a loyal community online and offline
-                    </td>
-                    <td>
-                      <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name"></picture>
-                        Robert Fox
-                      </div>
-                    </td>
-                    <td><span class="badge-active">Active</span></td>
-                    <td>17.04.2021</td>
-                    <td>
-                      <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                          <div class="sr-only">More info</div>
-                          <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                          <li><a href="##">Edit</a></li>
-                          <li><a href="##">Quick edit</a></li>
-                          <li><a href="##">Trash</a></li>
-                        </ul>
-                      </span>
-                    </td>
+                    
                   </tr>
                 </tbody>
-              </table>
-            </div>
-          </div>
-         
+            </table>
+        </div>
+        
+      
+          
         </div>
       </div>
     </main>
@@ -551,6 +448,77 @@
 <script src="plugins/feather.min.js"></script>
 <!-- Custom scripts -->
 <script src="js/script.js"></script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const leadForm = document.getElementById("lead-form");
+
+    if (!leadForm) {
+        console.error("No se encontró el formulario con ID 'lead-form'");
+        return;
+    }
+
+    const formTitle = leadForm.querySelector(".form-header h2");
+    const addButton = leadForm.querySelector(".add-btn");
+
+    function openForm(editing = false, leadData = {}) {
+        leadForm.style.display = "block";
+
+        formTitle.textContent = editing ? "Editar Lead" : "Agregar Nuevo Lead";
+        addButton.textContent = editing ? "Guardar Cambios" : "+ Agregar Contacto";
+
+        if (editing) {
+            document.querySelector("input[placeholder='Ingrese nombre']").value = leadData.name || "";
+            document.querySelector("input[placeholder='Ingrese email']").value = leadData.email || "";
+            document.querySelector("input[placeholder='Ingrese teléfono']").value = leadData.phone || "";
+            document.querySelector("input[placeholder='Ingrese empresa']").value = leadData.company || "";
+            document.querySelector("input[placeholder='Ingrese designación']").value = leadData.designation || "";
+            document.querySelector("textarea[placeholder='Ingrese información personal']").value = leadData.info || "";
+        } else {
+            leadForm.querySelectorAll("input, textarea").forEach(field => field.value = "");
+        }
+    }
+
+    function closeForm() {
+        leadForm.style.display = "none";
+    }
+
+    // Botón para abrir el formulario de creación
+    document.querySelector(".create-lead").addEventListener("click", () => openForm(false));
+
+    // Agregar eventos a los botones de edición
+    document.querySelectorAll(".edit-lead").forEach(button => {
+        button.addEventListener("click", function () {
+            const row = this.closest("tr");
+
+            if (!row) {
+                console.error("No se encontró la fila de la tabla.");
+                return;
+            }
+
+            const tds = row.querySelectorAll("td");
+
+            const leadData = {
+                name: tds[4]?.textContent.trim() || "",
+                email: tds[6]?.textContent.trim() || "",
+                phone: tds[5]?.textContent.trim() || "",
+                company: tds[7]?.textContent.trim() || "",
+                designation: tds[8]?.textContent.trim() || "",
+                info: "" 
+            };
+
+            openForm(true, leadData);
+        });
+    });
+
+    // Botón para cerrar el formulario
+    document.querySelector(".close-btn").addEventListener("click", closeForm);
+});
+
+  </script>
+  
 </body>
 
 </html>

@@ -1917,6 +1917,146 @@ label {
   top: auto;
 }
 
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  padding: 10px;
+  background-color: #1a1a2e;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.search-container {
+  flex-grow: 1; /* Permite que el input ocupe el espacio restante */
+  display: flex;
+  justify-content: center;
+}
+
+.search-container input {
+  width: 100%; 
+  max-width: 200px; 
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: #23233d;
+  color: white;
+  text-align: center;
+}
+
+.import-btn,.delete-btn {
+  padding: 3px;
+  margin: 5px;
+}
+
+.import-btn,.delete-btn,.create-lead {
+  color:#fff;
+  padding: 7px;
+  border-radius: 5px;
+}
+.import-btn {
+  background-color: rgb(24, 184, 24);
+}
+.delete-btn {
+  background-color: rgb(219, 27, 27);
+}
+.create-lead {
+  background-color: #8d2e85;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos del formulario flotante */
+.form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1a1a2e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 350px;
+  display: none; /* Oculto por defecto */
+  z-index: 1000;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-header h2 {
+  color: white;
+  font-size: 18px;
+}
+
+.close-btn {
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  background-color: rgb(233, 35, 35);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.form-body label {
+  color: white;
+  display: block;
+  margin-top: 10px;
+}
+
+.form-body input, .form-body select, .form-body textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background-color: #0f172a;
+  color: white;
+  margin-top: 5px;
+}
+
+textarea {
+  resize: none;
+  height: 60px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.add-btn {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #574bdb;
+}
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------------------*/
+
 .table-wrapper {
   overflow-x: auto;
   overflow-y: hidden;
@@ -3452,6 +3592,18 @@ label {
 .moon-icon {
   display: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (min-width: 576px) {
   .container {
