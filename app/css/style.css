@@ -1018,7 +1018,7 @@ body {
   font-style: normal;
 }
 
-/* Basic config for all custom icons: */
+/* Configuracion para los iconos */
 
 .icon {
   display: inline-block;
@@ -1056,8 +1056,8 @@ body {
   height: 24px;
 }
 
-.folder {
-  background-image: url(../img/svg/Bulk/Folder-white.svg);
+.user-white {
+  background-image: url(../img/svg/Bulk/3-User-white.svg);
   width: 24px;
   height: 24px;
 }
@@ -1188,6 +1188,11 @@ body {
   width: 24px;
   height: 24px;
 }
+
+
+
+
+
 
 .search-wrapper svg {
   stroke: #D6D7E3;
@@ -1959,12 +1964,26 @@ label {
 .import-btn {
   background-color: rgb(24, 184, 24);
 }
-.delete-btn {
+.delete-btn,.delete-lead {
   background-color: rgb(219, 27, 27);
 }
 .create-lead {
   background-color: #8d2e85;
 }
+.edit-lead {
+  background-color: #f5db4a;
+}
+.edit-lead, .delete-lead {
+  transition-duration: 0.3s;
+  padding: 1px;
+}
+
+.edit-lead:hover, .delete-lead:hover {
+  opacity: 0.7; /* Efecto al pasar el mouse */
+  transform: scale(1.1); /* Aumenta un poco el tamaño */
+  cursor: pointer;
+}
+
 
 
 
