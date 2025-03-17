@@ -1,0 +1,89 @@
+
+/* Contenedor del formulario de agregar leads */
+.form-container {
+    max-width: 600px;
+    color: #11111d;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: auto;
+    margin-top: 5%;
+  }
+  
+
+  .form-header {
+
+  }
+
+  
+  /* Título */
+  .form-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor de cada input */
+  .form-group {
+    margin-bottom:25px;
+    text-align: left;
+  }
+
+  
+  /* Etiquetas */
+  .form-group label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Campos de entrada */
+  .search-input, .select-box, .textarea-box, .ocupacion {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  /* Textarea */
+  .textarea-box {
+    resize: none;
+    height: 80px;
+  }
+  
+  /* Botón */
+  .add-btn {
+    width: 100%;
+    background: #0061F7;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  .reset-btn {
+    margin-top: 5px;
+    width: 100%;
+    background-color: #f00;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  .add-btn .reset-btn:hover {
+    transform: scale(0.5);
+    
+  }
+  .regresar-btn {
+
+  }
+  
+  

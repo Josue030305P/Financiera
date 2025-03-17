@@ -18,7 +18,7 @@
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="index.html"><span class="icon home" aria-hidden="true"></span>Leads</a>
+                    <a class="active" href="index.html"><span class="icon user-white" aria-hidden="true"></span>Leads</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">

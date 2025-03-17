@@ -1,11 +1,7 @@
 <nav class="main-nav--bg">
   <div class="container main-nav">
     <div class="main-nav-start">
-      <div class="search-wrapper">
-        <i data-feather="search" aria-hidden="true"></i>
-        <!-- Campo de búsqueda -->
-        <input type="text" placeholder="Enter keywords ..." required>
-      </div>
+      
     </div>
 
     <!-- Manejador del manú -->

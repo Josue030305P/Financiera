@@ -275,21 +275,7 @@ legend {
   /* 1 */
 }
 
-/**
- * Add the correct vertical alignment in Chrome, Firefox, and Opera.
- */
 
-progress {
-  vertical-align: baseline;
-}
-
-/**
- * Remove the default vertical scrollbar in IE 10+.
- */
-
-textarea {
-  overflow: auto;
-}
 
 /**
  * 1. Add the correct box sizing in IE 10.
@@ -1988,92 +1974,6 @@ label {
 
 
 
-
-
-
-
-
-
-
-/* Estilos del formulario flotante */
-.form-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #1a1a2e;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  width: 350px;
-  display: none; /* Oculto por defecto */
-  z-index: 1000;
-}
-
-.form-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.form-header h2 {
-  color: white;
-  font-size: 18px;
-}
-
-.close-btn {
-  color: white;
-  cursor: pointer;
-  font-size: 18px;
-  background-color: rgb(233, 35, 35);
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.form-body label {
-  color: white;
-  display: block;
-  margin-top: 10px;
-}
-
-.form-body input, .form-body select, .form-body textarea {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  background-color: #0f172a;
-  color: white;
-  margin-top: 5px;
-}
-
-textarea {
-  resize: none;
-  height: 60px;
-}
-
-.form-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.add-btn {
-  background-color: #6c5ce7;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.add-btn:hover {
-  background-color: #574bdb;
-}
-
-
-
-
-
 /*-------------------------------------------------------------------------------------------------------*/
 
 .table-wrapper {
@@ -3373,75 +3273,47 @@ textarea {
   border-radius: 6px;
 }
 
+
+
+/**Estilos para textos*/
+
+.text-primary {color: #0061f7;font-weight: bold;}
+.text-danger {color: #f00;font-weight: bold;}
+.text-secondary {color: #44445a;font-weight: bold;}
+
+
+
+
+
+/*Estilos para el modo socuro*/
+
 .darkmode {
   background-color: #11111d;
-  /* Navigation */
-  /* Sidebar */
-  /* Dropdown */
-  /* Main Title */
-  /* Dashboard */
-  /* Chart */
-  /* Sort bar */
-  /* Table */
-  /* Form */
-  /* Sign up */
-  /* New page  */
-  /* White block */
-  /* Pagination */
-  /* Badges */
-  /* Buttons */
-  /* Footer */
 }
 
-.darkmode .main-nav--bg {
-  background-color: #161624;
+/* Inputs y formularios */
+.darkmode input,
+.darkmode select,
+.darkmode textarea {
+  background-color: #222235 !important;
+  color: #D6D7E3 !important;
+  border: 1px solid #44445a;
 }
 
-.darkmode .search-wrapper input {
-  color: #d6d7e3;
-  background-color: #222235;
+
+.darkmode h2 {
+  color: #EFF0F6 !important;
 }
 
-.darkmode .search-wrapper input::-webkit-input-placeholder {
-  background-color: #222235;
-}
-
-.darkmode .search-wrapper input::-moz-placeholder {
-  background-color: #222235;
-}
-
-.darkmode .search-wrapper input:-ms-input-placeholder {
-  background-color: #222235;
-}
-
-.darkmode .search-wrapper input::-ms-input-placeholder {
-  background-color: #222235;
-}
-
-.darkmode .search-wrapper input::placeholder {
-  background-color: #222235;
-}
-
-.darkmode .gray-circle-btn {
-  background-color: #222235;
-}
-
-.darkmode .sun-icon {
-  display: none;
-}
-
-.darkmode .moon-icon {
-  display: initial;
-  fill: #fff;
-}
-
+/* Navegación y Sidebar */
+.darkmode .main-nav--bg,
 .darkmode .sidebar {
   background-color: #161624 !important;
 }
 
+/* Dropdown */
 .darkmode .dropdown {
   background-color: #11111d;
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -3458,32 +3330,16 @@ textarea {
   color: #b9b9b9;
 }
 
+/* Elementos del Dashboard */
+.darkmode .main-title,
+.darkmode .stat-cards-info__num,
 .darkmode .notification-dropdown__title {
-  color: #D6D7E3;
-}
-
-.darkmode .main-title {
   color: #EFF0F6;
 }
 
-.darkmode .stat-cards-item {
-  background-color: #222235;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.darkmode .stat-cards-info__num {
-  color: #EFF0F6;
-}
-
-.darkmode .chart {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
+.darkmode .stat-cards-item,
 .darkmode #myChart {
   background-color: #222235;
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -3491,96 +3347,39 @@ textarea {
   background-color: #161624;
 }
 
-.darkmode .users-table {
-  color: #EFF0F6;
-}
-
-.darkmode .users-table-info {
-  border-bottom-color: transparent;
-  color: #EFF0F6;
-}
-
-.darkmode .users-table thead {
-  background-color: #161624;
-}
-
+/* Tablas */
+.darkmode .users-table,
+.darkmode .users-table-info,
+.darkmode .users-table thead,
 .darkmode .users-table td {
   background-color: #222235;
+  color: #EFF0F6;
   border-color: transparent;
-}
-
-.darkmode .users-table tbody tr:last-child .users-item-dropdown::before {
-  border-color: #11111d transparent transparent;
 }
 
 .darkmode .users-table.active td {
   background-color: #2C2C42;
 }
 
-.darkmode .sort-btn {
-  color: #d6d7e3;
-}
-
-.darkmode .form {
-  background-color: #161624;
-}
-
-.darkmode .form-label {
-  color: #D6D7E3;
-}
-
-.darkmode .form-input {
-  background-color: #222235;
-  color: #D6D7E3;
-}
-
-.darkmode .sign-up__title {
-  color: #EFF0F6;
-}
-
-.darkmode .sign-up__subtitle {
-  color: #D6D7E3;
-}
-
-.darkmode .new-page-content input {
-  background-color: #363648;
-  color: #d6d7e3;
-}
-
-.darkmode .new-page-content .ql-toolbar {
-  background-color: #363648;
-  color: #d6d7e3;
-}
-
+/* Formularios */
+.darkmode .form,
 .darkmode .white-block {
-  background-color: #222235;
+  background-color: #161624;
   color: #D6D7E3;
 }
 
+.darkmode .form-label,
 .darkmode .white-block__title {
   color: #D6D7E3;
 }
 
-.darkmode .white-block .radio {
-  background-color: #37374B;
-}
-
-.darkmode .main-content {
-  background-color: #161624;
-}
-
-.darkmode .top-cat-list a {
-  border-color: #37374F;
-}
-
-.darkmode .top-cat-title h3 {
-  color: #EFF0F6;
-}
-
+.darkmode .sign-up__title,
+.darkmode .top-cat-title h3,
 .darkmode .top-cat-list__title {
   color: #EFF0F6;
 }
 
+/* Paginación */
 .darkmode .pagination a {
   opacity: .5;
   color: #FFFFFF;
@@ -3590,11 +3389,7 @@ textarea {
   opacity: 1;
 }
 
-.darkmode .badge-disabled {
-  background-color: rgba(255, 182, 72, 0.1);
-  color: #ffb648;
-}
-
+/* Botones y Footer */
 .darkmode .primary-white-btn {
   border: 1px solid #222235 !important;
   background-color: #161624;
@@ -3604,15 +3399,19 @@ textarea {
   border-top-color: #222235;
 }
 
-.darkmode .menu-toggle--gray {
-  background-image: url(../img/svg/Bulk/Menu-toggle-white.svg);
+/* Iconos de modo oscuro */
+.darkmode .sun-icon {
+  display: none;
+}
+
+.darkmode .moon-icon {
+  display: initial;
+  fill: #fff;
 }
 
 .moon-icon {
   display: none;
 }
-
-
 
 
 
