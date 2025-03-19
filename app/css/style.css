@@ -1911,19 +1911,29 @@ label {
 .table-header {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: 100%;
+  justify-content: space-between; 
+  width: 80%;
   padding: 10px;
   background-color: #1a1a2e;
   border-radius: 8px;
   white-space: nowrap;
+  flex-wrap: wrap; 
+  gap: 10px; 
 }
 
 .search-container {
-  flex-grow: 1; /* Permite que el input ocupe el espacio restante */
+  flex-grow: 1;
   display: flex;
   justify-content: center;
+  min-width: 150px;
 }
+
+.search-container input {
+  flex: 1 1 auto;
+  max-width: 250px; /* Se ajusta mejor a distintos tamaños */
+  min-width: 150px;
+}
+
 
 .search-container input {
   width: 100%; 
@@ -1983,7 +1993,7 @@ label {
 }
 
 .table-wrapper table {
-  min-width: 850px;
+  min-width: 80px;
 }
 
 .table-wrapper table.posts-table {

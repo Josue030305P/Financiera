@@ -21,7 +21,26 @@ $encabezados = [
     'Garantía',
     'Asesor',
     'Acciones'
+  ],
+
+  'Leads' => [
+    'Fecha de cita',
+    'Hora',
+    'Prioridad',
+    'Apellidos y nombres',
+    'Teléfono',
+    'Correo',
+    'Asesor',
+    'Acciones'
+
   ]
+
+
+];
+
+$links = [
+  "Inversionistas" => "nuevo-inversionista.php",
+  "Leads" => "<?=BAS ?>"
 ];
 
 
@@ -35,56 +54,18 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
     <h2 class="main-title">Lista de <?= $tipo ?></h2>
 
     <div class="row">
-      <div class="table-header">
-        <button class="create-lead">+ Nuevo <?= $tipo ?></button>
-        <div class="search-container">
-          <input type="text" placeholder="Buscar <?= $tipo ?> 🔍">
-
-        </div>
+    <div class="table-header">
+    <a href=""><button class="create-lead">+ Nuevo <?= $tipo ?></button></a>
+    <div class="search-container">
+        <input type="text" placeholder="Buscar <?= $tipo ?> 🔍">
+    </div>
+    <div class="header-buttons">
         <button class="import-btn">Exportar</button>
         <button class="delete-btn icon delete"></button>
-      </div>
+    </div>
+</div>
 
-      <!-- FORMULARIO PARA AGREGAR UN NUEVO LEAD Y PARA EDITAR -->
-      <div id="lead-form" class="form-container">
-        <div class="form-header h2">
-          <h2>Agregar Nuevo <?= $tipo ?></h2>
-          <span class="close-btn">✖</span>
-        </div>
 
-        <div class="form-body">
-          <label></label>
-          <input type="text" placeholder="Ingrese nombre">
-
-          <label>Email</label>
-          <input type="email" placeholder="Ingrese email">
-
-          <label>Teléfono</label>
-          <input type="text" placeholder="Ingrese teléfono">
-
-          <label>Empresa</label>
-          <input type="text" placeholder="Ingrese empresa">
-
-          <label>Designación</label>
-          <input type="text" placeholder="Ingrese designación">
-
-          <label>Estado del Lead</label>
-          <select>
-            <option>Seleccionar estado</option>
-            <option>Nuevo</option>
-            <option>En proceso</option>
-            <option>Convertido</option>
-          </select>
-
-          <label>Información Personal</label>
-          <textarea placeholder="Ingrese información personal"></textarea>
-
-          <div class="form-footer">
-            <button class="add-btn">+ Agregar</button>
-            <button class="close-btn">Cerrar</button>
-          </div>
-        </div>
-      </div>
 
 
       <div class="users-table table-wrapper">
@@ -105,7 +86,7 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
             <?php
 
             $datos = [
-              [
+              'Inversionistas' => [
                 'DNI' => '12345678',
                 'Apellidos y nombres' => 'González Pérez, Juan',
                 'Fecha de inicio' => '15/03/2025',
@@ -121,36 +102,55 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
                 'Observacion' => 'Ninguna',
                 'Garantía' => 'Sí',
                 'Asesor' => 'María López',
-                'iconos' => [
+                'Acciones' => [
                   'editar' => BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',
                   'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
                 ]
 
               ],
 
+
+
+              'Leads' => [
+                'Fecha de cita' => '21/03/2025',
+                'Hora' => '15:30pm',
+                'Prioridad' => 'Alta',
+                'Apellidos y nombres' => 'Pilpe Yataco, Josué Isai',
+                'Prioridad' => 'Alta',
+                'Teléfono' => '919482381',
+                'Correo' => 'josue96@gmail.com',
+                'Asesor' => 'Julia',
+                'Acciones' => [
+                  'editar' => BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',
+                  'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
+                ]
+
+              ]
+
             ];
 
-            if (!empty($datos)):
-              foreach ($datos as $fila):
-            ?>
-                <tr>
-                  <?php foreach ($columnas as $columna): ?>
-                    <td><?= htmlspecialchars($fila[$columna] ?? '') ?></td>
-                  <?php endforeach; ?>
-                  <td class="row-actions">
-                    <img src="<?= $fila['iconos']['editar'] ?>" alt="Editar lead" class="edit-lead">
-                    <img src="<?= $fila['iconos']['eliminar'] ?>" alt="Eliminar lead" class="delete-lead">
-                  </td>
-
-                </tr>
-              <?php
-              endforeach;
-            else:
+            if (!empty($datos[$tipo])):
               ?>
               <tr>
-                <td colspan="<?= count($columnas) + 1 ?>" style="text-align: center;">No hay registros disponibles</td>
+                <?php foreach ($columnas as $columna): ?>
+                  <td>
+                    <?php if ($columna === 'Acciones' && is_array($datos[$tipo]['Acciones'] ?? null)): ?>
+                      <img src="<?= $datos[$tipo]['Acciones']['editar'] ?>" alt="Editar" class="edit-lead">
+                      <img src="<?= $datos[$tipo]['Acciones']['eliminar'] ?>" alt="Eliminar" class="delete-lead">
+                    <?php else: ?>
+                      <?= htmlspecialchars($datos[$tipo][$columna] ?? '') ?>
+                    <?php endif; ?>
+                  </td>
+                <?php endforeach; ?>
               </tr>
-            <?php endif; ?>
+              <?php
+            else: ?>
+              <tr>
+              <td colspan="<?= count($columnas) + 1 ?>" style="text-align: center;">No hay registros disponibles</td>
+            </tr>
+          <?php endif; ?>
+            
+             
           </tbody>
 
         </table>
@@ -158,3 +158,6 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
     </div>
   </div>
 </main>
+
+
+
