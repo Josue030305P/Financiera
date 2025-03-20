@@ -26,6 +26,7 @@ html {
 
 body {
   margin: 0;
+ 
 }
 
 /**
@@ -1852,6 +1853,8 @@ label {
 .new-page-content input {
   padding: 5px 16px;
 }
+
+
 /*ESTILOS PARA LA TABLA DE LEADS*/
 
 .users-table table {
@@ -1911,15 +1914,21 @@ label {
 .table-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
-  width: 80%;
+  justify-content: space-between;
+  width: 100%; /* Ajustar al 100% para que coincida con la tabla */
   padding: 10px;
   background-color: #1a1a2e;
   border-radius: 8px;
   white-space: nowrap;
-  flex-wrap: wrap; 
-  gap: 10px; 
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px; /* Separación con la tabla */
 }
+
+.users-table {
+  width: 100%; /* Asegurar que la tabla ocupa todo el ancho */
+}
+
 
 .search-container {
   flex-grow: 1;
@@ -3303,6 +3312,7 @@ label {
 
 /* Inputs y formularios */
 .darkmode input,
+.darkmode, label
 .darkmode select,
 .darkmode textarea {
   background-color: #222235 !important;
@@ -3311,7 +3321,7 @@ label {
 }
 
 
-.darkmode h2 {
+.darkmode h2{
   color: #EFF0F6 !important;
 }
 
@@ -3384,7 +3394,7 @@ label {
 }
 
 .darkmode .sign-up__title,
-.darkmode .top-cat-title h3,
+.darkmode .top-cat-title 
 .darkmode .top-cat-list__title {
   color: #EFF0F6;
 }

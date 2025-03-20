@@ -1,86 +1,99 @@
-
-/* Contenedor del formulario de agregar leads */
 .form-container {
-    max-width: 600px;
-    color: #11111d;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    margin: auto;
-    margin-top: 5%;
-  }
-  
+  max-width: 750px;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: auto;
+  margin-top: 5%;
+}
 
-  .form-header {
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 20px;
+}
 
-  }
+.form-group {
+  text-align: left;
+  margin: 10px;
+}
 
-  
-  /* Título */
-  .form-title {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Contenedor de cada input */
-  .form-group {
-    margin-bottom:25px;
-    text-align: left;
-  }
+.full-width {
+  grid-column: span 2;
+}
 
-  
-  /* Etiquetas */
-  .form-group label {
-    font-size: 14px;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  /* Campos de entrada */
-  .search-input, .select-box, .textarea-box, .ocupacion {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    font-size: 14px;
-  }
-  
-  /* Textarea */
-  .textarea-box {
-    resize: none;
-    height: 80px;
-  }
-  
-  /* Botón */
-  .add-btn {
-    width: 100%;
-    background: #0061F7;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-  }
-  .reset-btn {
-    margin-top: 5px;
-    width: 100%;
-    background-color: #f00;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-  }
-  .add-btn .reset-btn:hover {
-    transform: scale(0.5);
-    
-  }
- 
-  
+/* Estilos de inputs y selects */
+.search-input, .select-box, .textarea-box, .ocupacion, .pais, .telefono, .nombres, .apellidos, .correo {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Textarea */
+.textarea-box {
+  resize: none;
+  height: 80px;
+}
+
+/* Botones */
+.add-btn, .reset-btn {
+  width: 45%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.add-btn {
+  background: #0061F7;
+  color: #fff;
+}
+
+.reset-btn {
+  background-color: #f00;
+  color: #fff;
+}
+
+.add-btn:hover, .reset-btn:hover {
+  transform: scale(1.05);
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.lista-leads {
+  text-decoration: none;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.regresar-btn {
+  background-color: rgba(241, 231, 83, 0.849);
+  color: black;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-decoration: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.regresar-btn:hover {
+  background-color: #d1b600;
+}

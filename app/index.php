@@ -20,7 +20,6 @@
         </div>
 
       
-        
 
     </div>
 
@@ -34,7 +33,6 @@
 
   <!-- Custom scripts -->
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
-
 
 
 

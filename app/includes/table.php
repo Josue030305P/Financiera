@@ -40,12 +40,11 @@ $encabezados = [
 
 $links = [
   "Inversionistas" => "nuevo-inversionista.php",
-  "Leads" => "<?=BAS ?>"
+  "Leads" =>  BASE_URL. "/app/views/leads/leads.add.php"
 ];
 
 
 $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
-
 
 
 ?>
@@ -55,7 +54,10 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
 
     <div class="row">
     <div class="table-header">
-    <a href=""><button class="create-lead">+ Nuevo <?= $tipo ?></button></a>
+    <a href="<?= isset($links[$tipo]) ? $links[$tipo] : '#' ?>">
+    <button class="create-lead">+ Nuevo <?= $tipo ?></button>
+</a>
+
     <div class="search-container">
         <input type="text" placeholder="Buscar <?= $tipo ?> 🔍">
     </div>
@@ -103,12 +105,11 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
                 'Garantía' => 'Sí',
                 'Asesor' => 'María López',
                 'Acciones' => [
-                  'editar' => BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',
+                  'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',BASE_URL . 'app/views/leads/inversionistas.update.php' ],
                   'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
                 ]
 
               ],
-
 
 
               'Leads' => [
@@ -121,7 +122,7 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
                 'Correo' => 'josue96@gmail.com',
                 'Asesor' => 'Julia',
                 'Acciones' => [
-                  'editar' => BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',
+                  'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',BASE_URL . 'app/views/leads/leads.update.php' ],
                   'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
                 ]
 
@@ -135,8 +136,8 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
                 <?php foreach ($columnas as $columna): ?>
                   <td>
                     <?php if ($columna === 'Acciones' && is_array($datos[$tipo]['Acciones'] ?? null)): ?>
-                      <img src="<?= $datos[$tipo]['Acciones']['editar'] ?>" alt="Editar" class="edit-lead">
-                      <img src="<?= $datos[$tipo]['Acciones']['eliminar'] ?>" alt="Eliminar" class="delete-lead">
+                      <a href="<?= $datos[$tipo]['Acciones']['editar'][1] ?>"><img src="<?= $datos[$tipo]['Acciones']['editar'][0] ?>" alt="Editar" class="edit-lead"></a>
+                      <a href=""><img src="<?= $datos[$tipo]['Acciones']['eliminar'] ?>" alt="Eliminar" class="delete-lead"></a>
                     <?php else: ?>
                       <?= htmlspecialchars($datos[$tipo][$columna] ?? '') ?>
                     <?php endif; ?>
