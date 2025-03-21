@@ -40,7 +40,7 @@ $encabezados = [
 
 $links = [
   "Inversionistas" => "nuevo-inversionista.php",
-  "Leads" =>  BASE_URL. "/app/views/leads/leads.add.php"
+  "Leads" =>  BASE_URL."/app/views/leads/leads.add.php"
 ];
 
 
