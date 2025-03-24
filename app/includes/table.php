@@ -47,12 +47,10 @@ $encabezados = [
     'Estado',
     'Acciones'
   ]
-
-
 ];
 
 $links = [
-  "Inversionistas" => "nuevo-inversionista",
+  "Inversionistas" => "inversionista.add",
   "Leads" =>  BASE_URL . "/app/views/leads/leads.add",
   "Contactos" => BASE_URL . "/app/views/contactibilidad/contactos.add"
 ];

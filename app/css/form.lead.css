@@ -6,6 +6,7 @@
   text-align: center;
   margin: auto;
   margin-top: 5%;
+  background: #fff;
 }
 
 .form-grid {
@@ -25,12 +26,17 @@
 }
 
 /* Estilos de inputs y selects */
-.search-input, .select-box, .textarea-box, .ocupacion, .pais, .telefono, .nombres, .apellidos, .correo {
+.search-input, .select-box, .textarea-box, .ocupacion, .pais, .telefono, .nombres, .apellidos, .correo,.nombreempresa,.ruc {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 14px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 /* Textarea */

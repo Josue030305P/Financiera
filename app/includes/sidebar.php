@@ -19,7 +19,7 @@
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="index.html"><span class="icon user-white" aria-hidden="true"></span>Leads</a>
+                    <a class="active" href="<?=BASE_URL?>app"><span class="icon user-white" aria-hidden="true"></span>Leads</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
@@ -48,7 +48,7 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="./views/inversionistas/">Lista de inversionistas</a>
+                            <a href="<?=BASE_URL?>app/views/inversionistas/">Lista de inversionistas</a>
                         </li>
                     </ul>
                 </li>

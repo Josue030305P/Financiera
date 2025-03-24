@@ -13,7 +13,7 @@
             <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
 
-    <div id="lead-form" class="form-container">
+    <div id="lead-form" class="form-container form">
     <h2 class="form-title">Agregar Nuevo Lead</h2>
     <div class="form-header">
         
