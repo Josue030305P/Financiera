@@ -33,19 +33,32 @@ $encabezados = [
     'Asesor',
     'Acciones'
 
+  ],
+
+  'Contactos' => [
+    'Apellidos y nombres',
+    'Asesor',
+    'Correo',
+    'Teléfono',
+    'Ocupación',
+    'Fecha',
+    'Hora',
+    'Comentarios',
+    'Estado',
+    'Acciones'
   ]
 
 
 ];
 
 $links = [
-  "Inversionistas" => "nuevo-inversionista.php",
-  "Leads" =>  BASE_URL."/app/views/leads/leads.add.php"
+  "Inversionistas" => "nuevo-inversionista",
+  "Leads" =>  BASE_URL . "/app/views/leads/leads.add",
+  "Contactos" => BASE_URL . "/app/views/contactibilidad/contactos.add"
 ];
 
 
 $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
-
 
 ?>
 <main class="main users chart-page" id="skip-target">
@@ -53,21 +66,19 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
     <h2 class="main-title">Lista de <?= $tipo ?></h2>
 
     <div class="row">
-    <div class="table-header">
-    <a href="<?= isset($links[$tipo]) ? $links[$tipo] : '#' ?>">
-    <button class="create-lead">+ Nuevo <?= $tipo ?></button>
-</a>
+      <div class="table-header">
+        <a href="<?= isset($links[$tipo]) ? $links[$tipo] : '#' ?>">
+          <button class="create-lead">+ Nuevo <?= $tipo ?></button>
+        </a>
 
-    <div class="search-container">
-        <input type="text" placeholder="Buscar <?= $tipo ?> 🔍">
-    </div>
-    <div class="header-buttons">
-        <button class="import-btn">Exportar</button>
-        <button class="delete-btn icon delete"></button>
-    </div>
-</div>
-
-
+        <div class="search-container">
+          <input type="text" placeholder="Buscar <?= $tipo ?> 🔍">
+        </div>
+        <div class="header-buttons">
+          <button class="import-btn">Exportar</button>
+          <button class="delete-btn icon delete"></button>
+        </div>
+      </div>
 
 
       <div class="users-table table-wrapper">
@@ -105,7 +116,7 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
                 'Garantía' => 'Sí',
                 'Asesor' => 'María López',
                 'Acciones' => [
-                  'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',BASE_URL . 'app/views/leads/inversionistas.update.php' ],
+                  'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg', BASE_URL . 'app/views/leads/inversionistas.update.php'],
                   'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
                 ]
 
@@ -115,43 +126,76 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
               'Leads' => [
                 'Fecha de cita' => '21/03/2025',
                 'Hora' => '15:30pm',
-                'Prioridad' => 'Alta',
                 'Apellidos y nombres' => 'Pilpe Yataco, Josué Isai',
-                'Prioridad' => 'Alta',
+                'Prioridad' => 'Baja',
                 'Teléfono' => '919482381',
                 'Correo' => 'josue96@gmail.com',
                 'Asesor' => 'Julia',
                 'Acciones' => [
-                  'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg',BASE_URL . 'app/views/leads/leads.update.php' ],
+                  'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg', BASE_URL . 'app/views/leads/leads.update.php'],
                   'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
                 ]
 
+              ],
+
+              'Contactos' => [
+                'Apellidos y nombres' => 'Pilpe Yataco, Josué Isai',
+                'Asesor' => 'Julia',
+                'Correo' => 'josue96@gmail.com',
+                'Teléfono' => '919482381',
+                'Ocupación' => 'Contador',
+                'Fecha' => '21/03/2025',
+                'Hora' => '15:30pm',
+                'Comentarios' => 'Muy interesado en el contrato a firmar',
+                'Estado' => 'Cerrado',
+                'Acciones' => [
+                  'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg', BASE_URL . 'app/views/leads/contactos.update.php'],
+                  'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
+                ]
               ]
 
             ];
 
             if (!empty($datos[$tipo])):
-              ?>
+            ?>
               <tr>
                 <?php foreach ($columnas as $columna): ?>
                   <td>
-                    <?php if ($columna === 'Acciones' && is_array($datos[$tipo]['Acciones'] ?? null)): ?>
+                    <?php if ($columna === 'Prioridad'): ?>
+                      <?php
+                      $prioridad = strtolower($datos[$tipo][$columna] ?? '');
+                      $colorClase = '';
+                      switch ($prioridad) {
+                        case 'alta':
+                          $colorClase = 'prioridad-alta';
+                          break;
+                        case 'media':
+                          $colorClase = 'prioridad-media';
+                          break;
+                        case 'baja':
+                          $colorClase = 'prioridad-baja';
+                          break;
+                      }
+                      ?>
+                      <span class="<?= $colorClase ?>"><?= htmlspecialchars($datos[$tipo][$columna] ?? '') ?></span>
+                    <?php elseif ($columna === 'Acciones' && is_array($datos[$tipo]['Acciones'] ?? null)): ?>
                       <a href="<?= $datos[$tipo]['Acciones']['editar'][1] ?>"><img src="<?= $datos[$tipo]['Acciones']['editar'][0] ?>" alt="Editar" class="edit-lead"></a>
                       <a href=""><img src="<?= $datos[$tipo]['Acciones']['eliminar'] ?>" alt="Eliminar" class="delete-lead"></a>
                     <?php else: ?>
                       <?= htmlspecialchars($datos[$tipo][$columna] ?? '') ?>
                     <?php endif; ?>
                   </td>
+
                 <?php endforeach; ?>
               </tr>
-              <?php
+            <?php
             else: ?>
               <tr>
-              <td colspan="<?= count($columnas) + 1 ?>" style="text-align: center;">No hay registros disponibles</td>
-            </tr>
-          <?php endif; ?>
-            
-             
+                <td colspan="<?= count($columnas) + 1 ?>" style="text-align: center;">No hay registros disponibles</td>
+              </tr>
+            <?php endif; ?>
+
+
           </tbody>
 
         </table>
@@ -159,6 +203,3 @@ $columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
     </div>
   </div>
 </main>
-
-
-

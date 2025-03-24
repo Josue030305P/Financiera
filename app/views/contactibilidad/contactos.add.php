@@ -14,10 +14,10 @@
 
 
     <div id="lead-form" class="form-container">
-    <h2 class="form-title">Agregar Nuevo Lead</h2>
+    <h2 class="form-title">Agregar Nuevo Contacto</h2>
     <div class="form-header">
         
-        <a href="<?=BASE_URL?>app/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
+        <a href="<?=BASE_URL?>app/views/contactibilidad/"><span class="regresar-btn"> ⬅️ Lista de contactos</span></a>
     </div>
 
     <div class="form-body">

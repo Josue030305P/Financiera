@@ -3091,6 +3091,25 @@ label {
   width: 100%;
 }
 
+.prioridad-alta {
+  color: red;
+  font-weight: bold;
+}
+
+.prioridad-media {
+  color: rgb(20, 66, 196);
+  font-weight: bold;
+}
+
+.prioridad-baja {
+  color: burlywood;
+  font-weight: bold;
+}
+
+
+
+
+
 .footer {
   border-top: 1px solid #E0E1EA;
   padding-top: 14px;

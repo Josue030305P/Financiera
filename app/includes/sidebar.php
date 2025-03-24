@@ -1,3 +1,4 @@
+<?php require_once 'config.php'; ?>
 <aside class="sidebar">
     <div class="sidebar-start">
         <div class="sidebar-head">
@@ -30,7 +31,7 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="app/views/contratos/contratos.add.php">Nuevos contratos</a>
+                            <a href="app/views/contratos/contratos.add">Nuevos contratos</a>
                         </li>
                         <li>
                             <a href="#">Lista de contratos</a>
@@ -47,7 +48,7 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="./views/inversionistas/inversionistas-list.php">Lista de contratos</a>
+                            <a href="./views/inversionistas/">Lista de inversionistas</a>
                         </li>
                     </ul>
                 </li>
@@ -61,11 +62,9 @@
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="media-01.html">Media-01</a>
+                            <a href="<?= BASE_URL."app/views/contactibilidad/" ?>">Lista de contactos</a>
                         </li>
-                        <li>
-                            <a href="media-02.html">Media-02</a>
-                        </li>
+                       
                     </ul>
                 </li>
                 <li>
