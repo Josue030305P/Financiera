@@ -5,22 +5,19 @@
     <div class="row">
       <div class="table-header">
         <a href="<?= $links[$tipo] ?? '#' ?>">
-          <button class="create-lead">+ Nuevo <?= ($tipo) ?></button>
+          <button class="create-lead">+ Nuevo <?= htmlspecialchars($tipo) ?></button>
         </a>
 
         <div class="search-container">
           <input type="text" placeholder="Buscar <?= htmlspecialchars($tipo) ?> 🔍">
-        
+          <span><img src="<?= BASE_URL ?>app/img/svg/Bulk/Plus.svg">Ver más</span>
         </div>
 
         <div class="header-buttons">
-          <button class="import-btn delete-btn">Exportar</button>
-          <button class="import-btn">Importar</button>
-          <button class=" bg-primary">Ver más</button>
-   
+          <button class="import-btn">Exportar</button>
+          <button class="delete-btn icon delete"></button>
         </div>
       </div>
-
 
       <div class="users-table table-wrapper">
         <table class="posts-table">
@@ -34,10 +31,9 @@
 
           <tbody>
             <?php if (!empty($datos[$tipo])): ?>
-              
-              <tr class="tr-item">
+              <tr>
                 <?php foreach ($columnas as $columna): ?>
-                  <td class="td-item">
+                  <td>
                     <?php if ($columna === 'Prioridad'): ?>
                       <?php
                       $prioridad = strtolower($datos[$tipo][$columna] ?? '');
@@ -62,7 +58,6 @@
                   </td>
                 <?php endforeach; ?>
               </tr>
-
             <?php else: ?>
               <tr>
                 <td colspan="<?= count($columnas) ?>" class="text-center">No hay datos disponibles</td>
@@ -74,9 +69,3 @@
     </div>
   </div>
 </main>
-
-
-
-
-
-

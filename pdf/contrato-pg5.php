@@ -20,7 +20,6 @@
 
     <h5 class="text-left">DECLARO BAJO JURAMENTO LO SIGUIENTE:</h5>
 
-
     <div class="no-break">
 
         <ol>
@@ -51,12 +50,24 @@
 
     <p style="text-align: right;">24 de septiembre del 2024</p>
 
+    <table class="firmas uppercase bold">
+        <tbody>
 
-    <h5 class="text-center">______________________</h5>
+            <tr>
+                <td>______________________</td>
 
-    <p class="text-center uppercase bold" style="text-align: center;">firma</p>
-    <p class="text-center uppercase bold" style="text-align: center;">yaguillo alliaga franchesca brillitte</p>
-    <p class="text-center uppercase bold" style="text-align: center;">dni n° 707814463</p>
+            </tr>
+
+            <tr>
+                <td>yaguillo aliaga franchesca</td>
+
+            </tr>
+            <tr>
+                <td>dni n° 707781463</td>
+            </tr>
+        </tbody>
+    </table>
+
 
 
 

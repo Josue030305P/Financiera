@@ -3,11 +3,15 @@
     max-width: 750px;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
     margin: auto;
     margin-top: 5%;
     
+  }
+
+  .form-header {
+    position: relative;
   }
   
   /* Estilos de la cuadrícula */
@@ -40,8 +44,14 @@
     border: 1px solid #ccc;
     font-size: 14px;
     outline: none;
-  }
   
+  }
+  textarea {
+    resize: none;
+    padding: 10px;
+    border-radius: 5px;
+  
+  }
   /* Ajuste del botón de regreso */
   .regresar-btn {
     background-color: rgba(241, 231, 83, 0.849);

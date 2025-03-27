@@ -1,4 +1,5 @@
 <?php require_once '../../includes/header.php'; ?>
+<?php require_once __DIR__ . "/../../includes/config.php"; ?>
 <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/inversionistas/form.add.css">
 
 <body>
@@ -13,7 +14,7 @@
 
 
             <div  class="form-container form">
-                <h2 class="form-title">Agregar Nuevo Inversionista</h2>
+                <h2 class="form-title">Agregar Contrato</h2>
                 <div class="form-header">
 
 

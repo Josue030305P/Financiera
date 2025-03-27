@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require_once __DIR__ . "/app/includes/config.php"; ?>
+
 
 <head>
   <meta charset="UTF-8">
@@ -9,39 +9,38 @@
   <!-- Favicon -->
   <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
   <!-- Custom styles -->
-  <link rel="stylesheet" href="./css/style.min.css">
+  <link rel="stylesheet" href="<?=BASE_URL?>app/css/style.css">
 </head>
 
 <body>
   <div class="layer"></div>
 <main class="page-center">
   <article class="sign-up">
-    <h1 class="sign-up__title">Welcome back!</h1>
-    <p class="sign-up__subtitle">Sign in to your account to continue</p>
+    <h1 class="sign-up__title">BIENVENIDO</h1>
+    <p class="sign-up__subtitle">Inicia sesión en tu cuenta para continuar</p>
     <form class="sign-up-form form" action="" method="">
       <label class="form-label-wrapper">
-        <p class="form-label">Email</p>
+        <p class="form-label">Correo</p>
         <input class="form-input" type="email" placeholder="Enter your email" required>
       </label>
       <label class="form-label-wrapper">
-        <p class="form-label">Password</p>
+        <p class="form-label">Constraseña</p>
         <input class="form-input" type="password" placeholder="Enter your password" required>
       </label>
-      <a class="link-info forget-link" href="##">Forgot your password?</a>
+      <a class="link-info forget-link" href="##">No recuerdas tu contraseña?</a>
       <label class="form-checkbox-wrapper">
         <input class="form-checkbox" type="checkbox" required>
-        <span class="form-checkbox-label">Remember me next time</span>
+        <span class="form-checkbox-label">Recordarme</span>
       </label>
-      <button class="form-btn primary-default-btn transparent-btn">Sign in</button>
+      <button class="form-btn primary-default-btn transparent-btn">Inicar Sesión</button>
     </form>
   </article>
 </main>
 <!-- Chart library -->
-<script src="./plugins/chart.min.js"></script>
+<script src="/plugins/chart.min.js"></script>
 <!-- Icons library -->
 <script src="plugins/feather.min.js"></script>
 <!-- Custom scripts -->
 <script src="js/script.js"></script>
 </body>
 
-</html>

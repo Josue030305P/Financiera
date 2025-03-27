@@ -1,37 +1,32 @@
+/* Contenedor principal del formulario */
 .form-container {
   max-width: 750px;
   padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin: auto;
   margin-top: 5%;
-  background: #fff;
+  
 }
+.form-header{position: relative;}
 
+/* Estilos de la cuadrícula */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 15px;
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .form-group {
   text-align: left;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .full-width {
   grid-column: span 2;
-}
-
-/* Estilos de inputs y selects */
-.search-input, .select-box, .textarea-box, .ocupacion, .pais, .telefono, .nombres, .apellidos, .correo,.nombreempresa,.ruc {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
 }
 
 .form-group label {
@@ -39,15 +34,49 @@
   margin-bottom: 5px;
 }
 
-/* Textarea */
-.textarea-box {
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+
+}
+textarea {
   resize: none;
-  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+/* Ajuste del botón de regreso */
+.regresar-btn {
+  background-color: rgba(241, 231, 83, 0.849);
+  color: black;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-decoration: none;
+  position: absolute;
+  top: 20%;
+  right: 0;
+  transform: translateY(-50%);
+  transition: background 0.3s;
+}
+
+.regresar-btn:hover {
+  background-color: #d1b600;
 }
 
 /* Botones */
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
 .add-btn, .reset-btn {
-  width: 45%;
+  width: 48%;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -70,36 +99,22 @@
   transform: scale(1.05);
 }
 
-.form-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 
-.lista-leads {
-  text-decoration: none;
-}
+  .full-width {
+    grid-column: span 1;
+  }
 
-.form-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
+  .form-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.regresar-btn {
-  background-color: rgba(241, 231, 83, 0.849);
-  color: black;
-  padding:12px;
-  border-radius: 5px;
-  font-size: 14px;
-  text-decoration: none;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-}
-
-.regresar-btn:hover {
-  background-color: #d1b600;
+  .add-btn, .reset-btn {
+    width: 100%;
+  }
 }

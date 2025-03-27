@@ -1175,6 +1175,11 @@ body {
   width: 24px;
   height: 24px;
 }
+.view-more {
+  background-image: url(../img/svg/Bulk/Plus.svg);
+  width: 24px;
+  height: 24px;
+}
 
 
 
@@ -1416,6 +1421,12 @@ button.disabled:focus {
 
 .secondary-default-btn:hover {
   background-color: rgba(47, 73, 209, 0.1);
+}
+.bg-primary {
+  background-color:rgb(43, 43, 255);
+  color: #fff;
+  padding: 6px;
+  border-radius: 4px;
 }
 
 .flat-btn {
@@ -1926,20 +1937,31 @@ label {
 }
 
 .users-table {
-  width: 100%; /* Asegurar que la tabla ocupa todo el ancho */
+  width: 100%;
 }
-
 
 .search-container {
   flex-grow: 1;
+  gap: 8px;
   display: flex;
   justify-content: center;
   min-width: 150px;
 }
 
+.search-container span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
 .search-container input {
   flex: 1 1 auto;
-  max-width: 250px; /* Se ajusta mejor a distintos tamaños */
+  max-width: 250px; 
   min-width: 150px;
 }
 

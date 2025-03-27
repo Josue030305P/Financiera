@@ -30,11 +30,9 @@
                         </span>
                     </a>
                     <ul class="cat-sub-menu">
+                        
                         <li>
-                            <a href="app/views/contratos/contratos.add">Nuevos contratos</a>
-                        </li>
-                        <li>
-                            <a href="#">Lista de contratos</a>
+                            <a href="<?=BASE_URL?>app/views/contratos/">Lista de contratos</a>
                         </li>
                     </ul>
                 </li>

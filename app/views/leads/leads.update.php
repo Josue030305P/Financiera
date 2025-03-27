@@ -1,5 +1,5 @@
 <?php require_once '../../includes/header.php'; ?>
-<?php require_once __DIR__ . "/../../includes/config.php"; ?>
+
 <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
 
 <body>
@@ -13,7 +13,7 @@
             <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
 
-    <div id="lead-form" class="form-container">
+    <div id="lead-form " class="form-container form">
     <h2 class="form-title">Actualizar</h2>
     <div class="form-header">
         
@@ -24,22 +24,22 @@
         <div class="form-grid">
             <div class="form-group">
                 <label for="apellidos">Apellidos</label>
-                <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos">
+                <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" value="Pilpe Yataco">
             </div>
 
             <div class="form-group">
                 <label for="nombres">Nombres</label>
-                <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres">
+                <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres" value="Josué Isai">
             </div>
 
             <div class="form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono">
+                <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono" value="919482381">
             </div>
 
             <div class="form-group">
                 <label for="correo">Correo</label>
-                <input type="email" id="correo" placeholder="Ingrese su correo" class="correo">
+                <input type="email" id="correo" placeholder="Ingrese su correo" class="correo" value="josueyataco96@gamil.com">
             </div>
 
             <div class="form-group">
@@ -62,12 +62,12 @@
 
             <div class="form-group full-width">
                 <label for="ocupacion">Ocupación</label>
-                <input type="text" id="ocupacion" placeholder="Ingrese una ocupación" class="ocupacion">
+                <input type="text" id="ocupacion" placeholder="Ingrese una ocupación" class="ocupacion" value="contador">
             </div>
 
             <div class="form-group full-width">
                 <label for="comentarios">Comentarios</label>
-                <textarea name="comentarios" id="comentarios" class="textarea-box" placeholder="Ingrese algún comentario"></textarea>
+                <textarea name="comentarios" id="comentarios" class="textarea-box" placeholder="Ingrese algún comentario" value="dsd"></textarea>
             </div>
         </div>
 

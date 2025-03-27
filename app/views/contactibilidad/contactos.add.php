@@ -1,6 +1,6 @@
 <?php require_once '../../includes/header.php'; ?>
 <?php require_once __DIR__ . "/../../includes/config.php"; ?>
-<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/inversionistas/form.add.css">
 
 <body>
 
@@ -13,7 +13,7 @@
             <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
 
-    <div id="lead-form" class="form-container">
+    <div id="lead-form form" class="form-container">
     <h2 class="form-title">Agregar Nuevo Contacto</h2>
     <div class="form-header">
         

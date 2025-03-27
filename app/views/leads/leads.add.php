@@ -1,5 +1,5 @@
 <?php require_once '../../includes/header.php'; ?>
-<?php require_once __DIR__ . "/../../includes/config.php"; ?>
+
 <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
 
 <body>
@@ -67,7 +67,7 @@
 
             <div class="form-group full-width">
                 <label for="comentarios">Comentarios</label>
-                <textarea name="comentarios" id="comentarios" class="textarea-box" placeholder="Ingrese algún comentario"></textarea>
+                <textarea name="comentarios" id="comentarios" class="textarea-box" ></textarea>
             </div>
         </div>
 
