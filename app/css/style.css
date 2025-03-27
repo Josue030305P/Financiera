@@ -3353,12 +3353,12 @@ label {
 
 /* Inputs y formularios */
 .darkmode input,
-.darkmode, label
+.darkmode label,
 .darkmode select,
 .darkmode textarea {
-  background-color: #222235 !important;
+  background-color: #1010149c !important;
   color: #D6D7E3 !important;
-  border: 1px solid #44445a;
+  
 }
 
 

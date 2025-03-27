@@ -138,11 +138,11 @@
     <div class="sidebar-footer">
         <a href="##" class="sidebar-user">
             <span class="sidebar-user-img">
-                <picture><source srcset="./img/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./img/avatar/avatar-illustrated-01.png" alt="User name"></picture>
+                <picture><source srcset="<?= BASE_URL?>app/img/avatar/avatar-illustrated-04.webp" type="image/webp"><img src="<?= BASE_URL?>app/img/avatar/avatar-illustrated-04.png" alt="User name"></picture>
             </span>
             <div class="sidebar-user-info">
-                <span class="sidebar-user__title">Nafisa Sh.</span>
-                <span class="sidebar-user__subtitle">Support manager</span>
+                <span class="sidebar-user__title">María</span>
+                <span class="sidebar-user__subtitle">Soporte</span>
             </div>
         </a>
     </div>

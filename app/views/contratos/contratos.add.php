@@ -1,6 +1,6 @@
 <?php require_once '../../includes/header.php'; ?>
 <?php require_once __DIR__ . "/../../includes/config.php"; ?>
-<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/inversionistas/form.add.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form-add/form.add.css">
 
 <body>
 
@@ -13,11 +13,15 @@
             <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
 
-            <div  class="form-container form">
+            <div class="form-container form">
                 <h2 class="form-title">Agregar Contrato</h2>
                 <div class="form-header">
+                    <div class="form-header">
 
+                        <a href="<?= BASE_URL ?>app/views/contratos/"><span class="regresar-btn"> ⬅️ Lista de
+                                contratos</span></a>
 
+                    </div>
 
                     <div class="form-body">
                         <div class="form-grid">
@@ -33,7 +37,8 @@
 
                             <div class="form-group">
                                 <label for="numdocumento">Documento</label>
-                                <input type="text" id="numdocumento" placeholder="Ingrese su documento" class="numdocumento">
+                                <input type="text" id="numdocumento" placeholder="Ingrese su documento"
+                                    class="numdocumento">
                             </div>
 
                             <div class="form-group">
@@ -62,7 +67,8 @@
 
                             <div class="form-group full-width">
                                 <label for="nombreempresa">Empresa (Opcional)</label>
-                                <input type="text" id="nombreempresa" placeholder="Ingrese nombre de la empresa" class="nombreempresa">
+                                <input type="text" id="nombreempresa" placeholder="Ingrese nombre de la empresa"
+                                    class="nombreempresa">
                             </div>
 
                             <div class="form-group full-width">

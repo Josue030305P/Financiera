@@ -1,6 +1,6 @@
 <?php require_once '../../includes/header.php'; ?>
 <?php require_once __DIR__ . "/../../includes/config.php"; ?>
-<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/inversionistas/form.add.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form-add/form.add.css">
 
 <body>
 
