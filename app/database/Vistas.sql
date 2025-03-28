@@ -1,0 +1,56 @@
+-- Vista para contratos;
+
+CREATE VIEW vista_contratos AS
+SELECT 
+    c.idcontrato,
+    c.fechainicio,
+    c.fechafin,
+    c.moneda,
+    c.capital,
+    c.tiporetorno,
+    p1.nombres AS inversionista,
+    p1.apellidos AS apellidos_inversionista,
+    p2.nombres AS asesor,
+    p2.apellidos AS apellidos_asesor,
+    ent.entidad  AS banco,
+    garant.tipogarantia AS garantia,
+    dgarant.porcentaje AS porcentaje_garantia
+FROM contratos c
+JOIN inversionistas i ON c.idinversionista = i.idinversionista
+JOIN personas p1 ON i.idpersona = p1.idpersona  
+JOIN usuarios u ON i.idasesor = u.idusuario
+JOIN colaboradores col ON u.idcolaborador = col.idcolaborador
+JOIN personas p2 ON col.idpersona = p2.idpersona  
+JOIN numcuentas ncuent ON ncuent.idinversionista = i.idinversionista 
+JOIN entidades ent ON ncuent.identidad = ent.identidad  
+JOIN detallegarantias dgarant ON dgarant.idcontrato = c.idcontrato
+JOIN garantias garant ON dgarant.idgarantia = garant.idgarantia 
+ORDER BY c.fechainicio DESC;
+
+SELECT * FROM vista_contratos;
+
+DROP VIEW lista_leads;
+
+
+
+-- Vista para leads
+CREATE VIEW lista_leads AS
+SELECT 
+    l.idlead,
+    CONCAT(p.nombres, ' ', p.apellidos) AS nombre_completo,
+    p.email,
+    p.telprincipal,
+    c.canal AS canal_contacto,
+    l.fecharegistro,
+    l.prioridad,
+    l.estado,
+    u.usuario AS asesor
+FROM leads l
+JOIN personas p ON l.idpersona = p.idpersona
+JOIN canales c ON l.idcanal = c.idcanal
+LEFT JOIN usuarios u ON l.idasesor = u.idusuario;
+
+
+select * from leads;
+
+select * from contactibilidad;
