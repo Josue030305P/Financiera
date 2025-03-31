@@ -1,5 +1,6 @@
 <?php
 
+
 require_once '../config/Database.php';
 
 class Lead
@@ -28,26 +29,25 @@ class Lead
         return $result;
     }
 
-    public function add(array $data): int
+    public function add(array $data): array
     {
         try {
             $this->conexion->beginTransaction();
-
-            // Insertar en 'personas'
-            $sqlP = "INSERT INTO personas (tipodocumento, numdocumento, idpais, iddistrito, apellidos, nombres, email, telprincipal)
-                     VALUES ('DNI', NULL, ?, ?, ?, ?, ?, ?)";
+    
+            // Insertar en personas
+            $sqlP = "INSERT INTO personas (idpais, apellidos, nombres, email, telprincipal)
+                     VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->conexion->prepare($sqlP);
             $stmt->execute([
                 $data['idpais'],
-                $data['iddistrito'],
                 $data['apellidos'],
                 $data['nombres'],
                 $data['email'],
                 $data['telprincipal']
             ]);
             $idpersona = $this->conexion->lastInsertId();
-
-            // Insertar en 'leads'
+    
+            // Insertar en leads
             $sqlL = "INSERT INTO leads (idasesor, idpersona, idcanal, comentarios, prioridad, ocupacion)
                      VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->conexion->prepare($sqlL);
@@ -59,26 +59,34 @@ class Lead
                 $data['prioridad'],
                 $data['ocupacion']
             ]);
-
+    
             $this->conexion->commit();
-            return $stmt->rowCount();
+            
+            return [
+                'success' => true,
+                'idpersona' => $idpersona,
+                'rows' => $stmt->rowCount()
+            ];
         } catch (PDOException $e) {
             $this->conexion->rollBack();
             throw new Exception($e->getMessage());
         }
     }
+
+   
+
+
 }
 
 
-$lead = new Lead();
 
+/*$elad = new Lead();
 $data = [
     // Datos para personas:
     "idpais"       => 1,
-    "iddistrito"   => 1, 
-    "apellidos"    => "Pilpe Yataco",
-    "nombres"      => "Josué Isai",
-    "email"        => "josueyaatco96@gmail.com",
+    "apellidos"    => "ddd",
+    "nombres"      => "Jggg",
+    "email"        => "josueyaa6@gmail.com",
     "telprincipal" => '919482381',
 
     // Datos para leads:
@@ -89,6 +97,6 @@ $data = [
     "ocupacion"    => "Profesor"
 ];
 
-// $lead->add($data);
-
-var_dump($lead->getAll());
+ 
+var_dump($elad->add($data));
+*/
