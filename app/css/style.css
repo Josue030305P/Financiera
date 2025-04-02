@@ -1926,14 +1926,14 @@ label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%; /* Ajustar al 100% para que coincida con la tabla */
+  width: 100%; 
   padding: 10px;
   background-color: #1a1a2e;
   border-radius: 8px;
   white-space: nowrap;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 10px; /* Separación con la tabla */
+  margin-bottom: 10px; 
 }
 
 .users-table {
@@ -3114,17 +3114,26 @@ label {
 }
 
 .prioridad-alta {
-  color: red;
-  font-weight: bold;
+  color: #fff;
+ background-color: red;
+ padding: 5px;
+ border-radius: 3px;
+font-weight: bold;
 }
 
 .prioridad-media {
-  color: rgb(20, 66, 196);
+  color: #ffffff;
+  background-color: rgb(20, 66, 196);
+  padding: 5px;
+ border-radius: 3px;
   font-weight: bold;
 }
 
 .prioridad-baja {
-  color: burlywood;
+  color: #ffffff;
+  padding: 5px;
+ border-radius: 3px;
+  background-color: burlywood;
   font-weight: bold;
 }
 

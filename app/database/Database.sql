@@ -27,6 +27,8 @@ distrito			VARCHAR(40) NOT NULL,
 CONSTRAINT fk_provincia FOREIGN KEY(idprovincia) REFERENCES provincias(idprovincia)
 )ENGINE=InnoDB;
 
+SELECT * FROM distritos;
+SELECT * FROM canales;
 
 CREATE TABLE roles(
 idrol				INT PRIMARY KEY AUTO_INCREMENT,
@@ -42,10 +44,10 @@ entidad					VARCHAR(45) UNIQUE NOT NULL
 
 CREATE TABLE  personas(
 idpersona			INT  PRIMARY KEY AUTO_INCREMENT,
-tipodocumento		ENUM('DNI','PSP','CEX'),
+tipodocumento		ENUM('DNI','PSP','CEX') DEFAULT 'DNI',
 numdocumento		VARCHAR(12) NULL,
 idpais				INT NOT NULL,
-iddistrito 		INT NOT NULL DEFAULT 0,
+iddistrito 		    INT NOT NULL DEFAULT 0,
 apellidos			VARCHAR(70) NOT NULL,
 nombres				VARCHAR(70) NOT NULL,
 email				VARCHAR(100) UNIQUE NOT NULL,
@@ -57,6 +59,9 @@ CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un nu
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 );
+ALTER TABLE personas MODIFY iddistrito INT NULL  ;
+SELECT * FROM personas;
+-- ALTER TABLE personas MODIFY tipodocumento  ENUM('DNI','PSP','CEX') DEFAULT 'DNI';
 
 
 
@@ -274,7 +279,30 @@ SHOW TABLES ;
 
 INSERT INTO canales(canal) VALUES('Facebook');
 SELECT * FROM canales;
+SELECT * From colaboradores;
+SELECT * FROM personas;
+SELECT * FROM roles;
+SELECT * FROM usuarios;
+UPDATE usuarios SET
+	usuario = "MaríaGomez"
+	WHERE idusuario=2;
+;
+
+UPDATE roles SET
+	rol = "Admin"
+    WHERE idrol = 2;
+
 UPDATE canales SET
-	canal = 'Facebook'
-    WHERE idcanal = 1;
+	canal = 'Instagram'
+    WHERE idcanal = 2;
     
+INSERT INTO pais(pais) VALUES('Perú');
+
+CREATE VIEW list_asesores AS
+
+	SELECT
+ 
+	FROM colaboradores c
+    INNER JOIN 
+    
+SELECT * FROM canales;

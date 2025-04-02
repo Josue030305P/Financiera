@@ -41,7 +41,7 @@ SELECT
     p.email,
     p.telprincipal,
     c.canal AS canal_contacto,
-    l.fecharegistro,
+ DATE_FORMAT(l.fecharegistro, '%d-%m-%Y %H:%i:%s') as fecharegistro,
     l.prioridad,
     l.estado,
     u.usuario AS asesor
@@ -51,6 +51,31 @@ JOIN canales c ON l.idcanal = c.idcanal
 LEFT JOIN usuarios u ON l.idasesor = u.idusuario;
 
 
-select * from leads;
 
-select * from contactibilidad;
+
+-- Vista para sesores
+
+CREATE VIEW list_asesores AS
+SELECT 
+	p.idpersona,
+	CONCAT(p.nombres, ' ',p.apellidos ) AS nombrecompleto,
+    r.rol AS rol_colaborador
+FROM 
+    colaboradores c
+INNER JOIN 
+    roles r ON c.idrol = r.idrol
+INNER JOIN 
+    personas p ON c.idpersona = p.idpersona
+WHERE 
+    r.rol = 'Asesor';
+    
+DROP VIEW list_asesores;
+
+
+
+SELECT * FROM lista_leads;
+SELECT * FROM leads;
+SELECT * FROM personas;
+
+
+SELECT * FROM pais;
