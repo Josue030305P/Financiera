@@ -17,7 +17,7 @@ class Lead
         $result = [];
         try {
 
-            $sql = "SELECT * FROM lista_leads ORDER BY idlead";
+            $sql = "SELECT * FROM lista_leads ORDER BY idlead ";
             $smt = $this->conexion->prepare($sql);
             $smt->execute();
 
@@ -27,6 +27,28 @@ class Lead
         }
 
         return $result;
+    }
+
+   
+    public function getById($id): array
+    {
+        try {
+            $sql = "SELECT l.*, p.idpais, p.apellidos, p.nombres, p.email, p.telprincipal 
+                    FROM leads l 
+                    JOIN personas p ON l.idpersona = p.idpersona 
+                    WHERE l.idlead = ?";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$id]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$result) {
+                throw new Exception("Lead no encontrado");
+            }
+            
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     public function add(array $data): array
@@ -73,30 +95,129 @@ class Lead
         }
     }
 
-   
+    public function update($id, array $data): array
+    {
+        try {
+            $this->conexion->beginTransaction();
+            
+            // Obtener el idpersona del lead
+            $sql = "SELECT idpersona FROM leads WHERE idlead = ?";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$id]);
+            $lead = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$lead) {
+                throw new Exception("Lead no encontrado");
+            }
+            
+            $idpersona = $lead['idpersona'];
+            
+           
+            $sqlP = "UPDATE personas SET 
+                     idpais = ?, 
+                     apellidos = ?, 
+                     nombres = ?, 
+                     email = ?, 
+                     telprincipal = ? 
+                     WHERE idpersona = ?";
+            $stmt = $this->conexion->prepare($sqlP);
+            $stmt->execute([
+                $data['idpais'],
+                $data['apellidos'],
+                $data['nombres'],
+                $data['email'],
+                $data['telprincipal'],
+                $idpersona
+            ]);
+            
+          
+            $sqlL = "UPDATE leads SET 
+                     idasesor = ?, 
+                     idcanal = ?, 
+                     comentarios = ?, 
+                     prioridad = ?, 
+                     ocupacion = ? 
+                     WHERE idlead = ?";
+            $stmt = $this->conexion->prepare($sqlL);
+            $stmt->execute([
+                $data['idasesor'],
+                $data['idcanal'],
+                $data['comentarios'],
+                $data['prioridad'],
+                $data['ocupacion'],
+                $id
+            ]);
+            
+            $this->conexion->commit();
+            
+            return [
+                'success' => true,
+                'rows' => $stmt->rowCount()
+            ];
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function delete($id): array
+    {
+        try {
+            $this->conexion->beginTransaction();
+        
+            $sqlGetPersona = "SELECT idpersona FROM leads WHERE idlead = ?";
+            $stmt = $this->conexion->prepare($sqlGetPersona);
+            $stmt->execute([$id]);
+            $lead = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$lead) {
+                throw new Exception("Lead no encontrado");
+            }
+            
+            $idpersona = $lead['idpersona'];
+            
+            $sqlL = "DELETE FROM leads WHERE idlead = ?";
+            $stmt = $this->conexion->prepare($sqlL);
+            $stmt->execute([$id]);
+            
+            $sqlP = "DELETE FROM personas WHERE idpersona = ?";
+            $stmt = $this->conexion->prepare($sqlP);
+            $stmt->execute([$idpersona]);
+            
+            $this->conexion->commit();
+            
+            return [
+                'success' => true,
+                'rows' => $stmt->rowCount()
+            ];
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function updateEstadoInversionista($id): array
+    {
+        try {
+            $sql = "UPDATE leads SET estado = 'Inversionista' WHERE idlead = ?";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$id]);
+            
+            return [
+                'success' => true,
+                'rows' => $stmt->rowCount()
+            ];
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
+
 
 
 }
 
 
 
-/*$elad = new Lead();
-$data = [
-    // Datos para personas:
-    "idpais"       => 1,
-    "apellidos"    => "ddd",
-    "nombres"      => "Jggg",
-    "email"        => "josueyaa6@gmail.com",
-    "telprincipal" => '919482381',
 
-    // Datos para leads:
-    "idasesor"     => 1,
-    "idcanal"      => 1, 
-    "comentarios"  => "Está algo interesado",
-    "prioridad"    => "Medio", 
-    "ocupacion"    => "Profesor"
-];
-
- 
-var_dump($elad->add($data));
-*/

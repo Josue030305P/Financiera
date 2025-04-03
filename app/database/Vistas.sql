@@ -50,6 +50,7 @@ JOIN personas p ON l.idpersona = p.idpersona
 JOIN canales c ON l.idcanal = c.idcanal
 LEFT JOIN usuarios u ON l.idasesor = u.idusuario;
 
+SELECT * FROM leads;
 
 
 
@@ -67,15 +68,44 @@ INNER JOIN
 INNER JOIN 
     personas p ON c.idpersona = p.idpersona
 WHERE 
-    r.rol = 'Asesor';
+    r.rol = 'Asesor de inversión';
     
-DROP VIEW list_asesores;
+
+
+CREATE VIEW list_inversionistas AS
+SELECT
+    inv.idinversionista,
+    CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto,
+    cont.capital,
+    nc.numcuenta,
+    nc.cci,
+    ent.tipo,
+    ent.entidad,
+    u.usuario 
+
+FROM inversionistas inv
+LEFT JOIN personas p ON inv.idpersona = p.idpersona
+LEFT JOIN numcuentas nc ON inv.idinversionista = nc.idinversionista
+LEFT JOIN entidades ent ON nc.identidad = ent.identidad
+LEFT JOIN contratos cont ON inv.idinversionista = cont.idinversionista
+LEFT JOIN usuarios u ON inv.idasesor = u.idusuario;
+
+SELECT * FROM list_inversionistas 
 
 
 
+
+
+
+SELECT * FROM inversionistas;
+SELECT * FROM entidades
+SELECT * FROM personas;
+SELECT * FROM colaboradores;
+SELECT * FROM usuarios;
 SELECT * FROM lista_leads;
 SELECT * FROM leads;
 SELECT * FROM personas;
-
+SELECT * FROM numcuentas;
+SELECT * FROM contratos;
 
 SELECT * FROM pais;

@@ -1,100 +1,120 @@
 <?php require_once '../../includes/header.php'; ?>
+<?php require_once "../../includes/config.php"; ?>
 
+<!-- Agregar meta tag para URL base -->
+<meta name="base-url" content="<?= BASE_URL ?>">
 <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
 
 <body>
-
     <div class="page-flex">
-
         <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
-
         <div class="main-wrapper">
-
             <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
+            <div id="lead-form" class="form-container form">
+                <h2 class="form-title">Actualizar Lead</h2>
+                <div class="form-header">
+                    <a href="<?=BASE_URL?>app/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
+                </div>
 
-    <div id="lead-form " class="form-container form">
-    <h2 class="form-title">Actualizar</h2>
-    <div class="form-header">
-        
-        <a href="<?=BASE_URL?>app/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
-    </div>
+                <div class="form-body">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" required>
+                        </div>
 
-    <div class="form-body">
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="apellidos">Apellidos</label>
-                <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" value="Pilpe Yataco">
-            </div>
+                        <div class="form-group">
+                            <label for="nombres">Nombres</label>
+                            <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres" required>
+                        </div>
 
-            <div class="form-group">
-                <label for="nombres">Nombres</label>
-                <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres" value="Josué Isai">
-            </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono" maxlength="9" required>
+                        </div>
 
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono" value="919482381">
-            </div>
+                        <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input type="email" id="correo" placeholder="Ingrese su correo" class="correo" required>
+                        </div>
 
-            <div class="form-group">
-                <label for="correo">Correo</label>
-                <input type="email" id="correo" placeholder="Ingrese su correo" class="correo" value="josueyataco96@gamil.com">
-            </div>
+                        <div class="form-group">
+                            <label for="pais">País</label>
+                            <select name="pais" id="pais" class="select-box" required>
+                                <option value="">Seleccione un país</option>
+                            </select>
+                        </div>
 
-            <div class="form-group">
-                <label for="pais">País</label>
-                <select name="pais" id="pais" class="select-box">
-                    <option value="Alta">Perú</option>
-                    <option value="Media">Chile</option>
-                    <option value="Baja">Venezuela</option>
-                </select>
-            </div>
+                        <div class="form-group">
+                            <label for="prioridad">Prioridad</label>
+                            <select name="prioridad" id="prioridad" class="select-box" required>
+                                <option value="">Seleccione prioridad</option>
+                                <option value="Alto">Alto</option>
+                                <option value="Medio">Medio</option>
+                                <option value="Bajo">Bajo</option>
+                            </select>
+                        </div>
 
-            <div class="form-group">
-                <label for="prioridad">Prioridad</label>
-                <select name="prioridad" id="prioridad" class="select-box">
-                    <option value="Alta">Alta</option>
-                    <option value="Media">Media</option>
-                    <option value="Baja">Baja</option>
-                </select>
-            </div>
+                        <div class="form-group">
+                            <label for="asesor">Asesor</label>
+                            <select name="asesor" id="asesor" class="select-box" required>
+                                <option value="">Seleccione un asesor</option>
+                            </select>
+                        </div>
 
-            <div class="form-group full-width">
-                <label for="ocupacion">Ocupación</label>
-                <input type="text" id="ocupacion" placeholder="Ingrese una ocupación" class="ocupacion" value="contador">
-            </div>
+                        <div class="form-group">
+                            <label for="canal">Canal</label>
+                            <select name="canal" id="canal" class="select-box" required>
+                                <option value="">Seleccione un canal</option>
+                                <option value="1">Facebook</option>
+                                <option value="2">WhatsApp</option>
+                                <option value="3">Instagram</option>
+                            </select>
+                        </div>
 
-            <div class="form-group full-width">
-                <label for="comentarios">Comentarios</label>
-                <textarea name="comentarios" id="comentarios" class="textarea-box" placeholder="Ingrese algún comentario" value="dsd"></textarea>
+                        <div class="form-group full-width">
+                            <label for="ocupacion">Ocupación</label>
+                            <input type="text" id="ocupacion" placeholder="Ingrese una ocupación" class="ocupacion">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="comentarios">Comentarios</label>
+                            <textarea name="comentarios" id="comentarios" class="textarea-box"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="button" class="add-btn">Actualizar lead</button>
+                        <button type="button" class="reset-btn">Cancelar</button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="form-footer">
-            <button class="add-btn">Agregar lead</button>
-            <button class=" disabled reset-btn" >Cancelar</button>
-        </div>
     </div>
-</div>
 
-
-        </div>
-
-
-    </div>
-    
-
-    <!-- Chart library -->
+    <!-- Scripts -->
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
-
-    <!-- Icons library -->
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
-
-    <!-- Custom scripts -->
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
-
-
+    
+    <!-- Agregar el nuevo script del formulario -->
+    <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtener el ID del lead de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const leadId = urlParams.get('id');
+            
+            if (leadId) {
+                // Inicializar el formulario con el ID del lead
+                new LeadForm(leadId, true);
+            } else {
+                alert('ID de lead no proporcionado');
+                window.location.href = '<?= BASE_URL ?>app/';
+            }
+        });
+    </script>
 </body>
 
 

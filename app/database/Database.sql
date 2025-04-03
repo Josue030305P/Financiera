@@ -77,7 +77,7 @@ updated_at			DATETIME NULL
 
 )ENGINE=InnoDB;
 
-
+SELECT * FROM inversionistas;
 CREATE TABLE colaboradores(
 idcolaborador   	INT PRIMARY KEY AUTO_INCREMENT,
 idpersona			INT NOT NULL,
@@ -95,6 +95,7 @@ CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol),
 CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
+
 
 
 
@@ -132,7 +133,7 @@ CONSTRAINT fk_idusuario	FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_creacion_inver FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
-
+SELECT * FROM usuarios;
 CREATE TABLE numcuentas(
 idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
 estitular			CHAR(2) NOT NULL DEFAULT 'Si',
@@ -170,11 +171,15 @@ fecharegistro		DATETIME NOT NULL DEFAULT NOW(),
 comentarios			VARCHAR(120) NULL,
 prioridad			ENUM('Bajo','Medio','Alto') NOT NULL,
 ocupacion			VARCHAR(50) NOT NULL,
-estado				VARCHAR(50) NOT NULL DEFAULT 'Nuevo contacto',
+estado				ENUM('Nuevo contacto','En proceso','Inversionista') NOT NULL DEFAULT 'Nuevo contacto',
 CONSTRAINT fk_idasesor FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
 CONSTRAINT idpersona_leads FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
 CONSTRAINT fk_idcanla_leads FOREIGN KEY(idcanal) REFERENCES canales(idcanal)
 )ENGINE=InnoDB;
+
+
+
+
 
 
 CREATE TABLE contactibilidad(
@@ -270,39 +275,12 @@ CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcu
 
 CREATE TABLE accesos(
 idacceso				INT PRIMARY KEY AUTO_INCREMENT,
-idcolaborador_acces		INT NOT NULL,
+idusuario_acceso 		INT NOT NULL,
 fechahora				DATETIME NOT NULL DEFAULT NOW(),
 status_					ENUM('Activo','Inactivo') NOT NULL,
-CONSTRAINT fk_idcolaborador_acces FOREIGN KEY(idcolaborador_acces) REFERENCES colaboradores(idcolaborador)		
+CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios(idusuario) -- Aclarar leugo si es en colabordores o usuarios;
 )ENGINE=InnoDB;
 SHOW TABLES ;
 
-INSERT INTO canales(canal) VALUES('Facebook');
-SELECT * FROM canales;
-SELECT * From colaboradores;
-SELECT * FROM personas;
-SELECT * FROM roles;
-SELECT * FROM usuarios;
-UPDATE usuarios SET
-	usuario = "MaríaGomez"
-	WHERE idusuario=2;
-;
 
-UPDATE roles SET
-	rol = "Admin"
-    WHERE idrol = 2;
 
-UPDATE canales SET
-	canal = 'Instagram'
-    WHERE idcanal = 2;
-    
-INSERT INTO pais(pais) VALUES('Perú');
-
-CREATE VIEW list_asesores AS
-
-	SELECT
- 
-	FROM colaboradores c
-    INNER JOIN 
-    
-SELECT * FROM canales;

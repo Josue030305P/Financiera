@@ -1,43 +1,44 @@
 <?php require_once __DIR__ . "/../../includes/header.php"; ?>
 
-<?php
+<?php 
+
 $tipo = 'Inversionistas';
 
-$encabezados = [
-  'Inversionistas' => ['DNI', 'Apellidos y nombres', 'Fecha de inicio', 'Mes', 'Fecha de termino', 'Capital', '%', 'Monto', 'N° cuenta', 'CCI', 'Entidad', 'Fecha', 'Observacion', 'Garantía', 'Asesor', 'Acciones']
+$configuracionTabla = [
+    'columnas' => [
+        'ID',
+        'Nombres',
+        'Apellidos',
+        'Capital',
+        'N° cuenta',
+        'CCI',
+        'Entidad',
+        'Nombre de entidad',
+        'Asesor',
+        'Acciones'
+    ],
+    'mapeo' => [
+        'ID' => 'idinversionista',
+        'Nombres' => 'nombres',
+        'Apellidos' => 'apellidos',
+        'Capital' => 'capital',
+        'N° cuenta' => 'numcuenta',
+        'CCI' => 'cci',
+        'Entidad' => 'tipo',
+        'Nombre de entidad' =>'entidad' ,
+        'Asesor' => 'usuario'
+    ]
 ];
+
+
+$columnas = $configuracionTabla['columnas'];
 
 $links = [
-  "Inversionistas" => "inversionista.add",
+    "Inversionistas" => BASE_URL . "/app/views/inversionistas/inversionista.add"
 ];
-$columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
-
-$datos = [
-  'Inversionistas' => [
-    'DNI' => '12345678',
-    'Apellidos y nombres' => 'González Pérez, Juan',
-    'Fecha de inicio' => '15/03/2025',
-    'Mes' => 'Marzo',
-    'Fecha de termino' => '15/09/2025',
-    'Capital' => 'S/ 10,000',
-    '%' => '5%',
-    'Monto' => 'S/ 500',
-    'N° cuenta' => '123-456789-0-12',
-    'CCI' => '002-123456789012345678-90',
-    'Entidad' => 'Banco XYZ',
-    'Fecha' => '15/03/2025',
-    'Observacion' => 'Ninguna',
-    'Garantía' => 'Sí',
-    'Asesor' => 'María López',
-    'Acciones' => [
-      'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg', BASE_URL . 'app/views/leads/inversionistas.update.php'],
-      'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
-    ]
-
-  ]
-  ]
-
 ?>
+
+
 
 <body>
 
@@ -56,6 +57,23 @@ $datos = [
     </div>
 
   </div>
+
+  <script src="<?= BASE_URL ?>app/js/dataTable.js"></script>
+    <script>
+    new DataTable({
+        tableId: 'dataTable',
+        apiUrl: 'controllers/InversionistaController.php',
+        tipo: 'Inversionistas',
+        columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
+        mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
+        baseUrl: '<?= BASE_URL ?>',
+        idField: 'idinversionista',
+        customRenderers: {
+            
+        }
+    });
+</script>
+
 
 
 

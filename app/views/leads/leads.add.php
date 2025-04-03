@@ -68,8 +68,8 @@
                             <select name="canal" id="canal" class="select-box" required>
                                 <option value="">Seleccione un canal</option>
                                 <option value="1">Facebook</option>
-                                <option value="2">Instagram</option>
-                                <option value="3">WhatsApp</option>
+                               <option value="2">WhatsApp</option>
+                                <option value="3">Instagram</option>
                                 
                             </select>
                         </div>

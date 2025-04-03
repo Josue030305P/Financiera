@@ -14,7 +14,7 @@
 
 
             <div class="form-container form">
-                <h2 class="form-title">Agregar Nuevo Inversionista</h2>
+                <h2 class="form-title">Actualizar Inversionista</h2>
                 <div class="form-header">
 
                     <a href="<?= BASE_URL ?>app/views/inversionistas/"><span class="regresar-btn"> ⬅️ Inversionistas</span></a>
@@ -26,17 +26,17 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label>
-                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" disabled>
+                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos">
                         </div>
 
                         <div class="form-group">
                             <label for="nombres">Nombres</label>
-                            <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres" disabled>
+                            <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres">
                         </div>
 
                         <div class="form-group">
                             <label for="tipodocumento">Tipo de documento</label>
-                            <select id="tipodocumento" class="select-box" disabled>
+                            <select id="tipodocumento" class="select-box">
                                 <option value="DNI">DNI</option>
                                 <option value="RUC">RUC</option>
                                 <option value="CE">CE</option>
@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <label for="numdocumento">Número de Documento</label>
                             <input type="text" id="numdocumento" placeholder="Ingrese su documento"
-                                class="numdocumento" maxlength="12">
+                                class="numdocumento">
                         </div>
 
 
@@ -58,35 +58,20 @@
 
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
-                            <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono" maxlength="9" disabled>
+                            <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono">
                         </div>
 
                         <div class="form-group">
                             <label for="correo">Correo</label>
-                            <input type="email" id="correo" placeholder="Ingrese su correo" class="correo" disabled>
+                            <input type="email" id="correo" placeholder="Ingrese su correo" class="correo">
                         </div>
 
                         <div class="form-group">
                             <label for="pais">País</label>
-                            <select id="pais" class="select-box" disabled>
+                            <select id="pais" class="select-box">
                                 <option value="">Seleccione un país</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="distrito">Distrito</label>
-                            <select id="distrito" class="select-box">
-                                <option value="">Seleccione un distrito</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="domicilio">Domicilio</label>
-                            <input type="text" id="domicilio" placeholder="Ingrese el domicilio" class="domicilio">
-                        </div>
-                        <div class="form-group">
-                            <label for="referencia">Referencia</label>
-                            <input type="text" id="referencia" placeholder="Ingrese una referencia" class="referencia">
-                        </div>
-
 
                         <div class="form-group full-width">
                             <label for="nombreempresa">Empresa (Opcional)</label>
@@ -99,8 +84,7 @@
                             <input type="text" id="ruc" placeholder="Ingrese RUC de la empresa" class="ruc">
                         </div>
 
-                     
-                        </div>
+                      
 
                         <div class="form-group">
                             <label for="estado">Estado</label>
@@ -109,18 +93,11 @@
                                 <option value="Inactivo">Inactivo</option>
                             </select>
                         </div>
-
-                        <div class="form-group">
-                            <label for="asesor">Asesor</label>
-                            <select id="asesor" class="select-box" disabled>
-                                <option value="">Seleccione un asesor</option>
-                            </select>
-                        </div>
                     </div>
 
                     <div class="form-footer">
-                        <button class="add-btn">Agregar Inversionista</button>
-                        <button class="reset-btn">Cancelar</button>
+                        <button class="add-btn">Actualizar Inversionista</button>
+                        <button class="reset-btn" type="reset">Cancelar</button>
                     </div>
                 </div>
 
@@ -146,9 +123,16 @@
     <script src="<?= BASE_URL ?>app/js/inversionista.form.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const inversionistaId = urlParams.get('id');
             
-            new InversionistaForm();
+            if (inversionistaId) {
+                new InversionistaForm(inversionistaId, true);
+            } else {
+                alert('ID de inversionista no proporcionado');
+                window.location.href = '<?= BASE_URL ?>app/views/inversionistas/';
+            }
         });
     </script>
 
-</body>
+</body> 

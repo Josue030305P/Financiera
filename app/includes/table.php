@@ -3,15 +3,16 @@
         <h2 class="main-title">Lista de <?= htmlspecialchars($tipo) ?></h2>
 
         <div class="row">
-       
+
             <div class="table-header">
                 <a href="<?= $links[$tipo] ?? '#' ?>">
                     <button class="create-lead">+ Nuevo <?= ($tipo) ?></button>
                 </a>
+                
 
                 <div class="search-container">
-                    <input type="text" id="searchInput" 
-                           placeholder="Buscar <?= htmlspecialchars($tipo) ?> 🔍">
+                    <input type="text" id="searchInput" placeholder="Buscar <?= htmlspecialchars($tipo) ?> 🔍">
+
                 </div>
 
                 <div class="header-buttons">
@@ -21,7 +22,7 @@
                 </div>
             </div>
 
-     
+
             <div class="users-table table-wrapper">
                 <table class="posts-table" id="dataTable">
                     <thead>
@@ -32,12 +33,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </main>
-
-

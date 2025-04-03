@@ -45,6 +45,7 @@ $links = [
         <div class="main-wrapper">
             <?php require_once "./includes/navbar.php"; ?>
             <?php require_once "./includes/table.php" ?>
+          
         </div>
     </div>
 
@@ -57,12 +58,19 @@ $links = [
         tipo: 'leads',
         columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
         mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
-        baseUrl: '<?= BASE_URL ?>'
+        baseUrl: '<?= BASE_URL ?>',
+        idField: 'idlead',
+       
     });
+
+    
 </script>
 
-    <!-- Otros scripts -->
+
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
+    
+
+   
 </body>

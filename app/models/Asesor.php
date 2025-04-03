@@ -15,19 +15,15 @@ class Asesor
     {
         $result = [];
         try {
-
             $sql = "SELECT * FROM list_asesores";
-            $smt = $this->conexion->prepare($sql);
-            $smt->execute();
-
-            $result = $smt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
-
         return $result;
     }
-
 }
 
 
