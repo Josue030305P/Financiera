@@ -1,7 +1,7 @@
 <?php require_once '../../includes/header.php'; ?>
 <?php require_once "../../includes/config.php"; ?>
 
-<!-- Agregar meta tag para URL base -->
+
 <meta name="base-url" content="<?= BASE_URL ?>">
 <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
 
@@ -93,21 +93,22 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
+ 
     
-    <!-- Agregar el nuevo script del formulario -->
+
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Obtener el ID del lead de la URL
+            
             const urlParams = new URLSearchParams(window.location.search);
             const leadId = urlParams.get('id');
             
             if (leadId) {
-                // Inicializar el formulario con el ID del lead
+                
                 new LeadForm(leadId, true);
             } else {
                 alert('ID de lead no proporcionado');

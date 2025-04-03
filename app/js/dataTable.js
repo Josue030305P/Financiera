@@ -1,5 +1,4 @@
 class DataTable {
-
     constructor(options) {
         this.tableId = options.tableId;
         this.apiUrl = options.apiUrl;
@@ -27,6 +26,12 @@ class DataTable {
             this.renderizarTabla(data);
         } catch (error) {
             console.error('Error al cargar datos:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al cargar los datos',
+                confirmButtonColor: '#3085d6'
+            });
         }
     }
 
@@ -42,11 +47,9 @@ class DataTable {
                 const td = document.createElement('td');
                 td.className = 'td-item';
 
-                
                 if (this.customRenderers[columna]) {
                     td.innerHTML = this.customRenderers[columna](item);
                 } else {
-                  
                     switch(columna) {
                         case 'Prioridad':
                             const prioridad = item[this.mapeo[columna]];
@@ -71,7 +74,6 @@ class DataTable {
                             break;
                         default:
                             td.textContent = this.obtenerValorCampo(item, columna);
-                            
                     }
                 }
                 row.appendChild(td);
@@ -85,7 +87,6 @@ class DataTable {
         const campo = this.mapeo[columna];
         
         if (Array.isArray(campo)) {
-            
             return campo.map(c => item[c]).join(' ');
         } else if (campo) {
             return item[campo] || '—';
@@ -99,16 +100,32 @@ class DataTable {
             <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
                 <img src="${this.baseUrl}app/img/svg/Bulk/Edit-white.svg" alt="Editar" class="edit-lead">
             </a>
-            <a href="#" onclick="return confirm('¿Eliminar?') && window.dataTable.eliminarRegistro(${id})">
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
                 <img src="${this.baseUrl}app/img/svg/Bulk/Delete.svg" alt="Eliminar" class="delete-lead">
             </a>
             <a href="${this.baseUrl}app/views/inversionistas/inversionista.add?lead_id=${id}">
                 <button class="btn-addInversionista">
                     <img src="${this.baseUrl}app/img/svg/Bulk/3-User-white.svg" alt="Inversionista" class="icon-inversionista">
-                
                 </button>
             </a>
         `;
+    }
+
+    async confirmarEliminacion(id) {
+        const result = await Swal.fire({
+            title: '¿Eliminar?',
+            text: "¿Estás seguro de que deseas eliminar este registro?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        });
+
+        if (result.isConfirmed) {
+            await this.eliminarRegistro(id);
+        }
     }
 
     async eliminarRegistro(id) {
@@ -120,17 +137,30 @@ class DataTable {
             const result = await response.json();
             
             if (result.status === 'success') {
-                alert('Registro eliminado correctamente');
-                this.cargarDatos(); 
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Registro eliminado correctamente',
+                    confirmButtonColor: '#3085d6'
+                });
+                this.cargarDatos();
             } else {
-                alert('Error al eliminar: ' + result.message);
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al eliminar: ' + result.message,
+                    confirmButtonColor: '#3085d6'
+                });
             }
         } catch (error) {
             console.error('Error al eliminar:', error);
-            alert('Error al eliminar el registro');
+            await Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al eliminar el registro',
+                confirmButtonColor: '#3085d6'
+            });
         }
-        
-        return false;
     }
 
     initEventListeners() {
@@ -148,7 +178,6 @@ class DataTable {
         }
     }
 }
-
 
 
 

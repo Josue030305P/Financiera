@@ -1,40 +1,40 @@
 <?php require_once __DIR__ . "/../../includes/header.php"; ?>
 
-<?php 
+<?php
 
 $tipo = 'Inversionistas';
 
 $configuracionTabla = [
-    'columnas' => [
-        'ID',
-        'Nombres',
-        'Apellidos',
-        'Capital',
-        'N° cuenta',
-        'CCI',
-        'Entidad',
-        'Nombre de entidad',
-        'Asesor',
-        'Acciones'
-    ],
-    'mapeo' => [
-        'ID' => 'idinversionista',
-        'Nombres' => 'nombres',
-        'Apellidos' => 'apellidos',
-        'Capital' => 'capital',
-        'N° cuenta' => 'numcuenta',
-        'CCI' => 'cci',
-        'Entidad' => 'tipo',
-        'Nombre de entidad' =>'entidad' ,
-        'Asesor' => 'usuario'
-    ]
+  'columnas' => [
+    'ID',
+    'Nombres',
+    'Apellidos',
+    'Capital',
+    'N° cuenta',
+    'CCI',
+    'Entidad',
+    'Nombre de entidad',
+    'Asesor',
+    'Acciones'
+  ],
+  'mapeo' => [
+    'ID' => 'idinversionista',
+    'Nombres' => 'nombres',
+    'Apellidos' => 'apellidos',
+    'Capital' => 'capital',
+    'N° cuenta' => 'numcuenta',
+    'CCI' => 'cci',
+    'Entidad' => 'tipo',
+    'Nombre de entidad' => 'entidad',
+    'Asesor' => 'usuario'
+  ]
 ];
 
 
 $columnas = $configuracionTabla['columnas'];
 
 $links = [
-    "Inversionistas" => BASE_URL . "/app/views/inversionistas/inversionista.add"
+  "Inversionistas" => BASE_URL . "/app/views/inversionistas/inversionista.add"
 ];
 ?>
 
@@ -51,41 +51,48 @@ $links = [
       <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
       <?php
-    
+
       require_once __DIR__ . "/../../includes/table.php"
-        ?>
+      ?>
     </div>
 
   </div>
 
   <script src="<?= BASE_URL ?>app/js/dataTable.js"></script>
-    <script>
+  <script>
     new DataTable({
-        tableId: 'dataTable',
-        apiUrl: 'controllers/InversionistaController.php',
-        tipo: 'Inversionistas',
-        columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
-        mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
-        baseUrl: '<?= BASE_URL ?>',
-        idField: 'idinversionista',
-        customRenderers: {
-            
-        }
+      tableId: 'dataTable',
+      apiUrl: 'controllers/InversionistaController.php',
+      tipo: 'Inversionistas',
+      columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
+      mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
+      baseUrl: '<?= BASE_URL ?>',
+      idField: 'idinversionista',
+      customRenderers: {
+
+      }
     });
-</script>
+  </script>
 
 
 
 
-  <!-- Chart library -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
   <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
 
-  <!-- Icons library -->
+
   <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
 
-  <!-- Custom scripts -->
-  <script src="<?= BASE_URL ?>app/js/script.js"></script>
 
+  <script src="<?= BASE_URL ?>app/js/script.js"></script>
+  <script src="<?= BASE_URL ?>app/js/export-excel.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', e => {
+      exportExcel("<?= $tipo  ?>");
+    })
+  </script>
 
 
 

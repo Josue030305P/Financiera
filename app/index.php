@@ -34,7 +34,7 @@ $configuracionTabla = [
 $columnas = $configuracionTabla['columnas'];
 
 $links = [
-    "Leads" => BASE_URL . "/app/views/leads/leads.add"
+    "Leads" => BASE_URL . "app/views/leads/leads.add"
 ];
 ?>
 
@@ -66,10 +66,11 @@ $links = [
     
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
+    
     
 
    

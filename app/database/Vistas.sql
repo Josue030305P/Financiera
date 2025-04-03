@@ -32,7 +32,7 @@ SELECT * FROM vista_contratos;
 DROP VIEW lista_leads;
 
 
-
+SELECT * FROM leads;
 -- Vista para leads
 CREATE VIEW lista_leads AS
 SELECT 
@@ -48,9 +48,10 @@ SELECT
 FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona
 JOIN canales c ON l.idcanal = c.idcanal
-LEFT JOIN usuarios u ON l.idasesor = u.idusuario;
+LEFT JOIN usuarios u ON l.idasesor = u.idusuario
+WHERE l.estado = 'Nuevo contacto';
 
-SELECT * FROM leads;
+SELECT * FROM lista_leads;
 
 
 
@@ -69,6 +70,10 @@ INNER JOIN
     personas p ON c.idpersona = p.idpersona
 WHERE 
     r.rol = 'Asesor de inversión';
+SELECT * FROM roles;
+DROP VIEW list_asesores ;
+
+UPDATE roles SET rol = 'Asesor de inversión' WHERE idrol = 2;
     
 
 
@@ -90,22 +95,65 @@ LEFT JOIN entidades ent ON nc.identidad = ent.identidad
 LEFT JOIN contratos cont ON inv.idinversionista = cont.idinversionista
 LEFT JOIN usuarios u ON inv.idasesor = u.idusuario;
 
-SELECT * FROM list_inversionistas 
+SELECT * FROM list_inversionistas ;
 
 
 
-
-
-
+SELECT * FROM personas;
 SELECT * FROM inversionistas;
-SELECT * FROM entidades
-SELECT * FROM personas;
-SELECT * FROM colaboradores;
-SELECT * FROM usuarios;
-SELECT * FROM lista_leads;
-SELECT * FROM leads;
-SELECT * FROM personas;
-SELECT * FROM numcuentas;
-SELECT * FROM contratos;
 
-SELECT * FROM pais;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

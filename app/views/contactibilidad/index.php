@@ -77,6 +77,13 @@ $datos = [
 
   <!-- Custom scripts -->
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
+  <script src="<?= BASE_URL?>app/js/export-excel.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', e => {
+            exportExcel("<?= $tipo	?>");
+        })
+    </script>
+
 
 
 

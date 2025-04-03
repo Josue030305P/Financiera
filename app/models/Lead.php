@@ -29,7 +29,7 @@ class Lead
         return $result;
     }
 
-   
+
     public function getById($id): array
     {
         try {
@@ -40,11 +40,11 @@ class Lead
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([$id]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if (!$result) {
                 throw new Exception("Lead no encontrado");
             }
-            
+
             return $result;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
@@ -55,7 +55,7 @@ class Lead
     {
         try {
             $this->conexion->beginTransaction();
-    
+
             // Insertar en personas
             $sqlP = "INSERT INTO personas (idpais, apellidos, nombres, email, telprincipal)
                      VALUES (?, ?, ?, ?, ?)";
@@ -68,7 +68,7 @@ class Lead
                 $data['telprincipal']
             ]);
             $idpersona = $this->conexion->lastInsertId();
-    
+
             // Insertar en leads
             $sqlL = "INSERT INTO leads (idasesor, idpersona, idcanal, comentarios, prioridad, ocupacion)
                      VALUES (?, ?, ?, ?, ?, ?)";
@@ -81,9 +81,9 @@ class Lead
                 $data['prioridad'],
                 $data['ocupacion']
             ]);
-    
+
             $this->conexion->commit();
-            
+
             return [
                 'success' => true,
                 'idpersona' => $idpersona,
@@ -99,20 +99,20 @@ class Lead
     {
         try {
             $this->conexion->beginTransaction();
-            
+
             // Obtener el idpersona del lead
             $sql = "SELECT idpersona FROM leads WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([$id]);
             $lead = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if (!$lead) {
                 throw new Exception("Lead no encontrado");
             }
-            
+
             $idpersona = $lead['idpersona'];
-            
-           
+
+
             $sqlP = "UPDATE personas SET 
                      idpais = ?, 
                      apellidos = ?, 
@@ -129,8 +129,8 @@ class Lead
                 $data['telprincipal'],
                 $idpersona
             ]);
-            
-          
+
+
             $sqlL = "UPDATE leads SET 
                      idasesor = ?, 
                      idcanal = ?, 
@@ -147,9 +147,9 @@ class Lead
                 $data['ocupacion'],
                 $id
             ]);
-            
+
             $this->conexion->commit();
-            
+
             return [
                 'success' => true,
                 'rows' => $stmt->rowCount()
@@ -164,28 +164,28 @@ class Lead
     {
         try {
             $this->conexion->beginTransaction();
-        
+
             $sqlGetPersona = "SELECT idpersona FROM leads WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sqlGetPersona);
             $stmt->execute([$id]);
             $lead = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if (!$lead) {
                 throw new Exception("Lead no encontrado");
             }
-            
+
             $idpersona = $lead['idpersona'];
-            
+
             $sqlL = "DELETE FROM leads WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sqlL);
             $stmt->execute([$id]);
-            
+
             $sqlP = "DELETE FROM personas WHERE idpersona = ?";
             $stmt = $this->conexion->prepare($sqlP);
             $stmt->execute([$idpersona]);
-            
+
             $this->conexion->commit();
-            
+
             return [
                 'success' => true,
                 'rows' => $stmt->rowCount()
@@ -196,7 +196,7 @@ class Lead
         }
     }
 
-    public function updateEstadoInversionista($id): array
+    /*public function updateEstadoInversionista($id): array
     {
         try {
             $sql = "UPDATE leads SET estado = 'Inversionista' WHERE idlead = ?";
@@ -211,13 +211,101 @@ class Lead
             throw new Exception($e->getMessage());
         }
     }
+*/
+
+    /*EJEMPLO PARA ANALIZAR*/
 
 
+    public function convertirAInversionista($idLead, $datosAdicionales)
+    {
+        try {
+            $this->conexion->beginTransaction();
 
+            // 1. Obtener datos del lead
+            $sqlLead = "SELECT l.*, p.* FROM leads l 
+                       JOIN personas p ON l.idpersona = p.idpersona 
+                       WHERE l.idlead = ?";
+            $stmt = $this->conexion->prepare($sqlLead);
+            $stmt->execute([$idLead]);
+            $lead = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            if (!$lead) {
+                throw new Exception("Lead no encontrado");
+            }
 
+            // 2. Actualizar datos de persona
+            $sqlUpdatePersona = "UPDATE personas SET
+                               tipodocumento = ?,
+                               numdocumento = ?,
+                               fechanacimiento = ?,
+                               iddistrito = ?,
+                               domicilio = ?,
+                               referencia = ?
+                               WHERE idpersona = ?";
+
+            $stmt = $this->conexion->prepare($sqlUpdatePersona);
+            $stmt->execute([
+                $datosAdicionales['tipodocumento'],
+                $datosAdicionales['numdocumento'],
+                $datosAdicionales['fechanacimiento'],
+                $datosAdicionales['iddistrito'],
+                $datosAdicionales['domicilio'],
+                $datosAdicionales['referencia'],
+                $lead['idpersona']
+            ]);
+
+            // 3. Crear empresa si se proporcionó RUC
+            $idEmpresa = null;
+            if (!empty($datosAdicionales['ruc'])) {
+                $sqlEmpresa = "INSERT INTO empresas (
+                               nombrecomercial, direccion, ruc, razonsocial
+                               ) VALUES (?, ?, ?, ?)";
+
+                $stmt = $this->conexion->prepare($sqlEmpresa);
+                $stmt->execute([
+                    $datosAdicionales['nombre_empresa'] ?? 'Empresa de ' . $lead['nombres'],
+                    $datosAdicionales['domicilio'],
+                    $datosAdicionales['ruc'],
+                    $datosAdicionales['razon_social'] ?? 'Empresa de ' . $lead['nombres']
+                ]);
+
+                $idEmpresa = $this->conexion->lastInsertId();
+            }
+
+            // 4. Crear inversionista
+            $sqlInversionista = "INSERT INTO inversionistas (
+                                idpersona, idempresa, idasesor, idusuariocreacion
+                                ) VALUES (?, ?, ?, ?)";
+
+            $stmt = $this->conexion->prepare($sqlInversionista);
+            $stmt->execute([
+                $lead['idpersona'],
+                $idEmpresa,
+                $lead['idasesor'],
+                $datosAdicionales['idusuariocreacion'] // ID del usuario que realiza la conversión
+            ]);
+
+            $idInversionista = $this->conexion->lastInsertId();
+
+            // 5. Actualizar estado del lead
+            $sqlUpdateLead = "UPDATE leads SET estado = 'Inversionista' WHERE idlead = ?";
+            $stmt = $this->conexion->prepare($sqlUpdateLead);
+            $stmt->execute([$idLead]);
+
+            $this->conexion->commit();
+
+            return [
+                'success' => true,
+                'idinversionista' => $idInversionista,
+                'idpersona' => $lead['idpersona'],
+                'idempresa' => $idEmpresa
+            ];
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            throw new Exception($e->getMessage());
+        }
+    }
 }
 
-
-
-
+//$dd = new Lead();
+//$dd->updateEstadoInversionista(3);

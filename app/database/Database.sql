@@ -50,6 +50,7 @@ idpais				INT NOT NULL,
 iddistrito 		    INT NOT NULL DEFAULT 0,
 apellidos			VARCHAR(70) NOT NULL,
 nombres				VARCHAR(70) NOT NULL,
+fechanacimiento   DATE NOT NULL DEFAULT ,
 email				VARCHAR(100) UNIQUE NOT NULL,
 domicilio			VARCHAR(100) NULL,
 telprincipal		VARCHAR(15) NOT NULL,
@@ -59,7 +60,10 @@ CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un nu
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 );
-ALTER TABLE personas MODIFY iddistrito INT NULL  ;
+
+-- ALTER TABLE personas ADD COLUMN fechanacimiento DATE NOT NULL DEFAULT '2000-01-01';
+
+SELECT * FROM usuarios;
 SELECT * FROM personas;
 -- ALTER TABLE personas MODIFY tipodocumento  ENUM('DNI','PSP','CEX') DEFAULT 'DNI';
 

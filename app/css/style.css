@@ -1978,19 +1978,25 @@ label {
   text-align: center;
 }
 
-.import-btn,.delete-btn {
+.export-excel, .import-excel {
+  width: 35px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.delete-btn {
   padding: 3px;
   margin: 5px;
 }
 
-.import-btn,.delete-btn,.create-lead {
+.delete-btn,.create-lead {
   color:#fff;
   padding: 7px;
   border-radius: 5px;
 }
-.import-btn {
-  background-color: rgb(24, 184, 24);
-}
+
+
+
 .delete-btn,.delete-lead {
   background-color: rgb(219, 27, 27);
 }

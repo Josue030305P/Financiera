@@ -68,10 +68,18 @@
 
                         <div class="form-group">
                             <label for="pais">País</label>
-                            <select id="pais" class="select-box" disabled>
+                            <select id="pais" class="select-box" >
                                 <option value="">Seleccione un país</option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label for="distrito">Provincia</label>
+                            <select id="distrito" class="select-box">
+                                <option value="">Seleccione un distrito</option>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="distrito">Distrito</label>
                             <select id="distrito" class="select-box">
@@ -84,23 +92,23 @@
                         </div>
                         <div class="form-group">
                             <label for="referencia">Referencia</label>
-                            <input type="text" id="referencia" placeholder="Ingrese una referencia" class="referencia">
+                            <input type="text" id="referencia" placeholder="Ingrese una referencia" class="referencia ">
                         </div>
 
 
-                        <div class="form-group full-width">
+                        <div class="form-group ">
                             <label for="nombreempresa">Empresa (Opcional)</label>
                             <input type="text" id="nombreempresa" placeholder="Ingrese nombre de la empresa"
                                 class="nombreempresa">
                         </div>
 
-                        <div class="form-group full-width">
+                        <div class="form-group ">
                             <label for="ruc">RUC (Opcional)</label>
                             <input type="text" id="ruc" placeholder="Ingrese RUC de la empresa" class="ruc">
                         </div>
 
                      
-                        </div>
+                        
 
                         <div class="form-group">
                             <label for="estado">Estado</label>
@@ -112,7 +120,7 @@
 
                         <div class="form-group">
                             <label for="asesor">Asesor</label>
-                            <select id="asesor" class="select-box" disabled>
+                            <select id="asesor" class="select-box">
                                 <option value="">Seleccione un asesor</option>
                             </select>
                         </div>

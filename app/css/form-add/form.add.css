@@ -28,9 +28,6 @@
     flex-direction: column;
   }
   
-  .full-width {
-    grid-column: span 2;
-  }
 
   .form-group label {
     font-weight: bold;
@@ -52,7 +49,8 @@
     border-radius: 5px;
   
   }
-  /* Ajuste del botón de regreso */
+  
+  
   .regresar-btn {
     background-color: rgba(241, 231, 83, 0.849);
     color: black;
@@ -102,7 +100,6 @@
     transform: scale(1.05);
   }
   
-  /* Media Query para pantallas pequeñas */
   @media (max-width: 768px) {
     .form-grid {
       grid-template-columns: 1fr;

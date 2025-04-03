@@ -26,4 +26,7 @@ class Asesor
     }
 }
 
+//$a = new Asesor();
+
+//var_dump($a->getAll());
 

@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="asesor">Asesor</label>
                             <select name="asesor" id="asesor" class="select-box" required>
-                                <option value="">Seleccione un asesor</option>
+                                <option value="">Cargando asesores...</option>
                             </select>
                         </div>
 
@@ -94,10 +94,11 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
+   
     
     <!-- Agregar el nuevo script del formulario -->
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>

@@ -1,4 +1,3 @@
-
 <?php require_once __DIR__ . "/../../includes/header.php"; ?>
 
 
@@ -7,12 +6,12 @@
 $tipo = 'Contratos';
 
 $encabezados = [
- 
+
   'Contratos' => ['Asesor', 'Apellidos y nombres', 'DNI', 'Teléfono', 'Correo', 'Fecha de inicio', 'Duración meses', 'Moneda', 'Día de pago', 'Interés', 'Capital', 'Tipo de retorno', 'Período de pago', 'Impuesto de renta', 'Tolerancia de días', 'Versión de contrato', 'N° Cuenta', 'CCI', 'Acciones']
 ];
 
 $links = [
-  
+
   "Contratos" => BASE_URL . "/app/views/contratos/contratos.add"
 ];
 
@@ -47,37 +46,38 @@ $datos = [
     'Acciones' => [
       'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg', BASE_URL . 'app/views/leads/contactos.update.php'],
       'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
-    ]],
+    ]
+  ],
 
 
 
 
-  ];
+];
 
 ?>
 
 
 <body>
 
-    <div class="page-flex">
+  <div class="page-flex">
 
-        <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
+    <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
 
-        <div class="main-wrapper">
+    <div class="main-wrapper">
 
-            <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
+      <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
-            <?php 
-              
-              require_once __DIR__ . "/../../includes/table.php"  
-            ?>
-        </div>
+      <?php
 
+      require_once __DIR__ . "/../../includes/table.php"
+      ?>
     </div>
 
+  </div>
 
 
-    <!-- Chart library -->
+
+  <!-- Chart library -->
   <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
 
   <!-- Icons library -->
@@ -86,11 +86,11 @@ $datos = [
   <!-- Custom scripts -->
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
 
-
+  <script src="<?= BASE_URL ?>app/js/export-excel.js"></script>
   <script>
-
-    
-
+    document.addEventListener('DOMContentLoaded', e => {
+      exportExcel("<?= $tipo  ?>");
+    })
   </script>
 
 
