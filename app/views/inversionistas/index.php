@@ -7,8 +7,7 @@ $tipo = 'Inversionistas';
 $configuracionTabla = [
   'columnas' => [
     'ID',
-    'Nombres',
-    'Apellidos',
+    'Nombres y apellidos',
     'Capital',
     'N° cuenta',
     'CCI',
@@ -19,8 +18,7 @@ $configuracionTabla = [
   ],
   'mapeo' => [
     'ID' => 'idinversionista',
-    'Nombres' => 'nombres',
-    'Apellidos' => 'apellidos',
+    'Nombres y apellidos' => 'nombrecompleto',
     'Capital' => 'capital',
     'N° cuenta' => 'numcuenta',
     'CCI' => 'cci',

@@ -1,97 +1,95 @@
 <?php require_once __DIR__ . "/../../includes/header.php"; ?>
-
-
-
 <?php
 $tipo = 'Contratos';
 
-$encabezados = [
-
-  'Contratos' => ['Asesor', 'Apellidos y nombres', 'DNI', 'Teléfono', 'Correo', 'Fecha de inicio', 'Duración meses', 'Moneda', 'Día de pago', 'Interés', 'Capital', 'Tipo de retorno', 'Período de pago', 'Impuesto de renta', 'Tolerancia de días', 'Versión de contrato', 'N° Cuenta', 'CCI', 'Acciones']
+$configuracionTabla = [
+  'columnas' => [
+      'ID',
+      'Inversionista',
+      'Fecha inicio',
+      'Fecha fin',
+      'Moneda',
+      'Capital',
+      'Tipo de retorno',
+      'Asesor',
+      'Banco',
+      'Garantía',
+      'Porcentaje de garantía',
+  ],
+  'mapeo' => [
+      'ID' => 'idcontrato',
+      'Inversionista' => 'inversionista',
+      'Fecha inicio' => 'fechainicio',
+      'Fecha fin' => 'fechafin',
+      'Moneda' => 'moneda',
+      'Capital' => 'capital',
+      'Tipo de retorno' => 'tiporetorno',
+      'Asesor' => 'asesor',
+      'Banco' => 'banco',
+      'Garantía' => 'garantia',
+      'Porcentaje de garantía' => 'porcentaje_garantia',
+      
+      
+  ]
 ];
+
+
+
+$columnas = $configuracionTabla['columnas'];
 
 $links = [
-
-  "Contratos" => BASE_URL . "/app/views/contratos/contratos.add"
+  "Contratos" => BASE_URL . "app/views/contratos/contrato.add"
 ];
 
 
-
-
-$columnas = isset($encabezados[$tipo]) ? $encabezados[$tipo] : [];
-
-
-
-
-$datos = [
-  'Contratos' => [
-    'Asesor' => 'María',
-    'Apellidos y nombres' => 'Pilpe Yataco Josué Isai',
-    'DNI' => '71882015',
-    'Teléfono' => '919482381',
-    'Correo' => 'josueyataco96@gamil.com',
-    'Fecha de inicio' => '18-02-2025',
-    'Duración meses' => '12 Meses',
-    'Moneda' => 'PEN',
-    'Día de pago' => '1',
-    'Interés' => 3,
-    'Capital' => 15000,
-    'Tipo de retorno' => 'Fijo',
-    'Período de pago' => 'Mensual',
-    'Impuesto de renta' => 3,
-    'Tolerania de días' => 3,
-    'Versión de contrato' => 1.0,
-    'N° Cuenta' => '145255855555',
-    'CCI' => '14545455555555',
-    'Acciones' => [
-      'editar' => [BASE_URL . 'app/img/svg/Bulk/Edit-white.svg', BASE_URL . 'app/views/leads/contactos.update.php'],
-      'eliminar' => BASE_URL . 'app/img/svg/Bulk/Delete.svg'
-    ]
-  ],
-
-
-
-
-];
 
 ?>
 
 
+
 <body>
-
-  <div class="page-flex">
-
-    <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
-
-    <div class="main-wrapper">
-
-      <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
-
-      <?php
-
-      require_once __DIR__ . "/../../includes/table.php"
-      ?>
+    <div class="page-flex">
+        <?php require_once "../../includes/sidebar.php"; ?>
+        <div class="main-wrapper">
+            <?php require_once "../../includes/navbar.php"; ?>
+            <?php require_once "../../includes/table.php" ?>
+          
+        </div>
     </div>
 
-  </div>
+    <!-- Scripts -->
+    <script src="<?= BASE_URL ?>app/js/dataTable.js"></script>
+    <script>
+    new DataTable({
+        tableId: 'dataTable',
+        apiUrl: 'controllers/ContratoController.php',
+        tipo: 'contratos',
+        columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
+        mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
+        baseUrl: '<?= BASE_URL ?>',
+        idField: 'idcontrato',
+       
+    });
+
+    
+</script>
 
 
 
-  <!-- Chart library -->
-  <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
-
-  <!-- Icons library -->
-  <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
-
-  <!-- Custom scripts -->
-  <script src="<?= BASE_URL ?>app/js/script.js"></script>
-
-  <script src="<?= BASE_URL ?>app/js/export-excel.js"></script>
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', e => {
       exportExcel("<?= $tipo  ?>");
     })
   </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
+    <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
+    <script src="<?= BASE_URL ?>app/js/script.js"></script>
+    
+    
+
+   
+</body>
 
 
 

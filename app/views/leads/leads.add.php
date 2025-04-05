@@ -100,7 +100,7 @@
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
    
     
-    <!-- Agregar el nuevo script del formulario -->
+
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

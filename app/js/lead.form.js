@@ -31,7 +31,7 @@ class LeadForm {
             if (Array.isArray(asesores) && asesores.length > 0) {
                 asesores.forEach(asesor => {
                     selectAsesor.innerHTML += `
-                        <option value="${asesor.idpersona}">${asesor.nombrecompleto}</option>
+                        <option value="${asesor.idusuario}">${asesor.nombrecompleto}</option>
                     `;
                 });
             }
@@ -148,19 +148,20 @@ class LeadForm {
         try {
             const formData = {
                 idpais: document.getElementById('pais').value,
-                apellidos: document.getElementById('apellidos').value,
-                nombres: document.getElementById('nombres').value,
-                email: document.getElementById('correo').value,
-                telprincipal: document.getElementById('telefono').value,
+                apellidos: document.getElementById('apellidos').value.trim(),
+                nombres: document.getElementById('nombres').value.trim(),
+                email: document.getElementById('correo').value.trim().toLowerCase(),
+                telprincipal: document.getElementById('telefono').value.trim(),
                 idasesor: document.getElementById('asesor').value,
                 idcanal: document.getElementById('canal').value,
-                comentarios: document.getElementById('comentarios').value,
+                comentarios: document.getElementById('comentarios').value.trim(),
                 prioridad: document.getElementById('prioridad').value,
-                ocupacion: document.getElementById('ocupacion').value
+                ocupacion: document.getElementById('ocupacion').value.trim()
             };
-    
-            if (!this.validarFormulario(formData)) return;
-    
+
+       
+            
+
             const response = await fetch(`${this.baseUrl}app/controllers/LeadController.php`, {
                 method: 'POST',
                 headers: {
@@ -168,9 +169,9 @@ class LeadForm {
                 },
                 body: JSON.stringify(formData)
             });
-    
+
             const result = await response.json();
-    
+
             if (result.status === 'success') {
                 await Swal.fire({
                     icon: 'success',
@@ -192,11 +193,12 @@ class LeadForm {
             await Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Error al guardar el lead',
+                text: 'Error al guardar el lead: ' + error.message,
                 confirmButtonColor: '#3085d6'
             });
         }
     }
+
 
     async actualizarLead() {
         try {
@@ -252,59 +254,9 @@ class LeadForm {
         }
     }
 
-    async convertirAInversionista(idlead, idpersona) {
-        try {
-            const datosAdicionales = {
-                idpersona: idpersona,
-                tipodocumento: document.getElementById('tipodocumento').value,
-                numdocumento: document.getElementById('numdocumento').value,
-                iddistrito: document.getElementById('distrito').value,
-                domicilio: document.getElementById('domicilio').value,
-                telsecundario: document.getElementById('telsecundario').value,
-                referencia: document.getElementById('referencia').value
-            };
-
-            const response = await fetch(
-                `${this.baseUrl}app/controllers/LeadController.php?action=convertir&id=${idlead}`, 
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(datosAdicionales)
-                }
-            );
-
-            const result = await response.json();
-
-            if (result.status === 'success') {
-                await Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Lead convertido a inversionista correctamente',
-                    confirmButtonColor: '#3085d6'
-                });
-                window.location.href = `${this.baseUrl}app/views/inversionistas/`;
-            } else {
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error: ' + result.message,
-                    confirmButtonColor: '#3085d6'
-                });
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            await Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Error al convertir lead a inversionista',
-                confirmButtonColor: '#3085d6'
-            });
-        }
-    }
 
     async validarFormulario(data) {
+        
         if (!data.apellidos || !data.nombres) {
             await Swal.fire({
                 icon: 'warning',
@@ -314,6 +266,20 @@ class LeadForm {
             });
             return false;
         }
+
+        
+        const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!nombreRegex.test(data.nombres) || !nombreRegex.test(data.apellidos)) {
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Validación',
+                text: 'Nombres y apellidos solo deben contener letras y espacios',
+                confirmButtonColor: '#3085d6'
+            });
+            return false;
+        }
+
+ 
         if (!data.telprincipal) {
             await Swal.fire({
                 icon: 'warning',
@@ -323,6 +289,20 @@ class LeadForm {
             });
             return false;
         }
+
+        
+        const telefonoRegex = /^[0-9]{9}$/;
+        if (!telefonoRegex.test(data.telprincipal)) {
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Validación',
+                text: 'El teléfono debe tener 9 dígitos numéricos',
+                confirmButtonColor: '#3085d6'
+            });
+            return false;
+        }
+
+    
         if (!data.email) {
             await Swal.fire({
                 icon: 'warning',
@@ -332,6 +312,18 @@ class LeadForm {
             });
             return false;
         }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+            await Swal.fire({
+                icon: 'warning',
+                title: 'Validación',
+                text: 'Ingrese un correo electrónico válido',
+                confirmButtonColor: '#3085d6'
+            });
+            return false;
+        }
+
         if (!data.idasesor) {
             await Swal.fire({
                 icon: 'warning',
@@ -341,6 +333,7 @@ class LeadForm {
             });
             return false;
         }
+
         if (!data.idpais) {
             await Swal.fire({
                 icon: 'warning',
@@ -350,6 +343,8 @@ class LeadForm {
             });
             return false;
         }
+
         return true;
     }
+
 }

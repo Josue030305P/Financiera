@@ -100,7 +100,7 @@ class Lead
         try {
             $this->conexion->beginTransaction();
 
-            // Obtener el idpersona del lead
+           
             $sql = "SELECT idpersona FROM leads WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([$id]);
@@ -196,104 +196,92 @@ class Lead
         }
     }
 
-    /*public function updateEstadoInversionista($id): array
-    {
-        try {
-            $sql = "UPDATE leads SET estado = 'Inversionista' WHERE idlead = ?";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->execute([$id]);
-            
-            return [
-                'success' => true,
-                'rows' => $stmt->rowCount()
-            ];
-        } catch (PDOException $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
-*/
-
-    /*EJEMPLO PARA ANALIZAR*/
-
+    
 
     public function convertirAInversionista($idLead, $datosAdicionales)
     {
         try {
             $this->conexion->beginTransaction();
-
-            // 1. Obtener datos del lead
+    
+            
             $sqlLead = "SELECT l.*, p.* FROM leads l 
                        JOIN personas p ON l.idpersona = p.idpersona 
                        WHERE l.idlead = ?";
             $stmt = $this->conexion->prepare($sqlLead);
             $stmt->execute([$idLead]);
             $lead = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
             if (!$lead) {
                 throw new Exception("Lead no encontrado");
             }
-
-            // 2. Actualizar datos de persona
+    
+            
             $sqlUpdatePersona = "UPDATE personas SET
                                tipodocumento = ?,
                                numdocumento = ?,
                                fechanacimiento = ?,
+                               iddepartamento = ?,
+                               idprovincia = ?,
                                iddistrito = ?,
                                domicilio = ?,
+                               telsecundario = ?,
                                referencia = ?
                                WHERE idpersona = ?";
-
+    
             $stmt = $this->conexion->prepare($sqlUpdatePersona);
             $stmt->execute([
                 $datosAdicionales['tipodocumento'],
                 $datosAdicionales['numdocumento'],
                 $datosAdicionales['fechanacimiento'],
+                $datosAdicionales['iddepartamento'],
+                $datosAdicionales['idprovincia'],
                 $datosAdicionales['iddistrito'],
                 $datosAdicionales['domicilio'],
+                $datosAdicionales['telsecundario'],
                 $datosAdicionales['referencia'],
                 $lead['idpersona']
             ]);
-
-            // 3. Crear empresa si se proporcionó RUC
+    
+            
             $idEmpresa = null;
             if (!empty($datosAdicionales['ruc'])) {
                 $sqlEmpresa = "INSERT INTO empresas (
                                nombrecomercial, direccion, ruc, razonsocial
                                ) VALUES (?, ?, ?, ?)";
-
+    
                 $stmt = $this->conexion->prepare($sqlEmpresa);
                 $stmt->execute([
-                    $datosAdicionales['nombre_empresa'] ?? 'Empresa de ' . $lead['nombres'],
-                    $datosAdicionales['domicilio'],
+                    $datosAdicionales['nombrecomercial'],
+                    $datosAdicionales['direccion'],
                     $datosAdicionales['ruc'],
-                    $datosAdicionales['razon_social'] ?? 'Empresa de ' . $lead['nombres']
+                    $datosAdicionales['razonsocial']
                 ]);
-
+    
                 $idEmpresa = $this->conexion->lastInsertId();
             }
-
-            // 4. Crear inversionista
+    
+            
             $sqlInversionista = "INSERT INTO inversionistas (
-                                idpersona, idempresa, idasesor, idusuariocreacion
-                                ) VALUES (?, ?, ?, ?)";
-
+                                idpersona, idempresa, idasesor, idusuariocreacion, fechaingreso
+                                ) VALUES (?, ?, ?, ?, NOW())";
+    
             $stmt = $this->conexion->prepare($sqlInversionista);
             $stmt->execute([
                 $lead['idpersona'],
                 $idEmpresa,
                 $lead['idasesor'],
-                $datosAdicionales['idusuariocreacion'] // ID del usuario que realiza la conversión
+                $datosAdicionales['idusuariocreacion']
             ]);
-
+    
             $idInversionista = $this->conexion->lastInsertId();
-
+    
             // 5. Actualizar estado del lead
             $sqlUpdateLead = "UPDATE leads SET estado = 'Inversionista' WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sqlUpdateLead);
             $stmt->execute([$idLead]);
-
+    
             $this->conexion->commit();
-
+    
             return [
                 'success' => true,
                 'idinversionista' => $idInversionista,
@@ -305,7 +293,9 @@ class Lead
             throw new Exception($e->getMessage());
         }
     }
+
+
 }
 
 //$dd = new Lead();
-//$dd->updateEstadoInversionista(3);
+//var_dump( $dd->getAll());

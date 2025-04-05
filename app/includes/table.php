@@ -11,7 +11,7 @@
 
 
                 <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Bucar de forma multiple 🔍">
+                    <input type="text" id="searchInput" placeholder="Bucardor multiple 🔍">
                     <!-- Buscar  htmlspecialchars($tipo) !-->
                 </div>
 

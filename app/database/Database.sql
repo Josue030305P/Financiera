@@ -27,6 +27,7 @@ distrito			VARCHAR(40) NOT NULL,
 CONSTRAINT fk_provincia FOREIGN KEY(idprovincia) REFERENCES provincias(idprovincia)
 )ENGINE=InnoDB;
 
+
 SELECT * FROM distritos;
 SELECT * FROM canales;
 
@@ -47,10 +48,10 @@ idpersona			INT  PRIMARY KEY AUTO_INCREMENT,
 tipodocumento		ENUM('DNI','PSP','CEX') DEFAULT 'DNI',
 numdocumento		VARCHAR(12) NULL,
 idpais				INT NOT NULL,
-iddistrito 		    INT NOT NULL DEFAULT 0,
+iddistrito 		    INT NULL,
 apellidos			VARCHAR(70) NOT NULL,
 nombres				VARCHAR(70) NOT NULL,
-fechanacimiento   DATE NOT NULL DEFAULT ,
+fechanacimiento   	DATE NULL  ,
 email				VARCHAR(100) UNIQUE NOT NULL,
 domicilio			VARCHAR(100) NULL,
 telprincipal		VARCHAR(15) NOT NULL,
@@ -60,6 +61,7 @@ CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un nu
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 );
+ALTER TABLE personas MODIFY iddistrito INT NULL;
 
 -- ALTER TABLE personas ADD COLUMN fechanacimiento DATE NOT NULL DEFAULT '2000-01-01';
 
@@ -82,6 +84,7 @@ updated_at			DATETIME NULL
 )ENGINE=InnoDB;
 
 SELECT * FROM inversionistas;
+
 CREATE TABLE colaboradores(
 idcolaborador   	INT PRIMARY KEY AUTO_INCREMENT,
 idpersona			INT NOT NULL,
@@ -103,11 +106,12 @@ CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion ) REFERENCE
 
 
 
+
 CREATE TABLE  usuarios(
 idusuario	 		INT PRIMARY KEY AUTO_INCREMENT,
 idcolaborador    	INT NOT NULL,
 usuario				VARCHAR(40) NOT NULL,
-password_user		VARCHAR(255) NOT NULL,
+passworduser		VARCHAR(255) NOT NULL,
 fotoperfil			VARCHAR(140) NULL,
 estado				VARCHAR(18) NULL,
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
@@ -138,6 +142,7 @@ CONSTRAINT fk_id_user_creacion_inver FOREIGN KEY (idusuariocreacion ) REFERENCES
 CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 SELECT * FROM usuarios;
+
 CREATE TABLE numcuentas(
 idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
 estitular			CHAR(2) NOT NULL DEFAULT 'Si',
@@ -167,7 +172,7 @@ canal			ENUM('Facebook','WhatsApp','Instagram','Otro')
 
 -- Personas en conversacion que aun no son inversionistas
 CREATE TABLE leads(
-idlead			INT PRIMARY KEY AUTO_INCREMENT,
+idlead				INT PRIMARY KEY AUTO_INCREMENT,
 idasesor  			INT NOT NULL, -- El usuario asesor
 idpersona			INT NOT NULL,
 idcanal				INT NOT NULL,
@@ -180,7 +185,8 @@ CONSTRAINT fk_idasesor FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
 CONSTRAINT idpersona_leads FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
 CONSTRAINT fk_idcanla_leads FOREIGN KEY(idcanal) REFERENCES canales(idcanal)
 )ENGINE=InnoDB;
-
+SELECT * FROM leads;
+SELECT * FROM usuarios;
 
 
 
@@ -286,5 +292,11 @@ CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios
 )ENGINE=InnoDB;
 SHOW TABLES ;
 
-
+SELECT * FROM personas;
+SELECT * FROM empresas;
+SELECT * FROM inversionistas;
+SELECT * FROM pais;
+SELECT * FROM departamentos;
+Select * from provincias;
+SELECT * FROM distritos;
 

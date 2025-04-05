@@ -74,9 +74,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="departamento">Departamento</label>
+                            <select id="departamento" class="select-box" >
+                                <option value="">Seleccione un departamento </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="distrito">Provincia</label>
                             <select id="distrito" class="select-box">
-                                <option value="">Seleccione un distrito</option>
+                                <option value="">Seleccione una provincia</option>
                             </select>
                         </div>
 

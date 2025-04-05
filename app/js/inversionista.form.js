@@ -44,6 +44,8 @@ class InversionistaForm {
         }
     }
 
+
+    
     async cargarAsesores() {
         try {
             const response = await fetch(`${this.baseUrl}app/controllers/AsesorController.php`);
@@ -149,6 +151,7 @@ class InversionistaForm {
         }
     }
 
+       
     async guardarInversionista() {
         try {
             
@@ -215,69 +218,7 @@ class InversionistaForm {
         }
     }
 
-    async actualizarInversionista() {
-        try {
-            const formData = {
-                apellidos: document.getElementById('apellidos').value,
-                nombres: document.getElementById('nombres').value,
-                tipodocumento: document.getElementById('tipodocumento').value,
-                numdocumento: document.getElementById('numdocumento').value,
-                fechanacimiento: document.getElementById('fechanacimiento').value,
-                telefono: document.getElementById('telefono').value,
-                correo: document.getElementById('correo').value,
-                idpais: document.getElementById('pais').value,
-                nombreempresa: document.getElementById('nombreempresa').value,
-                ruc: document.getElementById('ruc').value,
-                idasesor: document.getElementById('asesor').value,
-                estado: document.getElementById('estado').value
-            };
+  
     
-            if (!this.validarFormulario(formData)) return;
-    
-            const response = await fetch(`${this.baseUrl}app/controllers/InversionistaController.php?id=${this.inversionistaId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-    
-            const result = await response.json();
-    
-            if (result.status === 'success') {
-                alert('Inversionista actualizado correctamente');
-                window.location.href = `${this.baseUrl}app/views/inversionistas/`;
-            } else {
-                alert('Error al actualizar: ' + result.message);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error al actualizar el inversionista');
-        }
-    }
 
-    validarFormulario(data) {
-        if (!data.apellidos || !data.nombres) {
-            alert('Los nombres y apellidos son obligatorios');
-            return false;
-        }
-        if (!data.numdocumento) {
-            alert('El número de documento es obligatorio');
-            return false;
-        }
-        if (!data.telefono) {
-            alert('El teléfono es obligatorio');
-            return false;
-        }
-        if (!data.correo) {
-            alert('El correo es obligatorio');
-            return false;
-        }
-        
-        if (!data.idpais) {
-            alert('Debe seleccionar un país');
-            return false;
-        }
-        return true;
-    }
-} 
+}

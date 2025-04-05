@@ -53,13 +53,15 @@ WHERE l.estado = 'Nuevo contacto';
 
 SELECT * FROM lista_leads;
 
-
+SELECT  * FROM personas;
+SELECT * FROM leads;
+SELECT * FROM  canales;
 
 -- Vista para sesores
 
 CREATE VIEW list_asesores AS
 SELECT 
-	p.idpersona,
+	u.idusuario,
 	CONCAT(p.nombres, ' ',p.apellidos ) AS nombrecompleto,
     r.rol AS rol_colaborador
 FROM 
@@ -68,12 +70,14 @@ INNER JOIN
     roles r ON c.idrol = r.idrol
 INNER JOIN 
     personas p ON c.idpersona = p.idpersona
+INNER JOIN usuarios u  ON c.idcolaborador = u.idcolaborador
 WHERE 
     r.rol = 'Asesor de inversión';
-SELECT * FROM roles;
+    
+SELECT * FROM list_asesores;
 DROP VIEW list_asesores ;
 
-UPDATE roles SET rol = 'Asesor de inversión' WHERE idrol = 2;
+
     
 
 
