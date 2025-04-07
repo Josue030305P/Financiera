@@ -61,15 +61,12 @@ CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un nu
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 );
-ALTER TABLE personas MODIFY iddistrito INT NULL;
 
--- ALTER TABLE personas ADD COLUMN fechanacimiento DATE NOT NULL DEFAULT '2000-01-01';
+
 
 SELECT * FROM usuarios;
 SELECT * FROM personas;
 -- ALTER TABLE personas MODIFY tipodocumento  ENUM('DNI','PSP','CEX') DEFAULT 'DNI';
-
-
 
 
 CREATE TABLE empresas(
@@ -102,9 +99,6 @@ CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol),
 CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
-
-
-
 
 
 CREATE TABLE  usuarios(
@@ -187,10 +181,6 @@ CONSTRAINT fk_idcanla_leads FOREIGN KEY(idcanal) REFERENCES canales(idcanal)
 )ENGINE=InnoDB;
 SELECT * FROM leads;
 SELECT * FROM usuarios;
-
-
-
-
 
 CREATE TABLE contactibilidad(
 idcontactibilidad		INT PRIMARY KEY AUTO_INCREMENT,
@@ -299,4 +289,9 @@ SELECT * FROM pais;
 SELECT * FROM departamentos;
 Select * from provincias;
 SELECT * FROM distritos;
+SELECT * FROM contactibilidad;
+SELECT * FROM leads;
+
+INSERT INTO contactibilidad(idlead,fecha,hora,comentarios,estado) VALUES(26,'2025-07-04','10:30','Se obtuvo primer acercamiento','En proceso');
+
 

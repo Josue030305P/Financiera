@@ -30,14 +30,12 @@ $configuracionTabla = [
     ]
 ];
 
-
 $columnas = $configuracionTabla['columnas'];
 
 $links = [
     "Leads" => BASE_URL . "app/views/leads/leads.add"
 ];
 ?>
-
 
 <body>
     <div class="page-flex">
@@ -72,6 +70,4 @@ $links = [
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
     
     
-
-   
 </body>

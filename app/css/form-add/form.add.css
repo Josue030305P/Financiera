@@ -1,4 +1,4 @@
-/* Contenedor principal del formulario */
+
 .form-container {
     max-width: 750px;
     padding: 25px;
@@ -14,7 +14,7 @@
     position: relative;
   }
   
-  /* Estilos de la cuadrícula */
+
   .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
