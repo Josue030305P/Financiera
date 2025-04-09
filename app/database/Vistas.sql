@@ -49,7 +49,7 @@ FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona
 JOIN canales c ON l.idcanal = c.idcanal
 LEFT JOIN usuarios u ON l.idasesor = u.idusuario
-WHERE l.estado = 'Nuevo contacto';
+WHERE l.estado = 'Nuevo contacto' AND NOT l.estado = 'Inactivo';
 
 SELECT * FROM lista_leads;
 

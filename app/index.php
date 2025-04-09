@@ -1,3 +1,11 @@
+<?php session_start();  
+
+if (!isset($_SESSION['nombre'])) {
+    header('Location:../'); 
+    exit();
+}
+?>
+
 <?php require_once './includes/header.php'; ?>
 <?php require_once "./includes/config.php"; ?>
 
@@ -38,6 +46,7 @@ $links = [
 ?>
 
 <body>
+    <h1>Hola <?= $_SESSION['nombre'] ?></h1>
     <div class="page-flex">
         <?php require_once "./includes/sidebar.php"; ?>
         <div class="main-wrapper">

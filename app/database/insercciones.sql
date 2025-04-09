@@ -2,7 +2,7 @@
 INSERT INTO pais (pais) VALUES 
 ('Perú'),
 ('Argentina');
-
+SELECT * FROM pais;
 -- Tabla: departamentos
 INSERT INTO departamentos (departamento) VALUES 
 ('Lima'),
@@ -36,25 +36,26 @@ INSERT INTO personas (
 )
 VALUES
 
-('DNI', '12344538', 1, 3, 'Meneses Fuentes', 'Paola Manuela', 'Paola@example.com', 'Av. nn', '987654851', 'Al costado de mi vecino'),
-('DNI', '71882015', 1, 3, 'Pilpe Yataco', 'Josué Isai', 'josue@example.com', 'Av. nn', '936047189', 'Al costado de bodega Marcelina'),
-('DNI', '85986985', 1, 3, 'Perez Munayco', 'María Esther', 'maria@example.com', 'Av. nn', '923569887','Al costado de mi vecino');
+('DNI', '12344538', 1, 1, 'Meneses Fuentes', 'Paola Manuela', 'Paola@example.com', 'Av. nn', '987654851', 'Al costado de mi vecino'),
+('DNI', '71882015', 1, 1, 'Pilpe Yataco', 'Josué Isai', 'josue@example.com', 'Av. nn', '936047189', 'Al costado de bodega Marcelina'),
+('DNI', '85986985', 1, 1, 'Perez Munayco', 'María Esther', 'maria@example.com', 'Av. nn', '923569887','Al costado de mi vecino');
 
 SELECT * FROM personas;
 SELECT * FROM roles;
 
 INSERT INTO colaboradores (idpersona, idrol, fechainicio)
 VALUES
-(9, 1, '2025-01-01');
+(1, 1, '2025-01-01');
 
 SELECT * FROM colaboradores;
 
 
 INSERT INTO usuarios (idcolaborador, usuario, passworduser)
 VALUES
-(1, 'MartiaPerez', '12345');
+(1, 'Paola', '12345');
 
 SELECT * FROM usuarios;
+
 INSERT INTO inversionistas (idpersona, idempresa, idasesor)
 VALUES
 (7, NULL, 1);
@@ -78,7 +79,7 @@ SELECT * FROM usuarios;
 
 INSERT INTO leads (idasesor, idpersona, idcanal, comentarios, prioridad, ocupacion)
 VALUES
-(1, 8, 1, 'Esta demasiado interesado', 'Alto', 'Ingeníera');
+(1, 2, 1, 'Esta demasiado interesado', 'Alto', 'Ingeníera');
 
 
 INSERT INTO contactibilidad (idlead, fecha, hora, comentarios, estado)
@@ -103,6 +104,7 @@ INSERT INTO garantias (tipogarantia) VALUES
 ('Letra');
 
 SELECT * FROM contratos;
+
 INSERT INTO detallegarantias (idgarantia, idcontrato, porcentaje, observaciones)
 VALUES
 (1, 2, 50, 'Un auto Kia Picanto 2025');

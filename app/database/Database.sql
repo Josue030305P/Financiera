@@ -4,9 +4,10 @@ USE financiera;
 
 CREATE TABLE pais(
 idpais 				INT PRIMARY KEY AUTO_INCREMENT,
-pais				VARCHAR(40) NOT NULL
+pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 )ENGINE=InnoDB;
 
+  
 
 CREATE TABLE departamentos(
 iddepartamento		INT PRIMARY KEY AUTO_INCREMENT,
@@ -28,8 +29,6 @@ CONSTRAINT fk_provincia FOREIGN KEY(idprovincia) REFERENCES provincias(idprovinc
 )ENGINE=InnoDB;
 
 
-SELECT * FROM distritos;
-SELECT * FROM canales;
 
 CREATE TABLE roles(
 idrol				INT PRIMARY KEY AUTO_INCREMENT,
@@ -47,27 +46,20 @@ CREATE TABLE  personas(
 idpersona			INT  PRIMARY KEY AUTO_INCREMENT,
 tipodocumento		ENUM('DNI','PSP','CEX') DEFAULT 'DNI',
 numdocumento		VARCHAR(12) NULL,
-idpais				INT NOT NULL,
+idpais				INT NOT NULL DEFAULT 1,
 iddistrito 		    INT NULL,
 apellidos			VARCHAR(70) NOT NULL,
 nombres				VARCHAR(70) NOT NULL,
-fechanacimiento   	DATE NULL  ,
+fechanacimiento   	DATE NULL,
 email				VARCHAR(100) UNIQUE NOT NULL,
 domicilio			VARCHAR(100) NULL,
-telprincipal		VARCHAR(15) NOT NULL,
+telprincipal		VARCHAR(15) NOT NULL UNIQUE,
 telsecundario		VARCHAR(15) NULL,
 referencia			VARCHAR(150) NULL,
 CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un numero de documento y amarrarlo a un tipo de documento
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
-);
-
-
-
-SELECT * FROM usuarios;
-SELECT * FROM personas;
--- ALTER TABLE personas MODIFY tipodocumento  ENUM('DNI','PSP','CEX') DEFAULT 'DNI';
-
+)ENGINE=InnoDB;
 
 CREATE TABLE empresas(
 idempresa			INT PRIMARY KEY AUTO_INCREMENT,
@@ -80,7 +72,6 @@ updated_at			DATETIME NULL
 
 )ENGINE=InnoDB;
 
-SELECT * FROM inversionistas;
 
 CREATE TABLE colaboradores(
 idcolaborador   	INT PRIMARY KEY AUTO_INCREMENT,
@@ -95,9 +86,10 @@ fechahoraeliminacion	DATETIME NULL,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL,
 CONSTRAINT fk_idpersona FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
-CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol),
 CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
-CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
+CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario),
+CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
+
 )ENGINE=InnoDB;
 
 
@@ -112,7 +104,7 @@ created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcolaborador FOREIGN KEY(idcolaborador) REFERENCES colaboradores(idcolaborador)
 )ENGINE=InnoDB;
-
+SELECT * FROM usuarios;
 
 /*ALTER TABLE usuarios
 CHANGE COLUMN idcolaboradores idcolaborador INT NOT NULL;
@@ -174,12 +166,12 @@ fecharegistro		DATETIME NOT NULL DEFAULT NOW(),
 comentarios			VARCHAR(120) NULL,
 prioridad			ENUM('Bajo','Medio','Alto') NOT NULL,
 ocupacion			VARCHAR(50) NOT NULL,
-estado				ENUM('Nuevo contacto','En proceso','Inversionista') NOT NULL DEFAULT 'Nuevo contacto',
+estado				ENUM('Nuevo contacto','En proceso','Inversionista','Inactivo') NOT NULL DEFAULT 'Nuevo contacto',
 CONSTRAINT fk_idasesor FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
 CONSTRAINT idpersona_leads FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
 CONSTRAINT fk_idcanla_leads FOREIGN KEY(idcanal) REFERENCES canales(idcanal)
 )ENGINE=InnoDB;
-SELECT * FROM leads;
+
 SELECT * FROM usuarios;
 
 CREATE TABLE contactibilidad(
@@ -291,7 +283,8 @@ Select * from provincias;
 SELECT * FROM distritos;
 SELECT * FROM contactibilidad;
 SELECT * FROM leads;
-
+SELECT * FROM usuarios;
+select * from accesos;
 INSERT INTO contactibilidad(idlead,fecha,hora,comentarios,estado) VALUES(26,'2025-07-04','10:30','Se obtuvo primer acercamiento','En proceso');
 
 
