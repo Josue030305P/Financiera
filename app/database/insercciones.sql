@@ -45,14 +45,14 @@ SELECT * FROM roles;
 
 INSERT INTO colaboradores (idpersona, idrol, fechainicio)
 VALUES
-(1, 1, '2025-01-01');
+(3, 1, '2025-01-01');
 
 SELECT * FROM colaboradores;
 
 
 INSERT INTO usuarios (idcolaborador, usuario, passworduser)
 VALUES
-(1, 'Paola', '12345');
+(2, 'MariaEsther', '12345');
 
 SELECT * FROM usuarios;
 

@@ -48,6 +48,6 @@ class Ubigeo
     }
 }
 
-//$d = new Ubigeo();
+// $d = new Ubigeo();
 
-//var_dump($d->getDepartamentos());
+// var_dump($d->getDepartamentos());

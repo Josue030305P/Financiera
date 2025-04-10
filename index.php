@@ -44,54 +44,52 @@
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
-  e.preventDefault();
+      e.preventDefault();
 
-  fetch('<?= BASE_URL ?>app/controllers/LoginController', {
-    method: 'POST',
-    body: new FormData(this)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      // Guardar el idusuario en el sessionStorage (opcional)
-      sessionStorage.setItem('idusuario', data.idusuario);
+      fetch('<?= BASE_URL ?>app/controllers/LoginController', {
+        method: 'POST',
+        body: new FormData(this)
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Guardar el idusuario en el sessionStorage (opcional)
+            sessionStorage.setItem('idusuario', data.idusuario);
 
-      // Mostrar mensaje de éxito
-      Swal.fire({
-        toast: true, 
-        position: 'top-end', 
-        icon: 'success',
-        title: 'Inicio de sesión exitoso',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-        }
-      });
-
-      // Redireccionar después de 2 segundos
-      setTimeout(() => {
-        window.location.href = '<?= BASE_URL ?>app/';
-      }, 2000);
-    } else {
-      Swal.fire({
-        toast: true,
-        position: 'top-end',
-        icon: 'error',
-        title: data.message || 'Credenciales incorrectas',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true
-      });
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Error al procesar la solicitud');
-  });
-});
+            // Mostrar mensaje de éxito
+            Swal.fire({
+              toast: true,
+              position: 'top-end',
+              icon: 'success',
+              title: 'Inicio de sesión exitoso',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+              }
+            });
+            setTimeout(() => {
+              window.location.href = '<?= BASE_URL ?>app/';
+            }, 2000);
+          } else {
+            Swal.fire({
+              toast: true,
+              position: 'top-end',
+              icon: 'error',
+              title: data.message || 'Credenciales incorrectas',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error al procesar la solicitud');
+        });
+    });
 
   </script>
 

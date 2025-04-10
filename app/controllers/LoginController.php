@@ -7,29 +7,28 @@ require_once '../models/Login.php';
 
 $login = new Login();
 
-// Comprobar si es una solicitud POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Verificar si la solicitud es para login
+    
     if (isset($_POST['usuario']) && isset($_POST['passworduser'])) {
         try {
-            // Llamada al método login con los datos de usuario y contraseña
+            
             $result = $login->login([
                 'usuario'      => $_POST['usuario'],
                 'passworduser' => $_POST['passworduser']
             ]);
 
             if ($result['success']) {
-                // Si el login fue exitoso, guardar el nombre y redirigir
+                
                 $_SESSION['nombre'] = $result['nombre'];
                 $_SESSION['idusuario'] = $result['idusuario']; 
                 echo json_encode(['success' => true, 'redirect' => '../', 'idusuario' => $result['idusuario']]);
             } else {
-                // Si las credenciales son incorrectas
+                
                 echo json_encode(['success' => false, 'message' => 'Credenciales incorrectas']);
             }
         } catch (Exception $e) {
-            // Manejo de errores
+        
             echo json_encode([
                 'success' => false,
                 'message' => 'Error en el servidor: ' . $e->getMessage()

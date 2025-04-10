@@ -38,6 +38,17 @@ class Login {
         }
     }
 
+    // public function registrarse($params = []) : array {
+
+    //     try {
+
+    //     }
+
+    //     catch(PDOException $e) {
+    //         throw new Exception($e->getMessage());
+    //     }
+    // }
+
    
     public function registrarAcceso($idusuario) {
         try {

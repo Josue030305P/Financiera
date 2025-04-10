@@ -1,5 +1,7 @@
+<?php session_start(); ?>
 <?php require_once '../../includes/header.php'; ?>
 <?php require_once "../../includes/config.php"; ?>
+
 
 
 <meta name="base-url" content="<?= BASE_URL ?>">
@@ -14,14 +16,15 @@
             <div id="lead-form" class="form-container form">
                 <h2 class="form-title">Actualizar Lead</h2>
                 <div class="form-header">
-                    <a href="<?=BASE_URL?>app/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
+                    <a href="<?= BASE_URL ?>app/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
                 </div>
 
                 <div class="form-body">
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label>
-                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" required>
+                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos"
+                                required>
                         </div>
 
                         <div class="form-group">
@@ -31,8 +34,16 @@
 
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
-                            <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono" maxlength="9" required>
+                            <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono"
+                                maxlength="9" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="telsecundario">Telefono secundario (Opcional)</label>
+                            <input type="tel" id="telsecundario" placeholder="Ingrese número de telefono"
+                                class="telsecundario">
+                        </div>
+
 
                         <div class="form-group">
                             <label for="correo">Correo</label>
@@ -45,6 +56,83 @@
                                 <option value="">Seleccione un país</option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label for="departamento">Departamento</label>
+                            <select name="departamento" id="departamento" class="select-box" required>
+                                <option value="">Seleccione un departamento</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="provincia">Provincia</label>
+                            <select name="provincia" id="provincia" class="select-box" required>
+                                <option value="">Seleccione un provincia</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="distrito">Distrito</label>
+                            <select name="distrito" id="distrito" class="select-box" required>
+                                <option value="">Seleccione un distrito</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipodocumento">Tipo de documento</label>
+                            <select name="tipodocumento" id="tipodocumento" class="select-box" required>
+                                <option value="DNI">DNI</option>
+                                <option value="DNI">PSP</option>
+                                <option value="DNI">CEX</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="numdocumento">N° documento</label>
+                            <input type="text" id="numdocumento" placeholder="Ingrese el n° de documento"
+                                class="numdocumento" required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fechanacimiento">Fecha nacimiento</label>
+                            <input type="datetime" id="fechanacimiento" placeholder="Ingrese la fecha de nacimiento"
+                                class="fechanacimiento" required="true">
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input type="email" id="correo" placeholder="Ingrese el correo" class="correo">
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="domicilio">Domicilio</label>
+                            <input type="text" id="domicilio" placeholder="Ingrese el domicilio" class="domicilio">
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="referencia">Referencia</label>
+                            <input type="text" id="referencia" placeholder="Ingrese una referencia"
+                                class="numdocumento">
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="telsecundario">Telefono secundario</label>
+                            <input type="text" id="telsecundario" placeholder="Ingrese número de telefono"
+                                class="telsecundario">
+                        </div>
+
 
                         <div class="form-group">
                             <label for="prioridad">Prioridad</label>
@@ -73,7 +161,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group full-width">
+                        <div class="form-group">
                             <label for="ocupacion">Ocupación</label>
                             <input type="text" id="ocupacion" placeholder="Ingrese una ocupación" class="ocupacion">
                         </div>
@@ -97,18 +185,45 @@
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
- 
-    
+    <script src="<?= BASE_URL ?>app/js/ubigeo.js"></script>
+    <!-- Incluir CSS de Pikaday -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+    <!-- Incluir la librería de Pikaday -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.es.min.js"></script>
+
+
+
 
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
+
+            let picker = new Pikaday({
+            field: document.getElementById('fechanacimiento'),
+            format: 'DD-MM-YYYY', 
+            yearRange: [1900, 3000], 
+            minDate: new Date(1900, 0, 1), 
+            maxDate: new Date() + 500,
+            i18n: {
+                previousMonth : 'Mes anterior',
+                nextMonth     : 'Mes siguiente',
+                months        : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                weekdays      : ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                weekdaysShort : ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+            },
+            onSelect: function() {
+              
+              var fechaSeleccionada = this.getDate();
+                var fechaFormateada = fechaSeleccionada.toLocaleDateString('es-ES'); 
+                document.getElementById('fechanacimiento').value = fechaFormateada;
+            }
+        });
             const urlParams = new URLSearchParams(window.location.search);
             const leadId = urlParams.get('id');
-            
+
             if (leadId) {
-                
+
                 new LeadForm(leadId, true);
             } else {
                 alert('ID de lead no proporcionado');
@@ -120,4 +235,4 @@
 
 
 
-</html>
+</html>>

@@ -78,7 +78,7 @@ SELECT * FROM list_asesores;
 DROP VIEW list_asesores ;
 
 
-    
+
 
 
 CREATE VIEW list_inversionistas AS
@@ -133,6 +133,18 @@ CREATE VIEW list_contactibilidad AS
 
 
 SELECT * FROM contactibilidad;
+
+
+-- ROLES DE USUARIOS
+
+CREATE VIEW vista_usuarios_roles AS
+SELECT u.idusuario, u.usuario, r.rol
+FROM usuarios u
+JOIN colaboradores c ON u.idcolaborador = c.idcolaborador
+JOIN roles r ON c.idrol = r.idrol;
+
+
+
 
 
 

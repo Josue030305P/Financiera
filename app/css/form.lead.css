@@ -1,6 +1,6 @@
 
 .form-container {
-  max-width: 750px;
+  max-width: 990px;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.2);
@@ -10,6 +10,7 @@
   
 }
 .form-header{position: relative;}
+
 
 .form-grid {
   display: grid;
@@ -42,6 +43,26 @@ input, select {
   outline: none;
 
 }
+
+.pika-single {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Personalizar los días seleccionados */
+.pika-button.pika-selected {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Modificar el borde y el tamaño del campo de entrada */
+#fechanacimiento {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
 textarea {
   resize: none;
   padding: 10px;
@@ -57,7 +78,7 @@ textarea {
   font-size: 14px;
   text-decoration: none;
   position: absolute;
-  top: 20%;
+  top: 10%;
   right: 0;
   transform: translateY(-50%);
   transition: background 0.3s;

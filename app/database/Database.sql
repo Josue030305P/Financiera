@@ -112,7 +112,7 @@ CHANGE COLUMN idcolaboradores idcolaborador INT NOT NULL;
 
 CREATE TABLE inversionistas(
 idinversionista		INT PRIMARY KEY AUTO_INCREMENT,
-idpersona			INT NULL, -- persona inversionista  
+idpersona			INT NULL UNIQUE, -- persona inversionista  
 idempresa			INT NULL,
 idasesor			INT NOT NULL, -- Usuario encargado
 idusuariocreacion	INT  NULL, -- FK
@@ -127,6 +127,7 @@ CONSTRAINT fk_idusuario	FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_creacion_inver FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
+
 SELECT * FROM usuarios;
 
 CREATE TABLE numcuentas(
@@ -159,7 +160,7 @@ canal			ENUM('Facebook','WhatsApp','Instagram','Otro')
 -- Personas en conversacion que aun no son inversionistas
 CREATE TABLE leads(
 idlead				INT PRIMARY KEY AUTO_INCREMENT,
-idasesor  			INT NOT NULL, -- El usuario asesor
+idasesor  			INT NULL, -- El usuario asesor
 idpersona			INT NOT NULL,
 idcanal				INT NOT NULL,
 fecharegistro		DATETIME NOT NULL DEFAULT NOW(),
@@ -173,6 +174,7 @@ CONSTRAINT fk_idcanla_leads FOREIGN KEY(idcanal) REFERENCES canales(idcanal)
 )ENGINE=InnoDB;
 
 SELECT * FROM usuarios;
+-- ALTER TABLE leads MODIFY COLUMN idasesor INT NULL;
 
 CREATE TABLE contactibilidad(
 idcontactibilidad		INT PRIMARY KEY AUTO_INCREMENT,
@@ -285,6 +287,9 @@ SELECT * FROM contactibilidad;
 SELECT * FROM leads;
 SELECT * FROM usuarios;
 select * from accesos;
+SELECT * FROM colaboradores;
+SELECT * FROM roles;
 INSERT INTO contactibilidad(idlead,fecha,hora,comentarios,estado) VALUES(26,'2025-07-04','10:30','Se obtuvo primer acercamiento','En proceso');
+UPDATE colaboradores SET idrol = 2 WHERE idcolaborador = 1;
 
-
+UPDATE leads SET idasesor = 2 WHERE idlead = 1;
