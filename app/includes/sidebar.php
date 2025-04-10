@@ -1,4 +1,13 @@
 <?php require_once 'config.php'; ?>
+<?php  
+
+if (!isset($_SESSION['nombre'])) {
+    header('Location:../'); 
+    exit();
+}
+
+?>
+
 <aside class="sidebar">
     <div class="sidebar-start">
         <div class="sidebar-head">
@@ -141,9 +150,82 @@
                 <picture><source srcset="<?= BASE_URL?>app/img/avatar/avatar-illustrated-04.webp" type="image/webp"><img src="<?= BASE_URL?>app/img/avatar/avatar-illustrated-04.png" alt="User name"></picture>
             </span>
             <div class="sidebar-user-info">
-                <span class="sidebar-user__title">María</span>
+                <span class="sidebar-user__title"><?= $_SESSION['nombre']?></span>
                 <span class="sidebar-user__subtitle">Soporte</span>
             </div>
         </a>
+
+        <div class="logout-wrapper" style="padding: 1rem;">
+            <button id="logoutBtn" class="logout-btn" style="display: flex; align-items: center; color: red;">
+                <span class="icon logout" aria-hidden="true"></span>
+                <span style="margin-left: 0.5rem;">Cerrar sesión</span>
+            </button>
+        </div>
+
     </div>
 </aside> 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+    // Mostrar una alerta de confirmación antes de proceder
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¿Quieres cerrar sesión?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, cerrar sesión',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Si el usuario confirma, proceder a cerrar sesión
+            fetch('<?= BASE_URL ?>app/controllers/LoginController.php', {  
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'  // Formato estándar para POST
+                },
+                body: new URLSearchParams({ logout: 'true' })  
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    // Mostrar mensaje de éxito
+                    Swal.fire({
+                        title: '¡Sesión cerrada!',
+                        text: 'Has cerrado sesión exitosamente.',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        window.location.href = '<?= BASE_URL ?>'; // Redirigir al inicio
+                    });
+                } else {
+                    // Mostrar mensaje de error
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonText: 'Intentar nuevamente'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error al cerrar sesión:', error);
+                // Mostrar mensaje de error por falla en la petición
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al cerrar la sesión.',
+                    icon: 'error',
+                    confirmButtonText: 'Intentar nuevamente'
+                });
+            });
+        } else {
+            // Si el usuario cancela la acción
+            Swal.fire('Cancelado', 'La sesión no se cerró.', 'info');
+        }
+    });
+});
+
+
+</script>

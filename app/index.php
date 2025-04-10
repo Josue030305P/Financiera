@@ -46,7 +46,7 @@ $links = [
 ?>
 
 <body>
-    <h1>Hola <?= $_SESSION['nombre'] ?></h1>
+    
     <div class="page-flex">
         <?php require_once "./includes/sidebar.php"; ?>
         <div class="main-wrapper">

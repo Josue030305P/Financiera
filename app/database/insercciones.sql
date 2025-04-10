@@ -121,9 +121,10 @@ VALUES
 (1, 1, 1, 'TX123', NOW(), 1000.00, 'Pago 1');
 
 
--- Tabla: accesos
--- (Se asume que en colaboradores, idcolaborador=1 y 2)
+
 INSERT INTO accesos (idusuario_acceso, status_)
 VALUES
 (1, 'Activo');
+
+SELECT * FROM accesos;
 
