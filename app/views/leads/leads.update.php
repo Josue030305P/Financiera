@@ -156,7 +156,7 @@
                     <div class="form-footer">
                         <button type="button" class="add-btn">Actualizar lead</button>
                         <button type="button" class="reset-btn">Cancelar</button>
-                        <button type="button" class="invertir-btn">Invertir</button>
+                        <button class="invertir-btn" id="invertir-btn" disabled="true">Invertir</button>
                     </div>
                 </div>
             </div>
@@ -177,6 +177,8 @@
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+
 
             let picker = new Pikaday({
             field: document.getElementById('fechanacimiento'),

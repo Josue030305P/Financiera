@@ -169,6 +169,7 @@ class LeadForm {
                 },
                 body: JSON.stringify(formData)
             });
+            
 
             const result = await response.json();
 
@@ -202,6 +203,10 @@ class LeadForm {
 
     async actualizarLead() {
         try {
+            const btnInvertir = document.getElementById('invertir-btn');
+            btnInvertir.disabled = true;
+
+            
             const formData = {
                 tipodocumento: document.getElementById('tipodocumento').value,
                 numdocumento: document.getElementById('numdocumento').value,
@@ -222,9 +227,8 @@ class LeadForm {
                 ocupacion: document.getElementById('ocupacion').value
             };
 
-            console.log(formData);
     
-            if (!this.validarFormulario(formData)) return;
+    
     
             const response = await fetch(`${this.baseUrl}app/controllers/LeadController.php?id=${this.leadId}`, {
                 method: 'PUT',
@@ -239,12 +243,23 @@ class LeadForm {
     
             if (result.status === 'success') {
                 await Swal.fire({
+                    toast: true,
+                    position: 'top-end',
                     icon: 'success',
-                    title: 'Éxito',
-                    text: 'Lead actualizado correctamente',
-                    confirmButtonColor: '#3085d6'
-                });
-                window.location.href = `${this.baseUrl}app/`;
+                    title: 'Lead actualizado correctamente',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer);
+                      toast.addEventListener('mouseleave', Swal.resumeTimer);
+                    }
+                  });
+
+                //   btnInvertir.addEventListener('click', () => {
+                //     window.location.href = `${this.baseUrl}app/views/contratos/`;
+                //   })
+             
             } else {
                 await Swal.fire({
                     icon: 'error',

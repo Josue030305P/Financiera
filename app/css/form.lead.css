@@ -26,7 +26,9 @@
   margin-top: 15px;
 }
 
-
+.full-width {
+  grid-column: span 2;
+}
 
 .form-group label {
   font-weight: bold;
@@ -124,9 +126,12 @@ textarea {
   }
 
   .form-footer {
+    margin-top: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content:center;
+    flex-wrap: wrap;
     gap: 10px;
+    margin-top: 15px;
   }
 
   .add-btn, .reset-btn, .invertir-btn {

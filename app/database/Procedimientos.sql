@@ -35,10 +35,12 @@ END //
 
 DELIMITER ;
 
-CALL sp_update_personas(1,'DNI','767282782',1,'1','Meneses Fuentes','Paola Manuela','','Poala@examplecom','Grocio Prado - Av Carrizo','987654851','985658255','Plaza de armas');
+CALL sp_update_personas(1, 'DNI', '767282782', 1, 1, 'Meneses Fuentes', 'Paola Manuela', '03-05-2005', 'poala@example.com', 'Grocio Prado - Av Carrizo', '987654851', '985658255', 'Plaza de armas');
 
+UPDATE leads SET estado = 'Nuevo contacto' WHERE idlead = 1;
 
 SELECT * FROM personas;
+SELECT * FROM leads;
 
 
 
