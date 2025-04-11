@@ -53,10 +53,9 @@
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            // Guardar el idusuario en el sessionStorage (opcional)
+            
             sessionStorage.setItem('idusuario', data.idusuario);
-
-            // Mostrar mensaje de éxito
+           
             Swal.fire({
               toast: true,
               position: 'top-end',

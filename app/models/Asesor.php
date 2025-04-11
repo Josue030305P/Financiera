@@ -25,8 +25,3 @@ class Asesor
         return $result;
     }
 }
-
-//$a = new Asesor();
-
-//var_dump($a->getAll());
-

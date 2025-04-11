@@ -31,28 +31,28 @@ INSERT INTO entidades (tipo, entidad) VALUES
 
 -- Tabla: personas
 INSERT INTO personas (
-    tipodocumento, numdocumento, idpais, iddistrito, 
+    tipodocumento, numdocumento, idpais, 
     apellidos, nombres, email, domicilio, telprincipal, referencia
 )
 VALUES
 
-('DNI', '12344538', 1, 1, 'Meneses Fuentes', 'Paola Manuela', 'Paola@example.com', 'Av. nn', '987654851', 'Al costado de mi vecino'),
-('DNI', '71882015', 1, 1, 'Pilpe Yataco', 'Josué Isai', 'josue@example.com', 'Av. nn', '936047189', 'Al costado de bodega Marcelina'),
-('DNI', '85986985', 1, 1, 'Perez Munayco', 'María Esther', 'maria@example.com', 'Av. nn', '923569887','Al costado de mi vecino');
+('DNI', '12344538', 1, 'Meneses Fuentes', 'Paola Manuela', 'Paola@example.com', 'Av. nn', '987654851', 'Al costado de mi vecino'),
+('DNI', '71882015', 1 ,'Pilpe Yataco', 'Josué Isai', 'josue@example.com', 'Av. nn', '936047189', 'Al costado de bodega Marcelina'),
+('DNI', '85986985', 1, 'Perez Munayco', 'María Esther', 'maria@example.com', 'Av. nn', '923569887','Al costado de mi vecino');
 
 SELECT * FROM personas;
 SELECT * FROM roles;
 
 INSERT INTO colaboradores (idpersona, idrol, fechainicio)
 VALUES
-(3, 1, '2025-01-01');
+(1, 2, '2025-01-01');
 
 SELECT * FROM colaboradores;
 
 
 INSERT INTO usuarios (idcolaborador, usuario, passworduser)
 VALUES
-(2, 'MariaEsther', '12345');
+(2, 'Paola', '12345');
 
 SELECT * FROM usuarios;
 

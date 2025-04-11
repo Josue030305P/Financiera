@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Obtener la URL base del meta tag
+  
     const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
     
     const departamentoSelect = document.getElementById("departamento");

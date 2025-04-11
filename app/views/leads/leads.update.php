@@ -83,8 +83,8 @@
                             <label for="tipodocumento">Tipo de documento</label>
                             <select name="tipodocumento" id="tipodocumento" class="select-box" required>
                                 <option value="DNI">DNI</option>
-                                <option value="DNI">PSP</option>
-                                <option value="DNI">CEX</option>
+                                <option value="PSP">PSP</option>
+                                <option value="CEX">CEX</option>
                             </select>
                         </div>
 
@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label for="numdocumento">N° documento</label>
                             <input type="text" id="numdocumento" placeholder="Ingrese el n° de documento"
-                                class="numdocumento" required="true">
+                                class="numdocumento" required="true" maxlength="12">
                         </div>
 
                         <div class="form-group">
@@ -100,16 +100,6 @@
                             <input type="datetime" id="fechanacimiento" placeholder="Ingrese la fecha de nacimiento"
                                 class="fechanacimiento" required="true">
                         </div>
-
-
-
-
-                        <div class="form-group">
-                            <label for="correo">Correo</label>
-                            <input type="email" id="correo" placeholder="Ingrese el correo" class="correo">
-                        </div>
-
-
 
 
                         <div class="form-group">
@@ -123,14 +113,6 @@
                             <label for="referencia">Referencia</label>
                             <input type="text" id="referencia" placeholder="Ingrese una referencia"
                                 class="numdocumento">
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label for="telsecundario">Telefono secundario</label>
-                            <input type="text" id="telsecundario" placeholder="Ingrese número de telefono"
-                                class="telsecundario">
                         </div>
 
 
@@ -181,18 +163,24 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
     <script src="<?= BASE_URL ?>app/js/ubigeo.js"></script>
-    <!-- Incluir CSS de Pikaday -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
-    <!-- Incluir la librería de Pikaday -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.es.min.js"></script>
-
-
+  
 
 
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
@@ -235,4 +223,4 @@
 
 
 
-</html>>
+</html>

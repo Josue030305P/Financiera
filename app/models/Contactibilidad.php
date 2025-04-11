@@ -35,5 +35,3 @@ class Contactibilidad
 }
 
 
-//$ct = new Contactibilidad();
-//var_dump($ct->getAll());

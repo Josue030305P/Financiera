@@ -168,7 +168,7 @@ if (!isset($_SESSION['nombre'])) {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.getElementById('logoutBtn').addEventListener('click', function() {
-    // Mostrar una alerta de confirmación antes de proceder
+  
     Swal.fire({
         title: '¿Estás seguro?',
         text: '¿Quieres cerrar sesión?',
@@ -179,11 +179,11 @@ if (!isset($_SESSION['nombre'])) {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            // Si el usuario confirma, proceder a cerrar sesión
+        
             fetch('<?= BASE_URL ?>app/controllers/LoginController.php', {  
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'  // Formato estándar para POST
+                    'Content-Type': 'application/x-www-form-urlencoded' 
                 },
                 body: new URLSearchParams({ logout: 'true' })  
             })
@@ -198,10 +198,10 @@ if (!isset($_SESSION['nombre'])) {
                         icon: 'success',
                         confirmButtonText: 'Aceptar'
                     }).then(() => {
-                        window.location.href = '<?= BASE_URL ?>'; // Redirigir al inicio
+                        window.location.href = '<?= BASE_URL ?>'; 
                     });
                 } else {
-                    // Mostrar mensaje de error
+                  
                     Swal.fire({
                         title: 'Error',
                         text: data.message,
@@ -212,7 +212,7 @@ if (!isset($_SESSION['nombre'])) {
             })
             .catch(error => {
                 console.error('Error al cerrar sesión:', error);
-                // Mostrar mensaje de error por falla en la petición
+                
                 Swal.fire({
                     title: 'Error',
                     text: 'Hubo un problema al cerrar la sesión.',
@@ -221,7 +221,7 @@ if (!isset($_SESSION['nombre'])) {
                 });
             });
         } else {
-            // Si el usuario cancela la acción
+            
             Swal.fire('Cancelado', 'La sesión no se cerró.', 'info');
         }
     });

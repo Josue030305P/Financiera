@@ -36,14 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } 
     
-    // Verificar si la solicitud es para logout
+    
     elseif (isset($_POST['logout']) && $_POST['logout'] == true) {
         try {
-            // Verificar si hay una sesión activa
+            
             if (isset($_SESSION['idusuario'])) {
-                // Llamada al método cerrarSesion
+             
                 $login->cerrarSesion($_SESSION['idusuario']);
-                // Destruir la sesión
+               
                 session_unset();
                 session_destroy();
 
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } 
 
     else {
-        // Si faltan campos en el formulario
+  
         echo json_encode([
             'success' => false,
             'message' => 'Faltan campos requeridos',
@@ -68,6 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-// Si no es una solicitud POST
+
 echo json_encode(['success' => false, 'message' => 'Método no permitido']);
 exit();

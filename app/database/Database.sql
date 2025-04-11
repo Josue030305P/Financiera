@@ -56,10 +56,12 @@ domicilio			VARCHAR(100) NULL,
 telprincipal		VARCHAR(15) NOT NULL UNIQUE,
 telsecundario		VARCHAR(15) NULL,
 referencia			VARCHAR(150) NULL,
+ estado				ENUM('Activo','Inactivo') DEFAULT 'Activo',
 CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un numero de documento y amarrarlo a un tipo de documento
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 )ENGINE=InnoDB;
+
 
 CREATE TABLE empresas(
 idempresa			INT PRIMARY KEY AUTO_INCREMENT,
@@ -275,6 +277,8 @@ status_					ENUM('Activo','Inactivo') NOT NULL,
 CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios(idusuario) -- Aclarar leugo si es en colabordores o usuarios;
 )ENGINE=InnoDB;
 SHOW TABLES ;
+
+ALTER TABLE accesos ADD COLUMN fechahorainactivo DATETIME NULL; 
 
 SELECT * FROM personas;
 SELECT * FROM empresas;

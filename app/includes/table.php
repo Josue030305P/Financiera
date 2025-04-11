@@ -12,7 +12,7 @@
 
                 <div class="search-container">
                     <input type="text" id="searchInput" placeholder="Bucardor multiple 🔍">
-                    <!-- Buscar  htmlspecialchars($tipo) !-->
+                    
                 </div>
 
                 <div class="header-buttons">
