@@ -203,17 +203,26 @@ class LeadForm {
     async actualizarLead() {
         try {
             const formData = {
+                tipodocumento: document.getElementById('tipodocumento').value,
+                numdocumento: document.getElementById('numdocumento').value,
                 idpais: document.getElementById('pais').value,
+                iddistrito: document.getElementById('distrito').value,
                 apellidos: document.getElementById('apellidos').value,
                 nombres: document.getElementById('nombres').value,
+                fechanacimiento: document.getElementById('fechanacimiento').value,
                 email: document.getElementById('correo').value,
+                domicilio: document.getElementById('domicilio').value,
                 telprincipal: document.getElementById('telefono').value,
+                telsecundario: document.getElementById('telsecundario').value,
+                referencia: document.getElementById('referencia').value,
                 idasesor: document.getElementById('asesor').value,
                 idcanal: document.getElementById('canal').value,
                 comentarios: document.getElementById('comentarios').value,
                 prioridad: document.getElementById('prioridad').value,
                 ocupacion: document.getElementById('ocupacion').value
             };
+
+            console.log(formData);
     
             if (!this.validarFormulario(formData)) return;
     
@@ -226,6 +235,7 @@ class LeadForm {
             });
     
             const result = await response.json();
+            console.log(result);
     
             if (result.status === 'success') {
                 await Swal.fire({

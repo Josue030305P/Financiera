@@ -3,7 +3,6 @@
 <?php require_once "../../includes/config.php"; ?>
 
 
-
 <meta name="base-url" content="<?= BASE_URL ?>">
 <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
 
@@ -46,8 +45,8 @@
 
 
                         <div class="form-group">
-                            <label for="correo">Correo</label>
-                            <input type="email" id="correo" placeholder="Ingrese su correo" class="correo" required>
+                            <label for="email">Correo</label>
+                            <input type="email" id="correo" name="email" placeholder="Ingrese su correo" class="correo" required>
                         </div>
 
                         <div class="form-group">
@@ -91,27 +90,27 @@
 
                         <div class="form-group">
                             <label for="numdocumento">N° documento</label>
-                            <input type="text" id="numdocumento" placeholder="Ingrese el n° de documento"
+                            <input type="text" id="numdocumento" name="numdocumento" placeholder="Ingrese el n° de documento"
                                 class="numdocumento" required="true" maxlength="12">
                         </div>
 
                         <div class="form-group">
                             <label for="fechanacimiento">Fecha nacimiento</label>
-                            <input type="datetime" id="fechanacimiento" placeholder="Ingrese la fecha de nacimiento"
-                                class="fechanacimiento" required="true">
+                            <input type="datetime" id="fechanacimiento" name="fechanacimiento" placeholder="Ingrese la fecha de nacimiento"
+                                class="fechanacimiento"  required="true">
                         </div>
 
 
                         <div class="form-group">
                             <label for="domicilio">Domicilio</label>
-                            <input type="text" id="domicilio" placeholder="Ingrese el domicilio" class="domicilio">
+                            <input type="text" id="domicilio" name="domicilio" placeholder="Ingrese el domicilio" class="domicilio">
                         </div>
 
 
 
                         <div class="form-group">
                             <label for="referencia">Referencia</label>
-                            <input type="text" id="referencia" placeholder="Ingrese una referencia"
+                            <input type="text" id="referencia" name="referencia" placeholder="Ingrese una referencia"
                                 class="numdocumento">
                         </div>
 
@@ -145,7 +144,7 @@
 
                         <div class="form-group">
                             <label for="ocupacion">Ocupación</label>
-                            <input type="text" id="ocupacion" placeholder="Ingrese una ocupación" class="ocupacion">
+                            <input type="text" id="ocupacion" name=ocupacion placeholder="Ingrese una ocupación" class="ocupacion">
                         </div>
 
                         <div class="form-group full-width">
@@ -157,21 +156,13 @@
                     <div class="form-footer">
                         <button type="button" class="add-btn">Actualizar lead</button>
                         <button type="button" class="reset-btn">Cancelar</button>
+                        <button type="button" class="invertir-btn">Invertir</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-    
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
@@ -202,8 +193,10 @@
             },
             onSelect: function() {
               
-              var fechaSeleccionada = this.getDate();
-                var fechaFormateada = fechaSeleccionada.toLocaleDateString('es-ES'); 
+                let fechaSeleccionada = this.getDate();
+                let fechaFormateada = fechaSeleccionada.toLocaleDateString('es-ES'); 
+                fechaFormateada = fechaFormateada.replace(/\//g, '-');
+                console.log(fechaFormateada)
                 document.getElementById('fechanacimiento').value = fechaFormateada;
             }
         });

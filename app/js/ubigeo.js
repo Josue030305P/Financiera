@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`${baseUrl}app/controllers/UbigeoController`)  
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+             
                 departamentoSelect.innerHTML = "<option value=''>Seleccione un departamento</option>";
                 data.forEach(departamento => {
                     departamentoSelect.innerHTML += `<option value="${departamento.iddepartamento}">${departamento.departamento}</option>`;

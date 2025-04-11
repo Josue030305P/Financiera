@@ -113,21 +113,23 @@ class Lead
             $idpersona = $lead['idpersona'];
 
 
-            $sqlP = "UPDATE personas SET 
-                     idpais = ?, 
-                     apellidos = ?, 
-                     nombres = ?, 
-                     email = ?, 
-                     telprincipal = ? 
-                     WHERE idpersona = ?";
+            $sqlP = "CALL sp_update_personas(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $this->conexion->prepare($sqlP);
             $stmt->execute([
+                $idpersona,
+                $data['tipodocumento'],
+                $data['numdocumento'],
                 $data['idpais'],
+                $data['iddistrito'],
                 $data['apellidos'],
                 $data['nombres'],
+                $data['fechanacimiento'],
                 $data['email'],
+                $data['domicilio'],
                 $data['telprincipal'],
-                $idpersona
+                $data['telsecundario'],
+                $data['referencia'],
+                
             ]);
 
 

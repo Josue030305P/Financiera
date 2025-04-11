@@ -1,9 +1,9 @@
 
 .form-container {
-  max-width: 990px;
+  max-width: 900px;
   padding: 25px;
   border-radius: 10px;
-  box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 3px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin: auto;
   margin-top: 5%;
@@ -23,11 +23,10 @@
   text-align: left;
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 }
 
-.full-width {
-  grid-column: span 2;
-}
+
 
 .form-group label {
   font-weight: bold;
@@ -35,33 +34,21 @@
 }
 
 input, select {
+  border: 3px solid #ccc !important;
+  background: #fff;
+  color: #000;
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  outline: none;
-
+}
+input::placeholder {
+  color: #999;
+  font-weight: bold;
 }
 
-.pika-single {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
 
-/* Personalizar los días seleccionados */
-.pika-button.pika-selected {
-  background-color: #4CAF50;
-  color: white;
-}
 
-/* Modificar el borde y el tamaño del campo de entrada */
-#fechanacimiento {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
+
 
 textarea {
   resize: none;
@@ -88,15 +75,18 @@ textarea {
   background-color: #d1b600;
 }
 
-/* Botones */
+
 .form-footer {
+  margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 15px;
 }
 
-.add-btn, .reset-btn {
-  width: 48%;
+.add-btn, .reset-btn, .invertir-btn {
+  width: 30%;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -114,9 +104,13 @@ textarea {
   background-color: #f00;
   color: #fff;
 }
+.invertir-btn {
+  background-color: rgb(13, 189, 13);
+  color: #fff;
+}
 
-.add-btn:hover, .reset-btn:hover {
-  transform: scale(1.05);
+.add-btn:hover, .reset-btn:hover, .invertir-btn:hover {
+  transform: scale(1.02);
 }
 
 
@@ -130,11 +124,12 @@ textarea {
   }
 
   .form-footer {
+    display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  .add-btn, .reset-btn {
-    width: 100%;
+  .add-btn, .reset-btn, .invertir-btn {
+    width: 80%;
   }
 }

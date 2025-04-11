@@ -115,11 +115,18 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             }
 
             $registro = [
+                'tipodocumento' => htmlspecialchars($dataJSON['tipodocumento']),
+                'numdocumento'=> htmlspecialchars($dataJSON['numdocumento']),
                 'idpais' => htmlspecialchars($dataJSON['idpais']),
+                'iddistrito'=> htmlspecialchars($dataJSON['iddistrito']),
                 'apellidos' => htmlspecialchars($dataJSON['apellidos']),
                 'nombres' => htmlspecialchars($dataJSON['nombres']),
+                'fechanacimiento'=> htmlspecialchars($dataJSON['fechanacimiento']),
                 'email' => htmlspecialchars($dataJSON['email']),
+                'domicilio'=> htmlspecialchars($dataJSON['domicilio']),
                 'telprincipal' => htmlspecialchars($dataJSON['telprincipal']),
+                'telsecundario'=> htmlspecialchars($dataJSON['telsecundario']),
+                'referencia'=> htmlspecialchars($dataJSON['referencia']),
                 'idasesor' => htmlspecialchars($dataJSON['idasesor']),
                 'idcanal' => htmlspecialchars($dataJSON['idcanal']),
                 'comentarios' => htmlspecialchars($dataJSON['comentarios']),

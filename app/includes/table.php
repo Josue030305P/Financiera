@@ -11,7 +11,7 @@
 
 
                 <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Bucardor multiple 🔍">
+                    <input type="text" id="searchInput" placeholder="Buscador multiple 🔍">
                     
                 </div>
 
