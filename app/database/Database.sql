@@ -288,6 +288,7 @@ SELECT * FROM departamentos;
 Select * from provincias;
 SELECT * FROM distritos;
 SELECT * FROM contactibilidad;
+SELECT * FROM contratos;
 SELECT * FROM leads;
 SELECT * FROM usuarios;
 select * from accesos;

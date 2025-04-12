@@ -1,0 +1,231 @@
+/* Estilos para el contenedor principal */
+.container {
+    width: 95%;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .mt-5 {
+    margin-top: 3rem !important; /* !important para mayor especificidad si es necesario */
+  }
+  
+  /* Estilos para la tarjeta (card) */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.375rem;
+  }
+  
+  .mb-5 {
+    margin-bottom: 3rem !important;
+  }
+  
+  .shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  }
+  
+  .rounded-4 {
+    border-radius: 1rem !important;
+  }
+  
+  .border-1 {
+    border-width: 1px !important;
+  }
+  
+  /* Estilos para el encabezado de la tarjeta (card-header) */
+  .card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+  .bg-primary {
+    background-color: #0d6efd !important;
+  }
+  
+  .text-white {
+    color: #fff !important;
+  }
+  
+  .fw-bold {
+    font-weight: bold !important;
+  }
+  
+  .header-inversionista {
+    /* Puedes añadir estilos específicos para este encabezado si lo necesitas */
+  }
+  
+  /* Estilos para el cuerpo de la tarjeta (card-body) */
+  .card-body {
+    padding: 1rem 1.25rem;
+  }
+  
+  /* Estilos para la fila (row) */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -0.5);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+  }
+  
+  .row > * {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: calc(var(--bs-gutter-y) * 0.5);
+  }
+  
+  .mb-3 {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Estilos para las columnas (col-md-6, col-md-3) */
+  .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  
+  .col-md-3 {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  
+  /* Media query para tamaños de pantalla medianos (similar a Bootstrap md breakpoint) */
+  @media (max-width: 767.98px) {
+    .col-md-6,
+    .col-md-3 {
+      width: 100%; /* Apilar las columnas en pantallas más pequeñas */
+    }
+  }
+  
+  /* Estilos para la etiqueta del formulario (form-label) */
+  .form-label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Estilos para el control del formulario (form-control) */
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .form-control:disabled,
+  .form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+  }
+  
+  /* Estilos para el selector (form-select) */
+  .form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    -moz-padding-start: calc(0.75rem - 3px);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .form-select-sm {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Espaciado vertical adicional */
+  .mb-4 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem !important;
+  }
+  
+  /* Estilos para el textarea flotante (form-floating) */
+  .form-floating {
+    position: relative;
+  }
+  
+  .form-floating > .form-control,
+  .form-floating > .form-select {
+    padding: 1rem 0.75rem;
+    height: auto; /* Para que la altura se ajuste al contenido */
+  }
+  
+  .form-floating > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+    opacity: 0.65;
+  }
+  
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label,
+  .form-floating > .form-select ~ label {
+    opacity: 0.65;
+    transform: translateY(-0.5rem) scale(0.85);
+  }
+  
+  /* Estilos para el justify-content-center */
+  .d-flex {
+    display: flex !important;
+  }
+  
+  .justify-content-center {
+    justify-content: center !important;
+  }
+  
+  .col-md-10 {
+    flex: 0 0 auto;
+    width: calc(100% * 10 / 12); /* Ancho basado en el sistema de grid de Bootstrap */
+  }
+  
+  @media (max-width: 767.98px) {
+    .col-md-10 {
+      width: 100%;
+    }
+  }
+  
+  .mt-3 {
+    margin-top: 1rem !important;
+  }

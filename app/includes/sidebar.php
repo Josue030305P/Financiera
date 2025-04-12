@@ -191,7 +191,7 @@ if (!isset($_SESSION['nombre'])) {
             .then(data => {
                 console.log(data);
                 if (data.success) {
-                    // Mostrar mensaje de éxito
+                  
                     Swal.fire({
                         title: '¡Sesión cerrada!',
                         text: 'Has cerrado sesión exitosamente.',
