@@ -94,7 +94,6 @@ CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
 
-
 CREATE TABLE  usuarios(
 idusuario	 		INT PRIMARY KEY AUTO_INCREMENT,
 idcolaborador    	INT NOT NULL,
@@ -273,7 +272,8 @@ CREATE TABLE accesos(
 idacceso				INT PRIMARY KEY AUTO_INCREMENT,
 idusuario_acceso 		INT NOT NULL,
 fechahora				DATETIME NOT NULL DEFAULT NOW(),
-status_					ENUM('Activo','Inactivo') NOT NULL,
+status_					ENUM('Activo','In
+activo') NOT NULL,
 CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios(idusuario) -- Aclarar leugo si es en colabordores o usuarios;
 )ENGINE=InnoDB;
 SHOW TABLES ;

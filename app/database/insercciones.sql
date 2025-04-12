@@ -45,14 +45,14 @@ SELECT * FROM roles;
 
 INSERT INTO colaboradores (idpersona, idrol, fechainicio)
 VALUES
-(1, 2, '2025-01-01');
+(3, 1, '2025-01-01');
 
 SELECT * FROM colaboradores;
 
 
 INSERT INTO usuarios (idcolaborador, usuario, passworduser)
 VALUES
-(2, 'Paola', '12345');
+(2, 'Maria', '12345');
 
 SELECT * FROM usuarios;
 
@@ -79,7 +79,7 @@ SELECT * FROM usuarios;
 
 INSERT INTO leads (idasesor, idpersona, idcanal, comentarios, prioridad, ocupacion)
 VALUES
-(1, 2, 1, 'Esta demasiado interesado', 'Alto', 'Ingeníera');
+(2, 3, 1, 'Esta demasiado interesado', 'Alto', 'Ingeníera');
 
 
 INSERT INTO contactibilidad (idlead, fecha, hora, comentarios, estado)
