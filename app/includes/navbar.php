@@ -11,18 +11,7 @@
         <span class="sr-only">Toggle menu</span>
         <span class="icon menu-toggle--gray" aria-hidden="true"></span>
       </button>
-      <div class="lang-switcher-wrapper">
-
-        <button class="lang-switcher transparent-btn" type="button">
-          EN
-          <i data-feather="chevron-down" aria-hidden="true"></i>
-        </button>
-        <ul class="lang-menu dropdown">
-          <li><a href="##">English</a></li>
-          <li><a href="##">French</a></li>
-          <li><a href="##">Uzbek</a></li>
-        </ul>
-      </div> 
+     
       
       <!-- Boton para cmabiar de tema -->
       <button class="theme-switcher gray-circle-btn" type="button" title="Switch theme">
@@ -34,7 +23,7 @@
 
 
       <!-- Botón de notificacines -->
-      <div class="notification-wrapper">
+      <!-- <div class="notification-wrapper">
         <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
           <span class="sr-only">To messages</span>
           <span class="icon notification active" aria-hidden="true"></span>
@@ -79,7 +68,7 @@
             <a class="link-to-page" href="##">Go to Notifications page</a>
           </li>
         </ul>
-      </div>
+      </div> -->
       <!-- Fin de botón notificacines -->
 
       <div class="nav-user-wrapper">

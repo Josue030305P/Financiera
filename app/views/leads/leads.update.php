@@ -156,7 +156,8 @@
                     <div class="form-footer">
                         <button type="button" class="add-btn">Actualizar lead</button>
                         <button type="button" class="reset-btn">Cancelar</button>
-                        <button class="invertir-btn" id="invertir-btn" disabled="true">Invertir</button>
+                        <a href="<?= BASE_URL?>app/views/contratos/" class="invertir-btn d-none" visible="false">Invertir</a>
+                       
                     </div>
                 </div>
             </div>

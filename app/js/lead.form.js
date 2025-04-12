@@ -10,7 +10,7 @@ class LeadForm {
     async init() {
         await Promise.all([
             this.cargarAsesores(),
-            this.cargarPaises()
+            this.cargarPaises(),
         ]);
         
         if (this.isUpdate && this.leadId) {
@@ -200,13 +200,9 @@ class LeadForm {
         }
     }
 
-
     async actualizarLead() {
         try {
-            const btnInvertir = document.getElementById('invertir-btn');
-            btnInvertir.disabled = true;
-
-            
+      
             const formData = {
                 tipodocumento: document.getElementById('tipodocumento').value,
                 numdocumento: document.getElementById('numdocumento').value,
@@ -227,9 +223,6 @@ class LeadForm {
                 ocupacion: document.getElementById('ocupacion').value
             };
 
-    
-    
-    
             const response = await fetch(`${this.baseUrl}app/controllers/LeadController.php?id=${this.leadId}`, {
                 method: 'PUT',
                 headers: {
@@ -239,7 +232,7 @@ class LeadForm {
             });
     
             const result = await response.json();
-            console.log(result);
+           // console.log(result);
     
             if (result.status === 'success') {
                 await Swal.fire({
@@ -256,9 +249,7 @@ class LeadForm {
                     }
                   });
 
-                //   btnInvertir.addEventListener('click', () => {
-                //     window.location.href = `${this.baseUrl}app/views/contratos/`;
-                //   })
+                  document.querySelector('.invertir-btn').classList.remove('d-none');
              
             } else {
                 await Swal.fire({
@@ -280,96 +271,96 @@ class LeadForm {
     }
 
 
-    async validarFormulario(data) {
+    // async validarFormulario(data) {
         
-        if (!data.apellidos || !data.nombres) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'Los nombres y apellidos son obligatorios',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     if (!data.apellidos || !data.nombres) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'Los nombres y apellidos son obligatorios',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
         
-        const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-        if (!nombreRegex.test(data.nombres) || !nombreRegex.test(data.apellidos)) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'Nombres y apellidos solo deben contener letras y espacios',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    //     if (!nombreRegex.test(data.nombres) || !nombreRegex.test(data.apellidos)) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'Nombres y apellidos solo deben contener letras y espacios',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
  
-        if (!data.telprincipal) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'El teléfono es obligatorio',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     if (!data.telprincipal) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'El teléfono es obligatorio',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
         
-        const telefonoRegex = /^[0-9]{9}$/;
-        if (!telefonoRegex.test(data.telprincipal)) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'El teléfono debe tener 9 dígitos numéricos',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     const telefonoRegex = /^[0-9]{9}$/;
+    //     if (!telefonoRegex.test(data.telprincipal)) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'El teléfono debe tener 9 dígitos numéricos',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
     
-        if (!data.email) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'El correo es obligatorio',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     if (!data.email) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'El correo es obligatorio',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'Ingrese un correo electrónico válido',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //     if (!emailRegex.test(data.email)) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'Ingrese un correo electrónico válido',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
-        if (!data.idasesor) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'Debe seleccionar un asesor',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     if (!data.idasesor) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'Debe seleccionar un asesor',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
-        if (!data.idpais) {
-            await Swal.fire({
-                icon: 'warning',
-                title: 'Validación',
-                text: 'Debe seleccionar un país',
-                confirmButtonColor: '#3085d6'
-            });
-            return false;
-        }
+    //     if (!data.idpais) {
+    //         await Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Validación',
+    //             text: 'Debe seleccionar un país',
+    //             confirmButtonColor: '#3085d6'
+    //         });
+    //         return false;
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
 }

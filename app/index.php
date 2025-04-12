@@ -56,7 +56,7 @@ $links = [
         </div>
     </div>
 
-    <!-- Scripts -->
+
     <script src="<?= BASE_URL ?>app/js/dataTable.js"></script>
     <script>
     new DataTable({

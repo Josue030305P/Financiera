@@ -48,7 +48,9 @@ input::placeholder {
   font-weight: bold;
 }
 
-
+.d-none {
+  display: none;
+}
 
 
 

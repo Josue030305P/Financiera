@@ -2,7 +2,6 @@
 <?php require_once '../../includes/header.php'; ?>
 <?php  require_once '../../includes/config.php' ?>
 
-<!-- Agregar meta tag para URL base -->
 <meta name="base-url" content="<?= BASE_URL ?>">
 <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
 
