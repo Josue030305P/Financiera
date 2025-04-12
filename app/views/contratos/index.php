@@ -1,13 +1,12 @@
 <?php session_start(); ?>
-
+<?php require_once '../../includes/header.php'; ?>
 <?php require_once "../../includes/config.php"; ?>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link rel="stylesheet" href="<?= BASE_URL ?>app/css/contrato.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <style>
@@ -35,12 +34,18 @@
       height: 80px !important;
     } */
   </style>
-
-
 </head>
 
 <body>
 
+
+  <div class="page-flex">
+    <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
+    <div class="main-wrapper">
+      <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
+
+        
+          
   <div class="container mt-5">
     <!-- Inversionista -->
     <div class="card mb-5 text-bg-secondary">
@@ -93,10 +98,7 @@
             <input type="text" class="form-control" id="telconyuge">
             <label for="telconyuge">Teléfono (Conyuge)</label>
           </div>
-
-
         </div>
-
       </div>
 
     </div>
@@ -197,6 +199,9 @@
     </div>
 
   </div>
+    </div>
+  </div>
+
 
 
 
