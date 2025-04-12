@@ -192,8 +192,42 @@ CONSTRAINT fk_id_user_creacion_contact FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contact FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+CREATE TABLE versiones(
+idversion				INT AUTO_INCREMENT PRIMARY KEY,
+fechainicio				DATE NOT NULL DEFAULT NOW(),
+fechafin				DATE NULL
+)ENGINE=InnoDB;
+INSERT INTO versiones(fechainicio) VALUES(NOW());
+SELECT * FROM versiones;
+
+CREATE TABLE condiciones(
+idcondicion				INT AUTO_INCREMENT PRIMARY KEY,
+idversion				INT NOT NULL,
+entidad					ENUM('Mutuatario','Mutuante') COMMENT 'Mutuatario(Yonda) - Mutuante(Inversionista)',
+condicion				VARCHAR(300) NOT NULL,
+CONSTRAINT fk_idversion_condicion FOREIGN KEY(idversion) REFERENCES versiones(idversion)
+)ENGINE=InnoDB;
+
+INSERT INTO condiciones(idversion,entidad,condicion)
+	VALUES(1,'Mutuante','DECLARACIÓN JURADA DE ORIGEN DE FONDOS'),
+		  (1,'Mutuante','Cumplir con la presentación de documentos contables requeridos, referente a sus facturas de renta de segunda categoría'),
+		  (1,'Mutuante','Informar al MUTUATARIO cualquier situación referente a sus cuentas bancarias a recibir su rentabilidad con anticipación');
+		
+SELECT * FROM condiciones;
+
+
+
+
+
+
+
+
+SELECT * FROM condiciones;
+-- CREATE UNIQUE INDEX unique_active_version ON versiones (idcontrato) WHERE fechafin IS NULL;
+
 CREATE TABLE contratos(
 idcontrato				INT PRIMARY KEY AUTO_INCREMENT,
+idversion				INT NOT NULL,
 idasesor				INT NOT NULL,
 idinversionista			INT NOT NULL,
 idconyuge				INT NULL, -- Persona a la que pueden depositar en caso suceda algo al cliente o asi lo decida
@@ -212,16 +246,18 @@ capital					DECIMAL(10,2) NOT NULL,
 tiporetorno				ENUM('Fijo','Variable') NOT NULL, -- EL monto del dinero peude variar o ser fijo 
 periodopago				VARCHAR(30) NOT NULL DEFAULT 'Mensual',
 observacion				VARCHAR(100) NULL,
-version					CHAR(2)  NOT NULL DEFAULT '1',
 fechahoraeliminacion	DATETIME NULL,
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idusuario_asesor FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
+CONSTRAINT fk_idversion FOREIGN KEY(idversion) REFERENCES versiones(idversion),
 CONSTRAINT fk_idinversionista_contrato FOREIGN KEY(idinversionista) REFERENCES inversionistas(idinversionista),
 CONSTRAINT fk_idconyugue FOREIGN KEY(idconyuge) REFERENCES personas(idpersona),
 CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
+SELECT * FROM contratos;
+
 
 CREATE TABLE garantias(
 idgarantia				INT PRIMARY KEY AUTO_INCREMENT,
