@@ -51,6 +51,22 @@ class Lead
         }
     }
 
+    public function getLeadToInversionistaById($id): array
+    {
+
+        try {
+
+            $sql = "SELECT * FROM v_lead_to_inversionista WHERE idlead = ?";
+            $smt = $this->conexion->prepare($sql);
+            $smt->execute([$id]);
+            $result = $smt->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function add(array $data): array
     {
         try {
@@ -100,7 +116,7 @@ class Lead
         try {
             $this->conexion->beginTransaction();
 
-           
+
             $sql = "SELECT idpersona FROM leads WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute([$id]);
@@ -129,7 +145,7 @@ class Lead
                 $data['telprincipal'],
                 $data['telsecundario'],
                 $data['referencia'],
-                
+
             ]);
 
 
@@ -198,7 +214,7 @@ class Lead
             throw new Exception($e->getMessage());
         }
     }
-
-    
 }
 
+// $lead = new Lead();
+//  var_dump($lead->getLeadToInversionistaById(5));

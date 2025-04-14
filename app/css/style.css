@@ -3370,6 +3370,19 @@ font-weight: bold;
 
 
 
+.darkmode .text-bg-secondary {
+
+  background-color: #222235 !important; 
+  color: #EFF0F6 !important;
+}
+
+
+.darkmode .card {
+  background-color: #222235 !important; 
+  color: #EFF0F6 !important;
+  box-shadow: none;
+}
+
 
 /*Estilos para el modo socuro*/
 

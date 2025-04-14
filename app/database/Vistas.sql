@@ -143,15 +143,23 @@ FROM usuarios u
 JOIN colaboradores c ON u.idcolaborador = c.idcolaborador
 JOIN roles r ON c.idrol = r.idrol;
 
+SELECT * FROM leads;
+SELECT * FROM personas;
 
 
+CREATE VIEW v_lead_to_inversionista AS
+SELECT
+    l.idlead,
+    CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto,
+    p.tipodocumento,
+    p.numdocumento,
+    p.telprincipal AS telefono
+FROM leads l
+JOIN personas p ON l.idpersona = p.idpersona;
 
+-- DROP VIEW  v_lead_to_inversionista;
 
-
-
-
-
-
+SELECT * FROM v_lead_to_inversionista WHERE idlead = 5;
 
 
 

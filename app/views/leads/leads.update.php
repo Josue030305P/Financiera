@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <label for="fechanacimiento">Fecha nacimiento</label>
                             <input type="datetime" id="fechanacimiento" name="fechanacimiento" placeholder="Ingrese la fecha de nacimiento"
-                                class="fechanacimiento"  required="true">
+                                class="fechanacimiento" required="true">
                         </div>
 
 
@@ -156,8 +156,8 @@
                     <div class="form-footer">
                         <button type="button" class="add-btn">Actualizar lead</button>
                         <button type="button" class="reset-btn">Cancelar</button>
-                        <a href="<?= BASE_URL?>app/views/contratos/" class="invertir-btn d-none" visible="false">Invertir</a>
-                       
+                        <a href="" class="invertir-btn d-none" visible="false">Invertir</a>
+
                     </div>
                 </div>
             </div>
@@ -172,43 +172,44 @@
     <script src="<?= BASE_URL ?>app/js/ubigeo.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
-  
+
 
 
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
-
-
             let picker = new Pikaday({
-            field: document.getElementById('fechanacimiento'),
-            format: 'DD-MM-YYYY', 
-            yearRange: [1900, 3000], 
-            minDate: new Date(1900, 0, 1), 
-            maxDate: new Date() + 500,
-            i18n: {
-                previousMonth : 'Mes anterior',
-                nextMonth     : 'Mes siguiente',
-                months        : ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                weekdays      : ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                weekdaysShort : ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
-            },
-            onSelect: function() {
-              
-                let fechaSeleccionada = this.getDate();
-                let fechaFormateada = fechaSeleccionada.toLocaleDateString('es-ES'); 
-                fechaFormateada = fechaFormateada.replace(/\//g, '-');
-                console.log(fechaFormateada)
-                document.getElementById('fechanacimiento').value = fechaFormateada;
-            }
-        });
+                field: document.getElementById('fechanacimiento'),
+                format: 'DD-MM-YYYY',
+                yearRange: [1900, 3000],
+                minDate: new Date(1900, 0, 1),
+                maxDate: new Date() + 500,
+                i18n: {
+                    previousMonth: 'Mes anterior',
+                    nextMonth: 'Mes siguiente',
+                    months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+                },
+                onSelect: function() {
+                    let fechaSeleccionada = this.getDate();
+                    let fechaFormateada = fechaSeleccionada.toLocaleDateString('es-ES');
+                    fechaFormateada = fechaFormateada.replace(/\//g, '-');
+                    document.getElementById('fechanacimiento').value = fechaFormateada;
+                }
+            });
+
             const urlParams = new URLSearchParams(window.location.search);
             const leadId = urlParams.get('id');
+            const btnContrato = document.querySelector('.invertir-btn');
 
             if (leadId) {
-
-                new LeadForm(leadId, true);
+                new LeadForm(leadId, true); 
+                
+                btnContrato.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = `<?= BASE_URL ?>app/views/contratos/contrato.add.php?id=${leadId}`;
+                });
             } else {
                 alert('ID de lead no proporcionado');
                 window.location.href = '<?= BASE_URL ?>app/';

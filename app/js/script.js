@@ -173,39 +173,45 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   (function () {
-    Chart.defaults.backgroundColor = '#000';
+    
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.backgroundColor = '#000';
+    }
+  
     var darkMode = localStorage.getItem('darkMode');
     var darkModeToggle = document.querySelector('.theme-switcher');
-
-    var enableDarkMode = function enableDarkMode() {
+  
+    function enableDarkMode() {
       document.body.classList.add('darkmode');
       localStorage.setItem('darkMode', 'enabled');
-    };
-
-    var disableDarkMode = function disableDarkMode() {
+    }
+  
+    function disableDarkMode() {
       document.body.classList.remove('darkmode');
       localStorage.setItem('darkMode', null);
-    };
-
+    }
+  
     if (darkMode === 'enabled') {
       enableDarkMode();
     }
-
+  
+    
     if (darkModeToggle) {
       darkModeToggle.addEventListener('click', function () {
         darkMode = localStorage.getItem('darkMode');
-
         if (darkMode !== 'enabled') {
           enableDarkMode();
         } else {
           disableDarkMode();
         }
 
-        addData();
+        if (typeof addData === 'function') {
+          addData();
+        }
       });
     }
   })();
-
+  
   (function () {
     var checkAll = document.querySelector('.check-all');
     var checkers = document.querySelectorAll('.check');

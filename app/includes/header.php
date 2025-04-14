@@ -9,5 +9,5 @@
   <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
 
   <link rel="stylesheet" href="<?= BASE_URL ?>app/css/style.css">
-  
+
 </head>

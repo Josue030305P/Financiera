@@ -45,7 +45,7 @@ SELECT * FROM roles;
 
 INSERT INTO colaboradores (idpersona, idrol, fechainicio)
 VALUES
-(3, 1, '2025-01-01');
+(1, 2, '2025-01-01');
 
 SELECT * FROM colaboradores;
 
@@ -53,7 +53,7 @@ SELECT * FROM colaboradores;
 INSERT INTO usuarios (idcolaborador, usuario, passworduser)
 VALUES
 (2, 'Maria', '12345');
-
+UPDATE usuarios SET usuario = 'Paola' WHERE idusuario =2; 
 SELECT * FROM usuarios;
 
 INSERT INTO inversionistas (idpersona, idempresa, idasesor)
@@ -76,10 +76,11 @@ INSERT INTO canales (canal) VALUES
 
 SELECT * FROM personas;
 SELECT * FROM usuarios;
+select * from colaboradores;
 
 INSERT INTO leads (idasesor, idpersona, idcanal, comentarios, prioridad, ocupacion)
 VALUES
-(2, 3, 1, 'Esta demasiado interesado', 'Alto', 'Ingeníera');
+(2, 2, 1, 'Esta demasiado interesado', 'Alto', 'Ingeníera');
 
 
 INSERT INTO contactibilidad (idlead, fecha, hora, comentarios, estado)
