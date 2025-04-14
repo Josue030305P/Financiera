@@ -43,7 +43,19 @@ SELECT * FROM personas;
 SELECT * FROM leads;
 
 
+DELIMITER //
 
+CREATE PROCEDURE sp_buscar_persona_dni(
+IN dni_ CHAR(8)
+)
+BEGIN
+		SELECT * FROM personas WHERE tipodocumento = 'DNI' AND numdocumento = dni_;
+
+END //
+
+DELIMITER ;
+
+CALL sp_buscar_persona_dni('78526515');
 
 
 
