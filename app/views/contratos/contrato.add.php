@@ -5,7 +5,7 @@ require_once "../../includes/config.php";
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="base-url" content="<?= BASE_URL ?>">
   <title>Document</title>
   <link rel="stylesheet" href="<?= BASE_URL ?>app/css/contrato.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -32,17 +32,17 @@ require_once "../../includes/config.php";
 
               <div class="col-md-2 form-group">
                 <label for="tipodocumento">Tipo de documento</label>
-                <input type="text" class="form-control" id="tipodocumento" value="">
+                <input type="text" class="form-control" id="tipodocumento" value="" disabled>
               </div>
 
               <div class="col-md-3 form-group">
                 <label for="numdocumento">N° documento</label>
-                <input type="text" class="form-control" id="numdocumento" value="">
+                <input type="text" class="form-control" id="numdocumento" value="" disabled maxlength="8">
               </div>
 
               <div class="col-md-3 form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="text" class="form-control" id="telefono">
+                <input type="text" class="form-control" id="telefono" disabled>
               </div>
             </div>
 
@@ -50,13 +50,10 @@ require_once "../../includes/config.php";
               <div class="col-md-4 form-group">
                 <label for="buscarDNI">Buscar DNI (cónyuge)</label>
                 <div class="input-group">
-                  <input type="search" class="form-control" id="buscarDNI" />
-                  <button class="btn btn-primary" type="button" id="botonBuscar">
-
-                  </button>
+                  <input type="search" class="form-control" id="buscarDNI"  maxlength="8"/>
                 </div>
               </div>
-
+ 
               <div class="col-md-5 form-group">
                 <label for="conyuge">Cónyuge</label>
                 <input type="text" class="form-control" id="conyuge">
@@ -171,7 +168,10 @@ require_once "../../includes/config.php";
   <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
   <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
+  <script src="<?= BASE_URL ?>app/js/buscarConyuge.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
+
 
     const urlParams = new URLSearchParams(window.location.search);
     const leadId = urlParams.get('id');

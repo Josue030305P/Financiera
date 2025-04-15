@@ -24,6 +24,19 @@ class Asesor
         }
         return $result;
     }
+
+    public function getAesorByLead($id):array {
+        $result = [];
+        try {
+            $sql = "SELECT *  FROM  v_asesor_lead  WHERE idlead = ? ";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+        return $result;
+    }
 }
-// $asesor = new Asesor();
-// var_dump($asesor->getAll());
+$asesor = new Asesor();
+var_dump($asesor->getAll(2));

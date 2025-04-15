@@ -67,6 +67,22 @@ class Lead
         }
     }
 
+
+    public function searchConyuge($ndocumento):array {
+        try {
+
+            $sql = "CALL sp_buscar_persona_dni(?)";
+            $smt = $this->conexion->prepare($sql);
+            $smt->execute([$ndocumento]);
+            $result = $smt->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+        catch(PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function add(array $data): array
     {
         try {
@@ -217,4 +233,4 @@ class Lead
 }
 
 // $lead = new Lead();
-//  var_dump($lead->getLeadToInversionistaById(5));
+// var_dump($lead->searchConyuge('58787777'));

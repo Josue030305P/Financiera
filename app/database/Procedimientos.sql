@@ -55,7 +55,7 @@ END //
 
 DELIMITER ;
 
-CALL sp_buscar_persona_dni('78526515');
+CALL sp_buscar_persona_dni('58787777');
 
 
 

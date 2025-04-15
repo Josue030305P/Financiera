@@ -21,10 +21,25 @@ if ($_SERVER["REQUEST_METHOD"]) {
                     echo json_encode(['error' => $e->getMessage()]);
                 }
 
-            } else {
+            }  
+            else if (isset($_GET['dni'])) {
+                // Nueva ruta para buscar cónyuge por DNI
+                $dni = $_GET['dni'];
+                try {
+                    $resultado = $lead->searchConyuge($dni);
+                    echo json_encode($resultado);
+                } catch (Exception $e) {
+                    echo json_encode(['error' => $e->getMessage()]);
+                }
+            }  
+            
+            else {
                 echo json_encode(['error' => 'Parámetro "id" no proporcionado']);
             }
             break;
+
+        case 'POST':
+
     }
 }
 
