@@ -13,7 +13,7 @@
 .form-group label {
   margin-bottom: 0.4rem;
   font-weight: 600;
-  color: #1a1a1a;
+
 }
 
 
@@ -28,6 +28,24 @@
   background-color: rgb(180, 180, 180);
   width: 100%;
 }
+
+
+
+.darkmode .form-group input,
+.darkmode .form-group select,
+.darkmode .form-group textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #fff !important;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgb(180, 180, 180);
+  width: 100%;
+}
+
+
+
+
 
 .form-group input:focus,
 .form-group select:focus,
@@ -46,7 +64,15 @@
 }
 
 .card {
-  background: #fff;
+  background: #f6f4f4f1;
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+.darkmode .card {
+  background: #000;
   border: none;
   border-radius: 0.75rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);

@@ -74,19 +74,20 @@ require_once "../../includes/config.php";
             <div class="row mb-3">
               <div class="col-md-3 form-group">
                 <label for="fechainicio">Fecha inicio</label>
-                <input type="date" class="form-control" id="fechainicio" disabled>
+                <input type="date" class="form-control" id="fechainicio" disabled >
+              </div>
+              <div class="col-md-3 form-group">
+                <label for="meses">Número de Meses</label>
+                <input type="number" class="form-control" id="meses" value="0" min="1" required>
               </div>
               <div class="col-md-3 form-group">
                 <label for="fechafin">Fecha fin</label>
-                <input type="date" class="form-control" id="fechafin" value="">
+                <input type="date" class="form-control" id="fechafin" value="" required>
               </div>
-              <div class="col-md-3 form-group">
-                <label for="meses">Meses</label>
-                <input type="text" class="form-control" id="meses" value="">
-              </div>
+             
               <div class="col-md-3 form-group">
                 <label for="moneda">Moneda</label>
-                <select class="form-select" id="moneda" aria-label="Moneda">
+                <select class="form-select" id="moneda" aria-label="Moneda" required>
                   <option selected value="PEN">PEN</option>
                   <option value="USD">USD</option>
                 </select>
@@ -96,34 +97,34 @@ require_once "../../includes/config.php";
             <div class="row mb-3">
               <div class="col-md-3 form-group">
                 <label for="interes">Interés</label>
-                <input type="text" class="form-control" id="interes">
+                <input type="text" class="form-control" id="interes" required>
               </div>
               <div class="col-md-3 form-group">
                 <label for="capital">Capital</label>
-                <input type="text" class="form-control" id="capital" value="">
+                <input type="text" class="form-control" id="capital" value="" required>
               </div>
               <div class="col-md-3 form-group">
                 <label for="tipo">Tipo</label>
-                <input type="text" class="form-control" id="tipo" value="Fijo">
+                <input type="text" class="form-control" id="tipo" value="Fijo" required>
               </div>
               <div class="col-md-3 form-group">
                 <label for="diapago">Día pago</label>
-                <input type="text" class="form-control" id="diapago" value="">
+                <input type="text" class="form-control" id="diapago" value="" required>
               </div>
             </div>
 
             <div class="row mb-3">
               <div class="col-md-4 form-group">
                 <label for="periodo">Período</label>
-                <input type="text" class="form-control" id="periodo" value="">
+                <input type="text" class="form-control" id="periodo" value="Mensual" required>
               </div>
               <div class="col-md-4 form-group">
                 <label for="impuestorenta">Impuesto renta</label>
-                <input type="number" class="form-control" id="impuestorenta" value="5">
+                <input type="number" class="form-control" id="impuestorenta" value="5" required>
               </div>
               <div class="col-md-4 form-group">
                 <label for="tolerancia">Tolerancia días</label>
-                <input type="text" class="form-control" id="tolerancia" value="3">
+                <input type="text" class="form-control" id="tolerancia" value="3" required>
               </div>
             </div>
 
@@ -168,39 +169,10 @@ require_once "../../includes/config.php";
   <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
   <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
-  <script src="<?= BASE_URL ?>app/js/buscarConyuge.js"></script>
+  <script src="<?= BASE_URL ?>app/js/contrato.js"></script>
+  <!-- PRUEBA DE ENVIO DE DATOS A REPORTES PDF -->
+  <script src="<?= BASE_URL ?>app/js/contrato.prueba.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const leadId = urlParams.get('id');
-
-    fetch(`<?= BASE_URL ?>app/controllers/ContratoController.php?id=${leadId}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        document.getElementById('nombre').value = data.nombrecompleto;
-        document.getElementById('tipodocumento').value = data.tipodocumento;
-        document.getElementById('numdocumento').value = data.numdocumento;
-        document.getElementById('telefono').value = data.telefono;
-      })
-      .catch(error => console.error(error))
-
-
-
-
-    const fechainicio = document.getElementById('fechainicio');
-    const hoy = new Date();
-    const yyyy = hoy.getFullYear();
-    const mm = String(hoy.getMonth() + 1).padStart(2, '0');
-    const dd = String(hoy.getDate()).padStart(2, '0');
-    const fechaFormateada = `${yyyy}-${mm}-${dd}`;
-
-    fechainicio.value = fechaFormateada;
-  </script>
-
-
-
+  
 
 </body>

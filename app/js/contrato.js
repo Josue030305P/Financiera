@@ -1,0 +1,189 @@
+const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
+const nombreAsesor = document.querySelector('#nombreAsesor');
+const fechaInicio = document.getElementById('fechainicio');
+const fechaFin = document.getElementById('fechafin');
+const mesesInput = document.getElementById('meses');
+const diaPago = document.getElementById('diapago');
+const fechaRegistro = document.querySelector('#fecharegistro');
+const fechaContrato = document.querySelector('#fechacontrato');
+const urlParams = new URLSearchParams(window.location.search);
+const leadId = urlParams.get('id');
+
+
+// Datos del card Asesor.
+(async () => {
+    
+    // Obtener la fecha de hoy por defecto:
+    
+    const hoy = new Date();
+    const yyyy = hoy.getFullYear();
+    const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+    const dd = String(hoy.getDate()).padStart(2, '0');
+    const fechaFormateada = `${yyyy}-${mm}-${dd}`;
+
+    fechaContrato.value = fechaFormateada;
+    fechainicio.value = fechaFormateada;
+    diaPago.value = dd;
+
+    try {
+        const peticion = await fetch(`${baseUrl}app/controllers/AsesorController.php?id=${leadId}`);
+        const response =  await peticion.json();
+        console.log(response);
+
+        response.forEach(data => {
+            nombreAsesor.value = data.nombreasesor;
+            fechaRegistro.value = data.fecharegistrolead;
+            
+        });
+    
+    }
+
+    catch(error) {
+        console.error(error);
+    }
+})();
+
+// Obtner datos del lead que va a pasar a inversionista
+
+(async () => {
+
+    try {
+        const peticion = await  fetch(`${baseUrl}app/controllers/ContratoController.php?id=${leadId}`)
+        const response = await peticion.json();
+        console.log(response);
+        document.getElementById('nombre').value = response.nombrecompleto;
+        document.getElementById('tipodocumento').value = response.tipodocumento;
+        document.getElementById('numdocumento').value = response.numdocumento;
+        document.getElementById('telefono').value = response.telefono;
+        
+    }
+
+    catch(error){
+        console.error(error);
+    }
+
+})();
+
+
+// Obtener conyuge
+function buscarConyuge() {
+    const dni = document.getElementById('buscarDNI').value.trim();
+    const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
+    
+    if (!dni || dni.length !== 8) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Ingrese un DNI válido de 8 dígitos',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+        });
+        return;
+    }
+
+
+    Swal.fire({
+        title: 'Buscando...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`${baseUrl}app/controllers/ContratoController.php?dni=${dni}`)
+        .then(response => response.json())
+        .then(data => {
+            Swal.close(); 
+            
+            if (data.error || !data.nombres) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'No se encontraron resultados',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+                return;
+            }
+            
+            
+            document.getElementById('conyuge').value = `${data.nombres || ''} ${data.apellidos || ''}`.trim();
+            document.getElementById('telconyuge').value = data.telprincipal || '';
+          
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Datos encontrados',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+        })
+        .catch(error => {
+            Swal.close();
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Error en la búsqueda',
+                text: 'No se encontrarón resultados ',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            });
+            console.error('Error:', error);
+        });
+}
+
+
+
+document.getElementById('buscarDNI').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); 
+        buscarConyuge();
+    }
+});
+
+
+document.getElementById('buscarDNI').addEventListener('input', function(e) {
+    this.value = this.value.replace(/[^0-9]/g, '');
+    if (this.value.length > 8) {
+        this.value = this.value.slice(0, 8);
+    }
+});
+
+
+// Calcular le fecha de fin, de acuerdo a la fecha de inicio:
+function calcularFechaFin() {
+    
+    if (!mesesInput.value || mesesInput.value.trim() === '') {
+        fechaFin.value = '';
+        return;
+    }
+    
+    
+    if (fechaInicio.value && mesesInput.value) {
+        const fecha = new Date(fechaInicio.value);
+        const meses = parseInt(mesesInput.value);
+        
+        if (!isNaN(meses)) {
+            fecha.setMonth(fecha.getMonth() + meses);
+            
+            const yyyy = fecha.getFullYear();
+            const mm = String(fecha.getMonth() + 1).padStart(2, '0');
+            const dd = String(fecha.getDate() + 1).padStart(2, '0');
+            
+            fechaFin.value = `${yyyy}-${mm}-${dd}`;
+        }
+    }
+}
+
+// Event listeners (los mismos que tenías)
+mesesInput.addEventListener('input', calcularFechaFin);
+mesesInput.addEventListener('change', calcularFechaFin);
+fechaInicio.addEventListener('change', calcularFechaFin);

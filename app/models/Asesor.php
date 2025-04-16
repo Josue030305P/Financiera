@@ -25,7 +25,7 @@ class Asesor
         return $result;
     }
 
-    public function getAesorByLead($id):array {
+    public function getAsesorByLead($id):array {
         $result = [];
         try {
             $sql = "SELECT *  FROM  v_asesor_lead  WHERE idlead = ? ";
@@ -33,10 +33,10 @@ class Asesor
             $stmt->execute([$id]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            throw new Exception($e->getMessage());
+         throw new Exception($e->getMessage());
         }
         return $result;
     }
 }
-$asesor = new Asesor();
-var_dump($asesor->getAll(2));
+// $asesor = new Asesor();
+//  var_dump($asesor->getAesorByLead(2));

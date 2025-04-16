@@ -73,7 +73,9 @@ INNER JOIN
 INNER JOIN usuarios u  ON c.idcolaborador = u.idcolaborador
 WHERE 
     r.rol = 'Asesor de inversión';
-    
+
+SELECT * FROM colaboradores;
+SELECT * FROM usuarios;
 SELECT * FROM list_asesores;
 DROP VIEW list_asesores ;
 
@@ -148,12 +150,16 @@ SELECT * FROM personas;
 
 USE financiera;
 
+-- Hay que cambiar esta vista, para que lleve los datos de la persona(Inverionista) para rellenar los datos del PDF
 CREATE VIEW v_lead_to_inversionista AS
 SELECT
     l.idlead,
     CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto,
     p.tipodocumento,
     p.numdocumento,
+    p.domicilio,
+    p.refrencia,
+    p.fechanacimiento,
     p.telprincipal AS telefono
 FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona;
@@ -161,8 +167,10 @@ JOIN personas p ON l.idpersona = p.idpersona;
 -- DROP VIEW  v_lead_to_inversionista;
 
 SELECT * FROM v_lead_to_inversionista WHERE idlead = 5;
+SELECT * FROM personas;
 
-CREATE OR REPLACE VIEW v_asesor_lead AS
+
+CREATE  VIEW v_asesor_lead AS
 SELECT 
     l.idlead,
     p.idpersona,
@@ -188,7 +196,7 @@ LEFT JOIN
 
 SELECT *  FROM  v_asesor_lead  WHERE idlead = 2;
 
-
+SELECT * FROM personas;
 
 
 
