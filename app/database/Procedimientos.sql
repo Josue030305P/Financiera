@@ -55,10 +55,36 @@ END //
 
 DELIMITER ;
 
-CALL sp_buscar_persona_dni('58787777');
+CALL sp_buscar_persona_dni('71882015');
 
 
+-- Agregar Conyuge
 
+DELIMITER //
+CREATE PROCEDURE sp_add_conyuge(
+IN idpais_		INT,
+IN apellidos_	VARCHAR(70),
+IN nombres_		VARCHAR(70),
+IN tipodocumento_ ENUM('DNI','PSP','CEX'),
+IN numdocumento_  VARCHAR(12),
+IN email_		VARCHAR(100),
+IN telprincipal_ VARCHAR(15),
+IN domicilio_ VARCHAR(100)
+
+)
+BEGIN
+
+	INSERT INTO personas(idpais,apellidos,nombres,tipodocumento,numdocumento,email,telprincipal,domicilio)
+		VALUES(idpais_,apellidos_,nombres_,tipodocumento_,numdocumento_,email_,telprincipal_,domicilio_);
+
+END //
+
+DELIMITER ;
+
+CALL  sp_add_conyuge(1,'Pilpe Yataco','Isai','DNI','71882016','isai@gmail.com','919482381');
+
+
+SELECT * FROM personas;
 
 
 /* DELIMITER //

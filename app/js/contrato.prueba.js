@@ -7,7 +7,7 @@ document.getElementById('guardar').addEventListener('click', function() {
     form.method = 'POST';
     form.action = `${normalizedBaseUrl}pdf/reporte.php`;
     form.style.display = 'none';
-    form.enctype = 'application/json'; // Importante para JSON
+    form.enctype = 'application/json'; 
     
     // Recoger todos los datos del formulario
     const formData = {
@@ -39,19 +39,19 @@ document.getElementById('guardar').addEventListener('click', function() {
         }
     };
 
-    // Crear campo oculto con los datos serializados como JSON
+    
     const input = document.createElement('input');
     input.type = 'hidden';
     input.name = 'jsonData';
     input.value = JSON.stringify(formData);
     form.appendChild(input);
 
-    // Verificación en consola
+
     console.log("Datos a enviar:", formData);
     console.log("JSON a enviar:", input.value);
     console.log("URL destino:", form.action);
 
-    // Agregar formulario al body y enviar
+
     document.body.appendChild(form);
     form.submit();
 });

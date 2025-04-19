@@ -130,7 +130,6 @@ CREATE VIEW list_contactibilidad AS
     JOIN usuarios u ON l.idasesor = u.idusuario;
     
 
--- DROP VIEW list_contactibilidad;
 
 
 
@@ -166,7 +165,7 @@ JOIN personas p ON l.idpersona = p.idpersona;
 
 -- DROP VIEW  v_lead_to_inversionista;
 
-SELECT * FROM v_lead_to_inversionista WHERE idlead = 5;
+SELECT * FROM v_lead_to_inversionista WHERE idlead = 2;
 SELECT * FROM personas;
 
 

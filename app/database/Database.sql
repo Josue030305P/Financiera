@@ -11,7 +11,9 @@ pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 
 CREATE TABLE departamentos(
 iddepartamento		INT PRIMARY KEY AUTO_INCREMENT,
-departamento		VARCHAR(40) NOT NULL
+idpais INT NOT NULL DEFAULT 1,
+departamento		VARCHAR(40) NOT NULL,
+CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais)
 )ENGINE=InnoDB;
 
 CREATE  TABLE provincias(
@@ -27,6 +29,24 @@ idprovincia			INT NOT NULL,
 distrito			VARCHAR(40) NOT NULL,
 CONSTRAINT fk_provincia FOREIGN KEY(idprovincia) REFERENCES provincias(idprovincia)
 )ENGINE=InnoDB;
+
+
+
+SELECT * FROM personas;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -223,7 +243,6 @@ SELECT * FROM condiciones;
 
 
 SELECT * FROM condiciones;
--- CREATE UNIQUE INDEX unique_active_version ON versiones (idcontrato) WHERE fechafin IS NULL;
 
 CREATE TABLE contratos(
 idcontrato				INT PRIMARY KEY AUTO_INCREMENT,

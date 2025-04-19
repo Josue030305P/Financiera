@@ -83,6 +83,31 @@ class Lead
         }
     }
 
+    public function addConyuge($params = []) : array {
+        try {
+          
+            $sql = "CALL  sp_add_conyuge(?,?,?,?,?,?,?,?)";
+            $smt = $this->conexion->prepare($sql);
+            $smt->execute([
+                $params['idpais'],
+                $params['apellidos'],
+                $params['nombres'],
+                $params['tipodocumento'],
+                $params['numdocumento'],
+                $params['email'],
+                $params['telprincipal'],
+                $params['domicilio'],
+            ]);
+
+            return ['success' => true];
+        
+
+        }
+        catch(PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function add(array $data): array
     {
         try {
@@ -127,7 +152,7 @@ class Lead
         }
     }
 
-    public function update($id, array $data): array
+    public function update($id, $data = []): array
     {
         try {
             $this->conexion->beginTransaction();
@@ -232,5 +257,15 @@ class Lead
     }
 }
 
-// $lead = new Lead();
-// var_dump($lead->searchConyuge('58787777'));
+//  $lead = new Lead();
+//  $datos = [
+//     'idpais' => 1,
+//     'apellidos' => 'Mendoza Apolaya',
+//     'nombres' => 'Paulina Isabella',
+//     'tipodocumento' => 'DNI',
+//     'numdocumento' => '58589858',
+//     'email' => 'isabella@gmail.com',
+//     'telprincipal' => '958785488'
+//  ];
+
+// var_dump($lead->addConyuge($datos));

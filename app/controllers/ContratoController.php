@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"]) {
 
             }  
             else if (isset($_GET['dni'])) {
-                // Nueva ruta para buscar cónyuge por DNI
+                
                 $dni = $_GET['dni'];
                 try {
                     $resultado = $lead->searchConyuge($dni);
