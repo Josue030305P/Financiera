@@ -153,7 +153,7 @@ CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCE
 
 SELECT * FROM usuarios;
 SELECT * FROM personas;
-
+SELECT * FROM inversionistas;
 CREATE TABLE numcuentas(
 idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
 estitular			CHAR(2) NOT NULL DEFAULT 'Si',

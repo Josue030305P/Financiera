@@ -2,6 +2,15 @@
 .mt-5 {
   margin-top: 10px;
 }
+
+.m {
+  margin: 10px;
+}
+
+hr {
+  color: #0d6efd !important;
+  font-weight: bold !important;
+}
 .form-group {
   margin-bottom: 1rem;
   display: flex;

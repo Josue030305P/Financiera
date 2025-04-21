@@ -27,6 +27,17 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
           <div class="card-header bg-primary text-white fw-bold">Inversionista</div>
 
           <div class="card-body">
+
+            <div class="form-group">
+              <label for="tipo_inversionista">Tipo de Inversionista</label>
+              <select name="tipo_inversionista" id="tipo_inversionista" class="select-box" required>
+                <option value="persona">Persona</option>
+                <option value="empresa">Empresa</option>
+              </select>
+            </div>
+
+            <hr class="m"></hr>
+
             <div class="row mb-3">
               <div class="col-md-4 form-group">
                 <label for="nombre">Inversionista</label>
@@ -67,6 +78,28 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
                 <input type="text" class="form-control" id="telconyuge" maxlength="9">
               </div>
             </div>
+
+
+            <div id="campos_empresa" style="display: none;" class="row mb-3">
+              <div class="form-group col-md-3">
+                <label for="nombrecomercial">Nombre Comercial</label>
+                <input type="text" id="nombrecomercial" name="nombrecomercial" placeholder="Ingrese el nombre comercial">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="razonsocial">Razón Social</label>
+                <input type="text" id="razonsocial" name="razonsocial" placeholder="Ingrese la razón social" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="ruc">RUC</label>
+                <input type="text" id="ruc" name="ruc" placeholder="Ingrese el RUC" maxlength="11" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="direccion_empresa">Dirección Empresa</label>
+                <input type="text" id="direccion_empresa" name="direccion_empresa" placeholder="Ingrese la dirección de la empresa" required>
+              </div>
+
+            </div>
+
           </div>
         </div>
 
@@ -168,7 +201,6 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
     </div>
   </div>
 
-
   <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
   <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
@@ -176,6 +208,22 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
   <!-- PRUEBA DE ENVIO DE DATOS A REPORTES PDF -->
   <script src="<?= BASE_URL ?>app/js/contrato.prueba.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    const tipoInversionista = document.getElementById('tipo_inversionista');
+
+    tipoInversionista.addEventListener('change', () => {
+      const camposEmpresa = document.getElementById('campos_empresa');
+      const razonSocialInput = document.getElementById('razonsocial');
+      const rucInput = document.getElementById('ruc');
+      const direccionEmpresaInput = document.getElementById('direccion_empresa');
+
+      if (tipoInversionista.value === 'empresa') {
+        camposEmpresa.style.display = 'flex';
+      }
+
+    });
+  </script>
 
 
 </body>
