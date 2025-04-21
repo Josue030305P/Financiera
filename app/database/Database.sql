@@ -44,7 +44,7 @@ SELECT * FROM personas;
 
 
 
-
+SELECT * FROM accesos;
 
 
 
@@ -81,6 +81,8 @@ CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un nu
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 )ENGINE=InnoDB;
+
+
 
 
 CREATE TABLE empresas(
@@ -150,6 +152,7 @@ CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCE
 )ENGINE=InnoDB;
 
 SELECT * FROM usuarios;
+SELECT * FROM personas;
 
 CREATE TABLE numcuentas(
 idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,

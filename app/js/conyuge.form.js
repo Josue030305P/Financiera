@@ -1,11 +1,14 @@
 class ConyugeForm {
     constructor() {
+
+        this.urlParams = new URLSearchParams(window.location.search);
+        this.leadId = this.urlParams.get('id');
         this.baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
         this.form = document.getElementById('lead-form');
         this.init();
     }
 
-    async init() {
+    async init() {                                        
 
         await this.cargarPaises();
         this.initEventListeners();
@@ -58,7 +61,9 @@ class ConyugeForm {
             });
 
             if (result.isConfirmed) {
+              
                 window.location.href = `${this.baseUrl}app/views/contratos/contrato.add`;
+                
             }
         });
     }
@@ -99,7 +104,7 @@ class ConyugeForm {
                     timer: 1500,
                     timerProgressBar: true
                 });
-                window.location.href = `${this.baseUrl}app/views/contratos/contrato.add`;
+                window.location.href = `${this.baseUrl}app/views/contratos/contrato.add?id=${this.leadId}`;
             }
             
         } catch (error) {

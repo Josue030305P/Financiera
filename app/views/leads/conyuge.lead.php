@@ -17,7 +17,7 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label>
-                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" required>
+                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" required autocomplete="off">
                         </div>
 
                         <div class="form-group">

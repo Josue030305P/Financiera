@@ -202,7 +202,8 @@ class LeadForm {
 
     async actualizarLead() {
         try {
-      mn  
+      
+
             const formData = {
                 tipodocumento: document.getElementById('tipodocumento').value,
                 numdocumento: document.getElementById('numdocumento').value,

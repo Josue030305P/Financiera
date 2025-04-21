@@ -1,6 +1,8 @@
 <?php session_start();
 require_once '../../includes/header.php';
 require_once "../../includes/config.php";
+
+$leadIdParaJS = $_POST['leadId'] ?? null;
 ?>
 
 <head>
@@ -17,8 +19,9 @@ require_once "../../includes/config.php";
     <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
     <div class="main-wrapper">
       <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
+      <div id="leadIdHolder" style="display: none;" data-lead-id="<?= htmlspecialchars($leadIdParaJS) ?>"></div>
+      <div class="container" style="margin-top: 40px;">
 
-      <div class="container mt-5">
         <!-- Inversionista -->
         <div class="card mb-5 text-bg-secondary">
           <div class="card-header bg-primary text-white fw-bold">Inversionista</div>
@@ -42,7 +45,7 @@ require_once "../../includes/config.php";
 
               <div class="col-md-3 form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="text" class="form-control" id="telefono" disabled>
+                <input type="text" class="form-control" id="telefono" disabled maxlength="9">
               </div>
             </div>
 
@@ -50,18 +53,18 @@ require_once "../../includes/config.php";
               <div class="col-md-4 form-group">
                 <label for="buscarDNI">Buscar DNI (cónyuge)</label>
                 <div class="input-group">
-                  <input type="search" class="form-control" id="buscarDNI"  maxlength="8"/>
+                  <input type="search" class="form-control" id="buscarDNI" maxlength="8" />
                 </div>
               </div>
- 
+
               <div class="col-md-5 form-group">
                 <label for="conyuge">Cónyuge</label>
-                <input type="text" class="form-control" id="conyuge">
+                <input type="text" class="form-control" id="conyuge" readonly>
               </div>
 
               <div class="col-md-3 form-group">
                 <label for="telconyuge">Teléfono (Cónyuge)</label>
-                <input type="text" class="form-control" id="telconyuge">
+                <input type="text" class="form-control" id="telconyuge" maxlength="9">
               </div>
             </div>
           </div>
@@ -74,7 +77,7 @@ require_once "../../includes/config.php";
             <div class="row mb-3">
               <div class="col-md-3 form-group">
                 <label for="fechainicio">Fecha inicio</label>
-                <input type="date" class="form-control" id="fechainicio" disabled >
+                <input type="date" class="form-control" id="fechainicio" disabled>
               </div>
               <div class="col-md-3 form-group">
                 <label for="meses">Número de Meses</label>
@@ -84,7 +87,7 @@ require_once "../../includes/config.php";
                 <label for="fechafin">Fecha fin</label>
                 <input type="date" class="form-control" id="fechafin" value="" required>
               </div>
-             
+
               <div class="col-md-3 form-group">
                 <label for="moneda">Moneda</label>
                 <select class="form-select" id="moneda" aria-label="Moneda" required>
@@ -120,7 +123,7 @@ require_once "../../includes/config.php";
               </div>
               <div class="col-md-4 form-group">
                 <label for="impuestorenta">Impuesto renta</label>
-                <input type="number" class="form-control" id="impuestorenta" value="5" required>
+                <input type="number" class="form-control" id="impuestorenta" value="5" min="0" max="100">
               </div>
               <div class="col-md-4 form-group">
                 <label for="tolerancia">Tolerancia días</label>
@@ -152,7 +155,7 @@ require_once "../../includes/config.php";
               </div>
               <div class="col-md-4 form-group">
                 <label for="fechacontrato">Fecha contrato</label>
-                <input type="text" class="form-control" id="fechacontrato" value="" disabled>
+                <input type="text" class="form-control" id="fechacontrato" readonly>
               </div>
             </div>
           </div>
@@ -173,6 +176,6 @@ require_once "../../includes/config.php";
   <!-- PRUEBA DE ENVIO DE DATOS A REPORTES PDF -->
   <script src="<?= BASE_URL ?>app/js/contrato.prueba.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+
 
 </body>

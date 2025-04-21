@@ -156,7 +156,10 @@
                     <div class="form-footer">
                         <button type="button" class="add-btn">Actualizar lead</button>
                         <button type="button" class="reset-btn">Cancelar</button>
-                        <a href="" class="invertir-btn d-none" visible="false">Invertir</a>
+                        <form action="<?= BASE_URL ?>app/views/contratos/contrato.add.php" method="post" id="invertirForm">
+                            <input type="hidden" name="leadId" id="leadIdInput" value="">
+                            <button type="submit" class="invertir-btn d-none" visible="false">Invertir</button>
+                        </form>
 
                     </div>
                 </div>
@@ -201,19 +204,26 @@
 
             const urlParams = new URLSearchParams(window.location.search);
             const leadId = urlParams.get('id');
+            const invertirForm = document.getElementById('invertirForm');
+            const leadIdInput = document.getElementById('leadIdInput');
             const btnContrato = document.querySelector('.invertir-btn');
 
             if (leadId) {
-                new LeadForm(leadId, true); 
-                
+                new LeadForm(leadId, true);
+                leadIdInput.value = leadId; 
+            
                 btnContrato.addEventListener('click', function(e) {
                     e.preventDefault();
-                    window.location.href = `<?= BASE_URL ?>app/views/contratos/contrato.add.php?id=${leadId}`;
+                    invertirForm.submit(); 
                 });
             } else {
                 alert('ID de lead no proporcionado');
                 window.location.href = '<?= BASE_URL ?>app/';
             }
+
+
+
+
         });
     </script>
 </body>
