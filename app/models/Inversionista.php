@@ -2,16 +2,28 @@
 
 require_once '../config/Database.php';
 
-class Inversionista {
+class Inversionista
+{
 
   private $conexion;
 
-  public function __construct() {
+  public function __construct()
+  {
     $this->conexion = Database::getConexion();
+
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+    }
+
+
+
+
+
   }
 
 
-  public function getAll():array {
+  public function getAll(): array
+  {
 
     $result = [];
     try {
@@ -20,13 +32,32 @@ class Inversionista {
       $smt->execute();
       $result = $smt->fetchAll(PDO::FETCH_ASSOC);
 
-    }
-
-    catch (PDOException $e) {
+    } catch (PDOException $e) {
       throw new Exception($e->getMessage());
     }
 
     return $result;
+
+  }
+
+
+  public function add($params = []): array
+  {
+
+    try {
+
+      if (!isset($_SESSION['idusuario'])) {
+        return ['success' => false, 'message' => 'No se encontró el ID de usuairo en la sesión.'];
+      }
+
+      $idUsuarioCreador = $_SESSION['idusuario'];
+      
+
+
+      $sql = "";
+    } catch (PDOException) {
+
+    }
 
   }
 

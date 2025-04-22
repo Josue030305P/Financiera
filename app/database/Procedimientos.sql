@@ -87,6 +87,44 @@ CALL  sp_add_conyuge(1,'Pilpe Yataco','Isai','DNI','71882016','isai@gmail.com','
 SELECT * FROM personas;
 
 
+DELIMITER //
+CREATE PROCEDURE sp_add_empresa(
+IN nombrecomercial_ VARCHAR(100),
+IN direccion_		VARCHAR(100),
+IN ruc_				CHAR(11),
+IN razonsocial_		VARCHAR(300)
+)
+BEGIN
+	INSERT INTO empresas(nombrecomercial, direccion, ruc, razonsocial)
+		VALUES(nombrecomercial_, direccion_, ruc_, razonsocial_);
+END //
+DELIMITER ;
+
+CALL  sp_add_empresa('Pepe el grillo', 'Al frente de la pista', '12345678911', 'Señor Pepe el grillo');
+SELECT * FROM empresas;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_add_inversionista(
+IN idpersona_ 		INT,
+IN idempresa_ 		INT,
+IN idasesor_		INT,
+IN idusuariocreacion_ INT
+)
+BEGIN
+	INSERT INTO empresas(idpersona, idempresa, idasesor, idusuariocreacion)
+		VALUES (idpersona_, idempresa_, idasesor_, idusuariocreacion_);
+END //
+
+DELIMITER ;
+SELECT * FROM inversionistas;
+
+
+
+
+
+
+
 /* DELIMITER //
 
 CREATE PROCEDURE sp_getByIdLead(

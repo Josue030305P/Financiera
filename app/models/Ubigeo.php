@@ -53,7 +53,7 @@ class Ubigeo
 
 
 // $ubigeo = new Ubigeo();
-// var_dump($ubigeo->getDistritosByProvincia(1));
+// var_dump($ubigeo->getDepartamentosByPais(1));
 
 
 

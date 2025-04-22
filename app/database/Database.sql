@@ -11,10 +11,12 @@ pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 
 CREATE TABLE departamentos(
 iddepartamento		INT PRIMARY KEY AUTO_INCREMENT,
-idpais INT NOT NULL DEFAULT 1,
+idpais 				INT NOT NULL DEFAULT 1,
 departamento		VARCHAR(40) NOT NULL,
 CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais)
 )ENGINE=InnoDB;
+ALTER TABLE departamentos ADD CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais);
+
 
 CREATE  TABLE provincias(
 idprovincia			INT PRIMARY KEY AUTO_INCREMENT,
