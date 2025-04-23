@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   paisSelect.dispatchEvent(new Event("change"));
   paisSelect.addEventListener("change", (e) => {
     const paisId = e.target.value;
+    console.log(paisId);
 
     if (paisId) {
       fetchDepartamentos(paisId);
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`${baseUrl}app/controllers/UbigeoController?pais=${paisId}`)
       .then((response) => response.json())
       .then((data) => {
+        
         departamentoSelect.innerHTML =
           "<option value=''>Seleccione un departamento</option>";
         data.forEach((departamento) => {

@@ -15,6 +15,7 @@ idpais 				INT NOT NULL DEFAULT 1,
 departamento		VARCHAR(40) NOT NULL,
 CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais)
 )ENGINE=InnoDB;
+ALTER TABLE departamentos ADD COLUMN idpais  INT NOT NULL DEFAULT 1;
 ALTER TABLE departamentos ADD CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais);
 
 
@@ -217,14 +218,16 @@ CONSTRAINT fk_id_user_creacion_contact FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contact FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
-CREATE TABLE versiones(
-idversion				INT AUTO_INCREMENT PRIMARY KEY,
-fechainicio				DATE NOT NULL DEFAULT NOW(),
-fechafin				DATE NULL
-)ENGINE=InnoDB;
+CREATE TABLE versiones (
+  idversion    INT AUTO_INCREMENT PRIMARY KEY,
+  fechainicio  DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  fechafin     DATE        NULL
+) ENGINE=InnoDB;
+
 INSERT INTO versiones(fechainicio) VALUES(NOW());
 SELECT * FROM versiones;
 
+DROP TABLE versiones;
 CREATE TABLE condiciones(
 idcondicion				INT AUTO_INCREMENT PRIMARY KEY,
 idversion				INT NOT NULL,
@@ -280,7 +283,11 @@ CONSTRAINT fk_idconyugue FOREIGN KEY(idconyuge) REFERENCES personas(idpersona),
 CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
+
 SELECT * FROM contratos;
+
+
+DROP TABLE contratos;
 
 
 CREATE TABLE garantias(

@@ -91,8 +91,6 @@ class ConyugeForm {
 
             const result = await response.json();
 
-            console.log(result);
-
             if (result.success) {
                 await Swal.fire({
                     toast:true,
@@ -104,8 +102,27 @@ class ConyugeForm {
                     timer: 1500,
                     timerProgressBar: true
                 });
-                window.location.href = `${this.baseUrl}app/views/contratos/contrato.add?id=${this.leadId}`;
+                
+               
             }
+
+            // Crear un formulario dinámicamente
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = `${this.baseUrl}app/views/contratos/contrato.add`;
+
+          
+            const leadIdInput = document.createElement('input');
+            leadIdInput.type = 'hidden';
+            leadIdInput.name = 'leadId';
+            leadIdInput.value = this.leadId; 
+
+           
+            form.appendChild(leadIdInput);
+            document.body.appendChild(form);
+
+            form.submit();
+        
             
         } catch (error) {
             console.error('Error:', error);

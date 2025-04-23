@@ -79,8 +79,13 @@ textarea {
   background-color: #d1b600;
 }
 
+.form-footer form {
+  width: 50%;
+}
 
-.form-footer {
+
+
+.form-footer{
   margin-top: 20px;
   display: flex;
   justify-content:center;
@@ -89,7 +94,7 @@ textarea {
   margin-top: 15px;
 }
 
-.add-btn, .reset-btn, .invertir-btn {
+.add-btn, .reset-btn {
   width: 30%;
   padding: 10px;
   border: none;
@@ -111,6 +116,7 @@ textarea {
 .invertir-btn {
   background-color: rgb(13, 189, 13);
   color: #fff;
+  width: 100%;
 }
 
 .add-btn:hover, .reset-btn:hover, .invertir-btn:hover {

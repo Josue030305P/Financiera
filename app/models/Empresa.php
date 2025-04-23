@@ -43,11 +43,11 @@ class Empresa {
 
 }
 
-$empresa = new Empresa();
-$datos = [
-    'nombrecomercial' => 'Taxi churro',
-    'direccion' => 'Al costado de una casa blanca',
-    'ruc' => '12343434543',
-    'razonsocial' => 'Taxi churro de Joel Goonzález'
-];
-var_dump($empresa->add($datos));
+//  $empresa = new Empresa();
+// $datos = [
+//      'nombrecomercial' => 'Taxi churro',
+//      'direccion' => 'Al costado de una casa blanca',
+//      'ruc' => '12343434543',
+//      'razonsocial' => 'Taxi churro de Joel Goonzález'
+//  ];
+//  var_dump($empresa->add($datos));

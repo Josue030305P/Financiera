@@ -1,3 +1,5 @@
+USE financiera;
+
 DELIMITER //
 
 CREATE PROCEDURE sp_update_personas(
@@ -102,6 +104,8 @@ DELIMITER ;
 
 CALL  sp_add_empresa('Pepe el grillo', 'Al frente de la pista', '12345678911', 'Señor Pepe el grillo');
 SELECT * FROM empresas;
+SELECT * FROM usuarios;
+SELECT * FROM inversionistas;
 
 DELIMITER //
 
@@ -112,19 +116,53 @@ IN idasesor_		INT,
 IN idusuariocreacion_ INT
 )
 BEGIN
-	INSERT INTO empresas(idpersona, idempresa, idasesor, idusuariocreacion)
+	INSERT INTO inversionistas(idpersona, idempresa, idasesor, idusuariocreacion)
 		VALUES (idpersona_, idempresa_, idasesor_, idusuariocreacion_);
 END //
 
+
+DELIMITER //
+CREATE PROCEDURE sp_add_contrato(
+IN idversion_		INT,
+IN idasesor_		INT,
+IN idinversionista_	INT,
+IN idconyuge_		INT,   -- ES EL ID DE PERSONA que se agregado.
+IN idusuariocreacion_ INT,
+IN fechainicio_		DATE,
+IN fechafin_		DATE,
+IN fecharetornocapital_ DATE,
+IN impuestorenta_	DECIMAL(5,2),
+IN toleranciadias_  TINYINT,
+IN duracionmeses_	TINYINT,
+IN moneda_			ENUM('PEN','USD'),
+IN diapago_			TINYINT,
+IN interes_			DECIMAL(5,2),
+IN capital_			DECIMAL(10,2),
+IN tiporetorno_		ENUM('Fijo','Variable'),
+IN periodopago_		VARCHAR(30) ,
+IN observacion_		VARCHAR(100)
+)
+BEGIN
+	INSERT INTO contratos(idversion,idasesor,idinversionista,idconyuge,idusuariocreacion,fechainicio,fechafin,
+						fecharetornocapital,impuestorenta,toleranciadias,duracionmeses,moneda,diapago,interes,capital,
+                        tiporetorno,periodopago,observacion)
+                        VALUES
+                        (idversion_,idasesor_,idinversionista_,idconyuge_,idusuariocreacion_,fechainicio_,fechafin_,
+						fecharetornocapital_,impuestorenta_,toleranciadias_,duracionmeses_,moneda_,diapago_,interes_,capital_,
+                        tiporetorno_,periodopago_,observacion_);
+END //
 DELIMITER ;
+
+CALL sp_add_contrato(1,2,1,7,1,now(),'2026-23-04','','5','3','12','PEN','23','5','20000','Fijo','Mensual','Nuevo contrato cerrado');
+
+UPDATE contratos SET
+ fechafin = '2026-04-23' 
+ WHERE idcontrato = 1;
+
+SELECT * FROM usuarios;
+SELECT * FROM contratos;
 SELECT * FROM inversionistas;
-
-
-
-
-
-
-
+SELECT * FROM personas;
 /* DELIMITER //
 
 CREATE PROCEDURE sp_getByIdLead(

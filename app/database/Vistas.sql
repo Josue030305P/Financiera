@@ -49,7 +49,7 @@ FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona
 JOIN canales c ON l.idcanal = c.idcanal
 LEFT JOIN usuarios u ON l.idasesor = u.idusuario
-WHERE l.estado = 'Nuevo contacto' AND NOT l.estado = 'Inactivo';
+WHERE NOT l.estado = 'Inactivo';
 
 SELECT * FROM lista_leads;
 
@@ -162,7 +162,7 @@ SELECT
     p.telprincipal AS telefono
 FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona;
-
+SELECT * FROM personas;
 -- DROP VIEW  v_lead_to_inversionista;
 
 SELECT * FROM v_lead_to_inversionista WHERE idlead = 2;
@@ -197,6 +197,8 @@ SELECT *  FROM  v_asesor_lead  WHERE idlead = 2;
 
 SELECT * FROM personas;
 
+SELECT * FROM empresas;
+SELECT * FROM contratos;
 
 
 
