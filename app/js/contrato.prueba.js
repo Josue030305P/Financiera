@@ -2,7 +2,7 @@ document.getElementById('guardar').addEventListener('click', function() {
     const baseUrl = document.querySelector('meta[name="base-url"]')?.content || '';
     const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/';
     
-    // Crear formulario temporal
+    
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = `${normalizedBaseUrl}pdf/reporte.php`;

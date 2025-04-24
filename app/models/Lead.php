@@ -269,3 +269,5 @@ class Lead
 //  ];
 
 // var_dump($lead->addConyuge($datos));
+// $lead = new Lead();
+// var_dump($lead->getLeadToInversionistaById(1));

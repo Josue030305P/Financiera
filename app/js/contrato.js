@@ -5,11 +5,11 @@ const leadIdFromAttribute = leadIdHolder ? leadIdHolder.dataset.leadId : null;
 
 const urlParams = new URLSearchParams(window.location.search);
 const leadIdFromURL = urlParams.get("id");
-// console.log(leadIdFromURL);
+
 
 const leadId = leadIdFromAttribute || leadIdFromURL;
 
-// console.log("Lead ID en contrato.js:", leadId);
+
 
 const nombreAsesor = document.querySelector("#nombreAsesor");
 const fechaInicio = document.getElementById("fechainicio");
@@ -60,11 +60,9 @@ function formatearFecha(fecha) {
     const peticion = await fetch(
       `${baseUrl}app/controllers/ContratoController.php?id=${leadId}`
     );
-    // console.log(peticion);
+    console.log(peticion);
     const response = await peticion.json();
-    // console.log(response);
-
-
+  
     document.getElementById("nombre").value = response.nombrecompleto;
     document.getElementById("tipodocumento").value = response.tipodocumento;
     document.getElementById("numdocumento").value = response.numdocumento;
@@ -142,12 +140,12 @@ document.getElementById("buscarDNI").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     e.preventDefault();
     buscarConyuge();
-    document.getElementById("conyuge").value = ''; // Cada busqueda vuelva a reiniicar el Input
+    document.getElementById("conyuge").value = ''; 
   }
 });
 
 document.getElementById("buscarDNI").addEventListener("input", function () {
-  this.value = this.value.replace(/[^0-9]/g, ""); // Solo números
+  this.value = this.value.replace(/[^0-9]/g, ""); 
   if (this.value.length > 8) {
     this.value = this.value.slice(0, 8);
   }

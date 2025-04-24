@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="telsecundario">Telefono secundario (Opcional)</label>
                             <input type="tel" id="telsecundario" placeholder="Ingrese número de telefono"
-                                class="telsecundario">
+                                class="telsecundario" maxlength="9">
                         </div>
 
 

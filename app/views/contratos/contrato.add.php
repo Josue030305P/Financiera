@@ -205,7 +205,7 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
   <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
   <script src="<?= BASE_URL ?>app/js/contrato.js"></script>
-  <script src="<?= BASE_URL ?>app/js/generarContrato.js"></script>
+  <!-- <script src="<?= BASE_URL ?>app/js/generarContrato.js"></script> -->
   <!-- PRUEBA DE ENVIO DE DATOS A REPORTES PDF -->
   <!-- <script src="<?= BASE_URL ?>app/js/contrato.prueba.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

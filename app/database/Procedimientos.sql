@@ -46,7 +46,6 @@ SELECT * FROM leads;
 
 
 DELIMITER //
-
 CREATE PROCEDURE sp_buscar_persona_dni(
 IN dni_ CHAR(8)
 )
@@ -107,8 +106,8 @@ SELECT * FROM empresas;
 SELECT * FROM usuarios;
 SELECT * FROM inversionistas;
 
-DELIMITER //
 
+DELIMITER //
 CREATE PROCEDURE sp_add_inversionista(
 IN idpersona_ 		INT,
 IN idempresa_ 		INT,
@@ -121,11 +120,15 @@ BEGIN
 
          SELECT LAST_INSERT_ID() AS idinversionista;
 END //
+DELIMITER ;
 
-DELIMITER //
+CALL sp_add_inversionista(11,1,1,1);
+
+SELECT * FROM usuarios;
+
 SELECT * FROM inversionistas;
 
-
+DELIMITER //
 CREATE PROCEDURE sp_add_contrato(
 IN idversion_		INT,
 IN idasesor_		INT,

@@ -18,6 +18,7 @@ CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais)
 ALTER TABLE departamentos ADD COLUMN idpais  INT NOT NULL DEFAULT 1;
 ALTER TABLE departamentos ADD CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais);
 
+DROP TABLE departamentos;
 
 CREATE  TABLE provincias(
 idprovincia			INT PRIMARY KEY AUTO_INCREMENT,
@@ -25,6 +26,8 @@ iddepartamento		INT NOT NULL,
 provincia			VARCHAR(40) NOT NULL,
 CONSTRAINT fk_iddepartamen FOREIGN KEY(iddepartamento) REFERENCES departamentos(iddepartamento)
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE distritos(
 iddistrito			INT PRIMARY KEY AUTO_INCREMENT,
@@ -284,6 +287,33 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+ALTER TABLE contratos
+DROP FOREIGN KEY fk_idusuario_asesor;
+
+ALTER TABLE contratos
+DROP FOREIGN KEY fk_idversion;
+
+ALTER TABLE contratos
+DROP FOREIGN KEY fk_idinversionista_contrato;
+
+ALTER TABLE contratos
+DROP FOREIGN KEY fk_idconyugue;
+
+ALTER TABLE contratos
+DROP FOREIGN KEY fk_id_user_creacion_contrat;
+
+ALTER TABLE contratos
+DROP FOREIGN KEY fk_id_user_elimin_contrat;
+
+
+
+
+
+
+
+
+
+
 SELECT * FROM contratos;
 SELECT * FROM inversionistas;
 USE financiera;
@@ -307,6 +337,11 @@ CONSTRAINT fk_idgarantia FOREIGN KEY(idgarantia) REFERENCES garantias(idgarantia
 CONSTRAINT fk_idcontrato_detal_garant FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato)
 )ENGINE=InnoDB;
 
+ALTER TABLE detallegarantias
+DROP FOREIGN KEY fk_idcontrato_detal_garant;
+
+ALTER TABLE cronogramapagos
+DROP FOREIGN KEY fk_idcontrato_crono_pag ;
 
 CREATE TABLE cronogramapagos(
 idcronogramapago		INT PRIMARY KEY AUTO_INCREMENT,

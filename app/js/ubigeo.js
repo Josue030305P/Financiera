@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const provinciaSelect = document.getElementById("provincia");
   const distritoSelect = document.getElementById("distrito");
 
-  paisSelect.value = 1;
+
   paisSelect.dispatchEvent(new Event("change"));
   paisSelect.addEventListener("change", (e) => {
     const paisId = e.target.value;
@@ -53,9 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((response) => response.json())
       .then((data) => {
         
-        departamentoSelect.innerHTML =
-          "<option value=''>Seleccione un departamento</option>";
         data.forEach((departamento) => {
+          console.log(departamento);
           departamentoSelect.innerHTML += `<option value="${departamento.iddepartamento}">${departamento.departamento}</option>`;
         });
       })

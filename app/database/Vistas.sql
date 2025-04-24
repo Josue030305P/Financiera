@@ -34,6 +34,7 @@ DROP VIEW lista_leads;
 
 SELECT * FROM leads;
 -- Vista para leads
+
 CREATE VIEW lista_leads AS
 SELECT 
     l.idlead,
@@ -163,6 +164,8 @@ SELECT
     p.telprincipal AS telefono
 FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona;
+
+
 SELECT * FROM personas;
 DROP VIEW  v_lead_to_inversionista;
 
