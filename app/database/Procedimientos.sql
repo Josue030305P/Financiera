@@ -118,10 +118,14 @@ IN idusuariocreacion_ INT
 BEGIN
 	INSERT INTO inversionistas(idpersona, idempresa, idasesor, idusuariocreacion)
 		VALUES (idpersona_, idempresa_, idasesor_, idusuariocreacion_);
+
+         SELECT LAST_INSERT_ID() AS idinversionista;
 END //
 
-
 DELIMITER //
+SELECT * FROM inversionistas;
+
+
 CREATE PROCEDURE sp_add_contrato(
 IN idversion_		INT,
 IN idasesor_		INT,
@@ -153,7 +157,7 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL sp_add_contrato(1,2,1,7,1,now(),'2026-23-04','','5','3','12','PEN','23','5','20000','Fijo','Mensual','Nuevo contrato cerrado');
+CALL sp_add_contrato(1,2,1,7,1,now(),'2026-23-04',NULL,'5','3','12','PEN','23','5','20000','Fijo','Mensual','Nuevo contrato cerrado');
 
 UPDATE contratos SET
  fechafin = '2026-04-23' 

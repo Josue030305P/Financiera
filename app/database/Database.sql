@@ -285,8 +285,8 @@ CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFEREN
 )ENGINE=InnoDB;
 
 SELECT * FROM contratos;
-
-
+SELECT * FROM inversionistas;
+USE financiera;
 DROP TABLE contratos;
 
 

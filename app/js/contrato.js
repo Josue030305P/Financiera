@@ -5,11 +5,11 @@ const leadIdFromAttribute = leadIdHolder ? leadIdHolder.dataset.leadId : null;
 
 const urlParams = new URLSearchParams(window.location.search);
 const leadIdFromURL = urlParams.get("id");
-console.log(leadIdFromURL);
+// console.log(leadIdFromURL);
 
 const leadId = leadIdFromAttribute || leadIdFromURL;
 
-console.log("Lead ID en contrato.js:", leadId);
+// console.log("Lead ID en contrato.js:", leadId);
 
 const nombreAsesor = document.querySelector("#nombreAsesor");
 const fechaInicio = document.getElementById("fechainicio");
@@ -43,7 +43,7 @@ function formatearFecha(fecha) {
         `${baseUrl}app/controllers/AsesorController.php?id=${leadId}`
       );
       const response = await peticion.json();
-      console.log(response);
+      // console.log(response);
   
       response.forEach((data) => {
         nombreAsesor.value = data.nombreasesor;
@@ -60,9 +60,9 @@ function formatearFecha(fecha) {
     const peticion = await fetch(
       `${baseUrl}app/controllers/ContratoController.php?id=${leadId}`
     );
-    console.log(peticion);
+    // console.log(peticion);
     const response = await peticion.json();
-    console.log(response);
+    // console.log(response);
 
 
     document.getElementById("nombre").value = response.nombrecompleto;

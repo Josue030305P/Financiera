@@ -153,17 +153,44 @@ USE financiera;
 CREATE VIEW v_lead_to_inversionista AS
 SELECT
     l.idlead,
+    p.idpersona,
     CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto,
     p.tipodocumento,
     p.numdocumento,
     p.domicilio,
-    p.refrencia,
+    p.referencia,
     p.fechanacimiento,
     p.telprincipal AS telefono
 FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona;
 SELECT * FROM personas;
--- DROP VIEW  v_lead_to_inversionista;
+DROP VIEW  v_lead_to_inversionista;
+
+SELECT * FROM v_lead_to_inversionista WHERE idlead = 2;
+SELECT * FROM personas;
+
+CREATE OR REPLACE VIEW v_lead_to_inversionista AS
+SELECT
+    l.idlead,
+    p.idpersona,
+    CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto,
+    p.tipodocumento,
+    p.numdocumento,
+    p.domicilio,
+    p.referencia,
+    p.fechanacimiento,
+    p.telprincipal AS telefono,
+    u.idusuario AS idasesor,
+    CONCAT(p_asesor.nombres, ' ', p_asesor.apellidos) AS nombreasesor,
+    l.fecharegistro AS fecharegistrolead
+FROM leads l
+JOIN personas p ON l.idpersona = p.idpersona
+LEFT JOIN usuarios u ON l.idasesor = u.idusuario
+LEFT JOIN colaboradores c ON u.idcolaborador = c.idcolaborador
+LEFT JOIN personas p_asesor ON c.idpersona = p_asesor.idpersona
+LEFT JOIN roles r ON c.idrol = r.idrol
+WHERE r.rol = 'Asesor de inversión';
+
 
 SELECT * FROM v_lead_to_inversionista WHERE idlead = 2;
 SELECT * FROM personas;
@@ -199,7 +226,7 @@ SELECT * FROM personas;
 
 SELECT * FROM empresas;
 SELECT * FROM contratos;
-
+SELECT * FROM inversionistas;
 
 
 

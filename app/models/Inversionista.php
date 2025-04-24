@@ -57,8 +57,13 @@ class Inversionista
         $idusuariocreacion
 
       ));
+      
+      $idRow = $stmt->fetch(PDO::FETCH_ASSOC);
+      $idinversionista = $idRow['idinversionista'] ?? 0 ;
+      $stmt->closeCursor();
+      
       $this->conexion->commit();
-      $idinversionista = $this->conexion->lastInsertId();
+     
       return ["success" => true, "message" => "Se agrego el inversionista", "idinversionista" => $idinversionista];
     } catch (PDOException $e) {
       $this->conexion->rollBack();
@@ -69,16 +74,14 @@ class Inversionista
 
 }
 
-
 // $inv = new Inversionista();
-//  $dato = [
-//   "idpersona"=> 4,
+//   $dato = [
+//   "idpersona"=> 7,
 //    "idempresa"=> 2,
-//    "idasesor"=> 2,
-//    "idusuariocreacion"=> 1,
-//  ];
+//     "idasesor"=> 2
+//   ];
 
-//  var_dump($inv->add($dato));
+//   var_dump($inv->add($dato));
 
 
 
