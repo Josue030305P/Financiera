@@ -14,7 +14,7 @@ class Empresa {
     public function add($params = []) :array{
 
         try {
-
+            $this->conexion->beginTransaction();
             $sql = "CALL sp_add_empresa(?,?,?,?)";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute(array(
@@ -24,7 +24,11 @@ class Empresa {
                 $params['razonsocial']
             )); 
 
-            $idempresa = $this->conexion->lastInsertId();
+            $idRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            $idempresa = $idRow['idempresa'] ?? 0 ;
+            $stmt->closeCursor();
+            
+            $this->conexion->commit();
 
             return [
                 'success' => true,
@@ -34,6 +38,7 @@ class Empresa {
         }
 
         catch(PDOException $e) {
+            $this->conexion->rollback();
             throw new Exception($e->getMessage());
         }
        
@@ -43,11 +48,11 @@ class Empresa {
 
 }
 
-//  $empresa = new Empresa();
-// $datos = [
-//      'nombrecomercial' => 'Taxi churro',
-//      'direccion' => 'Al costado de una casa blanca',
-//      'ruc' => '12343434543',
-//      'razonsocial' => 'Taxi churro de Joel Goonzález'
-//  ];
-//  var_dump($empresa->add($datos));
+//   $empresa = new Empresa();
+//  $datos = [
+//       'nombrecomercial' => 'Taxi Barrunto',
+//       'direccion' => 'Al frente de plaza tottus',
+//       'ruc' => '15689584799',
+//       'razonsocial' => 'Taxi Barrunto S.A.C'
+//   ];
+//   var_dump($empresa->add($datos));

@@ -36,25 +36,26 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
               </select>
             </div>
 
-            <hr class="m"></hr>
+            <hr class="m">
+            </hr>
 
             <div class="row mb-3">
-              <div class="col-md-4 form-group">
+              <div class="col-md-4 form-group inversionista-info">
                 <label for="nombre">Inversionista</label>
                 <input type="text" class="form-control" id="nombre" disabled value="">
               </div>
 
-              <div class="col-md-2 form-group">
+              <div class="col-md-2 form-group inversionista-info">
                 <label for="tipodocumento">Tipo de documento</label>
                 <input type="text" class="form-control" id="tipodocumento" value="" disabled>
               </div>
 
-              <div class="col-md-3 form-group">
+              <div class="col-md-3 form-group inversionista-info">
                 <label for="numdocumento">N° documento</label>
                 <input type="text" class="form-control" id="numdocumento" value="" disabled maxlength="8">
               </div>
 
-              <div class="col-md-3 form-group">
+              <div class="col-md-3 form-group inversionista-info">
                 <label for="telefono">Teléfono</label>
                 <input type="text" class="form-control" id="telefono" disabled maxlength="9">
               </div>
@@ -83,7 +84,8 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
             <div id="campos_empresa" style="display: none;" class="row mb-3">
               <div class="form-group col-md-3">
                 <label for="nombrecomercial">Nombre Comercial</label>
-                <input type="text" id="nombrecomercial" name="nombrecomercial" placeholder="Ingrese el nombre comercial">
+                <input type="text" id="nombrecomercial" name="nombrecomercial"
+                  placeholder="Ingrese el nombre comercial">
               </div>
               <div class="form-group col-md-3">
                 <label for="razonsocial">Razón Social</label>
@@ -95,13 +97,16 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
               </div>
               <div class="form-group col-md-3">
                 <label for="direccion_empresa">Dirección Empresa</label>
-                <input type="text" id="direccion_empresa" name="direccion_empresa" placeholder="Ingrese la dirección de la empresa" required>
+                <input type="text" id="direccion_empresa" name="direccion_empresa"
+                  placeholder="Ingrese la dirección de la empresa" required>
               </div>
 
             </div>
 
           </div>
         </div>
+
+
 
         <!-- Datos de inversión -->
         <div class="card mb-5 text-bg-secondary">
@@ -205,9 +210,9 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
   <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
   <script src="<?= BASE_URL ?>app/js/contrato.js"></script>
-  <!-- <script src="<?= BASE_URL ?>app/js/generarContrato.js"></script> -->
+  <script src="<?= BASE_URL ?>app/js/generarContrato.js"></script> 
   <!-- PRUEBA DE ENVIO DE DATOS A REPORTES PDF -->
-  <!-- <script src="<?= BASE_URL ?>app/js/contrato.prueba.js"></script> -->
+   <!-- <script src="<?= BASE_URL ?>app/js/contrato.prueba.js"></script>  -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
@@ -215,14 +220,20 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
 
     tipoInversionista.addEventListener('change', () => {
       const camposEmpresa = document.getElementById('campos_empresa');
-      const razonSocialInput = document.getElementById('razonsocial');
-      const rucInput = document.getElementById('ruc');
-      const direccionEmpresaInput = document.getElementById('direccion_empresa');
+      const elementosInversionistaInfo = document.getElementsByClassName("inversionista-info");
 
       if (tipoInversionista.value === 'empresa') {
         camposEmpresa.style.display = 'flex';
+        for (let i = 0; i < elementosInversionistaInfo.length; i++) {
+          elementosInversionistaInfo[i].style.display = 'none';
+        }
+      } else {
+        camposEmpresa.style.display = 'none';
+        
+        for (let i = 0; i < elementosInversionistaInfo.length; i++) {
+          elementosInversionistaInfo[i].style.display = 'block'; 
+        }
       }
-
     });
   </script>
 

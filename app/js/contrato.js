@@ -60,7 +60,7 @@ function formatearFecha(fecha) {
     const peticion = await fetch(
       `${baseUrl}app/controllers/ContratoController.php?id=${leadId}`
     );
-    console.log(peticion);
+    // console.log(peticion);
     const response = await peticion.json();
   
     document.getElementById("nombre").value = response.nombrecompleto;

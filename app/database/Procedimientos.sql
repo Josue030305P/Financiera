@@ -98,8 +98,13 @@ IN razonsocial_		VARCHAR(300)
 BEGIN
 	INSERT INTO empresas(nombrecomercial, direccion, ruc, razonsocial)
 		VALUES(nombrecomercial_, direccion_, ruc_, razonsocial_);
+        
+             SELECT LAST_INSERT_ID() AS idempresa;
 END //
 DELIMITER ;
+
+
+DROP PROCEDURE sp_add_empresa;
 
 CALL  sp_add_empresa('Pepe el grillo', 'Al frente de la pista', '12345678911', 'Señor Pepe el grillo');
 SELECT * FROM empresas;

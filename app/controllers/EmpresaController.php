@@ -1,51 +1,59 @@
- <?php
+<?php
 
- require_once '../models/Empresa.php';
+require_once '../models/Empresa.php';
 
 
-//  if (isset($_SERVER['REQUEST_METHOD'])){
-//     header('Content-Type: application/json; charset=utf-8');
+if (isset($_SERVER['REQUEST_METHOD'])) {
+  header('Content-Type: application/json; charset=utf-8');
 
-//     $empresa = new Empresa();
+  $empresa = new Empresa();
 
-//     switch ($_SERVER['REQUEST_METHOD']){
-        
-//         case 'POST':
-//             $input = file_get_contents('php://input');
-//             $dataJSON = json_decode($input);
+  switch ($_SERVER['REQUEST_METHOD']) {
 
-//             if ($dataJSON === null && json_last_error() !== JSON_ERROR_NONE){
+    case 'POST':
+      $input = file_get_contents('php://input');
+      $dataJSON = json_decode($input,true);
+     // var_dump($dataJSON);
 
-//                 echo json_encode([
-//                     "status" => "error",
-//                     "message" => "Error al decodificar los datos JSON."
-//                 ]);
-//                 break;
-//             }
-//             $registro = [
-//                 'nombrecomercial' => htmlspecialchars($dataJSON['nombrecomercial'] ??''),
-//                 'direccion'=> htmlspecialchars($dataJSON['direccion'] ??''),
-//                 'ruc'=> htmlspecialchars($dataJSON['ruc'] ?? ''),
-//                 'razonsocial'=> htmlspecialchars($dataJSON['razonsocial'] ?? '')
-//             ];
+     $resgitro  = [
+      'nombrecomercial' => htmlspecialchars($dataJSON['nombrecomercial']),
+      'direccion'=> htmlspecialchars($dataJSON['direccion']),
+      'ruc'=> htmlspecialchars($dataJSON['ruc']),
+      'razonsocial'=> htmlspecialchars($dataJSON['razzonsocial']),
+     ];
 
-//             try {
-//                 $result = $empresa->add($registro);
-//                 echo json_encode([
-//                     'status'=> 'success',
-//                     'message'=> 'Empresa agregada correctamente'
-                
-//                 ]);
-//             } catch (Exception $e) {
-//                 echo json_encode([
-//                     'status'=> 'error',
-//                     'message'=> $e->getMessage()
-//                 ]);
-//             }
-//             break;
+      
+      try {
+        $result = $empresa->add($resgitro);
+        echo json_encode([
+          "status" => "success",
+          "message" => "Empresa agregada correctamente",
+          "data" => $result
+      ]);
 
 
 
 
-//  }
-// }
+      } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Error al agregar la empresa: ' . $e->getMessage()]);
+
+      }
+
+      break;
+
+
+
+
+
+
+
+
+
+
+  }
+
+
+
+
+
+}
