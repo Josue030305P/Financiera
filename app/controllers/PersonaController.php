@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $persona->addConyuge($params);
         
         if ($result['success']) {
-            echo json_encode(['success' => true, 'message' => 'Cónyuge agregado exitosamente']);
+            echo json_encode(['success' => true, 'message' => 'Cónyuge agregado exitosamente', 'idconyuge' => $result['idconyuge']]);
         } else {
             echo json_encode(['success' => false, 'message' => 'No se pudo agregar al cónyuge']);
         }
@@ -44,4 +44,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     echo json_encode(['success' => false, 'message' => 'Método no soportado']);
 }
-?>

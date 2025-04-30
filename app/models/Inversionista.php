@@ -73,15 +73,14 @@ class Inversionista
   }
 
 }
+//  $inv = new Inversionista();
+//    $dato = [
+//    "idpersona"=> 10,
+//     "idempresa"=> 18,
+//      "idasesor"=> 2
+//    ];
 
-// $inv = new Inversionista();
-//   $dato = [
-//   "idpersona"=> 7,
-//    "idempresa"=> 2,
-//     "idasesor"=> 2
-//   ];
-
-//   var_dump($inv->add($dato));
+// var_dump($inv->add($dato));
 
 
 

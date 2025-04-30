@@ -90,6 +90,7 @@ class ConyugeForm {
             });
 
             const result = await response.json();
+            // console.log(result);
 
             if (result.success) {
                 await Swal.fire({
@@ -119,6 +120,15 @@ class ConyugeForm {
 
            
             form.appendChild(leadIdInput);
+
+            // FIJARME SI ES QUE FUNCIONA CORRECTAMENTE:
+                const conyugeIdInput = document.createElement('input');
+                conyugeIdInput.type = 'hidden';
+                conyugeIdInput.name = 'conyugeId'; // Nombre para recibir en contrato.add
+                conyugeIdInput.value = result.idconyuge;
+                form.appendChild(conyugeIdInput);
+            
+
             document.body.appendChild(form);
 
             form.submit();

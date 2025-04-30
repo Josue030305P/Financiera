@@ -197,6 +197,9 @@ WHERE r.rol = 'Asesor de inversión';
 
 SELECT * FROM v_lead_to_inversionista WHERE idlead = 2;
 SELECT * FROM personas;
+SELECT * FROM inversionistas;
+SELECT * FROM empresas;
+SELECT * FROM contratos;
 
 
 CREATE  VIEW v_asesor_lead AS

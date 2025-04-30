@@ -77,14 +77,16 @@ BEGIN
 
 	INSERT INTO personas(idpais,apellidos,nombres,tipodocumento,numdocumento,email,telprincipal,domicilio)
 		VALUES(idpais_,apellidos_,nombres_,tipodocumento_,numdocumento_,email_,telprincipal_,domicilio_);
+        
+		SELECT LAST_INSERT_ID() AS idconyuge;
 
 END //
 
 DELIMITER ;
 
-CALL  sp_add_conyuge(1,'Pilpe Yataco','Isai','DNI','71882016','isai@gmail.com','919482381');
+CALL  sp_add_conyuge(1,'Meneses Alvárez','Flor','DNI','85856954','floralvarez@gmail.com','956859858','dsds');
 
-
+DROP PROCEDURE sp_add_conyuge;
 SELECT * FROM personas;
 
 
@@ -98,7 +100,6 @@ IN razonsocial_		VARCHAR(300)
 BEGIN
 	INSERT INTO empresas(nombrecomercial, direccion, ruc, razonsocial)
 		VALUES(nombrecomercial_, direccion_, ruc_, razonsocial_);
-        
              SELECT LAST_INSERT_ID() AS idempresa;
 END //
 DELIMITER ;
@@ -106,7 +107,7 @@ DELIMITER ;
 
 DROP PROCEDURE sp_add_empresa;
 
-CALL  sp_add_empresa('Pepe el grillo', 'Al frente de la pista', '12345678911', 'Señor Pepe el grillo');
+CALL  sp_add_empresa('todo yo', 'Al frente de la pista', '56585859854', 'todo yooyoyoyyoy');
 SELECT * FROM empresas;
 SELECT * FROM usuarios;
 SELECT * FROM inversionistas;

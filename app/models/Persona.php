@@ -27,8 +27,14 @@ class Persona {
                 $params['telprincipal'],
                 $params['domicilio'],
             ]);
+            $result = $smt->fetch(PDO::FETCH_ASSOC);
 
-            return ['success' => true];
+            if ($result && isset( $result['idconyuge'] )) {
+                return ['success'=> true,'idconyuge'=> $result['idconyuge']];
+            } else {
+                return ['success'=> false,'message'=> 'Error al obtener el ID conyuge'];
+            }
+
         
 
         }
@@ -37,5 +43,19 @@ class Persona {
         }
     }
 
-
 }
+
+
+// $c = new Persona();
+// $datos = [
+//     'idpais'=> 1,
+//     'apellidos' => 'Flores Fuentes',
+//     'nombres'=> 'Rosa Andrea',
+//     'tipodocumento'=> 'DNI',
+//     'numdocumento'=> '85858585',
+//     'email' => 'floresfuentesros@gmail.com',
+//     'telprincipal' => '985854210',
+//     'domicilio' => 'sdsdsd'
+// ];
+
+// var_dump($c->addConyuge($datos));   

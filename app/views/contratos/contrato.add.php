@@ -8,9 +8,18 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
 <head>
   <meta charset="UTF-8">
   <meta name="base-url" content="<?= BASE_URL ?>">
-  <title>Document</title>
+  <title>Contrato</title>
   <link rel="stylesheet" href="<?= BASE_URL ?>app/css/contrato.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    .mostrar {
+      display: block !important;
+    }
+    .ocultar {
+      display: none !important;
+    }
+    </style>
 </head>
 
 <body>
@@ -40,28 +49,28 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
             </hr>
 
             <div class="row mb-3">
-              <div class="col-md-4 form-group inversionista-info">
+              <div class="col-md-4 form-group inversionista-info mostrar">
                 <label for="nombre">Inversionista</label>
                 <input type="text" class="form-control" id="nombre" disabled value="">
               </div>
 
-              <div class="col-md-2 form-group inversionista-info">
+              <div class="col-md-2 form-group inversionista-info mostrar">
                 <label for="tipodocumento">Tipo de documento</label>
                 <input type="text" class="form-control" id="tipodocumento" value="" disabled>
               </div>
 
-              <div class="col-md-3 form-group inversionista-info">
+              <div class="col-md-3 form-group inversionista-info mostrar">
                 <label for="numdocumento">N° documento</label>
                 <input type="text" class="form-control" id="numdocumento" value="" disabled maxlength="8">
               </div>
 
-              <div class="col-md-3 form-group inversionista-info">
+              <div class="col-md-3 form-group inversionista-info mostrar">
                 <label for="telefono">Teléfono</label>
                 <input type="text" class="form-control" id="telefono" disabled maxlength="9">
               </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-3" id="campos_conyuge" >
               <div class="col-md-4 form-group">
                 <label for="buscarDNI">Buscar DNI (cónyuge)</label>
                 <div class="input-group">
@@ -217,25 +226,25 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
 
   <script>
     const tipoInversionista = document.getElementById('tipo_inversionista');
+    const camposEmpresa = document.getElementById('campos_empresa');
+    const inversionistaInfoElements = document.querySelectorAll(".inversionista-info");
+    const camposConyuge = document.getElementById('campos_conyuge');
+    const claseMostrar = 'mostrar';
+    const claseOcultar = 'ocultar';
 
     tipoInversionista.addEventListener('change', () => {
-      const camposEmpresa = document.getElementById('campos_empresa');
-      const elementosInversionistaInfo = document.getElementsByClassName("inversionista-info");
+      camposEmpresa.style.display = tipoInversionista.value === 'empresa' ? 'flex' : 'none';
+      camposConyuge.style.display = tipoInversionista.value === 'persona' ? 'flex' : 'none';
 
-      if (tipoInversionista.value === 'empresa') {
-        camposEmpresa.style.display = 'flex';
-        for (let i = 0; i < elementosInversionistaInfo.length; i++) {
-          elementosInversionistaInfo[i].style.display = 'none';
-        }
-      } else {
-        camposEmpresa.style.display = 'none';
-        
-        for (let i = 0; i < elementosInversionistaInfo.length; i++) {
-          elementosInversionistaInfo[i].style.display = 'block'; 
-        }
-      }
+      inversionistaInfoElements.forEach(element => {
+        element.classList.toggle(claseMostrar, tipoInversionista.value === 'persona');
+        element.classList.toggle(claseOcultar, tipoInversionista.value === 'empresa');
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      camposEmpresa.style.display = 'none';
+      camposConyuge.style.display = 'flex';
     });
   </script>
-
-
 </body>

@@ -13,13 +13,12 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
     case 'POST':
       $input = file_get_contents('php://input');
       $dataJSON = json_decode($input,true);
-     // var_dump($dataJSON);
 
      $resgitro  = [
       'nombrecomercial' => htmlspecialchars($dataJSON['nombrecomercial']),
       'direccion'=> htmlspecialchars($dataJSON['direccion']),
       'ruc'=> htmlspecialchars($dataJSON['ruc']),
-      'razonsocial'=> htmlspecialchars($dataJSON['razzonsocial']),
+      'razonsocial'=> htmlspecialchars($dataJSON['razonsocial']),
      ];
 
       

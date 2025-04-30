@@ -30,6 +30,48 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             break;
 
         case 'POST':
+            $input = file_get_contents('php://input');
+            $inversionistaData = json_decode($input, true);
+
+            if ($inversionistaData) {
+                $idpersona = $inversionistaData['idpersona'] ?? null;
+                $idempresa = $inversionistaData['idempresa'] ?? null;
+                $idasesor = $inversionistaData['idasesor'] ?? null;
+              
+
+                if (($idpersona !== null || $idempresa !== null) && $idasesor !== null) {
+                    $params = [
+                        'idpersona' => $idpersona,
+                        'idempresa' => $idempresa,
+                        'idasesor' => $idasesor,
+                    ];
+
+                    try {
+                        $result = $inversionista->add($params);
+                        echo json_encode([
+                            "status" => "success",
+                            "message" => $result['message'],
+                            "idinversionista" => $result['idinversionista']
+                        ]);
+                    } catch (Exception $e) {
+                        echo json_encode([
+                            "status" => "error",
+                            "message" => "Error al agregar el inversionista: " . $e->getMessage()
+                        ]);
+                    }
+                } else {
+                    echo json_encode([
+                        "status" => "error",
+                        "message" => "Datos de inversionista incompletos. Se requiere idpersona o idempresa e idasesor."
+                    ]);
+                }
+            } else {
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Datos JSON inválidos recibidos."
+                ]);
+            }
+            break;
 
     }
 
