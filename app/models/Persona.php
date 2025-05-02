@@ -48,14 +48,14 @@ class Persona {
 
 // $c = new Persona();
 // $datos = [
-//     'idpais'=> 1,
-//     'apellidos' => 'Flores Fuentes',
-//     'nombres'=> 'Rosa Andrea',
-//     'tipodocumento'=> 'DNI',
-//     'numdocumento'=> '85858585',
-//     'email' => 'floresfuentesros@gmail.com',
-//     'telprincipal' => '985854210',
-//     'domicilio' => 'sdsdsd'
+//      'idpais'=> 1,
+//      'apellidos' => 'Atuncar Almeyda',
+//      'nombres'=> 'Edward',
+//      'tipodocumento'=> 'DNI',
+//      'numdocumento'=> '65682885',
+//      'email' => 'almeydaedward@gmail.com',
+//      'telprincipal' => '985689230',
+//      'domicilio' => 'sdsdsd'
 // ];
 
 // var_dump($c->addConyuge($datos));   

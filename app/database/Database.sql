@@ -44,12 +44,6 @@ SELECT * FROM personas;
 
 
 
-
-
-
-
-
-
 SELECT * FROM accesos;
 
 
@@ -287,6 +281,7 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+ALTER TABLE contratos DROP COLUMN fecharetornocapital;
 ALTER TABLE contratos
 DROP FOREIGN KEY fk_idusuario_asesor;
 
@@ -304,12 +299,6 @@ DROP FOREIGN KEY fk_id_user_creacion_contrat;
 
 ALTER TABLE contratos
 DROP FOREIGN KEY fk_id_user_elimin_contrat;
-
-
-
-
-
-
 
 
 
@@ -378,7 +367,7 @@ status_					ENUM('Activo','In
 activo') NOT NULL,
 CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios(idusuario) -- Aclarar leugo si es en colabordores o usuarios;
 )ENGINE=InnoDB;
-SHOW TABLES ;
+
 
 ALTER TABLE accesos ADD COLUMN fechahorainactivo DATETIME NULL; 
 

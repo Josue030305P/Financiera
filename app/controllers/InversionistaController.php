@@ -49,7 +49,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                     try {
                         $result = $inversionista->add($params);
                         echo json_encode([
-                            "status" => "success",
+                            "status" => true,
                             "message" => $result['message'],
                             "idinversionista" => $result['idinversionista']
                         ]);

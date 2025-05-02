@@ -88,13 +88,7 @@ function buscarConyuge() {
     return;
   }
 
-  Swal.fire({
-    title: "Buscando...",
-    allowOutsideClick: false,
-    didOpen: () => {
-      Swal.showLoading();
-    },
-  });
+  
 
   fetch(`${baseUrl}app/controllers/ContratoController.php?dni=${dni}`)
     .then((response) => response.json())

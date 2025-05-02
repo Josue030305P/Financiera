@@ -88,6 +88,7 @@ CALL  sp_add_conyuge(1,'Meneses Alvárez','Flor','DNI','85856954','floralvarez@g
 
 DROP PROCEDURE sp_add_conyuge;
 SELECT * FROM personas;
+SELECT * FROM empresas;
 
 
 DELIMITER //
@@ -105,7 +106,6 @@ END //
 DELIMITER ;
 
 
-DROP PROCEDURE sp_add_empresa;
 
 CALL  sp_add_empresa('todo yo', 'Al frente de la pista', '56585859854', 'todo yooyoyoyyoy');
 SELECT * FROM empresas;
@@ -127,6 +127,8 @@ BEGIN
          SELECT LAST_INSERT_ID() AS idinversionista;
 END //
 DELIMITER ;
+
+
 
 CALL sp_add_inversionista(11,1,1,1);
 

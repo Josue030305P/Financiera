@@ -74,7 +74,7 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
               <div class="col-md-4 form-group">
                 <label for="buscarDNI">Buscar DNI (cónyuge)</label>
                 <div class="input-group">
-                  <input type="search" class="form-control" id="buscarDNI" maxlength="8" />
+                  <input type="search" class="form-control" id="buscarDNI" maxlength="8" data-id-conyuge=""/>
                 </div>
               </div>
 

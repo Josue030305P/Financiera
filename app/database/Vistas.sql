@@ -1,5 +1,5 @@
 -- Vista para contratos;
-
+USE financiera;
 CREATE VIEW vista_contratos AS
 SELECT 
     c.idcontrato,
@@ -146,30 +146,6 @@ JOIN colaboradores c ON u.idcolaborador = c.idcolaborador
 JOIN roles r ON c.idrol = r.idrol;
 
 SELECT * FROM leads;
-SELECT * FROM personas;
-
-USE financiera;
-
--- Hay que cambiar esta vista, para que lleve los datos de la persona(Inverionista) para rellenar los datos del PDF
-CREATE VIEW v_lead_to_inversionista AS
-SELECT
-    l.idlead,
-    p.idpersona,
-    CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto,
-    p.tipodocumento,
-    p.numdocumento,
-    p.domicilio,
-    p.referencia,
-    p.fechanacimiento,
-    p.telprincipal AS telefono
-FROM leads l
-JOIN personas p ON l.idpersona = p.idpersona;
-
-
-SELECT * FROM personas;
-DROP VIEW  v_lead_to_inversionista;
-
-SELECT * FROM v_lead_to_inversionista WHERE idlead = 2;
 SELECT * FROM personas;
 
 CREATE OR REPLACE VIEW v_lead_to_inversionista AS

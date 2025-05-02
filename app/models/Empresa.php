@@ -49,10 +49,10 @@ class Empresa {
 }
 
 // $empresa = new Empresa();
-//   $datos = [
-//        'nombrecomercial' => 'girasoles',
-//        'direccion' => 'Al frente de plaza tottus',       
-//        'ruc' => '85898585874',
-//        'razonsocial' => 'Girasole sy girasoles'
-//    ];
+//     $datos = [
+//          'nombrecomercial' => 'TT',
+//          'direccion' => 'Al frente de plaza tottus',       
+//          'ruc' => '85898585874',
+//          'razonsocial' => 'Girasole sy girasoles'
+//      ];
 // var_dump($empresa->add($datos));

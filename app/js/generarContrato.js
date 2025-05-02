@@ -5,17 +5,29 @@ const baseUrl = document.querySelector('meta[name="base-url"]')?.content || "";
 
 const leadIdHolder = document.getElementById('leadIdHolder');
 const leadIdFromAttribute = leadIdHolder ? leadIdHolder.dataset.leadId : null;
+const leadId = leadIdFromAttribute || leadIdFromURL;
 
 
-
-const urlParams = new URLSearchParams(window.location.search);
-const leadIdFromURL = urlParams.get("id");
 
 const btnGuardar = document.getElementById('guardar');
 let empresaId = null;
+const tipoInversionista = document.getElementById('tipo_inversionista');
 
 
-const leadId = leadIdFromAttribute || leadIdFromURL;
+
+// Campos del card inversión:
+const fechaInicio =   document.getElementById('fechainicio');
+const numMeses = document.getElementById('meses');
+const fechaFin = document.getElementById('fechafin');
+const moneda = document.getElementById('moneda');
+const interes = document.getElementsById('interes');
+const capital = document.getElementById('capital');
+const tipo = document.getElementById('tipo');
+const diaPago = document.getElementById('diapago');
+const periodo = document.getElementById('periodo');
+const impuestoRenta = document.getElementById('impuestoRenta');
+const tolerancia = document.getElementById('tolerancia');
+const observacion = document.getElementById('observacion');
 
 
 // Ya agrega una empresa y capturo el idempresa:
@@ -118,25 +130,97 @@ async function agregarInversionista(inversionistaData) {
 
 
 
+async function agregarInversionista(inversionistaData) {
+    try {
+        const response = await fetch(`${baseUrl}app/controllers/InversionistaController.php`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inversionistaData)
+        });
+        const result = await response.json();
 
-async function guardarContrato(){
+        if (result.status  && result.idinversionista) {
+            Swal.fire({ icon: 'success', title: 'Inversionista agregado', text: `ID del inversionista: ${result.idinversionista}` });
+            return { idinversionista: result.idinversionista };
+        } else {
+            Swal.fire({ icon: 'error', title: 'Error al agregar inversionista', text: result.message || 'Ocurrió un error.' });
+            return null;
+        }
+    } catch (error) {
+        console.error("Error al agregar inversionista:", error);
+        Swal.fire({ icon: 'error', title: 'Error', text: 'Ocurrió un error al comunicarse con el servidor.' });
+        return null;
+    }
+}
+
+async function guardarContrato() {
+    let empresaID = null;
+    const tipoInversionistaValue = tipoInversionista.value;
+
+    if (tipoInversionistaValue === 'empresa') {
+        empresaID = await guardarEmpresa();
+        if (!empresaID) {
+            return; 
+        }
+    }
+
+    const inversionistaData = await obtenerDatosInversionista();
+
+    if (inversionistaData.idpersona) {
+
+        // Datos para agregar el inversionista
+
+        const nuevoInversionista = {
+            idpersona: inversionistaData.idpersona,
+            idempresa: empresaID,
+            idasesor: inversionistaData.idasesor,
+        };
+
+        const inversionistaResult = await agregarInversionista(nuevoInversionista);
+
+        try {
+
+        const formData = {
+            idasesor:inversionistaData.idasesor,
+            idinversionista:inversionistaResult,
+            
+
+
+            
+            
+        };
+
+        const response = await fetch(`${baseUrl}app/controllers/ContratoController.php`, {
+            method:'POST',
+            headers:{
+                 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        const result = await response.json();
+
+        } catch(error) {
+
+        }
+
+    }
+}
+
+btnGuardar.addEventListener('click', guardarContrato);
+
+});
+
+
+
+
     //obtenerDatosInversionista();
     // agregarInversionista({
     //     idpersona:9,
     //     idempresa:17,
     //     idasesor:2
     // });
-}
 
 
-
-
-
-
-
-btnGuardar.addEventListener('click',guardarContrato);
-
-});
 
 
 
