@@ -157,7 +157,7 @@
     <!-- Custom scripts -->
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
     
-    <!-- Inversionista form script -->
+   
     <script src="<?= BASE_URL ?>app/js/inversionista.form.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

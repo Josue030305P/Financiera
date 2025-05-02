@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"]) {
                 $dataJSON = json_decode($input, true);
 
                 $registro = [
-                    'idversion' => 1,
+                    'idversion' => $dataJSON['idversion'],
                     'idasesor'=> $dataJSON['idasesor'],
                     'idinversionista'=> $dataJSON['idinversionista'],
                     'idconyuge'=> $dataJSON['idconyuge'] ?? null,

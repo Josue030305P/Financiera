@@ -20,7 +20,7 @@ const fechaInicio =   document.getElementById('fechainicio');
 const numMeses = document.getElementById('meses');
 const fechaFin = document.getElementById('fechafin');
 const moneda = document.getElementById('moneda');
-const interes = document.getElementsById('interes');
+const interes = document.getElementById('interes');
 const capital = document.getElementById('capital');
 const tipo = document.getElementById('tipo');
 const diaPago = document.getElementById('diapago');
@@ -181,12 +181,23 @@ async function guardarContrato() {
         try {
 
         const formData = {
+            idversion:1,
             idasesor:inversionistaData.idasesor,
             idinversionista:inversionistaResult,
-            
+            idconyuge:null,
+            fechainicio : fechaInicio.value,
+            fechafin: fechaFin.value,
+            impuestorenta: impuestoRenta.value,
+            tolerancia: tolerancia.value,
+            duracionmeses : numMeses.value,
+            moneda: moneda.value,
+            diapago : diaPago.value,
+            interes:interes.value,
+            capital:capital.value,
+            tiporetorno:tipo.value,
+            periodopago: periodo.value,
+            observacion:observacion.value
 
-
-            
             
         };
 
@@ -198,6 +209,11 @@ async function guardarContrato() {
             body: JSON.stringify(formData)
         });
         const result = await response.json();
+
+        if (result.success) {
+            alert('SE HA CREADO EL CONTRATO');
+        }
+
 
         } catch(error) {
 
