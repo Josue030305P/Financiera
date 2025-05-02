@@ -156,7 +156,7 @@
                     <div class="form-footer">
                         <button type="button" class="add-btn">Actualizar lead</button>
                         <button type="button" class="reset-btn">Cancelar</button>
-                        <form action="<?= BASE_URL ?>app/views/contratos/contrato.add.php" method="post" id="invertirForm">
+                        <form action="<?= BASE_URL ?>app/views/inversionistas/inversionista.add.php" method="post" id="invertirForm">
                             <input type="hidden" name="leadId" id="leadIdInput" value="">
                             <button type="submit" class="invertir-btn d-none" visible="false">Invertir</button>
                         </form>

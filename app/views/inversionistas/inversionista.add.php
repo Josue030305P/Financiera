@@ -1,169 +1,154 @@
-<?php require_once '../../includes/header.php'; ?>
-<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form-add/form.add.css">
-<meta name="base-url" content="<?= BASE_URL ?>">
+<?php session_start();
+require_once '../../includes/header.php';
+require_once "../../includes/config.php";
+
+$leadIdParaJS = $_POST['leadId'] ?? null;
+?>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="base-url" content="<?= BASE_URL ?>">
+  <title>Contrato</title>
+  <link rel="stylesheet" href="<?= BASE_URL ?>app/css/contrato.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    .mostrar {
+      display: block !important;
+    }
+
+    .ocultar {
+      display: none !important;
+    }
+  </style>
+</head>
 
 <body>
 
-    <div class="page-flex">
+  <div class="page-flex">
+    <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
+    <div class="main-wrapper">
+      <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
+      <div id="leadIdHolder" style="display: none;" data-lead-id="<?= htmlspecialchars($leadIdParaJS) ?>"></div>
+      <div class="container" style="margin-top: 40px;">
 
-        <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
+        <!-- Inversionista -->
+        <div class="card mb-5 text-bg-secondary">
+          <div class="card-header bg-primary text-white fw-bold">Inversionista</div>
 
-        <div class="main-wrapper">
+          <div class="card-body">
 
-            <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
+            <div class="form-group">
+              <label for="tipo_inversionista">Tipo de Inversionista</label>
+              <select name="tipo_inversionista" id="tipo_inversionista" class="select-box" required>
+                <option value="persona">Persona</option>
+                <option value="empresa">Empresa</option>
+              </select>
+            </div>
 
+            <hr class="m">
+            </hr>
 
-            <div class="form-container form">
-                <h2 class="form-title">Agregar Nuevo Inversionista</h2>
-                <div class="form-header">
+            <div class="row mb-3">
+              <div class="col-md-4 form-group inversionista-info mostrar">
+                <label for="nombre">Inversionista</label>
+                <input type="text" class="form-control" id="nombre" disabled value="">
+              </div>
 
-                    <a href="<?= BASE_URL ?>app/views/inversionistas/"><span class="regresar-btn"> ⬅️ Inversionistas</span></a>
+              <div class="col-md-2 form-group inversionista-info mostrar">
+                <label for="tipodocumento">Tipo de documento</label>
+                <input type="text" class="form-control" id="tipodocumento" value="" disabled>
+              </div>
 
+              <div class="col-md-3 form-group inversionista-info mostrar">
+                <label for="numdocumento">N° documento</label>
+                <input type="text" class="form-control" id="numdocumento" value="" disabled maxlength="8">
+              </div>
+
+              <div class="col-md-3 form-group inversionista-info mostrar">
+                <label for="telefono">Teléfono</label>
+                <input type="text" class="form-control" id="telefono" disabled maxlength="9">
+              </div>
+            </div>
+
+            <div class="row mb-3" id="campos_conyuge">
+              <div class="col-md-4 form-group">
+                <label for="buscarDNI">Buscar DNI (cónyuge)</label>
+                <div class="input-group">
+                  <input type="search" class="form-control" id="buscarDNI" maxlength="8" data-id-conyuge="" />
                 </div>
+              </div>
 
+              <div class="col-md-5 form-group">
+                <label for="conyuge">Cónyuge</label>
+                <input type="text" class="form-control" id="conyuge" readonly>
+              </div>
 
-                <div class="form-body">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="apellidos">Apellidos</label>
-                            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nombres">Nombres</label>
-                            <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tipodocumento">Tipo de documento</label>
-                            <select id="tipodocumento" class="select-box" disabled>
-                                <option value="DNI">DNI</option>
-                                <option value="RUC">RUC</option>
-                                <option value="CE">CE</option>
-                            </select>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="numdocumento">Número de Documento</label>
-                            <input type="text" id="numdocumento" placeholder="Ingrese su documento"
-                                class="numdocumento" maxlength="12">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="fechanacimiento">Fecha de Nacimiento</label>
-                            <input type="date" id="fechanacimiento" class="fechanacimiento">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="telefono">Teléfono</label>
-                            <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono" maxlength="9" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="correo">Correo</label>
-                            <input type="email" id="correo" placeholder="Ingrese su correo" class="correo" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="pais">País</label>
-                            <select id="pais" class="select-box" >
-                                <option value="">Seleccione un país</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="departamento">Departamento</label>
-                            <select id="departamento" class="select-box" >
-                                <option value="">Seleccione un departamento </option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="distrito">Provincia</label>
-                            <select id="distrito" class="select-box">
-                                <option value="">Seleccione una provincia</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="distrito">Distrito</label>
-                            <select id="distrito" class="select-box">
-                                <option value="">Seleccione un distrito</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="domicilio">Domicilio</label>
-                            <input type="text" id="domicilio" placeholder="Ingrese el domicilio" class="domicilio">
-                        </div>
-                        <div class="form-group">
-                            <label for="referencia">Referencia</label>
-                            <input type="text" id="referencia" placeholder="Ingrese una referencia" class="referencia ">
-                        </div>
-
-
-                        <div class="form-group ">
-                            <label for="nombreempresa">Empresa (Opcional)</label>
-                            <input type="text" id="nombreempresa" placeholder="Ingrese nombre de la empresa"
-                                class="nombreempresa">
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="ruc">RUC (Opcional)</label>
-                            <input type="text" id="ruc" placeholder="Ingrese RUC de la empresa" class="ruc">
-                        </div>
-
-                     
-                        
-
-                        <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <select id="estado" class="select-box">
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="asesor">Asesor</label>
-                            <select id="asesor" class="select-box">
-                                <option value="">Seleccione un asesor</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-footer">
-                        <button class="add-btn">Agregar Inversionista</button>
-                        <button class="reset-btn">Cancelar</button>
-                    </div>
-                </div>
-
+              <div class="col-md-3 form-group">
+                <label for="telconyuge">Teléfono (Cónyuge)</label>
+                <input type="text" class="form-control" id="telconyuge" maxlength="9">
+              </div>
             </div>
 
 
+            <div id="campos_empresa" style="display: none;" class="row mb-3">
+              <div class="form-group col-md-3">
+                <label for="nombrecomercial">Nombre Comercial</label>
+                <input type="text" id="nombrecomercial" name="nombrecomercial"
+                  placeholder="Ingrese el nombre comercial">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="razonsocial">Razón Social</label>
+                <input type="text" id="razonsocial" name="razonsocial" placeholder="Ingrese la razón social" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="ruc">RUC</label>
+                <input type="text" id="ruc" name="ruc" placeholder="Ingrese el RUC" maxlength="11" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="direccion_empresa">Dirección Empresa</label>
+                <input type="text" id="direccion_empresa" name="direccion_empresa"
+                  placeholder="Ingrese la dirección de la empresa" required>
+              </div>
+
+            </div>
+
+          </div>
         </div>
+      </div>
 
 
-    </div>
+      <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
+  <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
+  <script src="<?= BASE_URL ?>app/js/script.js"></script>
+  <script src="<?= BASE_URL ?>app/js/contrato.js"></script>
+  <script src="<?= BASE_URL ?>app/js/generarContrato.js"></script> 
+  <!-- PRUEBA DE ENVIO DE DATOS A REPORTES PDF -->
+   <!-- <script src="<?= BASE_URL ?>app/js/contrato.prueba.js"></script>  -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <script>
+    const tipoInversionista = document.getElementById('tipo_inversionista');
+    const camposEmpresa = document.getElementById('campos_empresa');
+    const inversionistaInfoElements = document.querySelectorAll(".inversionista-info");
+    const camposConyuge = document.getElementById('campos_conyuge');
+    const claseMostrar = 'mostrar';
+    const claseOcultar = 'ocultar';
 
-    <!-- Chart library -->
-    <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
+    tipoInversionista.addEventListener('change', () => {
+      camposEmpresa.style.display = tipoInversionista.value === 'empresa' ? 'flex' : 'none';
+      camposConyuge.style.display = tipoInversionista.value === 'persona' ? 'flex' : 'none';
 
-    <!-- Icons library -->
-    <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
+      inversionistaInfoElements.forEach(element => {
+        element.classList.toggle(claseMostrar, tipoInversionista.value === 'persona');
+        element.classList.toggle(claseOcultar, tipoInversionista.value === 'empresa');
+      });
+    });
 
-    <!-- Custom scripts -->
-    <script src="<?= BASE_URL ?>app/js/script.js"></script>
-    
-    <!-- Inversionista form script -->
-    <script src="<?= BASE_URL ?>app/js/inversionista.form.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            new InversionistaForm();
-        });
-    </script>
+    document.addEventListener('DOMContentLoaded', () => {
+      camposEmpresa.style.display = 'none';
+      camposConyuge.style.display = 'flex';
+    });
+  </script>
 
 </body>
