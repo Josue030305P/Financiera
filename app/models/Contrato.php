@@ -24,7 +24,7 @@ class Contrato
         $result = [];
         try {
 
-            $sql = "SELECT * FROM list_contratos";
+            $sql = "SELECT * FROM vista_contratos";
             $smt = $this->conexion->prepare($sql);
             $smt->execute();
 

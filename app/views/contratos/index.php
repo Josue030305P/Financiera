@@ -1,3 +1,10 @@
+<?php session_start();  
+
+if (!isset($_SESSION['nombre'])) {
+    header('Location:../'); 
+    exit();
+}
+?>
 <?php require_once __DIR__ . "/../../includes/header.php"; ?>
 <?php
 $tipo = 'Contratos';
@@ -14,20 +21,20 @@ $configuracionTabla = [
       'Asesor',
       'Banco',
       'Garantía',
-      'Porcentaje de garantía',
+      '% de garantía',
   ],
   'mapeo' => [
       'ID' => 'idcontrato',
-      'Inversionista' => 'inversionista',
+      'Inversionista' => 'nombreinversionista',
       'Fecha inicio' => 'fechainicio',
       'Fecha fin' => 'fechafin',
       'Moneda' => 'moneda',
       'Capital' => 'capital',
       'Tipo de retorno' => 'tiporetorno',
-      'Asesor' => 'asesor',
+      'Asesor' => 'nombreasesor',
       'Banco' => 'banco',
       'Garantía' => 'garantia',
-      'Porcentaje de garantía' => 'porcentaje_garantia',
+      '% de garantía' => 'porcentaje_garantia',
       
       
   ]
@@ -41,11 +48,7 @@ $links = [
   "Contratos" => BASE_URL . "app/views/contratos/contrato.add"
 ];
 
-
-
 ?>
-
-
 
 <body>
     <div class="page-flex">

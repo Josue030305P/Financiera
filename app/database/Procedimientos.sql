@@ -145,7 +145,6 @@ IN idconyuge_		INT,   -- ES EL ID DE PERSONA que se agregado.
 IN idusuariocreacion_ INT,
 IN fechainicio_		DATE,
 IN fechafin_		DATE,
-IN fecharetornocapital_ DATE,
 IN impuestorenta_	DECIMAL(5,2),
 IN toleranciadias_  TINYINT,
 IN duracionmeses_	TINYINT,
@@ -158,12 +157,12 @@ IN periodopago_		VARCHAR(30) ,
 IN observacion_		VARCHAR(100)
 )
 BEGIN
-	INSERT INTO contratos(idversion,idasesor,idinversionista,idconyuge,idusuariocreacion,fechainicio,fechafin,
-						fecharetornocapital,impuestorenta,toleranciadias,duracionmeses,moneda,diapago,interes,capital,
+	INSERT INTO contratos(idversion,idasesor,idinversionista,idconyuge,idusuariocreacion,fechainicio,fechafin
+						,impuestorenta,toleranciadias,duracionmeses,moneda,diapago,interes,capital,
                         tiporetorno,periodopago,observacion)
                         VALUES
                         (idversion_,idasesor_,idinversionista_,idconyuge_,idusuariocreacion_,fechainicio_,fechafin_,
-						fecharetornocapital_,impuestorenta_,toleranciadias_,duracionmeses_,moneda_,diapago_,interes_,capital_,
+						impuestorenta_,toleranciadias_,duracionmeses_,moneda_,diapago_,interes_,capital_,
                         tiporetorno_,periodopago_,observacion_);
 END //
 DELIMITER ;

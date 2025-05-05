@@ -174,6 +174,12 @@ CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERE
 CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+SELECT * FROM inversionistas;
+SELECT * FROM entidades;
+SELECT * FROM numcuentas;
+ INSERT INTO numcuentas (idinversionista,identidad, tipomoneda, idusuariocreacion, numcuenta, cci, observaciones)
+		VALUES(1,1,'PEN',1,'31575022240137','00231517502224013703','Asociando numeor de cuenta a inverisonista');
+
 
 CREATE TABLE canales(
 idcanal			INT AUTO_INCREMENT PRIMARY KEY,
@@ -262,6 +268,7 @@ observacion				VARCHAR(100) NULL,
 fechahoraeliminacion	DATETIME NULL,
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
+estado 				ENUM('Vigente','Completado') DEFAULT 'Vigente',
 CONSTRAINT fk_idusuario_asesor FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idversion FOREIGN KEY(idversion) REFERENCES versiones(idversion),
 CONSTRAINT fk_idinversionista_contrato FOREIGN KEY(idinversionista) REFERENCES inversionistas(idinversionista),
@@ -270,6 +277,8 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+ALTER TABLE contratos MODIFY COLUMN estado ENUM('Vigente','Completado') DEFAULT 'Vigente';
+SELECT * FROM contratos;
 -- PREGUNTAR LUEGO SI UN INVERSIONISTA PUEDE TENER SOLO UN CONTRATO:
 -- ALTER TABLE contratos MODIFY COLUMN idinversionista INT NOT NULL  UNIQUE;
 
@@ -278,6 +287,7 @@ idgarantia				INT PRIMARY KEY AUTO_INCREMENT,
 tipogarantia			ENUM('Auto','Hipoteca','Letra') NOT NULL
 )ENGINE=InnoDB;
 
+SELECT * FROM garantias;
 CREATE TABLE detallegarantias(
 iddetallegarantia       INT PRIMARY KEY AUTO_INCREMENT,
 idgarantia				INT NOT NULL,
@@ -289,6 +299,10 @@ updated_at 			DATETIME NULL,
 CONSTRAINT fk_idgarantia FOREIGN KEY(idgarantia) REFERENCES garantias(idgarantia),
 CONSTRAINT fk_idcontrato_detal_garant FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato)
 )ENGINE=InnoDB;
+
+INSERT INTO detallegarantias(idgarantia, idcontrato, porcentaje, observaciones)
+		VALUES(1,1,100,'Carro Kia Picanto - 2023');
+SELECT * FROM detallegarantias;
 
 
 CREATE TABLE cronogramapagos(

@@ -8,13 +8,12 @@ SELECT
     c.moneda,
     c.capital,
     c.tiporetorno,
-    p1.nombres AS inversionista,
-    p1.apellidos AS apellidos_inversionista,
-    p2.nombres AS asesor,
-    p2.apellidos AS apellidos_asesor,
+	CONCAT(p1.nombres , ' ', p1.apellidos ) AS nombreinversionista,
+   CONCAT(p2.nombres , ' ', p2.apellidos ) AS nombreasesor,
     ent.entidad  AS banco,
     garant.tipogarantia AS garantia,
-    dgarant.porcentaje AS porcentaje_garantia
+    dgarant.porcentaje AS porcentaje_garantia,
+    c.estado
 FROM contratos c
 JOIN inversionistas i ON c.idinversionista = i.idinversionista
 JOIN personas p1 ON i.idpersona = p1.idpersona  
@@ -29,8 +28,8 @@ ORDER BY c.fechainicio DESC;
 
 SELECT * FROM vista_contratos;
 
-DROP VIEW lista_leads;
-
+DROP VIEW vista_contratos;
+SELECT * FROM contratos;
 
 SELECT * FROM leads;
 -- Vista para leads
