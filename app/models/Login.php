@@ -64,7 +64,11 @@ class Login {
     public function cerrarSesion($idusuario) {
         try {
 
-            $sql = "UPDATE accesos SET status_ = 'Inactivo' WHERE idusuario_acceso = ? ORDER BY fechahora DESC LIMIT 1";
+            $sql = "UPDATE accesos 
+                SET status_ = 'Inactivo', fechafin = NOW() 
+                WHERE idusuario_acceso = ? 
+                ORDER BY fechahora DESC 
+                LIMIT 1";
             $smt = $this->conexion->prepare($sql);
             $smt->execute([$idusuario]);
 

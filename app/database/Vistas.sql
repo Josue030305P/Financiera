@@ -36,21 +36,42 @@ SELECT * FROM leads;
 -- Vista para leads
 
 CREATE VIEW lista_leads AS
-SELECT 
+SELECT
     l.idlead,
     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_completo,
     p.email,
     p.telprincipal,
     c.canal AS canal_contacto,
- DATE_FORMAT(l.fecharegistro, '%d-%m-%Y %H:%i:%s') as fecharegistro,
+    DATE_FORMAT(l.fecharegistro, '%d-%m-%Y %H:%i:%s') AS fecharegistro,
     l.prioridad,
     l.estado,
-    u.usuario AS asesor
+    CONCAT(pa.nombres, ' ', pa.apellidos) AS asesor 
 FROM leads l
 JOIN personas p ON l.idpersona = p.idpersona
 JOIN canales c ON l.idcanal = c.idcanal
 LEFT JOIN usuarios u ON l.idasesor = u.idusuario
+LEFT JOIN colaboradores co ON u.idcolaborador = co.idcolaborador 
+LEFT JOIN personas pa ON co.idpersona = pa.idpersona 
 WHERE NOT l.estado = 'Inactivo';
+
+SELECT * FROM inversionistas;
+SELECT * FROM contratos;
+SELECT * FROM empresas;
+
+
+SELECT * FROM usuarios;
+SELECT * FROM colaboradores;
+SELECT * FROM personas;
+
+
+
+
+
+
+
+
+
+
 
 SELECT * FROM lista_leads;
 

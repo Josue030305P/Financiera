@@ -1,22 +1,9 @@
 -- Tabla: pais
 INSERT INTO pais (pais) VALUES 
-('Perú'),
-('Argentina');
+('Perú');
+
 SELECT * FROM pais;
--- Tabla: departamentos
-INSERT INTO departamentos (departamento) VALUES 
-('Lima'),
-('Cusco');
 
-
-INSERT INTO provincias (iddepartamento, provincia) VALUES 
-(1, 'Callao'),
-(1, 'Barranca');
-SELECT * FROM provincias;
-
-INSERT INTO distritos (idprovincia, distrito) VALUES 
-(1, 'Miraflores');
-SELECT * FROM distritos;
 
 
 -- Tabla: roles
@@ -45,15 +32,16 @@ SELECT * FROM roles;
 
 INSERT INTO colaboradores (idpersona, idrol, fechainicio)
 VALUES
-(7, 1, '2025-01-01');
+(4, 1, '2025-01-01');
 
 SELECT * FROM colaboradores;
 
 
 INSERT INTO usuarios (idcolaborador, usuario, passworduser)
 VALUES
-(2, 'Maria', '12345');
-UPDATE usuarios SET usuario = 'Paola' WHERE idusuario =2; 
+(3, 'josue', '12345'),
+(4, 'esther', '12345');
+
 SELECT * FROM usuarios;
 
 INSERT INTO inversionistas (idpersona, idempresa, idasesor)

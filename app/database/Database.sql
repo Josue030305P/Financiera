@@ -2,6 +2,7 @@ CREATE DATABASE financiera;
 -- DROP DATABASE financiera;
 USE financiera;
 
+
 CREATE TABLE pais(
 idpais 				INT PRIMARY KEY AUTO_INCREMENT,
 pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
@@ -15,6 +16,8 @@ idpais 				INT NOT NULL DEFAULT 1,
 departamento		VARCHAR(40) NOT NULL,
 CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais)
 )ENGINE=InnoDB;
+
+
 ALTER TABLE departamentos ADD COLUMN idpais  INT NOT NULL DEFAULT 1;
 ALTER TABLE departamentos ADD CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais);
 
@@ -35,19 +38,6 @@ idprovincia			INT NOT NULL,
 distrito			VARCHAR(40) NOT NULL,
 CONSTRAINT fk_provincia FOREIGN KEY(idprovincia) REFERENCES provincias(idprovincia)
 )ENGINE=InnoDB;
-
-
-
-SELECT * FROM personas;
-
-
-
-
-
-SELECT * FROM accesos;
-
-
-
 
 
 CREATE TABLE roles(
@@ -76,7 +66,7 @@ domicilio			VARCHAR(100) NULL,
 telprincipal		VARCHAR(15) NOT NULL UNIQUE,
 telsecundario		VARCHAR(15) NULL,
 referencia			VARCHAR(150) NULL,
- estado				ENUM('Activo','Inactivo') DEFAULT 'Activo',
+estado				ENUM('Activo','Inactivo') DEFAULT 'Activo',
 CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un numero de documento y amarrarlo a un tipo de documento
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
@@ -93,7 +83,6 @@ ruc					CHAR(11)  UNIQUE NOT NULL,
 razonsocial			VARCHAR(300) UNIQUE NOT NULL,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL
-
 )ENGINE=InnoDB;
 
 
@@ -115,6 +104,15 @@ CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion ) REFERENCE
 CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
+
+-- ALTER TABLE colaboradores
+-- ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
+
+-- ALTER TABLE colaboradores
+-- ADD CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario);
+
+
+
 
 CREATE TABLE  usuarios(
 idusuario	 		INT PRIMARY KEY AUTO_INCREMENT,
@@ -154,6 +152,7 @@ CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCE
 SELECT * FROM usuarios;
 SELECT * FROM personas;
 SELECT * FROM inversionistas;
+
 CREATE TABLE numcuentas(
 idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
 estitular			CHAR(2) NOT NULL DEFAULT 'Si',
@@ -197,8 +196,6 @@ CONSTRAINT idpersona_leads FOREIGN KEY(idpersona) REFERENCES personas(idpersona)
 CONSTRAINT fk_idcanla_leads FOREIGN KEY(idcanal) REFERENCES canales(idcanal)
 )ENGINE=InnoDB;
 
-SELECT * FROM usuarios;
--- ALTER TABLE leads MODIFY COLUMN idasesor INT NULL;
 
 CREATE TABLE contactibilidad(
 idcontactibilidad		INT PRIMARY KEY AUTO_INCREMENT,
@@ -224,7 +221,6 @@ CREATE TABLE versiones (
 INSERT INTO versiones(fechainicio) VALUES(NOW());
 SELECT * FROM versiones;
 
-DROP TABLE versiones;
 CREATE TABLE condiciones(
 idcondicion				INT AUTO_INCREMENT PRIMARY KEY,
 idversion				INT NOT NULL,
@@ -241,12 +237,6 @@ INSERT INTO condiciones(idversion,entidad,condicion)
 SELECT * FROM condiciones;
 
 
-
-
-
-
-
-
 SELECT * FROM condiciones;
 
 CREATE TABLE contratos(
@@ -259,7 +249,6 @@ idusuariocreacion		INT  NULL, -- fk
 idusuarioeliminacion 	INT NULL, -- fk 	
 fechainicio				DATE NOT NULL,
 fechafin			    DATE NOT NULL,
-fecharetornocapital		DATE NULL,
 impuestorenta           DECIMAL(5,2) NOT NULL,
 toleranciadias			tinyint NOT NULL,
 duracionmeses			tinyint NOT NULL,
@@ -281,32 +270,6 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
-ALTER TABLE contratos DROP COLUMN fecharetornocapital;
-ALTER TABLE contratos
-DROP FOREIGN KEY fk_idusuario_asesor;
-
-ALTER TABLE contratos
-DROP FOREIGN KEY fk_idversion;
-
-ALTER TABLE contratos
-DROP FOREIGN KEY fk_idinversionista_contrato;
-
-ALTER TABLE contratos
-DROP FOREIGN KEY fk_idconyugue;
-
-ALTER TABLE contratos
-DROP FOREIGN KEY fk_id_user_creacion_contrat;
-
-ALTER TABLE contratos
-DROP FOREIGN KEY fk_id_user_elimin_contrat;
-
-
-
-
-SELECT * FROM contratos;
-SELECT * FROM inversionistas;
-USE financiera;
-DROP TABLE contratos;
 
 
 CREATE TABLE garantias(
@@ -326,11 +289,6 @@ CONSTRAINT fk_idgarantia FOREIGN KEY(idgarantia) REFERENCES garantias(idgarantia
 CONSTRAINT fk_idcontrato_detal_garant FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato)
 )ENGINE=InnoDB;
 
-ALTER TABLE detallegarantias
-DROP FOREIGN KEY fk_idcontrato_detal_garant;
-
-ALTER TABLE cronogramapagos
-DROP FOREIGN KEY fk_idcontrato_crono_pag ;
 
 CREATE TABLE cronogramapagos(
 idcronogramapago		INT PRIMARY KEY AUTO_INCREMENT,
@@ -338,7 +296,7 @@ idcontrato		 		INT NOT NULL,
 numcuota		    	INT NOT NULL,
 totalpago				DECIMAL(10,2) NOT NULL, -- El pago pendiente 
 amortizacion			DECIMAL(10,2) NOT NULL,
-fechavencimiento				DATE NOT NULL, -- Para identificar hasta que fecha hay plazo para pagar
+fechavencimiento		DATE NOT NULL, -- Para identificar hasta que fecha hay plazo para pagar
 estado					ENUM('Pagado','Pendiente') DEFAULT 'Pendiente',
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
@@ -363,12 +321,13 @@ CREATE TABLE accesos(
 idacceso				INT PRIMARY KEY AUTO_INCREMENT,
 idusuario_acceso 		INT NOT NULL,
 fechahora				DATETIME NOT NULL DEFAULT NOW(),
+fehafin					DATETIME NULL,
 status_					ENUM('Activo','In
 activo') NOT NULL,
 CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios(idusuario) -- Aclarar leugo si es en colabordores o usuarios;
 )ENGINE=InnoDB;
 
-
+ALTER TABLE accesos CHANGE fehafin fechafin	DATETIME NULL;
 ALTER TABLE accesos ADD COLUMN fechahorainactivo DATETIME NULL; 
 
 SELECT * FROM personas;
