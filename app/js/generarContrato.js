@@ -7,7 +7,7 @@ const leadIdHolder = document.getElementById('leadIdHolder');
 const leadIdFromAttribute = leadIdHolder ? leadIdHolder.dataset.leadId : null;
 const leadId = leadIdFromAttribute || leadIdFromURL;
 
-
+const idConyuge = document.getElementById('idconyuge').value;
 
 const btnGuardar = document.getElementById('guardar');
 let empresaId = null;
@@ -25,16 +25,18 @@ const capital = document.getElementById('capital');
 const tipo = document.getElementById('tipo');
 const diaPago = document.getElementById('diapago');
 const periodo = document.getElementById('periodo');
-const impuestoRenta = document.getElementById('impuestoRenta');
+const impuestoRenta = document.getElementById('impuestorenta');
 const tolerancia = document.getElementById('tolerancia');
 const observacion = document.getElementById('observacion');
 
 
-// Ya agrega una empresa y capturo el idempresa:
+// Ya agrega una empresa y capturo el idempresa - FUNCIONA DESDE  LA VIEW CONTRATO
 async function guardarEmpresa() {
 
     try {
 
+
+        
         const formData = {
             nombrecomercial: document.getElementById('nombrecomercial').value.trim(),
             direccion:document.getElementById('direccion_empresa').value.trim(),
@@ -69,7 +71,7 @@ async function guardarEmpresa() {
 
 }
 
-
+// FUNCIONA CORRECTAMENTE
 async function obtenerDatosInversionista() {
     try {
         const response = await fetch(
@@ -88,6 +90,8 @@ async function obtenerDatosInversionista() {
         return { idpersona: null, idasesor: null };
     }
 }
+
+// FUNCIONA DESDE LA VIEW CONTRATO
 
 async function agregarInversionista(inversionistaData) {
     try {
@@ -129,6 +133,7 @@ async function agregarInversionista(inversionistaData) {
 }
 
 
+// SI AGREGA EL INVERSIONISTA
 
 async function agregarInversionista(inversionistaData) {
     try {
@@ -152,6 +157,7 @@ async function agregarInversionista(inversionistaData) {
         return null;
     }
 }
+
 
 async function guardarContrato() {
     let empresaID = null;
@@ -177,18 +183,20 @@ async function guardarContrato() {
         };
 
         const inversionistaResult = await agregarInversionista(nuevoInversionista);
-
+    
         try {
 
+        // DE ESTA FORMA AGREGA UN CONTRATO - FALTA CAPTURAR EL IDCONYUGE SI ES QUE SE CREA
+        
         const formData = {
             idversion:1,
             idasesor:inversionistaData.idasesor,
-            idinversionista:inversionistaResult,
-            idconyuge:null,
+            idinversionista:inversionistaResult.idinversionista,
+            idconyuge:idConyuge,
             fechainicio : fechaInicio.value,
             fechafin: fechaFin.value,
             impuestorenta: impuestoRenta.value,
-            tolerancia: tolerancia.value,
+            toleranciadias: tolerancia.value,
             duracionmeses : numMeses.value,
             moneda: moneda.value,
             diapago : diaPago.value,
@@ -216,7 +224,7 @@ async function guardarContrato() {
 
 
         } catch(error) {
-
+                console.error(error);
         }
 
     }
@@ -227,14 +235,6 @@ btnGuardar.addEventListener('click', guardarContrato);
 });
 
 
-
-
-    //obtenerDatosInversionista();
-    // agregarInversionista({
-    //     idpersona:9,
-    //     idempresa:17,
-    //     idasesor:2
-    // });
 
 
 

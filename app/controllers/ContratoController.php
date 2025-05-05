@@ -7,15 +7,9 @@ if ($_SERVER["REQUEST_METHOD"]) {
 
     require_once '../models/Lead.php';
     require_once '../models/Contrato.php';
-    require_once '../models/Inversionista.php';
-    require_once '../models/Empresa.php';
-    require_once '../config/Database.php';
 
     $lead = new Lead();
     $contrato = new Contrato();
-    
-    $empresa = new Empresa();
-
 
     switch ($_SERVER['REQUEST_METHOD']) {
 

@@ -5,6 +5,7 @@ const leadIdFromAttribute = leadIdHolder ? leadIdHolder.dataset.leadId : null;
 
 const urlParams = new URLSearchParams(window.location.search);
 const leadIdFromURL = urlParams.get("id");
+// const leadIdFromURL = urlParams.get("leadId");
 
 
 const leadId = leadIdFromAttribute || leadIdFromURL;

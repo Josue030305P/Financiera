@@ -87,71 +87,84 @@ class ConyugeForm {
 
   async guardarConyuge() {
     try {
-      const formData = {
-        idpais: document.getElementById("pais").value,
-        apellidos: document.getElementById("apellidos").value.trim(),
-        nombres: document.getElementById("nombres").value.trim(),
-        email: document.getElementById("correo").value.trim().toLowerCase(),
-        telprincipal: document.getElementById("telefono").value.trim(),
-        tipodocumento: document.getElementById("tipodocumento").value,
-        numdocumento: document.getElementById("numdocumento").value.trim(),
-        domicilio: document.getElementById("domicilio").value.trim(),
-      };
+        const formData = {
+          idpais: document.getElementById("pais").value,
+          apellidos: document.getElementById("apellidos").value.trim(),
+          nombres: document.getElementById("nombres").value.trim(),
+          email: document.getElementById("correo").value.trim().toLowerCase(),
+          telprincipal: document.getElementById("telefono").value.trim(),
+          tipodocumento: document.getElementById("tipodocumento").value,
+          numdocumento: document.getElementById("numdocumento").value.trim(),
+          domicilio: document.getElementById("domicilio").value.trim(),
+  
+        };
 
-      const response = await fetch(
-        `${this.baseUrl}app/controllers/PersonaController.php`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+        const response = await fetch(
+            `${this.baseUrl}app/controllers/PersonaController.php`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            }
+        );
+
+        const result = await response.json();
+
+        if (result.success && result.idconyuge) {
+            await Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "Éxito",
+                text: "Cónyuge guardado correctamente",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+            });
+
+            // Crear un formulario dinámicamente
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = `${this.baseUrl}app/views/contratos/contrato.add`;
+
+            const leadIdInput = document.createElement("input");
+            leadIdInput.type = "hidden";
+            leadIdInput.name = "leadId";
+            leadIdInput.value = this.leadId;
+            form.appendChild(leadIdInput);
+
+          
+            const idConyugeInput = document.createElement("input");
+            idConyugeInput.type = "hidden";
+            idConyugeInput.name = "idconyuge";
+            idConyugeInput.value = result.idconyuge;
+            form.appendChild(idConyugeInput);
+          
+
+            document.body.appendChild(form);
+            form.submit();
+        } else {
+            await Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: result.message || "Error al guardar el cónyuge",
+                confirmButtonColor: "#3085d6",
+            });
         }
-      );
-
-      const result = await response.json();
-
-      if (result.success) {
-        await Swal.fire({
-          toast: true,
-          position: "top-end",
-          icon: "success",
-          title: "Éxito",
-          text: "Cónyuge guardado correctamente",
-          showConfirmButton: false,
-          timer: 1500,
-          timerProgressBar: true,
-        });
-       
-        
-        // Crear un formulario dinámicamente
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = `${this.baseUrl}app/views/contratos/contrato.add`;
-
-
-        const leadIdInput = document.createElement("input");
-        leadIdInput.type = "hidden";
-        leadIdInput.name = "leadId";
-        leadIdInput.value = this.leadId;
-
-        form.appendChild(leadIdInput);
-
-        document.body.appendChild(form);
-
-        form.submit();
-      }
 
     } catch (error) {
-      console.error("Error:", error);
-      await Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Error al guardar el cónyuge: " + error.message,
-        confirmButtonColor: "#3085d6",
-      });
+        console.error("Error:", error);
+        await Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Error al guardar el cónyuge: " + error.message,
+            confirmButtonColor: "#3085d6",
+        });
     }
-  }
+}
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

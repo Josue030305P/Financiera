@@ -48,7 +48,7 @@ class Contrato
             
           
             $idusuariocreacion = $_SESSION['idusuario'];
-            $sql = "CALL sp_add_contrato(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "CALL sp_add_contrato(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute(array(
                 $params["idversion"],
@@ -59,7 +59,7 @@ class Contrato
                 $params["fechainicio"],
                 $params["fechafin"],
                 $params["impuestorenta"],
-                $params["tolreanciadias"],
+                $params["toleranciadias"],
                 $params["duracionmeses"],
                 $params["moneda"],
                 $params["diapago"],
@@ -86,27 +86,27 @@ class Contrato
 
 
 
-//  $contratoModel = new Contrato();
+// $contratoModel = new Contrato();
 
 
-//   $params = [
-//       "idversion" => 1,       
-//       "idasesor" => 2,        
-//       "idinversionista" => 2,
-//       "idconyuge" => null,    
-//       "fechainicio" => "2025-04-25",
-//       "fechafin" => "2026-04-25",
-//       "impuestorenta" => 5.00,
-//       "tolreanciadias" => 5,
-//       "duracionmeses" => 12,
-//       "moneda" => "PEN",
-//       "diapago" => 30,
-//       "interes" => 10.00,
-//       "capital" => 10000.00,
-//       "tiporetorno" => "Fijo",
-//       "periodopago" => "Mensual",
-//       "observacion" => "Prueba de contrato desde consola"
-//   ];
+//    $params = [
+//        "idversion" => 1,       
+//        "idasesor" => 2,        
+//        "idinversionista" => 1,
+//        "idconyuge" => null,    
+//        "fechainicio" => "2025-04-25",
+//        "fechafin" => "2026-04-25",
+//        "impuestorenta" => 5.00,
+//        "toleranciadias" => 5,
+//        "duracionmeses" => 12,
+//        "moneda" => "PEN",
+//        "diapago" => 30,
+//        "interes" => 10.00,
+//         "capital" => 10000.00,
+//        "tiporetorno" => "Fijo",
+//        "periodopago" => "Mensual",
+//        "observacion" => "Prueba de contrato desde consola"
+//    ];
 
 
 // $resultado = $contratoModel->add($params);

@@ -77,7 +77,7 @@ CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 
 CREATE TABLE empresas(
 idempresa			INT PRIMARY KEY AUTO_INCREMENT,
-nombrecomercial		VARCHAR(100) NOT NULL,
+nombrecomercial		VARCHAR(100) NOT NULL UNIQUE,
 direccion			VARCHAR(100) NOT NULL,
 ruc					CHAR(11)  UNIQUE NOT NULL,
 razonsocial			VARCHAR(300) UNIQUE NOT NULL,
@@ -243,7 +243,7 @@ CREATE TABLE contratos(
 idcontrato				INT PRIMARY KEY AUTO_INCREMENT,
 idversion				INT NOT NULL,
 idasesor				INT NOT NULL,
-idinversionista			INT NOT NULL,
+idinversionista			INT NOT NULL UNIQUE,
 idconyuge				INT NULL, -- Persona a la que pueden depositar en caso suceda algo al cliente o asi lo decida
 idusuariocreacion		INT  NULL, -- fk
 idusuarioeliminacion 	INT NULL, -- fk 	
@@ -270,7 +270,8 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
-
+-- PREGUNTAR LUEGO SI UN INVERSIONISTA PUEDE TENER SOLO UN CONTRATO:
+-- ALTER TABLE contratos MODIFY COLUMN idinversionista INT NOT NULL  UNIQUE;
 
 CREATE TABLE garantias(
 idgarantia				INT PRIMARY KEY AUTO_INCREMENT,

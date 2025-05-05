@@ -3,6 +3,7 @@ require_once '../../includes/header.php';
 require_once "../../includes/config.php";
 
 $leadIdParaJS = $_POST['leadId'] ?? null;
+$idConyuge = $_POST['idconyuge'] ?? null;
 ?>
 
 <head>
@@ -29,6 +30,7 @@ $leadIdParaJS = $_POST['leadId'] ?? null;
     <div class="main-wrapper">
       <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
       <div id="leadIdHolder" style="display: none;" data-lead-id="<?= htmlspecialchars($leadIdParaJS) ?>"></div>
+      <input type="hidden" name="idconyuge"  id= "idconyuge" value= "<?php echo htmlspecialchars($idConyuge); ?>">
       <div class="container" style="margin-top: 40px;">
 
         <!-- Inversionista -->
