@@ -1,35 +1,6 @@
 -- Vista para contratos;
 USE financiera;
-CREATE VIEW vista_contratos AS
-SELECT 
-    c.idcontrato,
-    c.fechainicio,
-    c.fechafin,
-    c.moneda,
-    c.capital,
-    c.tiporetorno,
-	CONCAT(p1.nombres , ' ', p1.apellidos ) AS nombreinversionista,
-   CONCAT(p2.nombres , ' ', p2.apellidos ) AS nombreasesor,
-    ent.entidad  AS banco,
-    garant.tipogarantia AS garantia,
-    dgarant.porcentaje AS porcentaje_garantia,
-    c.estado
-FROM contratos c
-JOIN inversionistas i ON c.idinversionista = i.idinversionista
-JOIN personas p1 ON i.idpersona = p1.idpersona  
-JOIN usuarios u ON i.idasesor = u.idusuario
-JOIN colaboradores col ON u.idcolaborador = col.idcolaborador
-JOIN personas p2 ON col.idpersona = p2.idpersona  
-JOIN numcuentas ncuent ON ncuent.idinversionista = i.idinversionista 
-JOIN entidades ent ON ncuent.identidad = ent.identidad  
-JOIN detallegarantias dgarant ON dgarant.idcontrato = c.idcontrato
-JOIN garantias garant ON dgarant.idgarantia = garant.idgarantia 
-ORDER BY c.fechainicio DESC;
 
-SELECT * FROM vista_contratos;
-
-DROP VIEW vista_contratos;
-SELECT * FROM contratos;
 
 SELECT * FROM leads;
 -- Vista para leads
@@ -61,7 +32,6 @@ SELECT * FROM empresas;
 SELECT * FROM usuarios;
 SELECT * FROM colaboradores;
 SELECT * FROM personas;
-
 
 
 

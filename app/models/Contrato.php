@@ -24,7 +24,7 @@ class Contrato
         $result = [];
         try {
 
-            $sql = "SELECT * FROM vista_contratos";
+            $sql = "SELECT * FROM vista_contratos_resumida";
             $smt = $this->conexion->prepare($sql);
             $smt->execute();
 
@@ -79,6 +79,43 @@ class Contrato
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

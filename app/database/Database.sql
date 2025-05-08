@@ -362,4 +362,3 @@ SELECT * FROM roles;
 INSERT INTO contactibilidad(idlead,fecha,hora,comentarios,estado) VALUES(26,'2025-07-04','10:30','Se obtuvo primer acercamiento','En proceso');
 UPDATE colaboradores SET idrol = 2 WHERE idcolaborador = 1;
 
-UPDATE leads SET idasesor = 2 WHERE idlead = 1;

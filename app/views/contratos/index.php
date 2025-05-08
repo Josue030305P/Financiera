@@ -12,30 +12,29 @@ $tipo = 'Contratos';
 $configuracionTabla = [
   'columnas' => [
       'ID',
-      'Inversionista',
-      'Fecha inicio',
-      'Fecha fin',
-      'Moneda',
-      'Capital',
-      'Tipo de retorno',
       'Asesor',
-      'Banco',
-      'Garantía',
-      '% de garantía',
+      'Inversionista',
+      'Inicio',
+      'Fin',
+      'Moenda',
+      'Capital',
+      'Interes',
+      'Período',
+      'Estado'
+   
   ],
+
   'mapeo' => [
-      'ID' => 'idcontrato',
-      'Inversionista' => 'nombreinversionista',
-      'Fecha inicio' => 'fechainicio',
-      'Fecha fin' => 'fechafin',
-      'Moneda' => 'moneda',
-      'Capital' => 'capital',
-      'Tipo de retorno' => 'tiporetorno',
-      'Asesor' => 'nombreasesor',
-      'Banco' => 'banco',
-      'Garantía' => 'garantia',
-      '% de garantía' => 'porcentaje_garantia',
-      
+     'ID' => 'ID_Contrato',
+      'Asesor' => 'Asesor',
+      'Inversionista' => 'Inversionista',
+      'Inicio' => 'Inicio',
+      'Fin' => 'Fin',
+      'Moenda' => 'Moneda',
+      'Capital' => 'Capital',
+      'Interes' => 'Interes_Porcentaje',
+      'Período' => 'Periodo',
+      'Estado' => 'Estado'
       
   ]
 ];
@@ -76,6 +75,8 @@ $links = [
 
     
 </script>
+
+<script src="<?= BASE_URL ?>app/js/contratoFiltros.js"></script>
 
 
 

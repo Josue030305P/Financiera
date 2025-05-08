@@ -9,10 +9,38 @@
                     <button class="create-lead">+ Nuevo <?= ($tipo) ?></button>
                 </a>
 
+                <?php if ($tipo === 'Contratos'): ?>
+                    <div class="filters-container">
+                        <label for="filtro-vencimiento">Vencimiento:</label>
+                        <select id="filtro-vencimiento">
+                            <option value="">Todos</option>
+                            <option value="proximos_30_dias">Próximos 30 días</option>
+                        </select>
+
+                        <label for="filtro-estado">Estado:</label>
+                        <select id="filtro-estado">
+                            <option value="">Todos</option>
+                            <option value="Vigente">Vigente</option>
+                            <option value="Completado">Completado</option>
+                        </select>
+
+                        <label for="filtro-asesor">Asesor:</label>
+                        <input type="text" id="filtro-asesor" placeholder="Nombre del Asesor">
+
+                        <label for="filtro-moneda">Moneda:</label>
+                        <select id="filtro-moneda">
+                            <option value="">Todas</option>
+                            <option value="PEN">PEN</option>
+                            <option value="USD">USD</option>
+                        </select>
+
+                        <button id="aplicar-filtros">Aplicar Filtros</button>
+                        <button id="resetear-filtros">Resetear</button>
+                    </div>
+                <?php endif; ?>
 
                 <div class="search-container">
                     <input type="text" id="searchInput" placeholder="Buscador multiple 🔍">
-                    
                 </div>
 
                 <div class="header-buttons">
@@ -47,11 +75,9 @@
     <script src="<?= BASE_URL ?>app/js/export-excel.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', e => {
-            exportExcel("<?= $tipo	?>");
+            exportExcel("<?= $tipo ?>");
         })
     </script>
     <script src="<?= BASE_URL ?>app/js/import-excel.js"></script>
-
-
 
 </main>
