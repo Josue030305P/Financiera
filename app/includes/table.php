@@ -39,9 +39,6 @@
                     </div>
                 <?php endif; ?>
 
-                <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Buscador multiple 🔍">
-                </div>
 
                 <div class="header-buttons">
                     <img src="<?= BASE_URL ?>/app/img/png/export-excel.png" alt="Exportar excel" class="export-excel" title="Exportar a Excel">
@@ -57,7 +54,10 @@
                     <thead>
                         <tr class="users-table-info">
                             <?php foreach ($columnas as $columna): ?>
-                                <th><?= htmlspecialchars($columna) ?></th>
+                                <th>
+                                    <?= htmlspecialchars($columna) ?>
+                                    <span class="sort-icon"></span>
+                                </th>
                             <?php endforeach; ?>
                         </tr>
                     </thead>

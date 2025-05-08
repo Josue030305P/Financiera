@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"]) {
                 }
             } else {
                 echo json_encode($contrato->getAll());
-                // echo json_encode(['error' => 'Parámetro "id" no proporcionado']);
+             
 
             }
             break;
