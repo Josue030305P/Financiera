@@ -162,6 +162,32 @@ async function agregarInversionista(inversionistaData) {
 
 
 
+function generarCronograma(capital, interes, duracionMeses, fechaInicio) {
+    const cuotas = [];
+    const interesDecimal = interes / 100;
+    const cuotaBase = capital * interesDecimal;
+    const totalBruto =  cuotaBase - (cuotaBase * 0.05) ; // Aplicando el 5% de retencion
+
+    console.log('Capital con cobro de interes:', cuotaBase);
+
+
+    let fecha = new Date(fechaInicio);
+
+    for (let i = 1; i <= duracionMeses; i++) {
+        // Formatear fecha a dd/mm/yyyy
+        const fechaStr = fecha.toLocaleDateString('es-ES');
+        cuotas.push({
+            Cuota: i,
+            Fecha: fechaStr,
+            Total_Bruto: Number(cuotaBase.toFixed(2)),
+            Total_Neto: totalBruto 
+        });
+    
+        fecha.setMonth(fecha.getMonth() + 1);
+    }
+    return cuotas;
+}
+
 
 
 
@@ -238,6 +264,10 @@ async function guardarContrato() {
         if (result.success) {
            // console.log('ID CONTRATO GENERADO:' , result.idcontrato);
             alert('SE HA CREADO EL CONTRATO');
+
+            const cronograma = generarCronograma(formData.capital, Number(formData.interes), formData.duracionmeses, formData.fechainicio);
+            console.table(cronograma);
+
 
 
         }

@@ -301,7 +301,8 @@ CREATE TABLE cronogramapagos(
 idcronogramapago		INT PRIMARY KEY AUTO_INCREMENT,
 idcontrato		 		INT NOT NULL,
 numcuota		    	INT NOT NULL,
-totalpago				DECIMAL(10,2) NOT NULL, -- El pago pendiente 
+totalbruto			DECIMAL(10,2) NOT NULL, -- El pago pendiente 
+totalneto			DECIMAL(10,2) NOT NULL,
 amortizacion			DECIMAL(10,2) NOT NULL,
 fechavencimiento		DATE NOT NULL, -- Para identificar hasta que fecha hay plazo para pagar
 estado					ENUM('Pagado','Pendiente') DEFAULT 'Pendiente',
@@ -309,6 +310,8 @@ created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcontrato_crono_pag FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato) 
 ) ENGINE=InnoDB;
+
+
 
 CREATE TABLE detallepagos(
 iddetallepago			INT PRIMARY KEY AUTO_INCREMENT,
@@ -323,6 +326,9 @@ CONSTRAINT fk_idcronogramapago FOREIGN KEY(idcronogramapago) REFERENCES cronogra
 CONSTRAINT fk_idusuariopago	FOREIGN KEY(idusuariopago) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcuentas)
 )ENGINE=InnoDB;
+
+
+
 
 
 CREATE TABLE accesos(
