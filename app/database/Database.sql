@@ -18,10 +18,7 @@ CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais)
 )ENGINE=InnoDB;
 
 
-ALTER TABLE departamentos ADD COLUMN idpais  INT NOT NULL DEFAULT 1;
-ALTER TABLE departamentos ADD CONSTRAINT fk_idpais_depart FOREIGN KEY(idpais) REFERENCES pais(idpais);
 
-DROP TABLE departamentos;
 
 CREATE  TABLE provincias(
 idprovincia			INT PRIMARY KEY AUTO_INCREMENT,
@@ -99,17 +96,16 @@ fechahoraeliminacion	DATETIME NULL,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL,
 CONSTRAINT fk_idpersona FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
-CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
-CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario),
+CONSTRAINT colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
+CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
 
--- ALTER TABLE colaboradores
--- ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
+--ALTER TABLE colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
 
--- ALTER TABLE colaboradores
--- ADD CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario);
+--ALTER TABLE colaboradores
+--ADD CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario);
 
 
 
@@ -127,9 +123,6 @@ CONSTRAINT fk_idcolaborador FOREIGN KEY(idcolaborador) REFERENCES colaboradores(
 )ENGINE=InnoDB;
 SELECT * FROM usuarios;
 
-/*ALTER TABLE usuarios
-CHANGE COLUMN idcolaboradores idcolaborador INT NOT NULL;
-*/
 
 CREATE TABLE inversionistas(
 idinversionista		INT PRIMARY KEY AUTO_INCREMENT,
@@ -149,18 +142,15 @@ CONSTRAINT fk_id_user_creacion_inver FOREIGN KEY (idusuariocreacion ) REFERENCES
 CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
-SELECT * FROM usuarios;
-SELECT * FROM personas;
-SELECT * FROM inversionistas;
 
 CREATE TABLE numcuentas(
 idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
-estitular			CHAR(2) NOT NULL DEFAULT 'Si',
 idinversionista		INT NOT NULL,
 identidad			INT NOT NULL, -- Entidad es el banco o cajas
-tipomoneda			ENUM('PEN','USD') NOT NULL,
 idusuariocreacion   INT NULL, -- FK
 idusuarioeliminacion INT NULL, -- FK
+estitular			CHAR(2) NOT NULL DEFAULT 'Si',
+tipomoneda			ENUM('PEN','USD') NOT NULL,
 numcuenta			VARCHAR(30)  UNIQUE NOT NULL,
 cci         		VARCHAR(30) UNIQUE NOT NULL,
 fecharegistro		DATETIME NOT NULL DEFAULT NOW(),
@@ -243,8 +233,6 @@ INSERT INTO condiciones(idversion,entidad,condicion)
 SELECT * FROM condiciones;
 
 
-SELECT * FROM condiciones;
-
 CREATE TABLE contratos(
 idcontrato				INT PRIMARY KEY AUTO_INCREMENT,
 idversion				INT NOT NULL,
@@ -277,7 +265,7 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
-ALTER TABLE contratos MODIFY COLUMN estado ENUM('Vigente','Completado') DEFAULT 'Vigente';
+
 SELECT * FROM contratos;
 -- PREGUNTAR LUEGO SI UN INVERSIONISTA PUEDE TENER SOLO UN CONTRATO:
 -- ALTER TABLE contratos MODIFY COLUMN idinversionista INT NOT NULL  UNIQUE;
@@ -287,7 +275,6 @@ idgarantia				INT PRIMARY KEY AUTO_INCREMENT,
 tipogarantia			ENUM('Auto','Hipoteca','Letra') NOT NULL
 )ENGINE=InnoDB;
 
-SELECT * FROM garantias;
 CREATE TABLE detallegarantias(
 iddetallegarantia       INT PRIMARY KEY AUTO_INCREMENT,
 idgarantia				INT NOT NULL,
@@ -336,14 +323,12 @@ CREATE TABLE accesos(
 idacceso				INT PRIMARY KEY AUTO_INCREMENT,
 idusuario_acceso 		INT NOT NULL,
 fechahora				DATETIME NOT NULL DEFAULT NOW(),
-fehafin					DATETIME NULL,
+fechafin					DATETIME NULL,
 status_					ENUM('Activo','In
 activo') NOT NULL,
 CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios(idusuario) -- Aclarar leugo si es en colabordores o usuarios;
 )ENGINE=InnoDB;
 
-ALTER TABLE accesos CHANGE fehafin fechafin	DATETIME NULL;
-ALTER TABLE accesos ADD COLUMN fechahorainactivo DATETIME NULL; 
 
 SELECT * FROM personas;
 SELECT * FROM empresas;

@@ -24,29 +24,6 @@ LEFT JOIN colaboradores co ON u.idcolaborador = co.idcolaborador
 LEFT JOIN personas pa ON co.idpersona = pa.idpersona 
 WHERE NOT l.estado = 'Inactivo';
 
-SELECT * FROM inversionistas;
-SELECT * FROM contratos;
-SELECT * FROM empresas;
-
-
-SELECT * FROM usuarios;
-SELECT * FROM colaboradores;
-SELECT * FROM personas;
-
-
-
-
-
-
-
-
-
-
-SELECT * FROM lista_leads;
-
-SELECT  * FROM personas;
-SELECT * FROM leads;
-SELECT * FROM  canales;
 
 -- Vista para sesores
 
@@ -64,13 +41,6 @@ INNER JOIN
 INNER JOIN usuarios u  ON c.idcolaborador = u.idcolaborador
 WHERE 
     r.rol = 'Asesor de inversión';
-
-SELECT * FROM colaboradores;
-SELECT * FROM usuarios;
-SELECT * FROM list_asesores;
-DROP VIEW list_asesores ;
-
-
 
 
 
@@ -92,17 +62,8 @@ LEFT JOIN entidades ent ON nc.identidad = ent.identidad
 LEFT JOIN contratos cont ON inv.idinversionista = cont.idinversionista
 LEFT JOIN usuarios u ON inv.idasesor = u.idusuario;
 
-SELECT * FROM list_inversionistas ;
 
 
-
-SELECT * FROM personas;
-SELECT * FROM inversionistas;
-
-SELECT * FROM usuarios;
-USE financiera;
-
-SELECT * FROM leads;
 CREATE VIEW list_contactibilidad AS
 	SELECT 
 	cont.idcontactibilidad,
@@ -122,8 +83,6 @@ CREATE VIEW list_contactibilidad AS
     
 
 
-
-
 SELECT * FROM contactibilidad;
 
 
@@ -138,7 +97,7 @@ JOIN roles r ON c.idrol = r.idrol;
 SELECT * FROM leads;
 SELECT * FROM personas;
 
-CREATE OR REPLACE VIEW v_lead_to_inversionista AS
+CREATE VIEW v_lead_to_inversionista AS
 SELECT
     l.idlead,
     p.idpersona,
@@ -190,16 +149,6 @@ LEFT JOIN
     roles r ON c.idrol = r.idrol
     WHERE 
     r.rol = 'Asesor de inversión';
-
-
-SELECT *  FROM  v_asesor_lead  WHERE idlead = 2;
-
-SELECT * FROM personas;
-
-SELECT * FROM empresas;
-SELECT * FROM contratos;
-SELECT * FROM inversionistas;
-
 
 
 

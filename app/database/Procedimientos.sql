@@ -39,10 +39,6 @@ DELIMITER ;
 
 CALL sp_update_personas(1, 'DNI', '767282782', 1, 1, 'Meneses Fuentes', 'Paola Manuela', '03-05-2005', 'poala@example.com', 'Grocio Prado - Av Carrizo', '987654851', '985658255', 'Plaza de armas');
 
-UPDATE leads SET estado = 'Nuevo contacto' WHERE idlead = 1;
-
-SELECT * FROM personas;
-SELECT * FROM leads;
 
 
 DELIMITER //
@@ -86,10 +82,6 @@ DELIMITER ;
 
 CALL  sp_add_conyuge(1,'Meneses Alvárez','Flor','DNI','85856954','floralvarez@gmail.com','956859858','dsds');
 
-DROP PROCEDURE sp_add_conyuge;
-SELECT * FROM personas;
-SELECT * FROM empresas;
-
 
 DELIMITER //
 CREATE PROCEDURE sp_add_empresa(
@@ -107,12 +99,6 @@ DELIMITER ;
 
 
 
-CALL  sp_add_empresa('todo yo', 'Al frente de la pista', '56585859854', 'todo yooyoyoyyoy');
-SELECT * FROM empresas;
-SELECT * FROM usuarios;
-SELECT * FROM inversionistas;
-
-
 DELIMITER //
 CREATE PROCEDURE sp_add_inversionista(
 IN idpersona_ 		INT,
@@ -128,13 +114,6 @@ BEGIN
 END //
 DELIMITER ;
 
-
-
-CALL sp_add_inversionista(11,1,1,1);
-
-SELECT * FROM usuarios;
-
-SELECT * FROM inversionistas;
 
 DELIMITER //
 CREATE PROCEDURE sp_add_contrato(
@@ -169,10 +148,6 @@ DELIMITER ;
 
 CALL sp_add_contrato(1,2,1,7,1,now(),'2026-23-04',NULL,'5','3','12','PEN','23','5','20000','Fijo','Mensual','Nuevo contrato cerrado');
 
-UPDATE contratos SET
- fechafin = '2026-04-23' 
- WHERE idcontrato = 1;
-
 SELECT * FROM usuarios;
 SELECT * FROM contratos;
 SELECT * FROM inversionistas;
@@ -192,3 +167,6 @@ END
 DELIMITER //
 
 */
+
+SELECT * FROM usuarios;
+SELECT * FROM accesos

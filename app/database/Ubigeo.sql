@@ -564,7 +564,7 @@ INSERT INTO distritos (idprovincia, distrito) VALUES
 
 
 
-
+SELECT * FROM provincias;
 
 -- CHINCHA
 

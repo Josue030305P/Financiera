@@ -32,6 +32,9 @@ SELECT * FROM roles;
 
 INSERT INTO colaboradores (idpersona, idrol, fechainicio)
 VALUES
+(1, 2, '2025-01-01'),
+(2, 1, '2025-01-01'),
+(3, 1, '2025-01-01'),
 (4, 1, '2025-01-01');
 
 SELECT * FROM colaboradores;
@@ -39,8 +42,11 @@ SELECT * FROM colaboradores;
 
 INSERT INTO usuarios (idcolaborador, usuario, passworduser)
 VALUES
-(3, 'josue', '12345'),
-(4, 'esther', '12345');
+(1, 'mariafuentes', '12345'),
+(2, 'walterlevano', '12345'),
+(3, 'josuepilpe', '12345'),
+(4, 'mariaperez', '12345');
+
 
 SELECT * FROM usuarios;
 

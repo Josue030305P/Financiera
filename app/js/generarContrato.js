@@ -8,6 +8,7 @@ const leadIdFromAttribute = leadIdHolder ? leadIdHolder.dataset.leadId : null;
 const leadId = leadIdFromAttribute || leadIdFromURL;
 
 const idConyuge = document.getElementById('idconyuge').value;
+const idConyugeValidado =  document.getElementById('idconyuge').value === '' ? null : idConyuge; 
 
 const btnGuardar = document.getElementById('guardar');
 let empresaId = null;
@@ -183,6 +184,7 @@ async function guardarContrato() {
         };
 
         const inversionistaResult = await agregarInversionista(nuevoInversionista);
+        console.log('Resultado de agregarInversionista:', inversionistaResult);
     
         try {
 
@@ -192,7 +194,7 @@ async function guardarContrato() {
             idversion:1,
             idasesor:inversionistaData.idasesor,
             idinversionista:inversionistaResult.idinversionista,
-            idconyuge:idConyuge,
+            idconyuge:idConyugeValidado,
             fechainicio : fechaInicio.value,
             fechafin: fechaFin.value,
             impuestorenta: impuestoRenta.value,
@@ -208,6 +210,8 @@ async function guardarContrato() {
 
             
         };
+
+        console.log('DATOS DEL CONTARTO:', formData);
 
         const response = await fetch(`${baseUrl}app/controllers/ContratoController.php`, {
             method:'POST',
