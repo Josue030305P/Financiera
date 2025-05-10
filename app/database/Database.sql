@@ -145,24 +145,29 @@ CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCE
 
 CREATE TABLE numcuentas(
 idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
-idinversionista		INT NOT NULL,
+idcontrato			INT NOT NULL,
 identidad			INT NOT NULL, -- Entidad es el banco o cajas
 idusuariocreacion   INT NULL, -- FK
 idusuarioeliminacion INT NULL, -- FK
-estitular			CHAR(2) NOT NULL DEFAULT 'Si',
-tipomoneda			ENUM('PEN','USD') NOT NULL,
 numcuenta			VARCHAR(30)  UNIQUE NOT NULL,
-cci         		VARCHAR(30) UNIQUE NOT NULL,
 fecharegistro		DATETIME NOT NULL DEFAULT NOW(),
+cci         		VARCHAR(30) UNIQUE NOT NULL,
+estitular			CHAR(2) NOT NULL DEFAULT 'Si',
 observaciones		VARCHAR(100) NULL,
-fechahoraeliminacion	DATETIME NULL,
+estado				ENUM('Activo', 'Desactivado') NOT NULL DEFAULT 'Activo' ,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL,
-CONSTRAINT fk_idinversionista FOREIGN KEY(idinversionista) REFERENCES inversionistas(idinversionista),
+CONSTRAINT fk_contrato_numcuenta FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato),
 CONSTRAINT fk_identidad FOREIGN KEY(identidad) REFERENCES entidades(identidad),
 CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
+
+
+DROP TABLE numcuentas;
+ALTER TABLE numcuentas DROP COLUMN idinversionista;
+ALTER TABLE numcuentas DROP CONSTRAINT fk_id_user_elimin_numcuenta ;
+ALTER TABLE numcuentas DROP COLUMN tipomoneda;
 
 SELECT * FROM inversionistas;
 SELECT * FROM entidades;
@@ -319,6 +324,7 @@ CONSTRAINT fk_idusuariopago	FOREIGN KEY(idusuariopago) REFERENCES usuarios(idusu
 CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcuentas)
 )ENGINE=InnoDB;
 
+
 CREATE TABLE accesos(
 idacceso				INT PRIMARY KEY AUTO_INCREMENT,
 idusuario_acceso 		INT NOT NULL,
@@ -344,6 +350,19 @@ SELECT * FROM usuarios;
 select * from accesos;
 SELECT * FROM colaboradores;
 SELECT * FROM roles;
+SELECT * FROM cronogramapagos;
 INSERT INTO contactibilidad(idlead,fecha,hora,comentarios,estado) VALUES(26,'2025-07-04','10:30','Se obtuvo primer acercamiento','En proceso');
 UPDATE colaboradores SET idrol = 2 WHERE idcolaborador = 1;
+
+
+
+
+
+
+
+
+
+SELECT * FROM cronogramapagos;
+SELECT * FROM contratos;
+SELECT * FROM numcuentas;
 
