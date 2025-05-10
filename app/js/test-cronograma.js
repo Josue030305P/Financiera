@@ -1,20 +1,10 @@
-const duracionmeses = 12;
-const capital = 30900;
-const fechainicio = "2025-05-10";
-const interes = 5;
-
-
-cuota = capital / duracionmeses
-interes_mensual = (capital * interes) / 100 / duracionmeses
-total_bruto = cuota + interes_mensual
-
 
 function generarCronograma(capital, interes, duracionMeses, fechaInicio) {
     const cuotas = [];
     const interesDecimal = interes / 100;
-    const cuotaBase = capital / duracionMeses;
-    const interesMensual = capital * interesDecimal / duracionMeses;
-    const totalBruto = cuotaBase + interesMensual;
+    const cuotaBase = capital * interesDecimal;
+    console.log('Capital con cobro de interes:', cuotaBase);
+    const totalBruto =  cuotaBase - (cuotaBase * 0.05) ; // Aplicando el 5% de retencion
 
     let fecha = new Date(fechaInicio);
 
@@ -24,16 +14,16 @@ function generarCronograma(capital, interes, duracionMeses, fechaInicio) {
         cuotas.push({
             cuota: i,
             fecha: fechaStr,
-            total_bruto: totalBruto.toFixed(2),
-            neto: (totalBruto * 0.95).toFixed(2) // Ejemplo: 5% de retención
+            total_bruto: cuotaBase.toFixed(2),
+            neto: totalBruto 
         });
-        // Sumar un mes
+    
         fecha.setMonth(fecha.getMonth() + 1);
     }
     return cuotas;
 }
 
-// Ejemplo de uso:
+
 const cronograma = generarCronograma(30900, 3, 12, "2025-05-10");
 console.table(cronograma);
 
