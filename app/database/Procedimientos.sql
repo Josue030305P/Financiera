@@ -83,6 +83,9 @@ DELIMITER ;
 CALL  sp_add_conyuge(1,'Meneses Alvárez','Flor','DNI','85856954','floralvarez@gmail.com','956859858','dsds');
 
 
+
+
+
 DELIMITER //
 CREATE PROCEDURE sp_add_empresa(
 IN nombrecomercial_ VARCHAR(100),
@@ -143,6 +146,8 @@ BEGIN
                         (idversion_,idasesor_,idinversionista_,idconyuge_,idusuariocreacion_,fechainicio_,fechafin_,
 						impuestorenta_,toleranciadias_,duracionmeses_,moneda_,diapago_,interes_,capital_,
                         tiporetorno_,periodopago_,observacion_);
+                        
+                        SELECT LAST_INSERT_ID() AS idcontrato;
 END //
 DELIMITER ;
 
@@ -169,4 +174,5 @@ DELIMITER //
 */
 
 SELECT * FROM usuarios;
-SELECT * FROM accesos
+SELECT * FROM accesos;
+SELECT  * FROM inversionistas;

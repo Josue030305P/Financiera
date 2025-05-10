@@ -36,8 +36,6 @@ async function guardarEmpresa() {
 
     try {
 
-
-        
         const formData = {
             nombrecomercial: document.getElementById('nombrecomercial').value.trim(),
             direccion:document.getElementById('direccion_empresa').value.trim(),
@@ -160,6 +158,21 @@ async function agregarInversionista(inversionistaData) {
 }
 
 
+// FUNCIÓN PARA AGREGAR EL CRONOGRAMA DE PAGOS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 async function guardarContrato() {
     let empresaID = null;
     const tipoInversionistaValue = tipoInversionista.value;
@@ -211,7 +224,7 @@ async function guardarContrato() {
             
         };
 
-        console.log('DATOS DEL CONTARTO:', formData);
+        //console.log('DATOS DEL CONTARTO:', formData);
 
         const response = await fetch(`${baseUrl}app/controllers/ContratoController.php`, {
             method:'POST',
@@ -223,7 +236,10 @@ async function guardarContrato() {
         const result = await response.json();
 
         if (result.success) {
+           // console.log('ID CONTRATO GENERADO:' , result.idcontrato);
             alert('SE HA CREADO EL CONTRATO');
+
+
         }
 
 
