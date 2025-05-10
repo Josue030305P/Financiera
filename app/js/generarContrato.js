@@ -168,7 +168,7 @@ function generarCronograma(capital, interes, duracionMeses, fechaInicio) {
     const cuotaBase = capital * interesDecimal;
     const totalBruto =  cuotaBase - (cuotaBase * 0.05) ; // Aplicando el 5% de retencion
 
-    console.log('Capital con cobro de interes:', cuotaBase);
+    //console.log('Capital con cobro de interes:', cuotaBase);
 
 
     let fecha = new Date(fechaInicio);
@@ -187,10 +187,6 @@ function generarCronograma(capital, interes, duracionMeses, fechaInicio) {
     }
     return cuotas;
 }
-
-
-
-
 
 
 

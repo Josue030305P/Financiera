@@ -364,7 +364,7 @@ UPDATE colaboradores SET idrol = 2 WHERE idcolaborador = 1;
 
 
 
-
+-- AMORTTIZACION POR DAFFAULT SERA 0
 
 
 
