@@ -175,11 +175,15 @@ class LeadForm {
 
             if (result.status === 'success') {
                 await Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Lead guardado correctamente',
-                    confirmButtonColor: '#3085d6'
-                });
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "Éxito",
+                    text: "Lead agregado",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                  });
                 window.location.href = `${this.baseUrl}app/`;
             } else {
                 await Swal.fire({

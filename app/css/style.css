@@ -1965,6 +1965,9 @@ label {
 .delete-btn,.delete-lead {
   background-color: rgb(219, 27, 27);
 }
+.ver-cronograma {
+  background-color: #0061f7;
+}
 .create-lead {
   background-color: #8d2e85;
 }

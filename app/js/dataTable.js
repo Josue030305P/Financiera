@@ -125,6 +125,20 @@ class DataTable {
           `;
       }
 
+      if (this.tipo === 'contratos') {
+         acciones = `
+       
+        <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
+            <img src="${this.baseUrl}app/img/svg/Bulk/Delete.svg" alt="Eliminar" class="delete-lead">
+        </a>
+
+          <a href="${this.baseUrl}app/views/cronograma-pagos/">
+            <img src="${this.baseUrl}app/img/svg/Bulk/Paper-gray.svg" alt="Eliminar" class="ver-cronograma">
+        </a>
+
+    `;
+      }
+
       return acciones;
   }
 

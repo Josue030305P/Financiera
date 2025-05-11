@@ -20,7 +20,8 @@ $configuracionTabla = [
       'Capital',
       'Interes',
       'Período',
-      'Estado'
+      'Estado',
+      'Acciones'
    
   ],
 
