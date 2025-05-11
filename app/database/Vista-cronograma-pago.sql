@@ -20,3 +20,5 @@ DELIMITER ;
 CALL sp_generar_cronograma(1,1,988,865,'2025-08-12');
 SELECT * FROM cronogramapagos;
 SELECT * FROM contratos;
+SELECT * FROM inversionistas;
+SELECT * FROM personas;

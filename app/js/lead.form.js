@@ -77,7 +77,7 @@ class LeadForm {
             
             if (result.status === 'success') {
                 const lead = result.data;
-                
+                console.log(lead);
                 document.getElementById('apellidos').value = lead.apellidos || '';
                 document.getElementById('nombres').value = lead.nombres || '';
                 document.getElementById('telefono').value = lead.telprincipal || '';
@@ -237,22 +237,20 @@ class LeadForm {
             if (result.status === 'success') {
                 await Swal.fire({
                     toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Lead actualizado correctamente',
+                    position: "top-end",
+                    icon: "success",
+                    title: "Éxito",
+                    text: "Lead actualizado",
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1500,
                     timerProgressBar: true,
-                    didOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer);
-                      toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    }
                   });
 
                   document.querySelector('.invertir-btn').classList.remove('d-none');
              
             } else {
                 await Swal.fire({
+                    toast:true,
                     icon: 'error',
                     title: 'Error',
                     text: 'Error al actualizar: ' + result.message,
@@ -260,7 +258,7 @@ class LeadForm {
                 });
             }
         } catch (error) {
-            console.error('Error:', error);
+            
             await Swal.fire({
                 icon: 'error',
                 title: 'Error',

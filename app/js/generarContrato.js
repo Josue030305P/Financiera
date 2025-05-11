@@ -145,22 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       );
       const result = await response.json();
+      const resultFinally =
+        result.status && result.idinversionista
+          ? { idinversionista: result.idinversionista }
+          : null;
 
-      if (result.status && result.idinversionista) {
-        Swal.fire({
-          icon: "success",
-          title: "Inversionista agregado",
-          text: `ID del inversionista: ${result.idinversionista}`,
-        });
-        return { idinversionista: result.idinversionista };
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error al agregar inversionista",
-          text: result.message || "Ocurrió un error.",
-        });
-        return null;
-      }
+      return resultFinally;
     } catch (error) {
       console.error("Error al agregar inversionista:", error);
       Swal.fire({
@@ -179,8 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const interesDecimal = interes / 100;
     const cuotaBase = capital * interesDecimal;
     const totalBruto = cuotaBase - cuotaBase * 0.05; // Aplicando el 5% de retencion
-
-    //console.log('Capital con cobro de interes:', cuotaBase);
 
     let fecha = new Date(fechaInicio);
 
@@ -224,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const inversionistaResult = await agregarInversionista(
         nuevoInversionista
       );
-      console.log("Resultado de agregarInversionista:", inversionistaResult);
 
       try {
         // DE ESTA FORMA AGREGA UN CONTRATO - FALTA CAPTURAR EL IDCONYUGE SI ES QUE SE CREA
@@ -248,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
           observacion: observacion.value,
         };
 
-        console.log("DATOS DEL CONTRATO:", formData);
+        // console.log("DATOS DEL CONTRATO:", formData);
 
         const response = await fetch(
           `${baseUrl}app/controllers/ContratoController.php`,
@@ -263,8 +250,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = await response.json();
 
         if (result.success) {
-          // console.log('ID CONTRATO GENERADO:' , result.idcontrato);
-          alert("SE HA CREADO EL CONTRATO");
+          await Swal.fire({
+            toast: true,
+            position: "top-end",
+            icon: "success",
+            title: "Éxito",
+            text: "Contrato Generado",
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          });
+
           const idcontrato = result.idcontrato;
 
           const cronograma = generarCronograma(
@@ -274,7 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.fechainicio
           );
 
-          // Enviar cronograma al backend
           await fetch(`${baseUrl}app/controllers/CronogramaPago.Controller`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -283,8 +278,9 @@ document.addEventListener("DOMContentLoaded", () => {
               cuotas: cronograma,
             }),
           });
+          window.location.href = `${baseUrl}app/views/contratos/`;
 
-          console.table(cronograma);
+          //console.table(cronograma);
         }
       } catch (error) {
         console.error(error);
