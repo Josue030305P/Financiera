@@ -96,16 +96,16 @@ fechahoraeliminacion	DATETIME NULL,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL,
 CONSTRAINT fk_idpersona FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
-CONSTRAINT colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
+CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
 
---ALTER TABLE colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
+ALTER TABLE colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
 
---ALTER TABLE colaboradores
---ADD CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario);
+ALTER TABLE colaboradores
+ADD CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario);
 
 
 
@@ -303,13 +303,15 @@ idcontrato		 		INT NOT NULL,
 numcuota		    	INT NOT NULL,
 totalbruto			DECIMAL(10,2) NOT NULL, -- El pago pendiente 
 totalneto			DECIMAL(10,2) NOT NULL,
-amortizacion			DECIMAL(10,2) NOT NULL,
+amortizacion			DECIMAL(10,2) NOT NULL DEFAULT 0,
 fechavencimiento		DATE NOT NULL, -- Para identificar hasta que fecha hay plazo para pagar
 estado					ENUM('Pagado','Pendiente') DEFAULT 'Pendiente',
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcontrato_crono_pag FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato) 
 ) ENGINE=InnoDB;
+
+-- ALTER TABLE cronogramapagos MODIFY COLUMN amortizacion DECIMAL (10,2) NOT NULL DEFAULT 0;
 
 
 
