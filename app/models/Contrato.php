@@ -39,6 +39,26 @@ class Contrato
 
     }
 
+    public function getDatosPDF($idcontrato) {
+        try {
+            $sql = "SELECT * FROM vista_contrato_pdf  WHERE idcontrato = ?";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$idcontrato]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                return $result;
+            }
+
+            return [];
+
+
+        }catch(PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
     public function add($params = []): array
     {
 
@@ -89,11 +109,6 @@ class Contrato
     }
 
 }
-
-
-
-
-
 
 
 

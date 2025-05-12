@@ -123,3 +123,5 @@ VALUES
 
 SELECT * FROM accesos;
 
+
+SELECT * FROM numcuentas;

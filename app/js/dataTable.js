@@ -132,10 +132,14 @@ class DataTable {
             <img src="${this.baseUrl}app/img/svg/Bulk/Delete.svg" alt="Eliminar" class="delete-lead">
         </a>
 
-          <a href="${this.baseUrl}app/views/cronograma-pagos/">
-            <img src="${this.baseUrl}app/img/svg/Bulk/Paper-gray.svg" alt="Eliminar" class="ver-cronograma">
+          <a href="${this.baseUrl}app/views/cronograma-pagos/index.php?idcontrato=${id}">
+            <img src="${this.baseUrl}app/img/svg/Bulk/Paper-gray.svg" alt="Ver Cronograma" class="ver-cronograma">
         </a>
 
+      
+         <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank">
+            <img src="${this.baseUrl}app/img/svg/Bulk/Download.svg" alt="Generar PDF" class="generar-contrato">
+        </a>
     `;
       }
 
@@ -145,7 +149,7 @@ class DataTable {
   async confirmarEliminacion(id) {
       const result = await Swal.fire({
           title: "¿Eliminar?",
-          text: "¿Estás seguro de que deseas eliminar este registro?",
+          text: `¿Estás seguro de que deseas eliminar este registro? ${id}`,
           icon: "question",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",

@@ -1,13 +1,18 @@
+<?php
+$nombre_conyuge = getDato('inversionista', 'nombre_conyuge');
+$dni_conyuge = getDato('inversionista', 'dni_conyuge');
+?>
+
 <div class="container">
   <p>El monto del capital debe ser retornado de acuerdo con los plazos estipulados en
-    el <strong class="underline">“Cronograma de Pago del Mutuatario al Mutuante”</strong>, adicionando a
+    el <strong class="underline">"Cronograma de Pago del Mutuatario al Mutuante"</strong>, adicionando a
     este un plazo de 15 días
     hábiles por retrasos
     administrativos que puedan presentarse.</p>
 
   <p>Asimismo, se establece que, en caso de fallecimiento del <strong>MUTUANTE</strong>, se deberán
-    realizar pagos a la persona autorizada, que en el presente caso <strong>ALIAGA HUARCAYA DOROTEA</strong>
-    identificado con <strong>DNI N°22294765</strong>; para proceder debe presentarse
+    realizar pagos a la persona autorizada, que en el presente caso <strong><?= $nombre_conyuge ? strtoupper($nombre_conyuge) : 'NO ESPECIFICADO' ?></strong>
+    identificado con <strong>DNI N°<?= $dni_conyuge ? $dni_conyuge : 'NO ESPECIFICADO' ?></strong>; para proceder debe presentarse
     la documentación que sustentaría el hecho. </p>
 
   <h5 class="text-left underline bold">CUARTO. - RESOLUCIÓN DE CONTRATO</h5>

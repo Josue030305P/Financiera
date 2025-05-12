@@ -163,11 +163,10 @@ CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERE
 CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
-
-DROP TABLE numcuentas;
-ALTER TABLE numcuentas DROP COLUMN idinversionista;
-ALTER TABLE numcuentas DROP CONSTRAINT fk_id_user_elimin_numcuenta ;
-ALTER TABLE numcuentas DROP COLUMN tipomoneda;
+INSERT INTO numcuentas(idcontrato, identidad,numcuenta, cci)
+	VALUES(3,1,'858585858585','2025858588');
+    
+SELECT * FROM contratos;
 
 SELECT * FROM inversionistas;
 SELECT * FROM entidades;

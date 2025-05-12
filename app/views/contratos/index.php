@@ -70,7 +70,7 @@ $links = [
         columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
         mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
         baseUrl: '<?= BASE_URL ?>',
-        idField: 'idcontrato',
+        idField: 'ID_Contrato',
        
     });
 
@@ -90,6 +90,9 @@ $links = [
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
+    <script src="<?= BASE_URL ?>app/js/generarPDF.js"></script>
+    
+
     
     
 
