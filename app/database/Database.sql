@@ -313,7 +313,7 @@ CONSTRAINT fk_idcontrato_crono_pag FOREIGN KEY(idcontrato) REFERENCES contratos(
 
 -- ALTER TABLE cronogramapagos MODIFY COLUMN amortizacion DECIMAL (10,2) NOT NULL DEFAULT 0;
 
-
+-- ALTER TABLE cronogramapagos DROP CONSTRAINT fk_idcontrato_crono_pag;
 
 CREATE TABLE detallepagos(
 iddetallepago			INT PRIMARY KEY AUTO_INCREMENT,
@@ -330,7 +330,7 @@ CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcu
 )ENGINE=InnoDB;
 
 
-
+ 
 
 
 CREATE TABLE accesos(

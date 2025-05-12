@@ -175,4 +175,6 @@ DELIMITER //
 
 SELECT * FROM usuarios;
 SELECT * FROM accesos;
+SELECT * FROM contratos;
 SELECT  * FROM inversionistas;
+SELECT  * FROM cronogramapagos;

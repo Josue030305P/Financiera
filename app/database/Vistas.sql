@@ -1,7 +1,7 @@
 -- Vista para contratos;
 USE financiera;
 
-
+SELECT * FROM usuarios;
 SELECT * FROM leads;
 -- Vista para leads
 

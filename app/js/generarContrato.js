@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
           observacion: observacion.value,
         };
 
-        // console.log("DATOS DEL CONTRATO:", formData);
+         console.log("DATOS DEL CONTRATO:", formData);
 
         const response = await fetch(
           `${baseUrl}app/controllers/ContratoController.php`,
@@ -269,8 +269,8 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.duracionmeses,
             formData.fechainicio
           );
-
-          await fetch(`${baseUrl}app/controllers/CronogramaPago.Controller`, {
+          console.table(cronograma);
+          await fetch(`${baseUrl}app/controllers/CronogramaPago.Controller.php`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -278,9 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
               cuotas: cronograma,
             }),
           });
+          
           window.location.href = `${baseUrl}app/views/contratos/`;
 
-          //console.table(cronograma);
+         
         }
       } catch (error) {
         console.error(error);

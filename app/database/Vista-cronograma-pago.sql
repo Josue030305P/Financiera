@@ -1,5 +1,5 @@
 -- GENERAR CRONOGRAMA DE PAGO
-
+USE financiera;
 DELIMITER //
 
 CREATE PROCEDURE sp_generar_cronograma(
