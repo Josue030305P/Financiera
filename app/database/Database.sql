@@ -96,8 +96,8 @@ fechahoraeliminacion	DATETIME NULL,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL,
 CONSTRAINT fk_idpersona FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
-CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
-CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario),
+-- CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
+-- CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
@@ -143,30 +143,14 @@ CONSTRAINT fk_id_user_elimin_inver FOREIGN KEY (idusuarioeliminacion ) REFERENCE
 )ENGINE=InnoDB;
 
 
-CREATE TABLE numcuentas(
-idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
-idcontrato			INT NOT NULL,
-identidad			INT NOT NULL, -- Entidad es el banco o cajas
-idusuariocreacion   INT NULL, -- FK
-idusuarioeliminacion INT NULL, -- FK
-numcuenta			VARCHAR(30)  UNIQUE NOT NULL,
-fecharegistro		DATETIME NOT NULL DEFAULT NOW(),
-cci         		VARCHAR(30) UNIQUE NOT NULL,
-estitular			CHAR(2) NOT NULL DEFAULT 'Si',
-observaciones		VARCHAR(100) NULL,
-estado				ENUM('Activo', 'Desactivado') NOT NULL DEFAULT 'Activo' ,
-created_at			DATETIME NOT NULL DEFAULT NOW(),
-updated_at			DATETIME NULL,
-CONSTRAINT fk_contrato_numcuenta FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato),
-CONSTRAINT fk_identidad FOREIGN KEY(identidad) REFERENCES entidades(identidad),
-CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
-CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
-)ENGINE=InnoDB;
 
 INSERT INTO numcuentas(idcontrato, identidad,numcuenta, cci)
-	VALUES(3,1,'858585858585','2025858588');
+	VALUES(2,1,'858585858585','2025858588');
     
 SELECT * FROM contratos;
+
+SELECT * FROM personas;
+SELECT * FROM inversionistas;
 
 SELECT * FROM inversionistas;
 SELECT * FROM entidades;
@@ -273,6 +257,28 @@ CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFEREN
 SELECT * FROM contratos;
 -- PREGUNTAR LUEGO SI UN INVERSIONISTA PUEDE TENER SOLO UN CONTRATO:
 -- ALTER TABLE contratos MODIFY COLUMN idinversionista INT NOT NULL  UNIQUE;
+
+
+CREATE TABLE numcuentas(
+idnumcuentas		INT PRIMARY KEY AUTO_INCREMENT,
+idcontrato			INT NOT NULL,
+identidad			INT NOT NULL, -- Entidad es el banco o cajas
+idusuariocreacion   INT NULL, -- FK
+idusuarioeliminacion INT NULL, -- FK
+numcuenta			VARCHAR(30)  UNIQUE NOT NULL,
+fecharegistro		DATETIME NOT NULL DEFAULT NOW(),
+cci         		VARCHAR(30) UNIQUE NOT NULL,
+estitular			CHAR(2) NOT NULL DEFAULT 'Si',
+observaciones		VARCHAR(100) NULL,
+estado				ENUM('Activo', 'Desactivado') NOT NULL DEFAULT 'Activo' ,
+created_at			DATETIME NOT NULL DEFAULT NOW(),
+updated_at			DATETIME NULL,
+CONSTRAINT fk_contrato_numcuenta FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato),
+CONSTRAINT fk_identidad FOREIGN KEY(identidad) REFERENCES entidades(identidad),
+CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
+CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
+)ENGINE=InnoDB;
+
 
 CREATE TABLE garantias(
 idgarantia				INT PRIMARY KEY AUTO_INCREMENT,

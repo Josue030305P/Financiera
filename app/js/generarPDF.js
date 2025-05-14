@@ -31,7 +31,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ubicacion: data.ubicacion_inversionista,
                 banco: data.banco,
                 numcuenta: data.numcuenta,
-                cci: data.cci
+                cci: data.cci,
+                tiporetorno:data.tiporetorno,
+                fechainicio:data.fechainicio
             },
             conyuge: {
                 nombre: data.nombre_conyuge,

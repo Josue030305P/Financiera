@@ -169,23 +169,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const interesDecimal = interes / 100;
     const cuotaBase = capital * interesDecimal;
     const totalBruto = cuotaBase - cuotaBase * 0.05; // Aplicando el 5% de retencion
-
+  
     let fecha = new Date(fechaInicio);
-
+  
+    fecha.setMonth(fecha.getMonth() + 1); // Incrementamos el mes para la primera cuota
+  
     for (let i = 1; i <= duracionMeses; i++) {
+      let fechaPago = new Date(fecha);
+      const diaInicioContrato = new Date(fechaInicio).getDate() + 1; // Obtenemos el día en cada iteración
+      fechaPago.setDate(diaInicioContrato); // Establecemos el día del mes al día de inicio del contrato
+  
+      // Manejo de fin de mes: si el día de inicio es mayor que los días del mes actual
+      if (fechaPago.getMonth() !== fecha.getMonth() && diaInicioContrato > 28) {
+        fechaPago.setDate(0); // Retrocede al último día del mes anterior
+      }
+  
       // Formatear fecha a dd/mm/yyyy
-      const fechaStr = fecha.toLocaleDateString("es-ES");
+      const fechaStr = fechaPago.toLocaleDateString("es-ES");
+      console.log("FECHA STR:", fechaStr);
       cuotas.push({
         Cuota: i,
         Fecha: fechaStr,
         Total_Bruto: Number(cuotaBase.toFixed(2)),
         Total_Neto: totalBruto,
       });
-
+  
       fecha.setMonth(fecha.getMonth() + 1);
     }
     return cuotas;
   }
+  
 
   async function guardarContrato() {
     let empresaID = null;
@@ -262,6 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
 
           const idcontrato = result.idcontrato;
+          
 
           const cronograma = generarCronograma(
             formData.capital,
@@ -279,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }),
           });
           
-          window.location.href = `${baseUrl}app/views/contratos/`;
+         window.location.href = `${baseUrl}app/views/contratos/`;
 
          
         }

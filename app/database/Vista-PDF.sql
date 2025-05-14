@@ -3,6 +3,8 @@
 CREATE VIEW vista_contrato_pdf AS
 SELECT 
     c.idcontrato,
+    c.tiporetorno,
+    c.fechainicio,
     -- 1. Datos del Inversionista
     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_inversionista,
     p.numdocumento AS dni_inversionista,
@@ -10,6 +12,7 @@ SELECT
     -- 4. Ubicación del Inversionista
     CONCAT(d.distrito, ' - ', pr.provincia, ' - ', dep.departamento) AS ubicacion_inversionista,
     -- 5. Capital
+   
     c.capital,
     -- 6. Datos bancarios
     e.entidad AS banco,
@@ -42,3 +45,8 @@ FROM
     LEFT JOIN cronogramapagos cp ON c.idcontrato = cp.idcontrato
 GROUP BY 
     c.idcontrato;
+    
+DROP VIEW  vista_contrato_pdf; 
+SELECT * FROM contratos;
+SELECT * FROM cronogramapagos;
+SELECT * FROM usuarios;

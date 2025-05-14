@@ -1,6 +1,6 @@
 <?php
-$nombre_conyuge = getDato('inversionista', 'nombre_conyuge');
-$dni_conyuge = getDato('inversionista', 'dni_conyuge');
+$nombre_conyuge = getDato('conyuge', 'nombre');
+$dni_conyuge = getDato('conyuge', 'documento');
 ?>
 
 <div class="container">

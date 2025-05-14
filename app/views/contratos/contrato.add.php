@@ -30,7 +30,7 @@ $idConyuge = $_POST['idconyuge'] ?? null;
     <div class="main-wrapper">
       <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
       <div id="leadIdHolder" style="display: none;" data-lead-id="<?= htmlspecialchars($leadIdParaJS) ?>"></div>
-      <input type="hidden" name="idconyuge"  id= "idconyuge" value= "<?php echo htmlspecialchars($idConyuge); ?>">
+      <input type="hidden" name="idconyuge"  id= "idconyuge" value= "<?php echo $idConyuge !== null ? htmlspecialchars($idConyuge) : ''; ?>">
       <div class="container" style="margin-top: 40px;">
 
         <!-- Inversionista -->
