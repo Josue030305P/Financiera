@@ -52,7 +52,7 @@ class LeadForm {
             const paises = await response.json();
             
             const selectPais = document.getElementById('pais');
-            selectPais.innerHTML = '<option value="">Seleccione un país</option>';
+           
             
             paises.forEach(pais => {
                 selectPais.innerHTML += `
