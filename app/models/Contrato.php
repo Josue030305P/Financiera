@@ -121,60 +121,33 @@ class Contrato
 
 
 
+// $contratoModel = new Contrato();
 
 
+//    $params = [
+//        "idversion" => 1,       
+//      "idasesor" => 2,        
+//        "idinversionista" => 1,
+//       "idconyuge" => null,    
+//       "fechainicio" => "2025-04-25",
+//       "fechafin" => "2026-04-25",
+//         "impuestorenta" => 5.00,
+//         "toleranciadias" => 5,
+//         "duracionmeses" => 12,
+//         "moneda" => "PEN",
+//         "diapago" => 30,
+//         "interes" => 10.00,
+//          "capital" => 10000.00,
+//         "tiporetorno" => "Fijo",
+//         "periodopago" => "Mensual",
+//         "observacion" => "Prueba de contrato desde consola"
+//     ];
 
 
+//  $resultado = $contratoModel->add($params);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*$contratoModel = new Contrato();
-
-
-   $params = [
-       "idversion" => 1,       
-     "idasesor" => 2,        
-       "idinversionista" => 6,
-      "idconyuge" => null,    
-      "fechainicio" => "2025-04-25",
-      "fechafin" => "2026-04-25",
-        "impuestorenta" => 5.00,
-        "toleranciadias" => 5,
-        "duracionmeses" => 12,
-        "moneda" => "PEN",
-        "diapago" => 30,
-        "interes" => 10.00,
-         "capital" => 10000.00,
-        "tiporetorno" => "Fijo",
-        "periodopago" => "Mensual",
-        "observacion" => "Prueba de contrato desde consola"
-    ];
-
-
- $resultado = $contratoModel->add($params);
-
-
- var_dump($resultado);
+//  var_dump($resultado);
  
- */
+ 
 

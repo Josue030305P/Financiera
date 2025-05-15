@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
           observacion: observacion.value,
         };
 
-         console.log("DATOS DEL CONTRATO:", formData);
+        console.log("DATOS DEL CONTRATO:", formData);
 
         const response = await fetch(
           `${baseUrl}app/controllers/ContratoController.php`,

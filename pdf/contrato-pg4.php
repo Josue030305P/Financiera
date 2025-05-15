@@ -5,7 +5,7 @@ $inversionista = $jsonData['inversionista'];
 $contrato = $jsonData['contrato'];
 $cronograma = $contrato['cronograma'];
 $tiporetorno = $inversionista['tiporetorno'];
-var_dump($jsonData);
+//var_dump($jsonData);
 
 ?>
 <div class="container">

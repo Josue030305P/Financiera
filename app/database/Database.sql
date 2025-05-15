@@ -2,7 +2,6 @@ CREATE DATABASE financiera;
 -- DROP DATABASE financiera;
 USE financiera;
 
-
 CREATE TABLE pais(
 idpais 				INT PRIMARY KEY AUTO_INCREMENT,
 pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE

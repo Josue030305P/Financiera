@@ -1,3 +1,11 @@
+<?php 
+
+$jsonData = json_decode($_POST['jsonData'], true);
+
+$inversionista = $jsonData['inversionista'];
+
+?>
+
 <div class="container">
 
     <h5 class="text-center">ANEXO N°1</h5>
@@ -8,8 +16,8 @@
         modificado por DECRETO LEGISLATIVO N°1249
     </p>
 
-    <p>Yo, <strong class="uppercase">YAGUILLO ALIAGA FRANCHESCA BRILLITTE</strong>, identificado con el tipo de
-        documento,<strong>DNI N°70781463</strong> , obrando en
+    <p>Yo, <strong class="uppercase"><?php echo $inversionista['nombre']  ?></strong>, identificado con el tipo de
+        documento,<strong>DNI N°<?php echo $inversionista['documento']?></strong> , obrando en
         nombre propio de manera voluntaria y dando certeza de que todo lo aquí consignado es cierto, realizo la
         siguiente DECLARACION JURADA DE FUENTE U ORIGEN DE FONDOS a favor de <strong>YONDA & GRUPO HUARACA
             E.I.R.L.</strong>, con RUC
@@ -25,7 +33,7 @@
         <ol>
             <li>Que, los recursos que entrego para la(s) transacción(es) realizada provienen de fuentes de carácter
                 Profesional, Actividades de Negocios, Actividades Productivas, de Servicios u otras Actividades lícitas
-                referidas a…………………........................................................y que dichos fondos proceden
+                referidas a........................................................y que dichos fondos proceden
                 de sus rentas de primera, segunda, tercera, cuarta y quinta categoría debidamente declaradas a la SUNAT
                 con el pago de los impuestos respectivos.</li>
             <li>Que, los recursos que entrego no provienen de ninguna actividad ilícita contempladas en el Código Penal,
@@ -48,7 +56,7 @@
     </p>
 
 
-    <p style="text-align: right;">24 de septiembre del 2024</p>
+    <p style="text-align: right;">Lima, <?= date('d') ?> de <?= date('F') ?> de <?= date('Y') ?>.</p>
 
     <table class="firmas uppercase bold">
         <tbody>
@@ -59,11 +67,11 @@
             </tr>
 
             <tr>
-                <td>yaguillo aliaga franchesca</td>
+                <td><?php echo $inversionista['nombre']  ?></td>
 
             </tr>
             <tr>
-                <td>dni n° 707781463</td>
+                <td>dni n°<?php echo $inversionista['documento']?></td>
             </tr>
         </tbody>
     </table>
