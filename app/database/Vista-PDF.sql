@@ -1,4 +1,4 @@
-
+USE financiera;
 
 CREATE VIEW vista_contrato_pdf AS
 SELECT 

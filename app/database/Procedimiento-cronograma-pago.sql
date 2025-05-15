@@ -22,3 +22,51 @@ SELECT * FROM cronogramapagos;
 SELECT * FROM contratos;
 SELECT * FROM inversionistas;
 SELECT * FROM personas;
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE obtener_cronogramas_por_contrato (
+    IN idcontrato_ INT
+)
+BEGIN
+    SELECT *
+    FROM vista_cronogramas_detallado
+    WHERE idcontrato = idcontrato_;
+END //
+DELIMITER ;
+CALL  obtener_cronogramas_por_contrato(1);
+
+DROP PROCEDURE obtener_cronogramas_por_contrato;
+
+-- FILTRADOS
+DROP PROCEDURE IF EXISTS obtener_cronogramas_filtrado;
+DROP PROCEDURE IF EXISTS obtener_cronogramas_filtrado;
+DROP PROCEDURE IF EXISTS obtener_cronogramas_filtrado;
+
+DELIMITER //
+CREATE PROCEDURE obtener_cronogramas_filtrado (
+    IN filtro_estado VARCHAR(20),
+    IN filtro_fecha_inicio VARCHAR(10),  -- formato: 'dd-mm-yyyy'
+    IN filtro_fecha_fin VARCHAR(10),
+    IN filtro_id_contrato INT,
+    IN filtro_dni VARCHAR(12)
+)
+BEGIN
+    SELECT *
+    FROM vista_cronogramas_detallado
+    WHERE (filtro_estado IS NULL OR estado_pago = filtro_estado)
+    AND (filtro_fecha_inicio IS NULL OR fecha_inicio_contrato >= STR_TO_DATE(filtro_fecha_inicio, '%d-%m-%Y'))
+    AND (filtro_fecha_fin IS NULL OR fecha_fin_contrato <= STR_TO_DATE(filtro_fecha_fin, '%d-%m-%Y'))
+    AND (filtro_id_contrato IS NULL OR idcontrato = filtro_id_contrato)
+    AND (filtro_dni IS NULL OR dni = filtro_dni);
+END //
+DELIMITER ;
+
+CALL obtener_cronogramas_filtrado(null , '12-05-2025', NULL, null, NULL);
+CALL obtener_cronogramas_filtrado(null , '15-05-2025', NULL, null, NULL);
+CALL obtener_cronogramas_filtrado(null ,'12-05-2025', NULL, null, NULL);
+    SELECT fecha_inicio_contrato FROM vista_cronogramas_detallado;
+    
+CALL obtener_cronogramas_filtrado(null ,'15-05-2025', NULL, null, NULL);

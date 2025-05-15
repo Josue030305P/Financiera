@@ -47,9 +47,6 @@ h1 {
   margin: 0.67em 0;
 }
 
-/* Grouping content
-   ========================================================================== */
-
 /**
  * 1. Add the correct box sizing in Firefox.
  * 2. Show the overflow in Edge and IE.
@@ -2019,23 +2016,6 @@ label {
 
 /*-------------------------------------------------------------------------------------------------------*/
 
-.table-wrapper {
-  overflow-x: auto;
-  overflow-y: hidden;
-  margin-bottom: 20px;
-}
-
-.table-wrapper table {
-  min-width: 80px;
-}
-
-.table-wrapper table.posts-table {
-  min-width: 944px;
-}
-
-.table-wrapper table.library-table {
-  min-width: 483px;
-}
 .sidebar {
   position: -webkit-sticky;
   position: sticky;

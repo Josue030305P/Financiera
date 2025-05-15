@@ -12,6 +12,26 @@ class CronogramaPago {
     }
 
 
+     public function obtenerTodosFiltrado($filtros = []) : array {
+        try {
+            $filtroEstado = isset($filtros['estado']) && $filtros['estado'] !== '' ? "'" . $filtros['estado'] . "'" : 'NULL';
+            $filtroFechaInicio = isset($filtros['fechainicio']) && $filtros['fechainicio'] !== '' ? "'" . $filtros['fechainicio'] . "'" : 'NULL';
+            $filtroFechaFin = isset($filtros['fechafin']) && $filtros['fechafin'] !== '' ? "'" . $filtros['fechafin'] . "'" : 'NULL';
+            $filtroIdContrato = isset($filtros['idcontrato']) && $filtros['idcontrato'] !== '' ? intval($filtros['idcontrato']) : 'NULL';
+            $filtroDni = isset($filtros['dni']) && $filtros['dni'] !== '' ? "'" . $filtros['dni'] . "'" : 'NULL';
+            $sql = "CALL obtener_cronogramas_filtrado($filtroEstado, $filtroFechaInicio, $filtroFechaFin, $filtroIdContrato, $filtroDni)";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener cronogramas filtrados: " . $e->getMessage());
+        }
+    }
+
+
+
+
     public function add($idcontrato, $cuotas = []) : array {
         try {
             $this->conexion->beginTransaction();
@@ -49,4 +69,20 @@ class CronogramaPago {
     }
 
 
+
+       public function obtenerPorContrato(int $idContrato) : array {
+        try {
+            $sql = "CALL obtener_cronogramas_por_contrato(" . intval($idContrato) . ")";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener cronogramas por contrato: " . $e->getMessage());
+        }
+    }
+
 }
+
+// $cronograma = new CronogramaPago();
+//  $result = $cronograma->obtenerTodosFiltrado(['fechainicio'=> '11-05-2025']);
+// var_dump($result);

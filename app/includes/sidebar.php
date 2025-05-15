@@ -76,7 +76,7 @@ if (!isset($_SESSION['nombre'])) {
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
-                        <span class="icon paper" aria-hidden="true"></span>Pages
+                        <span class="icon paper" aria-hidden="true"></span>Cronograma Pagos
                         <span class="category__btn transparent-btn" title="Open list">
                             <span class="sr-only">Open list</span>
                             <span class="icon arrow-down" aria-hidden="true"></span>
@@ -84,10 +84,7 @@ if (!isset($_SESSION['nombre'])) {
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="pages.html">All pages</a>
-                        </li>
-                        <li>
-                            <a href="new-page.html">Add new page</a>
+                            <a href="<?= BASE_URL. "app/views/cronograma-pagos/"?>">Lista de cronogramas</a>
                         </li>
                     </ul>
                 </li>

@@ -11,7 +11,7 @@ $idConyuge = $_POST['idconyuge'] ?? null;
   <meta name="base-url" content="<?= BASE_URL ?>">
   <title>Contrato</title>
   <link rel="stylesheet" href="<?= BASE_URL ?>app/css/contrato.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 
   <style>
     .mostrar {
