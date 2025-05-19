@@ -1,3 +1,67 @@
+
+<style>
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(27, 27, 27, 0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-cronograma-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#modal-cronograma-body th, #modal-cronograma-body td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#modal-cronograma-body th {
+    background-color: #f2f2f2;
+}
+
+
+
+.ver-cronograma-modal img {
+    width: 24px; 
+    height: 24px;
+    vertical-align: middle;
+}
+
+</style>
+
+
+
 <main class="main users chart-page" id="skip-target">
     <div class="container">
         <h2 class="main-title">Lista de <?= htmlspecialchars($tipo) ?></h2>
@@ -67,6 +131,19 @@
                 </table>
             </div>
         </div>
+
+        <div id="modal-cronograma" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>Cronograma de Pagos - Contrato <span id="modal-contrato-id"></span></h3>
+                <div id="modal-cronograma-body">
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 
 

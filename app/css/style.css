@@ -1962,7 +1962,8 @@ label {
 .delete-btn,.delete-lead {
   background-color: rgb(219, 27, 27);
 }
-.ver-cronograma {
+.ver-cronograma-modal {
+ 
   background-color: #0061f7;
 }
 .generar-contrato {

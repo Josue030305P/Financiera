@@ -74,5 +74,8 @@
 
 
     <script src="<?= BASE_URL ?>app/js/filtrosCronogramas.js"></script>
+ <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
+  <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
+  <script src="<?= BASE_URL ?>app/js/script.js"></script>
 
 </body>
