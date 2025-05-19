@@ -51,16 +51,12 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 // Obtener los coronogramas con filtros
                 $filtros = [
                     'estado' => isset($_GET['estado']) ? $_GET['estado'] : '',
-                    'fechainicio' => isset($_GET['fechainicio']) ? $_GET['fechainicio'] : '',
-                    'fechafin' => isset($_GET['fechafin']) ? $_GET['fechafin'] : '',
                     'idcontrato' => isset($_GET['idcontrato_filtro']) ? intval($_GET['idcontrato_filtro']) : '', // Diferenciar del id_contrato para vista individual
                     'dni' => isset($_GET['dni']) ? $_GET['dni'] : ''
                 ];
 
 
                 $filtros['estado'] = filter_var($filtros['estado'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $filtros['fechainicio'] = filter_var($filtros['fechainicio'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $filtros['fechafin'] = filter_var($filtros['fechafin'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $filtros['dni'] = filter_var($filtros['dni'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 

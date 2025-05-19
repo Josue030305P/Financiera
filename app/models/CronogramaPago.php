@@ -15,11 +15,9 @@ class CronogramaPago {
      public function obtenerTodosFiltrado($filtros = []) : array {
         try {
             $filtroEstado = isset($filtros['estado']) && $filtros['estado'] !== '' ? "'" . $filtros['estado'] . "'" : 'NULL';
-            $filtroFechaInicio = isset($filtros['fechainicio']) && $filtros['fechainicio'] !== '' ? "'" . $filtros['fechainicio'] . "'" : 'NULL';
-            $filtroFechaFin = isset($filtros['fechafin']) && $filtros['fechafin'] !== '' ? "'" . $filtros['fechafin'] . "'" : 'NULL';
             $filtroIdContrato = isset($filtros['idcontrato']) && $filtros['idcontrato'] !== '' ? intval($filtros['idcontrato']) : 'NULL';
             $filtroDni = isset($filtros['dni']) && $filtros['dni'] !== '' ? "'" . $filtros['dni'] . "'" : 'NULL';
-            $sql = "CALL obtener_cronogramas_filtrado($filtroEstado, $filtroFechaInicio, $filtroFechaFin, $filtroIdContrato, $filtroDni)";
+            $sql = "CALL obtener_cronogramas_filtrado($filtroEstado,$filtroIdContrato, $filtroDni)";
 
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute();

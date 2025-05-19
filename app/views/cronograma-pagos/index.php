@@ -28,17 +28,13 @@
                             <option value="Vencido">Vencido</option>
                         </select>
 
-                        <label for="filtro-fecha-inicio">Fecha Inicio:</label>
-                        <input type="date" id="filtro-fecha-inicio">
-
-                        <label for="filtro-fecha-fin">Fecha Fin:</label>
-                        <input type="date" id="filtro-fecha-fin">
+    
 
                         <label for="filtro-id-contrato">ID Contrato:</label>
                         <input type="number" id="filtro-id-contrato" placeholder="Ingrese ID">
 
                         <label for="filtro-dni">DNI Inversionista:</label>
-                        <input type="text" id="filtro-dni" placeholder="Ingrese DNI">
+                        <input type="text" id="filtro-dni" placeholder="Ingrese DNI" maxlength="8">
 
                         <button id="btn-filtrar">Filtrar</button>
                         <button id="btn-limpiar-filtro">Limpiar Filtros</button>
@@ -59,8 +55,6 @@
                                     <th>Amortización</th>
                                     <th>Restante</th>
                                     <th>Estado</th>
-                                    <th>Fecha Inicio Contrato</th>
-                                    <th>Fecha Fin Contrato</th>
                                     <th>Detalles..</th>
                                 </tr>
                             </thead>

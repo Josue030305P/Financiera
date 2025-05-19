@@ -1,108 +1,114 @@
-
 #cronograma-page-content .container {
-    margin-top: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #cronograma-page-content h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
-
 #cronograma-page-content .filtros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
 }
 
 #cronograma-page-content .filtros label {
-    font-weight: bold;
-    color: #555;
+  margin-right: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+#cronograma-page-content .filtros > * {
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 #cronograma-page-content .filtros input[type="text"],
 #cronograma-page-content .filtros input[type="number"],
 #cronograma-page-content .filtros input[type="date"],
 #cronograma-page-content .filtros select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  flex-grow: 1;
+  min-width: 100px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 #cronograma-page-content .filtros button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 #cronograma-page-content .filtros button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 #cronograma-page-content .tabla-responsive {
-    overflow-x: auto;
+  overflow-x: auto;
 }
 
 #cronograma-page-content #tabla-cronograma {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border: 1px solid #ddd;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #ddd;
 }
 
 #cronograma-page-content #tabla-cronograma th,
 #cronograma-page-content #tabla-cronograma td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
 #cronograma-page-content #tabla-cronograma th {
-    background-color: #f0f0f0;
-    font-weight: bold;
-    color: #333;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #333;
 }
 
 #cronograma-page-content #tabla-cronograma tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 #cronograma-page-content .estado-Pendiente {
-    color: orange;
-    font-weight: bold;
+  color: orange;
+  font-weight: bold;
 }
 
 #cronograma-page-content .estado-Pagado {
-    color: green;
-    font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 
 #cronograma-page-content .estado-Vencido {
-    color: red;
-    font-weight: bold;
-}/* ... tus estilos existentes ... */
+  color: red;
+  font-weight: bold;
+}
 
 .grupo-contrato {
-    font-weight: bold;
-    background-color: #f8f9fa; /* Un color de fondo ligero para distinguir el grupo */
-    cursor: pointer; /* Opcional: indicar que es क्लिकेबल */
+  font-weight: bold;
+  background-color: #f8f9fa;
+  cursor: pointer;
 }
 
 .grupo-contrato td.expandir-control {
-    text-align: center;
+  text-align: center;
 }
 
 .detalle-pago td {
-    padding-left: 20px; /* Indentación para indicar que son detalles */
-    background-color: #fff; /* Asegurar fondo blanco para las filas de detalle */
+  padding-left: 20px;
+  background-color: #fff;
 }
