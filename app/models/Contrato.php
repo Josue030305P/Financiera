@@ -114,7 +114,8 @@ class Contrato
 
 
 
-
+// $contrato = new Contrato();
+// var_dump($contrato->getAll());
 
 
 

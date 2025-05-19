@@ -1,63 +1,67 @@
-
 <style>
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(27, 27, 27, 0.4); 
-}
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(27, 27, 27, 0.4);
+    }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; 
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; 
-}
+    .modal-content {
+        background-color: #fefefe;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+    .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .close-button:hover,
+    .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-#modal-cronograma-body table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
+    #modal-cronograma-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
 
-#modal-cronograma-body th, #modal-cronograma-body td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
+    #modal-cronograma-body th,
+    #modal-cronograma-body td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
 
-#modal-cronograma-body th {
-    background-color: #f2f2f2;
-}
+    #modal-cronograma-body th {
+        background-color: #f2f2f2;
+    }
 
 
 
-.ver-cronograma-modal img {
-    width: 24px; 
-    height: 24px;
-    vertical-align: middle;
-}
-
+    .ver-cronograma-modal img {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+    }
 </style>
 
 
@@ -69,37 +73,80 @@
         <div class="row">
 
             <div class="table-header">
-                <a href="<?= $links[$tipo] ?? '#' ?>">
-                    <button class="create-lead">+ Nuevo <?= ($tipo) ?></button>
-                </a>
+                <?php if ($tipo !== 'Contratos'): ?>
+                    <a href="<?= $links[$tipo] ?? '#' ?>">
+                        <button class="create-lead">+ Nuevo <?= htmlspecialchars($tipo) ?></button>
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($tipo === 'Leads'): ?>
+                    <div class="filters-container">
+                        <div class="filter-group">
+                            <label for="filtro-estado-lead">Filtrar por Prioridad:</label>
+                            <select id="filtro-estado-lead">
+                                <option value="">Todos</option>
+                                <option value="Alto">Alto</option>
+                                <option value="Medio">Medio</option>
+                                <option value="Bajo">Bajo</option>
+                            </select>
+                        </div>
+                        <div class="filter-actions">
+                            <button id="aplicar-filtros-lead">Aplicar Filtros</button>
+                            <button id="resetear-filtros-lead">Resetear</button>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
                 <?php if ($tipo === 'Contratos'): ?>
                     <div class="filters-container">
-                        <label for="filtro-vencimiento">Vencimiento:</label>
-                        <select id="filtro-vencimiento">
-                            <option value="">Todos</option>
-                            <option value="proximos_30_dias">Próximos 30 días</option>
-                        </select>
+                        <div class="filter-group">
+                            <label for="filtro-dni-asesor">DNI Asesor:</label>
+                            <input type="text" id="filtro-dni-asesor" placeholder="Ingrese DNI">
+                        </div>
 
-                        <label for="filtro-estado">Estado:</label>
-                        <select id="filtro-estado">
-                            <option value="">Todos</option>
-                            <option value="Vigente">Vigente</option>
-                            <option value="Completado">Completado</option>
-                        </select>
+                        <div class="filter-group">
+                            <label for="filtro-dni-inversionista">DNI Inversionista:</label>
+                            <input type="text" id="filtro-dni-inversionista" placeholder="Ingrese DNI">
+                        </div>
 
-                        <label for="filtro-asesor">Asesor:</label>
-                        <input type="text" id="filtro-asesor" placeholder="Nombre del Asesor">
+                        <div class="filter-group">
+                            <label for="filtro-vencimiento">Próximos a Vencer:</label>
+                            <select id="filtro-vencimiento">
+                                <option value="">Todos</option>
+                                <option value="proximos_30_dias">Próximos 30 días</option>
+                                <option value="proximos_60_dias">Próximos 60 días</option>
+                                <option value="proximos_90_dias">Próximos 90 días</option>
+                            </select>
+                        </div>
 
-                        <label for="filtro-moneda">Moneda:</label>
-                        <select id="filtro-moneda">
-                            <option value="">Todas</option>
-                            <option value="PEN">PEN</option>
-                            <option value="USD">USD</option>
-                        </select>
+                        <div class="filter-group">
+                            <label for="filtro-estado">Estado:</label>
+                            <select id="filtro-estado">
+                                <option value="">Todos</option>
+                                <option value="Vigente">Vigente</option>
+                                <option value="Completado">Completado</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </div>
 
-                        <button id="aplicar-filtros">Aplicar Filtros</button>
-                        <button id="resetear-filtros">Resetear</button>
+                        <div class="filter-group">
+                            <label for="filtro-anio">Contratos por Año:</label>
+                            <?php
+                            $currentYear = date('Y');
+                            $startYear = 2020;
+                            ?>
+                            <select id="filtro-anio">
+                                <option value="">Todos</option>
+                                <?php for ($i = $currentYear; $i >= $startYear; $i--): ?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                <?php endfor; ?>
+                            </select>
+                        </div>
+
+                        <div class="filter-actions">
+                            <button id="aplicar-filtros">Aplicar Filtros</button>
+                            <button id="resetear-filtros">Resetear</button>
+                        </div>
                     </div>
                 <?php endif; ?>
 

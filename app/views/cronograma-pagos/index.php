@@ -38,6 +38,8 @@
 
                         <button id="btn-filtrar">Filtrar</button>
                         <button id="btn-limpiar-filtro">Limpiar Filtros</button>
+
+                        
                     </div>
 
                     <div class="tabla-responsive">
@@ -72,10 +74,11 @@
 
     </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.19.3/xlsx.full.min.js"></script>
     <script src="<?= BASE_URL ?>app/js/filtrosCronogramas.js"></script>
  <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
   <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
+  
 
 </body>

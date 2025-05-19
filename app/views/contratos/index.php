@@ -13,10 +13,12 @@ $configuracionTabla = [
   'columnas' => [
       'ID',
       'Asesor',
+      'DNI Asesor',
       'Inversionista',
+      'DNI Inversionista',
       'Inicio',
       'Fin',
-      'Moenda',
+      'Moneda',
       'Capital',
       'Interes',
       'Período',
@@ -28,10 +30,12 @@ $configuracionTabla = [
   'mapeo' => [
      'ID' => 'ID_Contrato',
       'Asesor' => 'Asesor',
+      'DNI Asesor' => 'dniAsesor',
       'Inversionista' => 'Inversionista',
+      'DNI Inversionista' => 'dniInver',
       'Inicio' => 'Inicio',
       'Fin' => 'Fin',
-      'Moenda' => 'Moneda',
+      'Moneda' => 'Moneda',
       'Capital' => 'Capital',
       'Interes' => 'Interes_Porcentaje',
       'Período' => 'Periodo',
@@ -102,4 +106,3 @@ $links = [
 
 
 
-</body>

@@ -2,50 +2,66 @@
     const dataTableInstance = window.dataTable;
 
     if (dataTableInstance) {
-        dataTableInstance.allContratos = [];
-
-        const originalRenderizarTabla = dataTableInstance.renderizarTabla.bind(dataTableInstance);
-
-        dataTableInstance.renderizarTabla = function(data) {
-            originalRenderizarTabla(data);
-        };
-
         dataTableInstance.filtrarContratos = function () {
-            let datosFiltrados = [...this.dataOriginal]; 
-        
+            let datosFiltrados = [...this.dataOriginal];
+
             const filtroVencimiento = document.getElementById("filtro-vencimiento")?.value;
             const filtroEstado = document.getElementById("filtro-estado")?.value;
-            const filtroAsesor = document.getElementById("filtro-asesor")?.value.toLowerCase();
-            const filtroMoneda = document.getElementById("filtro-moneda")?.value;
-        
-            if (filtroVencimiento === 'proximos_30_dias') {
-                const hoy = new Date();
-                const dentroDe30Dias = new Date();
-                dentroDe30Dias.setDate(hoy.getDate() + 30);
-                datosFiltrados = datosFiltrados.filter(contrato => {
-                    const fechaFin = new Date(contrato['Fin']);
-                    return fechaFin >= hoy && fechaFin <= dentroDe30Dias;
-                });
+            const filtroDniAsesor = document.getElementById("filtro-dni-asesor")?.value.trim().toLowerCase();
+            const filtroDniInversionista = document.getElementById("filtro-dni-inversionista")?.value.trim().toLowerCase();
+            const filtroAnio = document.getElementById("filtro-anio")?.value; // ¡Aquí obtenemos el valor del filtro de año!
+
+            if (filtroDniAsesor) {
+                datosFiltrados = datosFiltrados.filter(contrato => contrato['dniAsesor'] && contrato['dniAsesor'].toLowerCase().includes(filtroDniAsesor));
             }
-        
+
+            if (filtroDniInversionista) {
+                datosFiltrados = datosFiltrados.filter(contrato => contrato['dniInver'] && contrato['dniInver'].toLowerCase().includes(filtroDniInversionista));
+            }
+
+            if (filtroVencimiento) {
+                const hoy = new Date();
+                let fechaFinComparacion;
+                switch (filtroVencimiento) {
+                    case 'proximos_30_dias':
+                        fechaFinComparacion = new Date(hoy);
+                        fechaFinComparacion.setDate(hoy.getDate() + 30);
+                        break;
+                    case 'proximos_60_dias':
+                        fechaFinComparacion = new Date(hoy);
+                        fechaFinComparacion.setDate(hoy.getDate() + 60);
+                        break;
+                    case 'proximos_90_dias':
+                        fechaFinComparacion = new Date(hoy);
+                        fechaFinComparacion.setDate(hoy.getDate() + 90);
+                        break;
+                    default:
+                        fechaFinComparacion = null;
+                        break;
+                }
+                if (fechaFinComparacion) {
+                    datosFiltrados = datosFiltrados.filter(contrato => {
+                        const fechaFin = new Date(contrato['Fin']);
+                        return fechaFin >= hoy && fechaFin <= fechaFinComparacion;
+                    });
+                }
+            }
+
             if (filtroEstado) {
                 datosFiltrados = datosFiltrados.filter(contrato => contrato['Estado'] === filtroEstado);
             }
-        
-            if (filtroAsesor) {
-                datosFiltrados = datosFiltrados.filter(contrato => contrato['Asesor'].toLowerCase().includes(filtroAsesor));
+
+            if (filtroAnio) {
+                datosFiltrados = datosFiltrados.filter(contrato => {
+                    const anioContrato = new Date(contrato['Inicio']).getFullYear();
+                    return String(anioContrato) === filtroAnio;
+                });
             }
-        
-            if (filtroMoneda) {
-                datosFiltrados = datosFiltrados.filter(contrato => contrato['Moneda'] === filtroMoneda);
-            }
-        
+
             this.renderizarTabla(datosFiltrados);
         };
-        
 
         dataTableInstance.resetearFiltros = function () {
-
             Swal.fire({
                 toast: true,
                 position: "top-end",
@@ -57,19 +73,17 @@
                 cancelButtonText: "No",
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-              }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById("filtro-vencimiento").value = "";
                     document.getElementById("filtro-estado").value = "";
-                    document.getElementById("filtro-asesor").value = "";
-                    document.getElementById("filtro-moneda").value = "";
-        
+                    document.getElementById("filtro-dni-asesor").value = "";
+                    document.getElementById("filtro-dni-inversionista").value = "";
+                    document.getElementById("filtro-anio").value = "";
                     this.renderizarTabla(this.dataOriginal);
                 }
             });
-
         };
-        
 
         dataTableInstance.initFilterEventListeners = function() {
             const aplicarFiltrosBtn = document.getElementById("aplicar-filtros");
@@ -86,4 +100,3 @@
         dataTableInstance.initFilterEventListeners();
     }
 })();
-
