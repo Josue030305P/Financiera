@@ -1,5 +1,3 @@
--- GENERAR CRONOGRAMA DE PAGO
-USE financiera;
 DELIMITER //
 
 CREATE PROCEDURE sp_generar_cronograma(
@@ -18,10 +16,6 @@ END //
 DELIMITER ;
 
 CALL sp_generar_cronograma(1,1,988,865,'2025-08-12');
-SELECT * FROM cronogramapagos;
-SELECT * FROM contratos;
-SELECT * FROM inversionistas;
-SELECT * FROM personas;
 
 
 
@@ -38,12 +32,7 @@ END //
 DELIMITER ;
 CALL  obtener_cronogramas_por_contrato(1);
 
-DROP PROCEDURE obtener_cronogramas_por_contrato;
 
--- FILTRADOS
-DROP PROCEDURE IF EXISTS obtener_cronogramas_filtrado;
-DROP PROCEDURE IF EXISTS obtener_cronogramas_filtrado;
-DROP PROCEDURE IF EXISTS obtener_cronogramas_filtrado;
 
 DELIMITER //
 CREATE PROCEDURE obtener_cronogramas_filtrado (
@@ -60,11 +49,4 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL obtener_cronogramas_filtrado(null , '12-05-2025', NULL, null, NULL);
-CALL obtener_cronogramas_filtrado(null , '15-05-2025', NULL, null, NULL);
-CALL obtener_cronogramas_filtrado(null ,'12-05-2025', NULL, null, NULL);
-    SELECT fecha_inicio_contrato FROM vista_cronogramas_detallado;
     
-CALL obtener_cronogramas_filtrado(null ,'15-05-2025', NULL, null, NULL);
-
-DROP procedure obtener_cronogramas_filtrado;

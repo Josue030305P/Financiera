@@ -320,12 +320,13 @@ numcuota		    	INT NOT NULL,
 totalbruto			DECIMAL(10,2) NOT NULL, -- El pago pendiente 
 totalneto			DECIMAL(10,2) NOT NULL,
 amortizacion			DECIMAL(10,2) NOT NULL DEFAULT 0,
+restante				DECIMAL(10,2) GENERATED ALWAYS AS (totalneto - amortizacion) STORED,
 fechavencimiento		DATE NOT NULL, -- Para identificar hasta que fecha hay plazo para pagar
-estado					ENUM('Pagado','Pendiente', 'Vencido') DEFAULT 'Pendiente',
+estado					ENUM('Pagado','Pendiente') DEFAULT 'Pendiente',
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcontrato_crono_pag FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato) 
-) ENGINE=InnoDB;
+) ENGINE=InnoDB; 
 
 -- ALTER TABLE cronogramapagos MODIFY COLUMN estado ENUM('Pagado','Pendiente', 'Vencido') DEFAULT 'Pendiente';
 
@@ -360,29 +361,11 @@ CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios
 )ENGINE=InnoDB;
 
 
-SELECT * FROM personas;
-SELECT * FROM empresas;
-SELECT * FROM inversionistas;
-SELECT * FROM pais;
-SELECT * FROM departamentos;
-Select * from provincias;
-SELECT * FROM distritos;
-SELECT * FROM contactibilidad;
-SELECT * FROM contratos;
-SELECT * FROM leads;
-SELECT * FROM usuarios;
-select * from accesos;
-SELECT * FROM colaboradores;
-SELECT * FROM roles;
-SELECT * FROM cronogramapagos;
-INSERT INTO contactibilidad(idlead,fecha,hora,comentarios,estado) VALUES(26,'2025-07-04','10:30','Se obtuvo primer acercamiento','En proceso');
-UPDATE colaboradores SET idrol = 2 WHERE idcolaborador = 1;
 
 
 
 
 
--- AMORTTIZACION POR DAFFAULT SERA 0
 
 
 

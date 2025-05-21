@@ -51,14 +51,3 @@ LEFT JOIN
     personas p ON i.idpersona = p.idpersona;
     
     
-SELECT * FROM inversionistas;
-SELECT * FROM personas;
-DROP VIEW vista_cronogramas_detallado;
-SELECT * FROM contratos;
-
-
-
-
-    
-    SELECT fecha_inicio_contrato FROM vista_cronogramas_detallado;
-    

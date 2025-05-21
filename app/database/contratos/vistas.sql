@@ -1,4 +1,3 @@
-USE financiera;
 
 CREATE VIEW vista_contrato_pdf AS
 SELECT 
@@ -46,7 +45,32 @@ FROM
 GROUP BY 
     c.idcontrato;
     
-DROP VIEW  vista_contrato_pdf; 
-SELECT * FROM contratos;
-SELECT * FROM cronogramapagos;
-SELECT * FROM usuarios;
+    
+CREATE VIEW vista_contratos_resumida AS
+SELECT
+    c.idcontrato AS ID_Contrato,
+    CONCAT(p_asesor.nombres, ' ', p_asesor.apellidos) AS Asesor,
+    CONCAT(p_asesor.numdocumento) AS dniAsesor,
+    IF(i.idpersona IS NOT NULL, CONCAT(p_inver.nombres, ' ', p_inver.apellidos), e_inver.nombrecomercial) AS Inversionista,
+    CONCAT(p_inver.numdocumento) AS dniInver,
+    c.fechainicio AS Inicio,
+    c.fechafin AS Fin,
+    c.moneda AS Moneda,
+    c.capital AS Capital,
+    c.interes AS Interes_Porcentaje,
+    c.periodopago AS Periodo,
+    c.estado AS Estado
+FROM
+    contratos c
+JOIN
+    usuarios u_asesor ON c.idasesor = u_asesor.idusuario
+JOIN
+    colaboradores col ON u_asesor.idcolaborador = col.idcolaborador
+JOIN
+    personas p_asesor ON col.idpersona = p_asesor.idpersona
+JOIN
+    inversionistas i ON c.idinversionista = i.idinversionista
+LEFT JOIN
+    personas p_inver ON i.idpersona = p_inver.idpersona
+LEFT JOIN
+    empresas e_inver ON i.idempresa = e_inver.idempresa;

@@ -1,4 +1,3 @@
-USE financiera;
 
 DELIMITER //
 CREATE PROCEDURE sp_numcuenta_contrato(
@@ -18,11 +17,3 @@ BEGIN
 END //
 
 DELIMITER $
-
-SELECT * FROM numcuentas;
-
-DROP PROCEDURE  sp_numcuenta_contrato
-
-
-SELECT * FROM entidades;
-SELECT * FROM numcuentas;
