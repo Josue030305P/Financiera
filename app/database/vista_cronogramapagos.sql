@@ -14,6 +14,10 @@ SELECT
 FROM cronogramapagos c; 
 
 
+SELECT * FROM cronogramapagos;
+
+
+
 
 
 

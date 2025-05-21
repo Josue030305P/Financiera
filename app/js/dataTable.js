@@ -179,11 +179,16 @@ class DataTable {
                     <img src="${this.baseUrl}app/img/svg/Bulk/Delete.svg" alt="Eliminar" class="delete-lead">
                 </a>
              <a href="#" class="ver-cronograma-modal" style="cursor: pointer; display: inline-block;" data-contrato-id="${id}">
-            <img src="${this.baseUrl}app/img/svg/Bulk/Paper-gray.svg" alt="Ver Cronograma" >
+            <img src="${this.baseUrl}app/img/svg/Bulk/Paper-gray.svg" alt="Ver Cronograma" title="Ver cronograma">
         </a>
                 <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank">
-                    <img src="${this.baseUrl}app/img/svg/Bulk/Download.svg" alt="Generar PDF" class="generar-contrato">
+                    <img src="${this.baseUrl}app/img/svg/Bulk/Download.svg" alt="Generar PDF" class="generar-contrato" title="Generar PDF">
                 </a>
+
+          <a href="${this.baseUrl}app/views/numcuentas/numcuenta.add.php?idcontrato=${id}">
+                    <img src="${this.baseUrl}app/img/svg/Bulk/Download.svg" alt="Asociar número de cuenta" class="generar-contrato" title="Asociar número de cuenta">
+                </a>
+
             `;
     }
     return acciones;

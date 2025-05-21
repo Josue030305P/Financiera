@@ -2,7 +2,9 @@ CREATE VIEW vista_contratos_resumida AS
 SELECT
     c.idcontrato AS ID_Contrato,
     CONCAT(p_asesor.nombres, ' ', p_asesor.apellidos) AS Asesor,
+    CONCAT(p_asesor.numdocumento) AS dniAsesor,
     IF(i.idpersona IS NOT NULL, CONCAT(p_inver.nombres, ' ', p_inver.apellidos), e_inver.nombrecomercial) AS Inversionista,
+    CONCAT(p_inver.numdocumento) AS dniInver,
     c.fechainicio AS Inicio,
     c.fechafin AS Fin,
     c.moneda AS Moneda,
@@ -26,7 +28,7 @@ LEFT JOIN
     empresas e_inver ON i.idempresa = e_inver.idempresa;
     
     
-    
+DROP VIEW vista_contratos_resumida;
     
     
     
@@ -111,6 +113,7 @@ SELECT
     vc.porcentaje_garantia
 FROM vista_contratos vc
 WHERE vc.estado = 'Vigente';
+
 
 CREATE VIEW vista_contrato_pdf AS
 SELECT 

@@ -49,19 +49,37 @@ SELECT
     inv.idinversionista,
     CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto,
     cont.capital,
-    nc.numcuenta,
-    nc.cci,
-    ent.tipo,
-    ent.entidad,
-    u.usuario 
+    GROUP_CONCAT(DISTINCT nc.numcuenta SEPARATOR ', ') AS numeros_cuenta,
+    GROUP_CONCAT(DISTINCT nc.cci SEPARATOR ', ') AS cci_cuentas,
+    GROUP_CONCAT(DISTINCT ent.tipo SEPARATOR ', ') AS tipos_entidad,
+    GROUP_CONCAT(DISTINCT ent.entidad SEPARATOR ', ') AS nombres_entidad,
 
-FROM inversionistas inv
-LEFT JOIN personas p ON inv.idpersona = p.idpersona
-LEFT JOIN numcuentas nc ON inv.idinversionista = nc.idinversionista
-LEFT JOIN entidades ent ON nc.identidad = ent.identidad
-LEFT JOIN contratos cont ON inv.idinversionista = cont.idinversionista
-LEFT JOIN usuarios u ON inv.idasesor = u.idusuario;
-
+    CONCAT(p_asesor.nombres, ' ', p_asesor.apellidos) AS nombre_completo_asesor
+FROM
+    inversionistas inv
+LEFT JOIN
+    personas p ON inv.idpersona = p.idpersona
+LEFT JOIN
+    contratos cont ON inv.idinversionista = cont.idinversionista
+LEFT JOIN
+    numcuentas nc ON cont.idcontrato = nc.idcontrato
+LEFT JOIN
+    entidades ent ON nc.identidad = ent.identidad
+LEFT JOIN
+    usuarios u ON inv.idasesor = u.idusuario
+LEFT JOIN
+    colaboradores col ON u.idcolaborador = col.idcolaborador
+LEFT JOIN
+    personas p_asesor ON col.idpersona = p_asesor.idpersona 
+GROUP BY
+    inv.idinversionista,
+    p.nombres,
+    p.apellidos,
+    cont.capital,
+   
+    p_asesor.nombres,
+    p_asesor.apellidos;
+    
 
 
 CREATE VIEW list_contactibilidad AS

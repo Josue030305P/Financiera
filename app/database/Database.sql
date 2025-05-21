@@ -7,7 +7,7 @@ idpais 				INT PRIMARY KEY AUTO_INCREMENT,
 pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 )ENGINE=InnoDB;
 
-  
+SELECT * FROM contratos;
 
 CREATE TABLE departamentos(
 iddepartamento		INT PRIMARY KEY AUTO_INCREMENT,
@@ -47,6 +47,8 @@ identidad				INT PRIMARY KEY AUTO_INCREMENT,
 tipo					ENUM('Banco','Caja') NOT NULL,
 entidad					VARCHAR(45) UNIQUE NOT NULL 
 )ENGINE=InnoDB;
+
+
 
 CREATE TABLE  personas(
 idpersona			INT  PRIMARY KEY AUTO_INCREMENT,
@@ -252,6 +254,8 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+SELECT * FROM numcuentas;
+
 
 SELECT * FROM contratos;
 -- PREGUNTAR LUEGO SI UN INVERSIONISTA PUEDE TENER SOLO UN CONTRATO:
@@ -277,6 +281,11 @@ CONSTRAINT fk_identidad FOREIGN KEY(identidad) REFERENCES entidades(identidad),
 CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
+
+
+
+
+
 
 
 CREATE TABLE garantias(

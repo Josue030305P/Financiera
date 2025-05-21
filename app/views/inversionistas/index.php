@@ -21,11 +21,11 @@ $configuracionTabla = [
     'ID' => 'idinversionista',
     'Nombres y apellidos' => 'nombrecompleto',
     'Capital' => 'capital',
-    'N° cuenta' => 'numcuenta',
-    'CCI' => 'cci',
-    'Entidad' => 'tipo',
-    'Nombre de entidad' => 'entidad',
-    'Asesor' => 'usuario'
+    'N° cuenta' => 'numeros_cuenta',
+    'CCI' => 'cci_cuentas',
+    'Entidad' => 'tipos_entidad',
+    'Nombre de entidad' => 'nombres_entidad',
+    'Asesor' => 'nombre_completo_asesor'
   ]
 ];
 
