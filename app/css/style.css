@@ -1868,86 +1868,149 @@ label {
   padding: 5px 16px;
 }
 
+
+
+
+/* Estilos generales para los badges (etiquetas de estado) */
+.badge {
+    display: inline-block;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 0.375rem; 
+    color: #fff; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+}
+
+
+
+
+.badge-info {
+    background-color: #0d6efd; 
+    color: #fff;
+}
+
+
+.badge-pending {
+    background-color: #ffc107; 
+    color: #fff; 
+}
+
+
+.badge-success {
+    background-color: #198754; 
+    color: #fff;
+}
+
+
+.badge-trashed {
+    background-color: #dc3545; 
+    color: #fff;
+}
+
+.badge-active {
+    background-color: #28a745; 
+    color: #fff;
+}
+
+
+.badge-default {
+    background-color: #6c757d; 
+    color: #fff;
+}
+
+
+
+
+/*-------------------------------------------------------------------------*/
+
+
+
+
 /* -------------------------------------------------------*/
 .filters-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px; /* Espacio entre grupos de filtros y el grupo de acciones/iconos */
-            /* background-color y padding removidos, ahora manejados por .table-header */
-            margin-bottom: 0; /* Ajuste para que no haya margen extra si el padre ya tiene padding */
-            align-items: flex-end; /* Alinea los elementos a la parte inferior */
-            justify-content: flex-start;
-            border-radius: 0; /* Removido, el border-radius lo manejará .table-header */
-            flex-grow: 1; /* Permite que el contenedor de filtros ocupe el espacio disponible */
-            min-width: 0; /* Permite que el contenedor de filtros se encoja */
-        }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+ 
+  margin-bottom: 0; 
+  align-items: flex-end; 
+  justify-content: flex-start;
+  border-radius: 0; 
+  flex-grow: 1; 
+  min-width: 0; 
+}
 
-        /* Estilos para cada grupo individual de filtro (label + input/select) */
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            flex: 1 1 160px; /* flex-grow, flex-shrink, flex-basis para control de tamaño */
-            min-width: 150px; /* Mantiene un ancho mínimo */
-            /* max-width removido para permitir que se ajusten mejor */
-        }
+/* Estilos para cada grupo individual de filtro (label + input/select) */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 160px; 
+  min-width: 150px;
 
-        .filter-group label {
-            margin-bottom: 5px;
-            font-size: 0.9em;
-            color: #f8f9fa;
-        }
+}
 
-        .filter-group input[type="text"],
-        .filter-group input[type="number"],
-        .filter-group select {
-            padding: 8px;
-            border: 1px solid #495057;
-            border-radius: 4px;
-            font-size: 0.95em;
-            flex-grow: 1;
-            max-width: 100%; /* Asegura que el input/select no desborde su padre */
-            box-sizing: border-box;
-            color: #495057;
-            background-color: #e9ecef;
-        }
+.filter-group label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  color: #f8f9fa;
+}
 
-        /* Contenedor para los botones de acción y los iconos de Excel */
-        .filter-controls-group {
-            display: flex;
-            align-items: flex-end; /* Alinea los botones y los iconos a la parte inferior */
-            gap: 10px; /* Espacio entre los botones de acción y los iconos */
-            flex-wrap: wrap; /* Permite que el grupo se envuelva si no hay espacio */
-            margin-top: 0; /* Asegura que no haya margen superior si ya se alinea con flex-end */
-            flex-shrink: 0; /* Evita que este grupo se encoja demasiado */
-            min-width: fit-content; /* Ocupa el espacio mínimo necesario para su contenido */
-        }
+.filter-group input[type="text"],
+.filter-group input[type="number"],
+.filter-group select {
+  padding: 8px;
+  border: 1px solid #495057;
+  border-radius: 4px;
+  font-size: 0.95em;
+  flex-grow: 1;
+  max-width: 100%; 
+  box-sizing: border-box;
+  color: #495057;
+  background-color: #e9ecef;
+}
 
-        /* Estilos para los botones de acción (Aplicar Filtros, Resetear) */
-        .filter-actions {
-            display: flex;
-            gap: 10px;
-            align-self: flex-end; /* Asegura que los botones se alineen con la parte inferior de los inputs */
-        }
+/* Contenedor para los botones de acción y los iconos de Excel */
+.filter-controls-group {
+  display: flex;
+  align-items: flex-end; 
+  flex-wrap: wrap;
+  margin-top: 0; 
+  flex-shrink: 0; 
+  min-width: fit-content;
+}
 
-        .filter-actions button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            font-size: 0.95em;
-        }
+/* Estilos para los botones de acción (Aplicar Filtros, Resetear) */
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  align-self: flex-end;
+}
 
-        .filter-actions button#aplicar-filtros,
-        .filter-actions button#aplicar-filtros-lead {
-            background-color: #007bff;
-        }
+.filter-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95em;
+}
 
-        .filter-actions button#resetear-filtros,
-        .filter-actions button#resetear-filtros-lead {
-            background-color: #6c757d;
-        }
+.filter-actions button#aplicar-filtros,
+.filter-actions button#aplicar-filtros-lead {
+  background-color: #007bff;
+}
 
+.filter-actions button#resetear-filtros,
+.filter-actions button#resetear-filtros-lead {
+  background-color: #6c757d;
+}
 
 .modal {
   display: none;
@@ -2011,156 +2074,156 @@ label {
   vertical-align: middle;
 }
 
+.table-header {
+  background-color: #0000cd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-        .table-header {
-            background-color: #0000CD; /* Color de fondo azul para todo el encabezado */
-            display: flex;
-            justify-content: space-between; /* Espacia el botón "Nuevo" y el contenedor de filtros */
-            align-items: center; /* Centra verticalmente los elementos */
-            margin-bottom: 20px;
-            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-            gap: 20px; /* Espacio entre el botón "Nuevo" y el contenedor de filtros */
-            padding: 10px; /* Padding interno para todo el header */
-            border-radius: 8px; /* Bordes redondeados para todo el header */
-            width: 100%; /* Asegura que ocupe el ancho completo de su padre */
-            box-sizing: border-box; /* Incluye padding y border en el ancho total */
-        }
+/* Estilos para el botón "Nuevo" */
+.create-lead {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  flex-shrink: 0;
+}
 
-        /* Estilos para el botón "Nuevo" */
-        .create-lead {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            flex-shrink: 0; 
-        }
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-        .header-buttons {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.header-buttons img {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
 
-        .header-buttons img {
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-        }
+.ver-cronograma-modal {
+  width: 21px;
 
-        .ver-cronograma-modal {
-          width: 21px;
-       
-          background-color: #28a745;
-        }
-       
+  background-color: #28a745;
+}
 
-        .edit-lead {
-          width: 21px;
-            background-color: #f5db4a;
-        }
-        .delete-lead {
-          width: 21px;
-            background-color: rgb(219, 27, 27);
-        }
-    
-        .generar-contrato {
-          width: 21px;
-            background-color:#ffb648
-        }
+.edit-lead {
+  width: 21px;
+  background-color: #f5db4a;
+}
+.delete-lead {
+  width: 21px;
+  background-color: rgb(219, 27, 27);
+}
 
-        .btn-addInversionista {
-            background-color: #0061f7;
-            color: #fff;
-            border-radius: 5px;
-            width: 21px;
-        }
+.generar-contrato {
+  width: 21px;
+  background-color: #ffb648;
+}
 
-        
+.btn-addInversionista {
+  background-color: #0061f7;
+  color: #fff;
+  border-radius: 5px;
+  width: 21px;
+}
 
-        .edit-lead:hover,.btn-addInversionista:hover, .delete-lead:hover, .ver-cronograma-modal:hover {
-            opacity: 0.7;
-            transform: scale(1.1);
-        }
+.edit-lead:hover,
+.btn-addInversionista:hover,
+.delete-lead:hover,
+.ver-cronograma-modal:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
 
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.users-table td,
+th {
+  width: 45px;
+}
 
-        .users-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .users-table td, th {
-          width: 45px;
-        }
+.users-table th,
+.users-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
 
-        .users-table th, .users-table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
+.users-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
-     
-        .users-table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
 
-        .table-wrapper {
-            overflow-x: auto; 
-            width: 100%;
-        }
+.posts-table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  color: #767676;
+  transition: none;
+}
 
-        .posts-table {
-            width: 100%;
-            text-align: left;
-            border-collapse: collapse;
-            line-height: 1.4;
-            letter-spacing: -0.3px;
-            color: #767676;
-            transition: none;
-        }
+.users-table-info {
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  color: #767676;
+  height: 48px;
+  border-bottom: 1.2px solid #dadbe4;
+  font-size: 14px;
+}
 
-        .users-table-info {
-            line-height: 1.4;
-            letter-spacing: -0.3px;
-            color: #767676;
-            height: 48px;
-            border-bottom: 1.2px solid #dadbe4;
-            font-size: 14px;
-        }
+.users-table-info th {
+  font-weight: 500;
+  padding: 5px;
+}
 
-        .users-table-info th {
-            font-weight: 500;
-            padding: 5px;
-        }
+.posts-table td {
+  background-color: #fff;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding: 10px;
+  white-space: normal;
+}
 
-        .posts-table td {
-            background-color: #fff;
-            border-top: 1px solid #EEEEEE;
-            border-bottom: 1px solid #EEEEEE;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            padding: 10px;
-            white-space: normal;
-        }
+.posts-table td:first-child {
+  padding-left: 20px;
+}
 
-        .posts-table td:first-child {
-            padding-left: 20px;
-        }
+.posts-table tbody {
+  font-size: 14px;
+}
 
-        .posts-table tbody {
-            font-size: 14px;
-        }
+.posts-table tbody tr:last-child .users-item-dropdown {
+  bottom: 250%;
+  top: auto;
+}
 
-        .posts-table tbody tr:last-child .users-item-dropdown {
-            bottom: 250%;
-            top: auto;
-        }
-
-        .export-excel, .import-excel {
-            width: 35px;
-            cursor: pointer;
-        }
+.export-excel,
+.import-excel {
+  width: 35px;
+  cursor: pointer;
+}
 
 /*-------------------------------------------------------------------------------------------------------*/
 

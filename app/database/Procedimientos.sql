@@ -117,6 +117,8 @@ BEGIN
 END //
 DELIMITER ;
 
+SELECT * FROM inversionistas;
+
 
 DELIMITER //
 CREATE PROCEDURE sp_add_contrato(

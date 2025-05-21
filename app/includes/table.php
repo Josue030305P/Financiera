@@ -8,7 +8,7 @@
         <div class="row">
 
             <div class="table-header">
-                <?php if ($tipo !== 'Contratos'): ?>
+                <?php if ($tipo !== 'Contratos'  && $tipo !== 'Contactos' ): ?>
                     <a href="<?= $links[$tipo] ?? '#' ?>">
                         <button class="create-lead">+ Nuevo <?= htmlspecialchars($tipo) ?></button>
                     </a>

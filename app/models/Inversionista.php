@@ -43,10 +43,10 @@ class Inversionista
 
     try {
       $this->conexion->beginTransaction();
-       if (!isset($_SESSION['idusuario'])) {
+      if (!isset($_SESSION['idusuario'])) {
         return ['success' => false, 'message' => 'No se encontró el ID de usuairo en la sesión.'];
       }
-    
+
       $idusuariocreacion = $_SESSION['idusuario'];
       $sql = "CALL sp_add_inversionista(?,?,?,?)";
       $stmt = $this->conexion->prepare($sql);
@@ -57,13 +57,38 @@ class Inversionista
         $idusuariocreacion
 
       ));
-      
+
+
+
       $idRow = $stmt->fetch(PDO::FETCH_ASSOC);
-      $idinversionista = $idRow['idinversionista'] ?? 0 ;
+      $idinversionista = $idRow['idinversionista'] ?? 0;
       $stmt->closeCursor();
-      
+
+
+      $idlead = null;
+      if (isset($params["idpersona"]) && $params["idpersona"] !== null) {
+        $sqlGetLeadId = "SELECT idlead FROM leads WHERE idpersona = ?";
+        $stmtGetLeadId = $this->conexion->prepare($sqlGetLeadId);
+        $stmtGetLeadId->execute([$params["idpersona"]]);
+        $leadResult = $stmtGetLeadId->fetch(PDO::FETCH_ASSOC);
+        if ($leadResult) {
+          $idlead = $leadResult['idlead'];
+        }
+      }
+
+
+
+      //  Actualizar el estado del lead si se encontró un idlead válido
+      if ($idlead !== null && $idlead > 0) {
+        $sqlActualizarLead = "UPDATE leads SET estado = 'Inversionista' WHERE idlead = ? AND estado = 'En proceso'";
+        $stmtActualizarLead = $this->conexion->prepare($sqlActualizarLead);
+        $stmtActualizarLead->execute([$idlead]);
+      }
+
+
+
       $this->conexion->commit();
-     
+
       return ["success" => true, "message" => "Se agrego el inversionista", "idinversionista" => $idinversionista];
     } catch (PDOException $e) {
       $this->conexion->rollBack();

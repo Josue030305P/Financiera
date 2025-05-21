@@ -68,7 +68,8 @@ class Lead
     }
 
 
-    public function searchConyuge($ndocumento):array {
+    public function searchConyuge($ndocumento): array
+    {
         try {
 
             $sql = "CALL sp_buscar_persona_dni(?)";
@@ -77,37 +78,14 @@ class Lead
             $result = $smt->fetch(PDO::FETCH_ASSOC);
 
             return $result;
-        }
-        catch(PDOException $e) {
+        } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    // Mofificar para traer el ultimo ID de la persona Agregada:
-    public function addConyuge($params = []) : array {
-        try {
-          
-            $sql = "CALL  sp_add_conyuge(?,?,?,?,?,?,?,?)";
-            $smt = $this->conexion->prepare($sql);
-            $smt->execute([
-                $params['idpais'],
-                $params['apellidos'],
-                $params['nombres'],
-                $params['tipodocumento'],
-                $params['numdocumento'],
-                $params['email'],
-                $params['telprincipal'],
-                $params['domicilio'],
-            ]);
 
-            return ['success' => true];
-        
 
-        }
-        catch(PDOException $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
+
 
     public function add(array $data): array
     {
@@ -196,8 +174,7 @@ class Lead
                      idcanal = ?, 
                      comentarios = ?, 
                      prioridad = ?, 
-                     ocupacion = ? ,
-                     estado = 'En proceso'
+                     ocupacion = ?
                      WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sqlL);
             $stmt->execute([
@@ -221,10 +198,13 @@ class Lead
         }
     }
 
+
+
     public function delete($id): array
     {
         try {
             $this->conexion->beginTransaction();
+
 
             $sqlGetPersona = "SELECT idpersona FROM leads WHERE idlead = ?";
             $stmt = $this->conexion->prepare($sqlGetPersona);
@@ -237,26 +217,71 @@ class Lead
 
             $idpersona = $lead['idpersona'];
 
-            $sqlL = "DELETE FROM leads WHERE idlead = ?";
-            $stmt = $this->conexion->prepare($sqlL);
-            $stmt->execute([$id]);
 
-            $sqlP = "DELETE FROM personas WHERE idpersona = ?";
-            $stmt = $this->conexion->prepare($sqlP);
-            $stmt->execute([$idpersona]);
+            $sqlL = "UPDATE leads SET estado = 'Inactivo' WHERE idlead = ?";
+            $stmtL = $this->conexion->prepare($sqlL);
+            $stmtL->execute([$id]);
+
+
+            $sqlP = "UPDATE personas SET estado = 'Inactivo' WHERE idpersona = ?";
+            $stmtP = $this->conexion->prepare($sqlP);
+            $stmtP->execute([$idpersona]);
 
             $this->conexion->commit();
 
             return [
                 'success' => true,
-                'rows' => $stmt->rowCount()
+                'rows_affected_lead' => $stmtL->rowCount(),
+                'rows_affected_persona' => $stmtP->rowCount(),
+                'message' => 'Lead y persona asociados marcados como Inactivos lógicamente.'
             ];
         } catch (PDOException $e) {
             $this->conexion->rollBack();
             throw new Exception($e->getMessage());
+
         }
+
     }
+
 }
+
+
+// public function delete($id): array
+// {
+//     try {
+//         $this->conexion->beginTransaction();
+
+//         $sqlGetPersona = "SELECT idpersona FROM leads WHERE idlead = ?";
+//         $stmt = $this->conexion->prepare($sqlGetPersona);
+//         $stmt->execute([$id]);
+//         $lead = $stmt->fetch(PDO::FETCH_ASSOC);
+
+//         if (!$lead) {
+//             throw new Exception("Lead no encontrado");
+//         }
+
+//         $idpersona = $lead['idpersona'];
+
+//         $sqlL = "DELETE FROM leads WHERE idlead = ?";
+//         $stmt = $this->conexion->prepare($sqlL);
+//         $stmt->execute([$id]);
+
+//         $sqlP = "DELETE FROM personas WHERE idpersona = ?";
+//         $stmt = $this->conexion->prepare($sqlP);
+//         $stmt->execute([$idpersona]);
+
+//         $this->conexion->commit();
+
+//         return [
+//             'success' => true,
+//             'rows' => $stmt->rowCount()
+//         ];
+//     } catch (PDOException $e) {
+//         $this->conexion->rollBack();
+//         throw new Exception($e->getMessage());
+//     }
+// }
+
 
 //  $lead = new Lead();
 //  $datos = [

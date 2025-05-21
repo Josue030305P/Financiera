@@ -4,7 +4,6 @@ USE financiera;
 SELECT * FROM usuarios;
 SELECT * FROM leads;
 -- Vista para leads
-
 CREATE VIEW lista_leads AS
 SELECT
     l.idlead,
@@ -22,8 +21,7 @@ JOIN canales c ON l.idcanal = c.idcanal
 LEFT JOIN usuarios u ON l.idasesor = u.idusuario
 LEFT JOIN colaboradores co ON u.idcolaborador = co.idcolaborador 
 LEFT JOIN personas pa ON co.idpersona = pa.idpersona 
-WHERE NOT l.estado = 'Inactivo';
-
+WHERE l.estado NOT IN ('Inactivo', 'Inversionista');
 
 -- Vista para sesores
 
@@ -102,7 +100,7 @@ CREATE VIEW list_contactibilidad AS
     JOIN usuarios u ON l.idasesor = u.idusuario;
     
 
-
+SELECT *  FROM list_contactibilidad;
 SELECT * FROM contactibilidad;
 
 
@@ -181,13 +179,7 @@ SELECT * FROM inversionistas;
 
 SELECT * FROM numcuentas;
 SELECT * FROM contactibilidad;
-
-
-
-
-
-
-
+SELECT * FROM leads;
 
 
 

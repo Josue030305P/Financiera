@@ -21,7 +21,6 @@ class DataTable {
   init() {
     this.cargarDatos();
     this.initEventListeners();
-    this.initFilterEventListeners();
     this.initHeader();
     this.initModalEventListeners();
   }
@@ -75,7 +74,6 @@ class DataTable {
   }
 
   renderizarTabla(data) {
-    console.log("Renderizando tabla con:", data);
     const tbody = document.querySelector(`#${this.tableId} tbody`);
     const thead = document.querySelector(`#${this.tableId} thead tr`);
     tbody.innerHTML = "";
@@ -115,13 +113,36 @@ class DataTable {
                 break;
               case "Estado":
                 const estado = item[this.mapeo[columna]];
-                const claseEstado =
-                  {
-                    Activo: "badge-active",
-                    Pendiente: "badge-pending",
-                    Inactivo: "badge-trashed",
-                  }[estado] || "";
-                td.innerHTML = `<span class="${claseEstado}">${estado}</span>`;
+                let claseEstado = "";
+
+                if (this.tipo === "leads") {
+                  claseEstado =
+                    {
+                      "Nuevo contacto": "badge-info",
+                      "En proceso": "badge-pending",
+                      Inversionista: "badge-success",
+                      Inactivo: "badge-trashed",
+                    }[estado] || "";
+                } else if (this.tipo === "contactos") {
+                
+                  claseEstado =
+                    {
+                      Realizado: "badge-active",
+                      Pendiente: "badge-pending",
+                      Reprogramado: "badge-trashed",
+                    }[estado] || "";
+                }else if (this.tipo === "contratos") {
+                  claseEstado =  {
+                      Vigente: "badge-active",
+                      Completado: "badge-trashed",
+                   
+                    }[estado] || "";
+                }
+                 else {
+                  claseEstado = "badge-default";
+                }
+
+                td.innerHTML = `<span class="badge ${claseEstado}">${estado}</span>`;
                 break;
               case "Acciones":
                 td.innerHTML = this.renderizarAcciones(item[this.idField]);
@@ -142,7 +163,6 @@ class DataTable {
       );
     }
   }
-
   obtenerValorCampo(item, columna) {
     const campo = this.mapeo[columna];
     if (Array.isArray(campo)) {
@@ -315,94 +335,5 @@ class DataTable {
 
     tablaHTML += "</tbody></table>";
     this.modalCronogramaBody.innerHTML = tablaHTML;
-  }
-
-  initFilterEventListeners() {
-    const aplicarFiltrosBtn = document.getElementById("aplicar-filtros");
-    if (aplicarFiltrosBtn) {
-      aplicarFiltrosBtn.addEventListener(
-        "click",
-        this.filtrarContratos.bind(this)
-      );
-    }
-
-    const resetearFiltrosBtn = document.getElementById("resetear-filtros");
-    if (resetearFiltrosBtn) {
-      resetearFiltrosBtn.addEventListener(
-        "click",
-        this.resetearFiltros.bind(this)
-      );
-    }
-  }
-
-  filtrarContratos() {
-    let datosFiltrados = [...this.dataOriginal];
-
-    const filtroVencimiento =
-      document.getElementById("filtro-vencimiento")?.value;
-    const filtroEstado = document.getElementById("filtro-estado")?.value;
-    const filtroAsesor = document
-      .getElementById("filtro-asesor")
-      ?.value.toLowerCase();
-    const filtroMoneda = document.getElementById("filtro-moneda")?.value;
-
-    if (filtroVencimiento === "proximos_30_dias") {
-      const hoy = new Date();
-      const dentroDe30Dias = new Date();
-      dentroDe30Dias.setDate(hoy.getDate() + 30);
-      datosFiltrados = datosFiltrados.filter((contrato) => {
-        const fechaFin = new Date(contrato["Fin"]);
-        return fechaFin >= hoy && fechaFin <= dentroDe30Dias;
-      });
-    }
-
-    if (filtroEstado) {
-      datosFiltrados = datosFiltrados.filter(
-        (contrato) => contrato["Estado"] === filtroEstado
-      );
-    }
-
-    if (filtroAsesor) {
-      datosFiltrados = datosFiltrados.filter((contrato) =>
-        contrato["Asesor"].toLowerCase().includes(filtroAsesor)
-      );
-    }
-
-    if (filtroMoneda) {
-      datosFiltrados = datosFiltrados.filter(
-        (contrato) => contrato["Moneda"] === filtroMoneda
-      );
-    }
-
-    this.renderizarTabla(datosFiltrados);
-  }
-
-  resetearFiltros() {
-    Swal.fire({
-      toast: true,
-      position: "top-end",
-      title: "Filtros",
-      text: "¿Desea quitar los filtros?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Sí",
-      cancelButtonText: "No",
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const filtroVencimiento = document.getElementById("filtro-vencimiento");
-        const filtroEstado = document.getElementById("filtro-estado");
-        const filtroAsesor = document.getElementById("filtro-asesor");
-        const filtroMoneda = document.getElementById("filtro-moneda");
-
-        if (filtroVencimiento) filtroVencimiento.value = "";
-        if (filtroEstado) filtroEstado.value = "";
-        if (filtroAsesor) filtroAsesor.value = "";
-        if (filtroMoneda) filtroMoneda.value = "";
-
-        this.renderizarTabla(this.dataOriginal);
-      }
-    });
   }
 }

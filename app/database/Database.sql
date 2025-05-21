@@ -70,7 +70,8 @@ CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 )ENGINE=InnoDB;
 
-
+SELECT * FROM personas;
+SELECT * FROM leads;
 
 
 CREATE TABLE empresas(
