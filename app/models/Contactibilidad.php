@@ -71,7 +71,73 @@ class Contactibilidad
             throw new Exception($e->getMessage());
         }
     }
+
+
+     
+    public function update($idcontactibilidad, $data = []): array
+    {
+        try {
+            $this->conexion->beginTransaction();
+
+
+            $sql = "CALL sp_update_contactibilidad(?,?,?,?,?)";
+            $stmt = $this->conexion->prepare($sql);
+
+            $stmt->execute([
+                $idcontactibilidad,
+                $data['fecha'],
+                $data['hora'],
+                $data['comentarios'],
+                $data['estado']
+            ]);
+
+            $this->conexion->commit();
+
+            return [
+                'success' => true,
+                'rows' => $stmt->rowCount() 
+            ];
+
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            throw new Exception("Error al actualizar la contactibilidad: " . $e->getMessage());
+        } catch (Exception $e) {
+            $this->conexion->rollBack(); 
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    
+    public function getById($idcontactibilidad): ?array
+    {
+        try {
+            $sql = "SELECT fecha, hora, comentarios, estado FROM contactibilidad WHERE idcontactibilidad = ?";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$idcontactibilidad]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ?: null; 
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener la contactibilidad por ID: " . $e->getMessage());
+        }
+    }
+
+
+
+
 }
+
+// $ts = new Contactibilidad();
+// var_dump($ts->getById(1));
+
+
+
+
+
+
+
+
+
+
 
 
 // $ts = new Contactibilidad();

@@ -9,10 +9,23 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
     switch ($_SERVER['REQUEST_METHOD']) {
 
-        case 'GET':
-            echo json_encode($contacto->getAll());
+             case 'GET':
+            if (isset($_GET['id'])) {
+                try {
+                    $idcontactibilidad = (int)$_GET['id'];
+                    $data = $contacto->getById($idcontactibilidad);
+                    if ($data) {
+                        echo json_encode(["status" => "success", "data" => $data]);
+                    } else {
+                        echo json_encode(["status" => "error", "message" => "Contacto no encontrado."]);
+                    }
+                } catch (Exception $e) {
+                    echo json_encode(["status" => "error", "message" => "Error al obtener contacto: " . $e->getMessage()]);
+                }
+            } else {
+                echo json_encode($contacto->getAll());
+            }
             break;
-
 
        case 'POST':
             $input = file_get_contents('php://input');
@@ -43,6 +56,34 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 echo json_encode([
                     "status" => "error",
                     "message" => "Error interno del servidor: " . $e->getMessage()
+                ]);
+            }
+            break;
+
+
+
+            case 'PUT': 
+            $input = file_get_contents('php://input');
+            $dataJSON = json_decode($input, true);
+
+            $idcontactibilidad = $_GET['id'] ?? null;
+
+            if (!$idcontactibilidad || !is_numeric($idcontactibilidad)) {
+                echo json_encode(["status" => "error", "message" => "ID de contactibilidad no proporcionado o inválido."]);
+                exit();
+            }
+
+            try {
+                $result = $contacto->update((int)$idcontactibilidad, $dataJSON);
+                echo json_encode([
+                    "status" => $result['success'] ? "success" : "error",
+                    "message" => $result['success'] ? "Contacto actualizado correctamente." : "No se pudo actualizar el contacto.",
+                    "rows" => $result['rows']
+                ]);
+            } catch (Exception $e) {
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Error al actualizar contacto: " . $e->getMessage()
                 ]);
             }
             break;

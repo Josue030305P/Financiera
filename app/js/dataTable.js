@@ -124,21 +124,19 @@ class DataTable {
                       Inactivo: "badge-trashed",
                     }[estado] || "";
                 } else if (this.tipo === "contactos") {
-                
                   claseEstado =
                     {
                       Realizado: "badge-active",
                       Pendiente: "badge-pending",
                       Reprogramado: "badge-trashed",
                     }[estado] || "";
-                }else if (this.tipo === "contratos") {
-                  claseEstado =  {
+                } else if (this.tipo === "contratos") {
+                  claseEstado =
+                    {
                       Vigente: "badge-active",
                       Completado: "badge-trashed",
-                   
                     }[estado] || "";
-                }
-                 else {
+                } else {
                   claseEstado = "badge-default";
                 }
 
@@ -175,16 +173,17 @@ class DataTable {
 
   renderizarAcciones(id) {
     let acciones = `
-            <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
+           
+        `;
+
+    if (this.tipo === "leads") {
+      acciones += `
+       <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
                 <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
             </a>
             <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
                 <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
             </a>
-        `;
-
-    if (this.tipo === "leads") {
-      acciones += `
                 <a href="${this.baseUrl}app/views/contactibilidad/contacto.add?idlead=${id}">
                     <button class="btn-addInversionista">
                         <img src="${this.baseUrl}app/img/svg/Bulk/3-User-white.svg" alt="Contactibilidad" class="icon-inversionista">
@@ -210,6 +209,17 @@ class DataTable {
                 </a>
 
             `;
+    }
+
+    if (this.tipo === "contactos") {
+      acciones = `
+            <a href="${this.baseUrl}app/views/contactibilidad/contactos.update.php?id=${id}">
+                <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
+            </a>
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
+                <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
+            </a>
+        `;
     }
     return acciones;
   }
