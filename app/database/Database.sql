@@ -191,11 +191,13 @@ fecha					DATE NOT NULL,
 hora					TIME NOT NULL,
 comentarios				VARCHAR(120) NULL,
 fechahoraeliminacion	DATETIME NULL,
-estado					VARCHAR(50) NULL,
+estado					ENUM('Realizado','Pendiente','Reprogramado') NOT NULL,
 CONSTRAINT fk_idlead FOREIGN KEY(idlead) REFERENCES leads(idlead),
 CONSTRAINT fk_id_user_creacion_contact FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_contact FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
+
+ALTER TABLE contactibilidad MODIFY COLUMN estado ENUM('Realizado','Pendiente','Reprogramado') NOT NULL;
 
 CREATE TABLE versiones (
   idversion    INT AUTO_INCREMENT PRIMARY KEY,

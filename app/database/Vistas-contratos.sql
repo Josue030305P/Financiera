@@ -32,6 +32,16 @@ DROP VIEW vista_contratos_resumida;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 CREATE VIEW vista_contratos AS
 SELECT 
     c.idcontrato,

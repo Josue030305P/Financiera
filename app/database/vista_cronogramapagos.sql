@@ -16,7 +16,7 @@ FROM cronogramapagos c;
 
 SELECT * FROM cronogramapagos;
 
-
+DROP VIEW vista_cronogramapagos;
 
 
 

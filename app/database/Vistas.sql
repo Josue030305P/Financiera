@@ -80,6 +80,8 @@ GROUP BY
     p_asesor.nombres,
     p_asesor.apellidos;
     
+DROP VIEW list_inversionistas;
+    
 
 
 CREATE VIEW list_contactibilidad AS
@@ -175,8 +177,10 @@ LEFT JOIN
 
 
 
+SELECT * FROM inversionistas;
 
-
+SELECT * FROM numcuentas;
+SELECT * FROM contactibilidad;
 
 
 

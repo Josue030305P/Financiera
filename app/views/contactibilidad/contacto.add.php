@@ -1,101 +1,68 @@
-<?php require_once '../../includes/header.php'; ?>
-<?php require_once __DIR__ . "/../../includes/config.php"; ?>
-<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form-add/form.add.css">
+<?php
+session_start();
+require_once '../../includes/header.php';
+require_once __DIR__ . "/../../includes/config.php";
+
+
+$idLead = $_GET['idlead'] ?? null;
+?>
+<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/contactibilidad.add.css">
+<meta name="base-url" content="<?= BASE_URL ?>">
 
 <body>
-
     <div class="page-flex">
-
         <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
 
         <div class="main-wrapper">
-
             <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
 
+            <div id="add-contactibilidad-page-content">
+                <div class="container">
+                    <h1>Registrar Contacto</h1>
 
-    <div id="lead-form form" class="form-container">
-    <h2 class="form-title">Agregar Nuevo Contacto</h2>
-    <div class="form-header">
-        
-        <a href="<?=BASE_URL?>app/views/contactibilidad/"><span class="regresar-btn"> ⬅️ Lista de contactos</span></a>
-    </div>
+                    <form id="addContactibilidadForm">
+                        <div class="form-grid">
+                            <input type="hidden" name="idlead" value="<?= htmlspecialchars($idLead) ?>">
 
-    <div class="form-body">
-        <div class="form-grid">
-            <div class="form-group">
-                <label for="apellidos">Apellidos</label>
-                <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos">
-            </div>
+                            <div class="form-group">
+                                <label for="fecha_contacto">Fecha de Contacto:</label>
+                                <input type="date" id="fecha_contacto" name="fecha_contacto" required>
+                            </div>
 
-            <div class="form-group">
-                <label for="nombres">Nombres</label>
-                <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres">
-            </div>
+                            <div class="form-group">
+                                <label for="hora_contacto">Hora de Contacto:</label>
+                                <input type="time" id="hora_contacto" name="hora_contacto" required>
+                            </div>
 
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono">
-            </div>
+                            <div class="form-group">
+                                <label for="estado_contactibilidad">Estado de la Contactibilidad:</label>
+                                <select id="estado_contactibilidad" name="estado_contactibilidad" required>
+                                    <option value="">Seleccione un estado</option>
+                                    <option value="Realizado">Realizado</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Reprogramado">Reprogramado</option>
+                                </select>
+                            </div>
 
-            <div class="form-group">
-                <label for="correo">Correo</label>
-                <input type="email" id="correo" placeholder="Ingrese su correo" class="correo">
-            </div>
+                            <div class="form-group full-width-comments">
+                                <label for="comentarios">Comentarios:</label>
+                                <textarea id="comentarios" name="comentarios" placeholder="Notas detalladas sobre la interacción (ej. 'Interesado en inversión a corto plazo, llamar el lunes')"></textarea>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="pais">País</label>
-                <select name="pais" id="pais" class="select-box">
-                    <option value="Alta">Perú</option>
-                    <option value="Media">Chile</option>
-                    <option value="Baja">Venezuela</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="prioridad">Prioridad</label>
-                <select name="prioridad" id="prioridad" class="select-box">
-                    <option value="Alta">Alta</option>
-                    <option value="Media">Media</option>
-                    <option value="Baja">Baja</option>
-                </select>
-            </div>
-
-            <div class="form-group full-width">
-                <label for="ocupacion">Ocupación</label>
-                <input type="text" id="ocupacion" placeholder="Ingrese una ocupación" class="ocupacion">
-            </div>
-
-            <div class="form-group full-width">
-                <label for="comentarios">Comentarios</label>
-                <textarea name="comentarios" id="comentarios" class="textarea-box" placeholder="Ingrese algún comentario"></textarea>
+                        <div class="form-actions">
+                            <button type="submit">Registrar Contacto</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <div class="form-footer">
-            <button class="add-btn">Agregar lead</button>
-            <button class=" disabled reset-btn" >Cancelar</button>
-        </div>
     </div>
-</div>
-
-
-        </div>
-
-
-    </div>
-    
-
-    <!-- Chart library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
-
-    <!-- Icons library -->
     <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
-
-    <!-- Custom scripts -->
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
-
+    <script src="<?= BASE_URL ?>app/js/contactibilidad.js"></script>
 
 </body>
-
-
 

@@ -165,9 +165,9 @@ class DataTable {
 
     if (this.tipo === "leads") {
       acciones += `
-                <a href="${this.baseUrl}app/views/inversionistas/inversionista.add?lead_id=${id}">
+                <a href="${this.baseUrl}app/views/contactibilidad/contacto.add?idlead=${id}">
                     <button class="btn-addInversionista">
-                        <img src="${this.baseUrl}app/img/svg/Bulk/3-User-white.svg" alt="Inversionista" class="icon-inversionista">
+                        <img src="${this.baseUrl}app/img/svg/Bulk/3-User-white.svg" alt="Contactibilidad" class="icon-inversionista">
                     </button>
                 </a>
             `;
