@@ -2112,25 +2112,7 @@ label {
   height: 30px;
 }
 
-.ver-cronograma-modal {
-  width: 21px;
 
-  background-color: #28a745;
-}
-
-.edit-lead {
-  width: 21px;
-  background-color: #f5db4a;
-}
-.delete-lead {
-  width: 21px;
-  background-color: rgb(219, 27, 27);
-}
-
-.generar-contrato {
-  width: 21px;
-  background-color: #ffb648;
-}
 
 .btn-addInversionista {
   background-color: #0061f7;
@@ -2139,10 +2121,7 @@ label {
   width: 21px;
 }
 
-.edit-lead:hover,
-.btn-addInversionista:hover,
-.delete-lead:hover,
-.ver-cronograma-modal:hover {
+.icon-acciones:hover {
   opacity: 0.7;
   transform: scale(1.1);
 }
@@ -2224,6 +2203,12 @@ th {
   width: 35px;
   cursor: pointer;
 }
+
+.icon-acciones {
+  width: 24px;
+  height: 24px;
+}
+
 
 /*-------------------------------------------------------------------------------------------------------*/
 

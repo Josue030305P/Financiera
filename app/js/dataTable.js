@@ -176,10 +176,10 @@ class DataTable {
   renderizarAcciones(id) {
     let acciones = `
             <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
-                <img src="${this.baseUrl}app/img/svg/Bulk/Edit-white.svg" alt="Editar" class="edit-lead">
+                <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
             </a>
             <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
-                <img src="${this.baseUrl}app/img/svg/Bulk/Delete.svg" alt="Eliminar" class="delete-lead">
+                <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
             </a>
         `;
 
@@ -196,17 +196,17 @@ class DataTable {
     if (this.tipo === "contratos") {
       acciones = `
                 <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
-                    <img src="${this.baseUrl}app/img/svg/Bulk/Delete.svg" alt="Eliminar" class="delete-lead">
+                    <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
                 </a>
              <a href="#" class="ver-cronograma-modal" style="cursor: pointer; display: inline-block;" data-contrato-id="${id}">
-            <img src="${this.baseUrl}app/img/svg/Bulk/Paper-gray.svg" alt="Ver Cronograma" title="Ver cronograma">
+            <img src="${this.baseUrl}app/img/png/cronograma-pagos.png" alt="Ver Cronograma" title="Ver cronograma">
         </a>
                 <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank">
-                    <img src="${this.baseUrl}app/img/svg/Bulk/Download.svg" alt="Generar PDF" class="generar-contrato" title="Generar PDF">
+                    <img src="${this.baseUrl}app/img/png/pdf.png" alt="Generar PDF" class="icon-acciones" title="Generar PDF">
                 </a>
 
           <a href="${this.baseUrl}app/views/numcuentas/numcuenta.add.php?idcontrato=${id}">
-                    <img src="${this.baseUrl}app/img/svg/Bulk/Download.svg" alt="Asociar número de cuenta" class="generar-contrato" title="Asociar número de cuenta">
+                    <img src="${this.baseUrl}app/img/png/tarjeta-banco.png" alt="Asociar número de cuenta" class="icon-acciones" title="Asociar número de cuenta">
                 </a>
 
             `;
