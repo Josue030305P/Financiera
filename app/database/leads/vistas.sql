@@ -49,39 +49,22 @@ LEFT JOIN
     colaboradores co ON u.idcolaborador = co.idcolaborador
 LEFT JOIN
     personas pa ON co.idpersona = pa.idpersona
-LEFT JOIN -- Nuevo JOIN para la tabla de contactibilidad
+LEFT JOIN 
     contactibilidad cont ON l.idlead = cont.idlead
 WHERE
-    l.estado NOT IN ('Inactivo', 'Inversionista') -- FILTRO ORIGINAL QUE QUERÍAS MANTENER
+    l.estado NOT IN ('Inactivo', 'Inversionista')
 GROUP BY
     l.idlead,
-    nombre_completo, -- Usa los alias si tu versión de MySQL/MariaDB lo permite en GROUP BY
+    nombre_completo, 
     p.email,
     p.telprincipal,
     c.canal,
     l.fecharegistro,
     l.prioridad,
     l.estado,
-    asesor -- Asegúrate de agrupar por todas las columnas seleccionadas
+    asesor 
 ORDER BY
     l.idlead;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 CREATE VIEW v_lead_to_inversionista AS

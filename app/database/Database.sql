@@ -7,7 +7,7 @@ idpais 				INT PRIMARY KEY AUTO_INCREMENT,
 pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 )ENGINE=InnoDB;
 
-SELECT * FROM contratos;
+
 
 CREATE TABLE departamentos(
 iddepartamento		INT PRIMARY KEY AUTO_INCREMENT,
@@ -98,8 +98,8 @@ fechahoraeliminacion	DATETIME NULL,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL,
 CONSTRAINT fk_idpersona FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
--- CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
--- CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario),
+CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
+CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
