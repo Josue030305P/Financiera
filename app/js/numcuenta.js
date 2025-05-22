@@ -24,12 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const paramsURL = new URLSearchParams(window.location.search);
     const idContratoURL = paramsURL.get('idcontrato');
 
-    if (!idContratoURL) {
-        console.error("ID de contrato no encontrado en la URL.");
-      
-        showToast('error', 'Error: ID de contrato no especificado en la URL.', 'center'); 
-        return;
-    }
 
     async function cargarTiposEntidad() {
         selectorTipoEntidad.innerHTML = '<option value="">Cargando tipos...</option>';
@@ -166,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 showToast('success', "Número de cuenta agregado exitosamente.");
                 formulario.reset();
-                window.location = `${baseUrl}app/views/contratos/`;
+                window.location = `${baseUrl}app/views/inversionistas/`;
                 selectorEntidad.innerHTML = '<option value="">Seleccione un tipo primero</option>';
                 selectorEntidad.disabled = true;
                 selectorTipoEntidad.value = "";

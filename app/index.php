@@ -59,16 +59,21 @@ $links = [
 
     <script src="<?= BASE_URL ?>app/js/dataTable.js"></script>
     <script>
-    new DataTable({
-        tableId: 'dataTable',
-        apiUrl: 'controllers/LeadController.php',
-        tipo: 'leads',
-        columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
-        mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
-        baseUrl: '<?= BASE_URL ?>',
-        idField: 'idlead',
-       
-    });
+   new DataTable({
+    tableId: 'dataTable',
+    apiUrl: 'controllers/LeadController.php',
+    tipo: 'leads',
+    columnas: <?= json_encode($configuracionTabla['columnas']) ?>,
+    mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
+    baseUrl: '<?= BASE_URL ?>',
+    idField: 'idlead',
+    customRenderers: { 
+      "Acciones": function(item) {
+            
+            return window.dataTable.renderizarAcciones(item); 
+        }  
+    }
+});
 
     
 </script>

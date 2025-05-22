@@ -211,13 +211,6 @@ select {
  * Correct the inability to style clickable types in iOS and Safari.
  */
 
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-
 /**
  * Remove the inner border and padding in Firefox.
  */
@@ -1250,25 +1243,6 @@ body {
   color: #fff;
 }
 
-.library-table-name span.info {
-  background-color: #5887ff;
-}
-
-.library-table-name span.danger {
-  background-color: #f26464;
-}
-
-.library-table-name span.warning {
-  background-color: #ffb648;
-}
-
-.library-table-name span.success {
-  background-color: #4bde97;
-}
-
-.library-table-name span.purple {
-  background-color: #5f2eea;
-}
 
 .dropzone-start svg {
   width: 60px;
@@ -1277,12 +1251,7 @@ body {
   stroke-width: 1px;
 }
 
-h1,
-h2,
-h3 {
-  letter-spacing: 1px;
-  color: #171717;
-}
+
 
 .h-1 {
   font-size: 64px;
@@ -1727,25 +1696,16 @@ button.disabled:focus {
 .badge-success,
 .badge-disabled {
   padding: 1px;
-  width: 85px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.67;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  border-radius: 100px;
+  width: 120px;
+  
   text-align: center;
 }
-
+.main   {
+  width: 100%;;
+}
+.row {
+  width: 100%;
+}
 .badge-active {
   color: #5887ff;
   background-color: rgba(88, 135, 255, 0.1);
@@ -1831,19 +1791,6 @@ input::placeholder {
   color: #d6d7e3;
 }
 
-input:focus {
-  outline: none;
-  border: rgba(134, 182, 254, 0.5) solid !important;
-  -webkit-box-shadow: 0 0 0 2px rgba(134, 182, 254, 0.5);
-  box-shadow: 0 0 0 2px rgba(134, 182, 254, 0.5);
-}
-
-input:enabled:read-write:-webkit-any(
-    :focus,
-    :hover
-  )::-webkit-calendar-picker-indicator {
-  display: none !important;
-}
 
 .check {
   position: relative;
@@ -1870,7 +1817,6 @@ label {
 
 
 
-
 /* Estilos generales para los badges (etiquetas de estado) */
 .badge {
     display: inline-block;
@@ -1887,9 +1833,6 @@ label {
     text-transform: uppercase; 
     letter-spacing: 0.5px;
 }
-
-
-
 
 .badge-info {
     background-color: #0d6efd; 
@@ -1924,12 +1867,6 @@ label {
     background-color: #6c757d; 
     color: #fff;
 }
-
-
-
-
-/*-------------------------------------------------------------------------*/
-
 
 
 
@@ -2113,7 +2050,6 @@ label {
 }
 
 
-
 .btn-addInversionista {
   background-color: #0061f7;
   color: #fff;
@@ -2129,10 +2065,6 @@ label {
 .users-table {
   width: 100%;
   border-collapse: collapse;
-}
-.users-table td,
-th {
-  width: 45px;
 }
 
 .users-table th,
@@ -2161,41 +2093,59 @@ th {
   transition: none;
 }
 
-.users-table-info {
-  line-height: 1.4;
-  letter-spacing: -0.3px;
-  color: #767676;
-  height: 48px;
-  border-bottom: 1.2px solid #dadbe4;
-  font-size: 14px;
-}
-
 .users-table-info th {
-  font-weight: 500;
-  padding: 5px;
+    background-color: #f8f9fa; 
+    color: #56677f; 
+    font-size: 0.9em; 
+    font-weight: bold; 
+    text-align: center;
+    padding: 15px ; 
+    border-bottom: 2px solid #e9ecef;
+    text-transform: uppercase; 
+    letter-spacing: 0.5px; 
 }
 
 .posts-table td {
-  background-color: #fff;
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #eeeeee;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding: 10px;
-  white-space: normal;
+    background-color: #ffffff; 
+    border-top: none; 
+    padding: 8px; 
+    font-size: 0.95em;
+    color: #495057; 
+    vertical-align: middle; 
+    white-space: normal; 
 }
 
-.posts-table td:first-child {
-  padding-left: 20px;
+
+.posts-table tr {
+    background-color: #ffffff; 
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+}
+
+.posts-table tr:hover {
+    background-color: #f0f5ff; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); 
+}
+
+
+.posts-table tr td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .posts-table tbody {
   font-size: 14px;
 }
 
-.posts-table tbody tr:last-child .users-item-dropdown {
-  bottom: 250%;
-  top: auto;
+.posts-table tr td:last-child {
+    display: flex;
+    height: 80px;
+    white-space: nowrap; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 5px; 
 }
 
 .export-excel,
@@ -2205,8 +2155,8 @@ th {
 }
 
 .icon-acciones {
-  width: 24px;
-  height: 24px;
+  width: 21px;
+  height: 21px;
 }
 
 

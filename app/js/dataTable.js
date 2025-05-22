@@ -105,9 +105,9 @@ class DataTable {
                 const prioridad = item[this.mapeo[columna]];
                 const clase =
                   {
-                    Alto: "badge-active",
-                    Medio: "badge-pending",
-                    Bajo: "badge-trashed",
+                    Alto: "badge badge-active",
+                    Medio: " badge badge-pending",
+                    Bajo: "badge badge-trashed",
                   }[prioridad] || "";
                 td.innerHTML = `<span class="${clase}">${prioridad}</span>`;
                 break;
@@ -166,53 +166,63 @@ class DataTable {
     if (Array.isArray(campo)) {
       return campo.map((c) => item[c]).join(" ");
     } else if (campo) {
-      return item[campo] || "—";
+      return item[campo] || "NO ASIGNADO";
     }
     return "—";
   }
 
-  renderizarAcciones(id) {
-    let acciones = `
-           
-        `;
+renderizarAcciones(item) { // <--- CAMBIO IMPORTANTE: AHORA RECIBE EL OBJETO 'item' COMPLETO
+    let acciones = ``;
+    const id = item[this.idField]; // Obtiene el ID del item
+    console.log(id, 'id')
+
+
 
     if (this.tipo === "leads") {
-      acciones += `
-       <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
+
+
+      if (item.puede_ser_inversionista) {
+            acciones += `
+                <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
                 <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
             </a>
+            `;
+        }
+        
+        acciones += `
+            
             <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
                 <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
             </a>
-                <a href="${this.baseUrl}app/views/contactibilidad/contacto.add?idlead=${id}">
-                    <button class="btn-addInversionista">
-                        <img src="${this.baseUrl}app/img/svg/Bulk/3-User-white.svg" alt="Contactibilidad" class="icon-inversionista">
-                    </button>
-                </a>
-            `;
+            <a href="${this.baseUrl}app/views/contactibilidad/contacto.add?idlead=${id}">
+                <button class="btn-addInversionista">
+                    <img src="${this.baseUrl}app/img/svg/Bulk/3-User-white.svg" alt="Contactibilidad" class="icon-inversionista">
+                </button>
+            </a>
+        `;
+
+        
     }
-
+    
     if (this.tipo === "contratos") {
-      acciones = `
-                <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
-                    <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
-                </a>
-             <a href="#" class="ver-cronograma-modal" style="cursor: pointer; display: inline-block;" data-contrato-id="${id}">
-            <img src="${this.baseUrl}app/img/png/cronograma-pagos.png" alt="Ver Cronograma" title="Ver cronograma">
-        </a>
-                <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank">
-                    <img src="${this.baseUrl}app/img/png/pdf.png" alt="Generar PDF" class="icon-acciones" title="Generar PDF">
-                </a>
-
-          <a href="${this.baseUrl}app/views/numcuentas/numcuenta.add.php?idcontrato=${id}">
-                    <img src="${this.baseUrl}app/img/png/tarjeta-banco.png" alt="Asociar número de cuenta" class="icon-acciones" title="Asociar número de cuenta">
-                </a>
-
-            `;
+        acciones = `
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
+                <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
+            </a>
+            <a href="#" class="ver-cronograma-modal" style="cursor: pointer; display: inline-block;" data-contrato-id="${id}">
+                <img src="${this.baseUrl}app/img/png/cronograma-pagos.png" alt="Ver Cronograma" title="Ver cronograma">
+            </a>
+            <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank">
+                <img src="${this.baseUrl}app/img/png/pdf.png" alt="Generar PDF" class="icon-acciones" title="Generar PDF">
+            </a>
+            <a href="${this.baseUrl}app/views/numcuentas/numcuenta.add.php?idcontrato=${id}">
+                <img src="${this.baseUrl}app/img/png/tarjeta-banco.png" alt="Asociar número de cuenta" class="icon-acciones" title="Asociar número de cuenta">
+            </a>
+        `;
     }
 
     if (this.tipo === "contactos") {
-      acciones = `
+        acciones = `
             <a href="${this.baseUrl}app/views/contactibilidad/contactos.update.php?id=${id}">
                 <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
             </a>
@@ -221,8 +231,9 @@ class DataTable {
             </a>
         `;
     }
+
     return acciones;
-  }
+}
 
   async confirmarEliminacion(id) {
     const result = await Swal.fire({

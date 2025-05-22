@@ -67,9 +67,11 @@ $links = [
       mapeo: <?= json_encode($configuracionTabla['mapeo']) ?>,
       baseUrl: '<?= BASE_URL ?>',
       idField: 'idinversionista',
-      customRenderers: {
-
-      }
+       customRenderers: {
+        "Acciones": function(item) { 
+            return window.dataTable.renderizarAcciones(item); 
+        }
+    }
     });
   </script>
 

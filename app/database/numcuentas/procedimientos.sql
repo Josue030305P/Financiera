@@ -1,4 +1,5 @@
 
+USE financiera;
 DELIMITER //
 CREATE PROCEDURE sp_numcuenta_contrato(
 IN idcontrato_ INT,
