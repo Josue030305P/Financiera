@@ -1839,12 +1839,17 @@ label {
     color: #fff;
 }
 
-
+.btn-pagar-cuota {
+  background-color: #ffc107;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
 .badge-pending {
     background-color: #ffc107; 
     color: #fff; 
 }
-
 
 .badge-success {
     background-color: #198754; 
@@ -2141,7 +2146,7 @@ label {
 
 .posts-table tr td:last-child {
     display: flex;
-    height: 80px;
+    height: 98px;
     white-space: nowrap; 
     justify-content: center; 
     align-items: center; 

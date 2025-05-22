@@ -1,3 +1,4 @@
+-- VISTA PARA UTILIZAR EN LA VISTA CONTRATOS
 CREATE VIEW vista_cronogramapagos AS
 SELECT 
     c.idcronogramapago,
@@ -19,6 +20,7 @@ SELECT * FROM cronogramapagos;
 DROP VIEW vista_cronogramapagos;
 
 
+-- VISTA PARA UTILIZAR EN LA VISTA DE CRONOGRAMA DE PAGOS
 
 
 CREATE VIEW vista_cronogramas_detallado AS

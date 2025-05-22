@@ -1,3 +1,5 @@
+
+USE financiera;
 DELIMITER //
 
 -- Trigger para INSERT

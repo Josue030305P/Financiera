@@ -346,7 +346,7 @@ CONSTRAINT fk_idusuariopago	FOREIGN KEY(idusuariopago) REFERENCES usuarios(idusu
 CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcuentas)
 )ENGINE=InnoDB;
 
-
+SELECT * FROM cronogramapagos;
  
 
 

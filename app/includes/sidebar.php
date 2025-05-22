@@ -89,11 +89,11 @@ if (!isset($_SESSION['nombre'])) {
                     </ul>
                 </li>
                 <li>
-                    <a href="comments.html">
+                    <a href="<?=  BASE_URL."app/views/detallepagos/" ?>">
                         <span class="icon message" aria-hidden="true"></span>
-                        Comments
+                        Detalle de pagos
                     </a>
-                    <span class="msg-counter">7</span>
+                   
                 </li>
             </ul>
             <span class="system-menu__title">system</span>
