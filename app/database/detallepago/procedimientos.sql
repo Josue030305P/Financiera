@@ -1,7 +1,6 @@
-
 USE financiera;
-DELIMITER //
 
+DELIMITER / /
 
 CREATE PROCEDURE sp_add_detallepago_cronograma(
 IN idcronogramapago_ INT,
@@ -19,9 +18,24 @@ BEGIN
 
 END //
 
-DELIMITER ;
+DELIMITER;
+
+DELIMITER / /
+
+CREATE PROCEDURE sp_numcuenta_by_idcontrato(
+IN idcontrato_ INT
+)
+BEGIN
+
+  SELECT numcuenta FROM numcuentas WHERE idcontrato = idcontrato_;
+
+END //
+
+DELIMITER;
 
 SELECT * FROM detallepagos;
-DROP PROCEDURE  sp_add_detallepago_cronograma;
+
+SELECT numcuenta FROM numcuentas WHERE idcontrato = 2;
+DROP PROCEDURE sp_add_detallepago_cronograma;
 
 SELECT * FROM numcuentas;

@@ -88,6 +88,7 @@
 
 
 .form-group-full-width {
+  
     grid-column: 1 / -1; 
 }
 
@@ -99,6 +100,7 @@
 }
 
 .btn {
+  margin: 8px;
     padding: 12px 25px;
     border: none;
     border-radius: 8px;
