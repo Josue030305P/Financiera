@@ -73,11 +73,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const btnPagarCuota = document.createElement("button");
         btnPagarCuota.className = "btn-pagar-cuota";
         btnPagarCuota.textContent = "Pagar cuota";
-
+        btnPagarCuota.dataset.idcontrato = primeraFila.idcontrato;
+        //console.log("BOTON DE PAGAR CON ID COPTRATO: ",btnPagarCuota );
+        
         // Crear etiqueta 'a' que me llevara a la vista de pago
 
         const btnEnlace = document.createElement("a");
-        btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?id=${primeraFila.idcronogramapago}`;
+        btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?id=${primeraFila.idcronogramapago}&idcontrato=${primeraFila.idcontrato}`;
 
         btnEnlace.appendChild(btnPagarCuota);
 
@@ -97,18 +99,19 @@ document.addEventListener("DOMContentLoaded", function () {
           // Botón para ir a pagar cuota
          
           const pago = pagosContrato[i];
-           const btnPagarCuota = document.createElement("button");
+          const btnPagarCuota = document.createElement("button");
           btnPagarCuota.className = "btn-pagar-cuota";
           btnPagarCuota.textContent = "Pagar cuota";
 
           // Crear etiqueta 'a' que me llevara a la vista de pago
 
           const btnEnlace = document.createElement("a");
-          btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?id=${pago.idcronogramapago}`;
+          btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?id=${pago.idcronogramapago}&idcontrato=${pago.idcontrato}`;
 
           btnEnlace.appendChild(btnPagarCuota);
-
-          console.log("ID CRONOGRAMA DE PAGOS: ", pago.idcronogramapago); // ID DEL CRMOGRAMA DE PAGO
+          btnPagarCuota.dataset.idcontrato = primeraFila.idcontrato;
+          console.log("BOTON DE PAGAR CON ID COPTRATO: ",btnPagarCuota );
+          //console.log("ID CRONOGRAMA DE PAGOS: ", pago.idcronogramapago); // ID DEL CRMOGRAMA DE PAGO
 
           const detalleRow = tablaCronogramaBody.insertRow();
           detalleRow.classList.add("detalle-pago");

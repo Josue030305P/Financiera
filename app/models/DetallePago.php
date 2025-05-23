@@ -62,6 +62,7 @@ class DetallePago
 }
 
 // $detallepago  = new DetallePago();
+// var_dump($detallepago->getNumcuentasByContrato(1));
 
 // $params = [
 //   'idcronogramapago' => 3,

@@ -16,6 +16,25 @@ class Numcuentas
         }
     }
 
+
+
+    public function getNumcuentasByContrato($id)
+    {
+
+        try {
+            $sql = "CALL sp_numcuenta_by_idcontrato(?)";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$id]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener número de cuentas del contrato " . $e->getMessage());
+        }
+
+    }
+
+
     public function add($params = []): array
     {
         try {
@@ -36,8 +55,8 @@ class Numcuentas
             ));
             $this->conexion->commit();
 
-            
-            
+
+
             return [
                 'success' => true,
                 'rows' => $stmt->rowCount()

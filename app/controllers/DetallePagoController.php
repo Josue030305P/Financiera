@@ -1,14 +1,35 @@
 <?php
 
 require_once '../models/DetallePago.php';
+require_once '../models/Numcuentas.php';
 
 if (isset($_SERVER['REQUEST_METHOD'])) {
   header('Content-Type: application/json; charset=utf-8');
 
   $detallePago = new DetallePago();
+  $numCuenta = new Numcuentas();
 
   switch ($_SERVER['REQUEST_METHOD']) {
 
+
+
+    case 'GET':
+      if (isset($_GET['idcontrato'])) {
+        $idcontrato = $_GET['idcontrato'];
+        try {
+          $resultados = $numCuenta->getNumcuentasByContrato($idcontrato);
+          echo json_encode([
+            "status" => "success",
+            "data" => $resultados
+          ]);
+        } catch (Exception $e) {
+          echo json_encode([
+            'success' => false,
+            'message' => 'Error al obtener los número de cuentas del contrato: ' . $e->getMessage()
+          ]);
+        }
+      }
+      break;
 
     case 'POST':
       $input = file_get_contents('php://input');
@@ -30,8 +51,8 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
           "Se ha registrado el pago",
           "data" => $result
         ]);
-      } catch(Exception $e) {
-        echo json_encode(['success' => false, 'message' => 'Error al agregar el pago: '. $e->getMessage()]);
+      } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Error al agregar el pago: ' . $e->getMessage()]);
       }
       break;
 
