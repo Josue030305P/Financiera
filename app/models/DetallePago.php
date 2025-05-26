@@ -13,7 +13,6 @@ class DetallePago
     if (session_status() == PHP_SESSION_NONE) {
       session_start();
     }
-
   }
 
 
@@ -45,32 +44,27 @@ class DetallePago
       $this->conexion->commit();
 
       return [
-        'success' => true,
+        'status' => true,
         'message' => 'Se ha insertado el pago'
       ];
-
-
     } catch (PDOException $e) {
       $this->conexion->rollBack();
       throw new Exception($e->getMessage());
     }
   }
-
-
-
-
 }
 
-// $detallepago  = new DetallePago();
-// var_dump($detallepago->getNumcuentasByContrato(1));
+//$detallepago  = new DetallePago();
+
+
 
 // $params = [
-//   'idcronogramapago' => 3,
-//   'idnumcuenta' => 3,
-//   'numtransaccion' => '1858545541411',
-//   'fechahora' => '2025-05-22',
-//   'monto' => 310.65,
-//   'observaciones' => 'Se ha cancelado la primer cuota'
+//    'idcronogramapago' => 1,
+//     'idnumcuenta' => 4,
+//     'numtransaccion' => '1858545541411',
+//     'fechahora' => '2025-05-22',
+//     'monto' => 310.65,
+//     'observaciones' => 'Se ha cancelado la primer cuota'
 // ];
 
 // var_dump($detallepago->add($params));

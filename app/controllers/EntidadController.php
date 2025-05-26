@@ -2,51 +2,6 @@
 
 
 
-
-
-/*
-
-require_once '../models/Entidad.php'; 
-
-header('Content-Type: application/json'); 
-
-$response = [
-    'success' => false,
-    'message' => 'Error desconocido.',
-    'data' => []
-];
-
-try {
-    $entidad = new Entidad();
-
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        if (isset($_GET['tipo']) && !empty($_GET['tipo'])) {
-            $tipo = $_GET['tipo'];
-           
-            if ($tipo === 'Banco' || $tipo === 'Caja') {
-                $entities = $entidad->getByTipo($tipo);
-                $response['success'] = true;
-                $response['message'] = 'Entidades obtenidas exitosamente.';
-                $response['data'] = $entities;
-            } else {
-                $response['message'] = 'Tipo de entidad inválido.';
-            }
-        } else {
-            
-            $response['message'] = 'Parámetro "tipo" es requerido para esta operación.';
-        }
-    } else {
-        $response['message'] = 'Método de solicitud no permitido.';
-        http_response_code(405); 
-    }
-} catch (Exception $e) {
-    $response['message'] = 'Error en el servidor: ' . $e->getMessage();
-    http_response_code(500); 
-}
-
-echo json_encode($response);
-*/
-
  
 require_once '../models/Entidad.php'; 
 

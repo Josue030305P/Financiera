@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Crear etiqueta 'a' que me llevara a la vista de pago
 
         const btnEnlace = document.createElement("a");
-        btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?id=${primeraFila.idcronogramapago}&idcontrato=${primeraFila.idcontrato}`;
+        btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?idcronograma=${primeraFila.idcronogramapago}&idcontrato=${primeraFila.idcontrato}`;
 
         btnEnlace.appendChild(btnPagarCuota);
 
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Crear etiqueta 'a' que me llevara a la vista de pago
 
           const btnEnlace = document.createElement("a");
-          btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?id=${pago.idcronogramapago}&idcontrato=${pago.idcontrato}`;
+          btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?idcronograma=${pago.idcronogramapago}&idcontrato=${pago.idcontrato}`;
 
           btnEnlace.appendChild(btnPagarCuota);
           btnPagarCuota.dataset.idcontrato = primeraFila.idcontrato;

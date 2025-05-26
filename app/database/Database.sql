@@ -347,7 +347,8 @@ CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcu
 )ENGINE=InnoDB;
 
 SELECT * FROM cronogramapagos;
- 
+ DROP TABLE detallepagos;
+ALTER TABLE detallepagos DROP CONSTRAINT fk_idnumcuenta;
 
 
 CREATE TABLE accesos(
@@ -368,6 +369,7 @@ CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios
 
 
 
+SELECT * FROM entidades;
 
 SELECT * FROM cronogramapagos;
 SELECT * FROM contratos;
