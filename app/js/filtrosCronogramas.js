@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded",  () =>  {
   const baseUrl =
     document.querySelector('meta[name="base-url"]')?.content || "";
   const tablaCronogramaBody = document.querySelector("#tabla-cronograma tbody");
@@ -14,153 +14,154 @@ document.addEventListener("DOMContentLoaded", function () {
     renderizarTablaAgrupada(data);
   }
 
-  function renderizarTablaAgrupada(data) {
+function renderizarTablaAgrupada(data) {
     tablaCronogramaBody.innerHTML = "";
     const contratosAgrupados = agruparPorContrato(data);
 
-    for (const contratoId in contratosAgrupados) {
-      const pagosContrato = contratosAgrupados[contratoId];
+    // Función auxiliar para crear y añadir texto a una celda
+    function crearCeldaTexto(fila, contenido) {
+        const celda = fila.insertCell();
+        celda.textContent = contenido;
+        return celda;
+    }
 
-      if (pagosContrato.length > 0) {
-        const primeraFila = pagosContrato[0];
 
-        const grupoRow = tablaCronogramaBody.insertRow();
-        grupoRow.classList.add("grupo-contrato");
-        grupoRow.dataset.contratoId = contratoId;
-        grupoRow.insertCell().textContent = primeraFila.idcontrato;
-        grupoRow.insertCell().textContent = pagosContrato.length + " pagos";
-        grupoRow.insertCell().textContent =
-          calcularTotalBruto(pagosContrato).toFixed(2);
-        grupoRow.insertCell().textContent =
-          primeraFila.nombre_inversionista +
-          " " +
-          primeraFila.apellido_inversionista;
-        grupoRow.insertCell().textContent = primeraFila.dni;
-        grupoRow.insertCell().textContent = primeraFila.numcuota;
-        grupoRow.insertCell().textContent = primeraFila.fechavencimiento;
-        grupoRow.insertCell().textContent = primeraFila.totalneto;
-        grupoRow.insertCell().textContent = primeraFila.amortizacion;
-        grupoRow.insertCell().textContent = primeraFila.restante;
-        const estadoCell = grupoRow.insertCell();
-        estadoCell.textContent = primeraFila.estado_pago;
-        estadoCell.classList.add(
-          `estado-${primeraFila.estado_pago.toLowerCase()}`
-        );
+    function crearBotonPagarCuota(baseUrl, idcronogramaPago, idcontrato, estadoPago) {
+        if (estadoPago && estadoPago.toLowerCase() === "pagado") {
+            return null; // No retorna nada si ya está pagado
+        }
 
-        // Celda única para ambos botones
-        const accionesCell = grupoRow.insertCell();
-        accionesCell.classList.add("acciones-cell");
-
-        // Crear contenedor para los botones
-        const botonesContainer = document.createElement("div");
-        botonesContainer.className = "botones-accion";
-        botonesContainer.style.display = "flex";
-        botonesContainer.style.gap = "8px";
-        botonesContainer.style.justifyContent = "flex-end";
-
-        // Botón de expandir
-        const btnExpandir = document.createElement("button");
-        btnExpandir.className = "btn-expandir";
-        btnExpandir.textContent = "+";
-
-        // Botón de Excel
-        const btnExcel = document.createElement("button");
-        btnExcel.className = "btn-exportar-excel";
-        btnExcel.dataset.contratoId = contratoId;
-        btnExcel.textContent = "Excel";
-
-        // Botón para ir a pagar cuota
         const btnPagarCuota = document.createElement("button");
         btnPagarCuota.className = "btn-pagar-cuota";
         btnPagarCuota.textContent = "Pagar cuota";
-        btnPagarCuota.dataset.idcontrato = primeraFila.idcontrato;
-        //console.log("BOTON DE PAGAR CON ID COPTRATO: ",btnPagarCuota );
-        
-        // Crear etiqueta 'a' que me llevara a la vista de pago
+        btnPagarCuota.dataset.idcontrato = idcontrato;
 
         const btnEnlace = document.createElement("a");
-        btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?idcronograma=${primeraFila.idcronogramapago}&idcontrato=${primeraFila.idcontrato}`;
-
+        btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?idcronograma=${idcronogramaPago}&idcontrato=${idcontrato}`;
         btnEnlace.appendChild(btnPagarCuota);
-
-        // Agregar botones al contenedor
-        botonesContainer.appendChild(btnExpandir);
-        botonesContainer.appendChild(btnExcel);
-        botonesContainer.appendChild(btnEnlace);
-
-        // Agregar contenedor a la celda
-        accionesCell.appendChild(botonesContainer);
-
-
-
-        // LA TABLA DE CRONOGRAMAS
-
-        for (let i = 1; i < pagosContrato.length; i++) {
-          // Botón para ir a pagar cuota
-         
-          const pago = pagosContrato[i];
-          const btnPagarCuota = document.createElement("button");
-          btnPagarCuota.className = "btn-pagar-cuota";
-          btnPagarCuota.textContent = "Pagar cuota";
-
-          // Crear etiqueta 'a' que me llevara a la vista de pago
-
-          const btnEnlace = document.createElement("a");
-          btnEnlace.href = `${baseUrl}app/views/detallepagos/detallepago.add?idcronograma=${pago.idcronogramapago}&idcontrato=${pago.idcontrato}`;
-
-          btnEnlace.appendChild(btnPagarCuota);
-          btnPagarCuota.dataset.idcontrato = primeraFila.idcontrato;
-          console.log("BOTON DE PAGAR CON ID COPTRATO: ",btnPagarCuota );
-          //console.log("ID CRONOGRAMA DE PAGOS: ", pago.idcronogramapago); // ID DEL CRMOGRAMA DE PAGO
-
-          const detalleRow = tablaCronogramaBody.insertRow();
-          detalleRow.classList.add("detalle-pago");
-          detalleRow.dataset.contratoId = contratoId;
-          detalleRow.style.display = "none";
-
-          detalleRow.insertCell().textContent = pago.idcontrato;
-          detalleRow.insertCell().textContent = "";
-          detalleRow.insertCell().textContent = "";
-          detalleRow.insertCell().textContent =
-            pago.nombre_inversionista + " " + pago.apellido_inversionista;
-          detalleRow.insertCell().textContent = pago.dni;
-          detalleRow.insertCell().textContent = pago.numcuota;
-          detalleRow.insertCell().textContent = pago.fechavencimiento;
-          detalleRow.insertCell().textContent = pago.totalneto;
-          detalleRow.insertCell().textContent = pago.amortizacion;
-          detalleRow.insertCell().textContent = pago.restante;
-          const estadoDetalleCell = detalleRow.insertCell();
-          estadoDetalleCell.textContent = pago.estado_pago;
-          estadoDetalleCell.classList.add(
-            `estado-${pago.estado_pago.toLowerCase()}`
-          );
-          detalleRow.insertCell().appendChild(btnEnlace);
-        }
-      }
+        return btnEnlace;
     }
 
-    // Event listener para expandir/contraer
+    for (const contratoId in contratosAgrupados) {
+        const pagosContrato = contratosAgrupados[contratoId];
+
+        if (pagosContrato.length > 0) {
+            const primeraFila = pagosContrato[0];
+
+            // Fila de grupo (encabezado)
+            const grupoRow = tablaCronogramaBody.insertRow();
+            grupoRow.classList.add("grupo-contrato");
+            grupoRow.dataset.contratoId = contratoId;
+
+            crearCeldaTexto(grupoRow, primeraFila.idcontrato);
+            crearCeldaTexto(grupoRow, pagosContrato.length + " pagos");
+            crearCeldaTexto(grupoRow, calcularTotalBruto(pagosContrato).toFixed(2));
+            crearCeldaTexto(grupoRow, `${primeraFila.nombre_inversionista} ${primeraFila.apellido_inversionista}`);
+            crearCeldaTexto(grupoRow, primeraFila.dni);
+            crearCeldaTexto(grupoRow, primeraFila.numcuota);
+            crearCeldaTexto(grupoRow, primeraFila.fechavencimiento);
+            crearCeldaTexto(grupoRow, primeraFila.totalneto);
+            crearCeldaTexto(grupoRow, primeraFila.amortizacion);
+            crearCeldaTexto(grupoRow, primeraFila.restante);
+
+            const estadoCellGrupo = crearCeldaTexto(grupoRow, primeraFila.estado_pago);
+            estadoCellGrupo.classList.add(`estado-${primeraFila.estado_pago.toLowerCase()}`);
+
+            // Celda de acciones para la fila de grupo
+            const accionesCellGrupo = grupoRow.insertCell();
+            accionesCellGrupo.classList.add("acciones-cell");
+            const botonesContainerGrupo = document.createElement("div");
+            botonesContainerGrupo.className = "botones-accion";
+            botonesContainerGrupo.style.display = "flex";
+            botonesContainerGrupo.style.gap = "8px";
+            botonesContainerGrupo.style.justifyContent = "flex-end";
+
+            const btnExpandir = document.createElement("button");
+            btnExpandir.className = "btn-expandir";
+            btnExpandir.textContent = "+";
+
+            const btnExcel = document.createElement("button");
+            btnExcel.className = "btn-exportar-excel";
+            btnExcel.dataset.contratoId = contratoId;
+            btnExcel.textContent = "Excel";
+
+            // Pasamos el estado de pago a la función crearBotonPagarCuota
+            const btnEnlaceGrupo = crearBotonPagarCuota(
+                baseUrl,
+                primeraFila.idcronogramapago,
+                primeraFila.idcontrato,
+                primeraFila.estado_pago // <--- AQUÍ se pasa el estado
+            );
+
+            botonesContainerGrupo.appendChild(btnExpandir);
+            botonesContainerGrupo.appendChild(btnExcel);
+            // Solo añadimos el botón si no es nulo (es decir, si el pago no está 'Pagado')
+            if (btnEnlaceGrupo) {
+                botonesContainerGrupo.appendChild(btnEnlaceGrupo);
+            }
+            accionesCellGrupo.appendChild(botonesContainerGrupo);
+
+            // Filas de detalle (ocultas inicialmente)
+            for (let i = 1; i < pagosContrato.length; i++) {
+                const pago = pagosContrato[i];
+
+                const detalleRow = tablaCronogramaBody.insertRow();
+                detalleRow.classList.add("detalle-pago");
+                detalleRow.dataset.contratoId = contratoId;
+                detalleRow.style.display = "none";
+
+                crearCeldaTexto(detalleRow, pago.idcontrato);
+                crearCeldaTexto(detalleRow, ""); // Celda vacía para alineación
+                crearCeldaTexto(detalleRow, ""); // Celda vacía para alineación
+                crearCeldaTexto(detalleRow, `${pago.nombre_inversionista} ${pago.apellido_inversionista}`);
+                crearCeldaTexto(detalleRow, pago.dni);
+                crearCeldaTexto(detalleRow, pago.numcuota);
+                crearCeldaTexto(detalleRow, pago.fechavencimiento);
+                crearCeldaTexto(detalleRow, pago.totalneto);
+                crearCeldaTexto(detalleRow, pago.amortizacion);
+                crearCeldaTexto(detalleRow, pago.restante);
+
+                const estadoDetalleCell = crearCeldaTexto(detalleRow, pago.estado_pago);
+                estadoDetalleCell.classList.add(`estado-${pago.estado_pago.toLowerCase()}`);
+
+                const accionesDetalleCell = detalleRow.insertCell();
+                // Pasamos el estado de pago a la función crearBotonPagarCuota
+                const btnEnlaceDetalle = crearBotonPagarCuota(
+                    baseUrl,
+                    pago.idcronogramapago,
+                    pago.idcontrato,
+                    pago.estado_pago // <--- AQUÍ también se pasa el estado
+                );
+                // Solo añadimos el botón si no es nulo
+                if (btnEnlaceDetalle) {
+                    accionesDetalleCell.appendChild(btnEnlaceDetalle);
+                }
+            }
+        }
+    }
+
+    // Listeners para expandir/contraer y exportar a Excel (estos no cambian)
     document.querySelectorAll(".btn-expandir").forEach((button) => {
-      button.addEventListener("click", function () {
-        const contratoId = this.closest(".grupo-contrato").dataset.contratoId;
-        const detalleRows = document.querySelectorAll(
-          `.detalle-pago[data-contrato-id="${contratoId}"]`
-        );
-        detalleRows.forEach((row) => {
-          row.style.display =
-            row.style.display === "none" ? "table-row" : "none";
+        button.addEventListener("click", function () {
+            const contratoId = this.closest(".grupo-contrato").dataset.contratoId;
+            const detalleRows = document.querySelectorAll(
+                `.detalle-pago[data-contrato-id="${contratoId}"]`
+            );
+            detalleRows.forEach((row) => {
+                row.style.display =
+                    row.style.display === "none" ? "table-row" : "none";
+            });
+            this.textContent = this.textContent === "+" ? "-" : "+";
         });
-        this.textContent = this.textContent === "+" ? "-" : "+";
-      });
     });
 
     document.querySelectorAll(".btn-exportar-excel").forEach((button) => {
-      button.addEventListener("click", function () {
-        const contratoId = this.dataset.contratoId;
-        exportarExcel(contratoId);
-      });
+        button.addEventListener("click", function () {
+            const contratoId = this.dataset.contratoId;
+            exportarExcel(contratoId);
+        });
     });
-  }
+}
 
   function agruparPorContrato(data) {
     const contratosAgrupados = {};
@@ -242,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     try {
-      // Crear el libro de Excel
+      // Crear el Excel
       const workbook = XLSX.utils.book_new();
       const worksheet = XLSX.utils.aoa_to_sheet(excelData);
 

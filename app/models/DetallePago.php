@@ -15,6 +15,21 @@ class DetallePago
     }
   }
 
+  public function getAll()
+  {
+    $result = [];
+    try {
+      $sql = "SELECT * FROM v_detalle_pagos";
+      $stmt = $this->conexion->prepare($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      throw new PDOException($e->getMessage());
+    }
+
+    return $result;
+  }
+
 
   public function add($params = []): array
   {
@@ -54,8 +69,8 @@ class DetallePago
   }
 }
 
-//$detallepago  = new DetallePago();
-
+// $detallepago  = new DetallePago();
+// var_dump($detallepago->getAll());
 
 
 // $params = [

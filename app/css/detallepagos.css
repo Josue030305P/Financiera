@@ -1,0 +1,264 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; 
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: 600;
+}
+
+.container {
+    margin-top: 60px;
+}
+.tabla-responsive {
+    width: 100%;
+    overflow-x: auto; 
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#tabla-detalle-pagos {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0;
+    background-color: #ffffff;
+    border-radius: 8px; 
+    overflow: hidden; 
+}
+
+#tabla-detalle-pagos thead {
+    background-color: #4a69bd;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#tabla-detalle-pagos th {
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95em;
+    white-space: nowrap; 
+}
+
+#tabla-detalle-pagos tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease; 
+}
+
+#tabla-detalle-pagos tbody tr:last-child {
+    border-bottom: none; 
+}
+
+#tabla-detalle-pagos tbody tr:hover {
+    background-color: #f5f8ff; 
+}
+
+#tabla-detalle-pagos td {
+    padding: 12px 20px;
+    vertical-align: middle;
+    font-size: 0.9em;
+    color: #555;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 200px;
+}
+
+.grupo-detalle-pago {
+    background-color: #ffffff;
+    font-weight: 600;
+    border-bottom: 2px solid #4a69bd; 
+    transition: background-color 0.3s ease;
+}
+
+.grupo-detalle-pago:hover {
+    background-color: #eaf2ff;
+}
+
+.grupo-detalle-pago td {
+    padding: 15px 12px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 150px; 
+}
+
+
+.detalle-pago-extra {
+    background-color: #f8f9fa; 
+    border-bottom: 1px dashed #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+.detalle-pago-extra:hover {
+    background-color: #eff3f8;
+}
+
+.detalle-pago-extra td {
+    font-size: 0.85em;
+    padding: 10px 12px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; }
+    
+
+
+
+.detalle-pago-extra td:nth-child(2), /* ID Cuenta */
+.detalle-pago-extra td:nth-child(3), /* Inversionista */
+.detalle-pago-extra td:nth-child(4), /* DNI */
+.detalle-pago-extra td:nth-child(5), /* Cuenta Depositada */
+.detalle-pago-extra td:nth-child(6)  /* Entidad */
+ {
+    
+    color: #ccc; 
+    text-align: center; 
+    font-weight: normal; 
+}
+
+
+
+.btn-expandir-detalle {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-expandir-detalle:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+.btn-editar-detalle {
+    background-color: #007bff; /* Azul */
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+}
+
+.btn-editar-detalle:hover {
+    background-color: #0056b3;
+}
+
+.btn-eliminar-detalle {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+}
+
+.btn-eliminar-detalle:hover {
+    background-color: #c82333;
+}
+
+
+.estado-pagado {
+    background-color: #e6ffe6;
+    color: #28a745;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85em;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+.estado-pendiente {
+    background-color: #fff3e6;
+    color: #ff8c00;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85em;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+.estado-vencido {
+    background-color: #ffe6e6;
+    color: #dc3545;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85em;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+
+@media (max-width: 992px) { 
+    .grupo-detalle-pago td,
+    .detalle-pago-extra td {
+        padding: 10px 8px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-wrapper {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .grupo-detalle-pago td,
+    .detalle-pago-extra td {
+        padding: 8px 5px;
+        font-size: 0.75em;
+    }
+
+    .estado-pagado, .estado-pendiente, .estado-vencido {
+        padding: 3px 6px;
+        font-size: 0.7em;
+        min-width: unset; 
+    }
+
+    .btn-expandir-detalle {
+        width: 25px;
+        height: 25px;
+        font-size: 1em;
+    }
+    .btn-editar-detalle, .btn-eliminar-detalle {
+        padding: 4px 8px;
+        font-size: 0.7em;
+    }
+}

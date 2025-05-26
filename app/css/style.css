@@ -293,12 +293,6 @@ legend {
  * 2. Correct the outline style in Safari.
  */
 
-[type="search"] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
-}
 
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
@@ -850,7 +844,7 @@ img {
 }
 
 body {
-  background-color: #f0f2fa;
+  background-color: #F0F2F5;
 }
 
 .page-flex {
@@ -1179,18 +1173,7 @@ body {
   height: 24px;
 }
 
-.search-wrapper svg {
-  stroke: #d6d7e3;
-  position: absolute;
-  left: 11px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  z-index: 1;
-}
+
 
 .lang-switcher svg {
   stroke: #b9b9b9;
@@ -2475,8 +2458,53 @@ label {
   -webkit-transition: 0.3s all;
   -o-transition: 0.3s all;
   transition: 0.3s all;
-  background-color: #fff;
+  background-color: #F0F2F5;
 }
+
+
+
+
+.logout-wrapper {
+    padding: 1rem; 
+   
+}
+
+.logout-btn {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 0.5rem; 
+    padding:10px;
+    border: none; 
+    border-radius: 25px;
+    cursor: pointer; 
+    font-size: 1em; 
+    font-weight: 900; 
+    text-decoration: none; 
+    background-color: #ff4d4d; 
+    color: #ffffff; 
+    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4); 
+
+
+    transition: background-color 0.3s ease, 
+                transform 0.2s ease, 
+                box-shadow 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #e60000; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(255, 77, 77, 0.6); 
+}
+
+.logout-btn:active {
+    background-color: #cc0000; 
+    transform: translateY(0); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+
 
 .main-nav-end {
   display: -webkit-box;

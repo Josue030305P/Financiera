@@ -11,6 +11,23 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
   switch ($_SERVER['REQUEST_METHOD']) {
 
 
+    case 'GET':
+      
+        try {
+          $resultados = $detallePago->getAll();
+          echo json_encode([
+            "status" => true,
+            "data" => $resultados
+          ]);
+        } catch (Exception $e) {
+          echo json_encode([
+            'success' => false,
+            'message' => 'Error al obtener los detalels de pagos: ' . $e->getMessage()
+          ]);
+        }
+      
+      break;
+
     case 'POST':
       $input = file_get_contents('php://input');
       $dataJSON = json_decode($input, true);
@@ -34,10 +51,5 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
         echo json_encode(['success' => false, 'message' => 'Error al agregar el pago: ' . $e->getMessage()]);
       }
       break;
-
-
   }
-
-
-
 }

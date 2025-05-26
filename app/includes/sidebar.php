@@ -1,8 +1,8 @@
 <?php require_once 'config.php'; ?>
-<?php  
+<?php
 
 if (!isset($_SESSION['nombre'])) {
-    header('Location:../'); 
+    header('Location:../');
     exit();
 }
 
@@ -28,7 +28,7 @@ if (!isset($_SESSION['nombre'])) {
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="<?=BASE_URL?>app"><span class="icon user-white" aria-hidden="true"></span>Leads</a>
+                    <a class="active" href="<?= BASE_URL ?>app"><span class="icon user-white" aria-hidden="true"></span>Leads</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
@@ -39,9 +39,9 @@ if (!isset($_SESSION['nombre'])) {
                         </span>
                     </a>
                     <ul class="cat-sub-menu">
-                        
+
                         <li>
-                            <a href="<?=BASE_URL?>app/views/contratos/">Lista de contratos</a>
+                            <a href="<?= BASE_URL ?>app/views/contratos/">Lista de contratos</a>
                         </li>
                     </ul>
                 </li>
@@ -55,7 +55,7 @@ if (!isset($_SESSION['nombre'])) {
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="<?=BASE_URL?>app/views/inversionistas/">Lista de inversionistas</a>
+                            <a href="<?= BASE_URL ?>app/views/inversionistas/">Lista de inversionistas</a>
                         </li>
                     </ul>
                 </li>
@@ -69,9 +69,9 @@ if (!isset($_SESSION['nombre'])) {
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="<?= BASE_URL."app/views/contactibilidad/" ?>">Lista de contactos</a>
+                            <a href="<?= BASE_URL . "app/views/contactibilidad/" ?>">Lista de contactos</a>
                         </li>
-                       
+
                     </ul>
                 </li>
                 <li>
@@ -84,16 +84,16 @@ if (!isset($_SESSION['nombre'])) {
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="<?= BASE_URL. "app/views/cronograma-pagos/"?>">Lista de cronogramas</a>
+                            <a href="<?= BASE_URL . "app/views/cronograma-pagos/" ?>">Lista de cronogramas</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="<?=  BASE_URL."app/views/detallepagos/" ?>">
+                    <a href="<?= BASE_URL . "app/views/detallepagos/" ?>">
                         <span class="icon message" aria-hidden="true"></span>
                         Detalle de pagos
                     </a>
-                   
+
                 </li>
             </ul>
             <span class="system-menu__title">system</span>
@@ -144,85 +144,87 @@ if (!isset($_SESSION['nombre'])) {
     <div class="sidebar-footer">
         <a href="##" class="sidebar-user">
             <span class="sidebar-user-img">
-                <picture><source srcset="<?= BASE_URL?>app/img/avatar/avatar-illustrated-04.webp" type="image/webp"><img src="<?= BASE_URL?>app/img/avatar/avatar-illustrated-04.png" alt="User name"></picture>
+                <picture>
+                    <source srcset="<?= BASE_URL ?>app/img/avatar/avatar-illustrated-04.webp" type="image/webp"><img src="<?= BASE_URL ?>app/img/avatar/avatar-illustrated-04.png" alt="User name">
+                </picture>
             </span>
             <div class="sidebar-user-info">
-                <span class="sidebar-user__title"><?= $_SESSION['nombre']?></span>
+                <span class="sidebar-user__title"><?= $_SESSION['nombre'] ?></span>
                 <span class="sidebar-user__subtitle">Soporte</span>
             </div>
         </a>
 
-        <div class="logout-wrapper" style="padding: 1rem;">
-            <button id="logoutBtn" class="logout-btn" style="display: flex; align-items: center; color: red;">
-                <span class="icon logout" aria-hidden="true"></span>
-                <span style="margin-left: 0.5rem;">Cerrar sesión</span>
+        <div class="logout-wrapper">
+            <button id="logoutBtn" class="logout-btn">
+
+                <span>Cerrar sesión</span>
             </button>
         </div>
 
     </div>
-</aside> 
+</aside>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.getElementById('logoutBtn').addEventListener('click', function() {
-  
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: '¿Quieres cerrar sesión?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, cerrar sesión',
-        cancelButtonText: 'Cancelar',
-        reverseButtons: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-        
-            fetch('<?= BASE_URL ?>app/controllers/LoginController.php', {  
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded' 
-                },
-                body: new URLSearchParams({ logout: 'true' })  
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                if (data.success) {
-                  
-                    Swal.fire({
-                        title: '¡Sesión cerrada!',
-                        text: 'Has cerrado sesión exitosamente.',
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar'
-                    }).then(() => {
-                        window.location.href = '<?= BASE_URL ?>'; 
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: '¿Quieres cerrar sesión?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch('<?= BASE_URL ?>app/controllers/LoginController.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            logout: 'true'
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.success) {
+
+                            Swal.fire({
+                                title: '¡Sesión cerrada!',
+                                text: 'Has cerrado sesión exitosamente.',
+                                icon: 'success',
+                                confirmButtonText: 'Aceptar'
+                            }).then(() => {
+                                window.location.href = '<?= BASE_URL ?>';
+                            });
+                        } else {
+
+                            Swal.fire({
+                                title: 'Error',
+                                text: data.message,
+                                icon: 'error',
+                                confirmButtonText: 'Intentar nuevamente'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cerrar sesión:', error);
+
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Hubo un problema al cerrar la sesión.',
+                            icon: 'error',
+                            confirmButtonText: 'Intentar nuevamente'
+                        });
                     });
-                } else {
-                  
-                    Swal.fire({
-                        title: 'Error',
-                        text: data.message,
-                        icon: 'error',
-                        confirmButtonText: 'Intentar nuevamente'
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error al cerrar sesión:', error);
-                
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un problema al cerrar la sesión.',
-                    icon: 'error',
-                    confirmButtonText: 'Intentar nuevamente'
-                });
-            });
-        } else {
-            
-            Swal.fire('Cancelado', 'La sesión no se cerró.', 'info');
-        }
+            } else {
+
+                Swal.fire('Cancelado', 'La sesión no se cerró.', 'info');
+            }
+        });
     });
-});
-
-
 </script>
