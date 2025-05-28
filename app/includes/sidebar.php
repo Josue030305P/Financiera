@@ -28,7 +28,8 @@ if (!isset($_SESSION['nombre'])) {
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="<?= BASE_URL ?>app"><span class="icon user-white" aria-hidden="true"></span>Leads</a>
+                    <a class="active" href="<?= BASE_URL ?>app"><span class="icon user-white"
+                            aria-hidden="true"></span>Leads</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
@@ -96,56 +97,16 @@ if (!isset($_SESSION['nombre'])) {
 
                 </li>
             </ul>
-            <span class="system-menu__title">system</span>
-            <ul class="sidebar-body-menu">
-                <li>
-                    <a href="appearance.html"><span class="icon edit" aria-hidden="true"></span>Appearance</a>
-                </li>
-                <li>
-                    <a class="show-cat-btn" href="##">
-                        <span class="icon category" aria-hidden="true"></span>Extentions
-                        <span class="category__btn transparent-btn" title="Open list">
-                            <span class="sr-only">Open list</span>
-                            <span class="icon arrow-down" aria-hidden="true"></span>
-                        </span>
-                    </a>
-                    <ul class="cat-sub-menu">
-                        <li>
-                            <a href="extention-01.html">Extentions-01</a>
-                        </li>
-                        <li>
-                            <a href="extention-02.html">Extentions-02</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="show-cat-btn" href="##">
-                        <span class="icon user-3" aria-hidden="true"></span>Users
-                        <span class="category__btn transparent-btn" title="Open list">
-                            <span class="sr-only">Open list</span>
-                            <span class="icon arrow-down" aria-hidden="true"></span>
-                        </span>
-                    </a>
-                    <ul class="cat-sub-menu">
-                        <li>
-                            <a href="users-01.html">Users-01</a>
-                        </li>
-                        <li>
-                            <a href="users-02.html">Users-02</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="##"><span class="icon setting" aria-hidden="true"></span>Settings</a>
-                </li>
-            </ul>
+
+
         </div>
     </div>
     <div class="sidebar-footer">
-        <a href="##" class="sidebar-user">
+        <a href="#" class="sidebar-user">
             <span class="sidebar-user-img">
                 <picture>
-                    <source srcset="<?= BASE_URL ?>app/img/avatar/avatar-illustrated-04.webp" type="image/webp"><img src="<?= BASE_URL ?>app/img/avatar/avatar-illustrated-04.png" alt="User name">
+                    <source srcset="<?= BASE_URL ?>app/img/avatar/avatar-illustrated-04.webp" type="image/webp"><img
+                        src="<?= BASE_URL ?>app/img/avatar/avatar-illustrated-04.png" alt="User name">
                 </picture>
             </span>
             <div class="sidebar-user-info">
@@ -166,7 +127,7 @@ if (!isset($_SESSION['nombre'])) {
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.getElementById('logoutBtn').addEventListener('click', function() {
+    document.getElementById('logoutBtn').addEventListener('click',  () => {
 
         Swal.fire({
             title: '¿Estás seguro?',
@@ -180,14 +141,14 @@ if (!isset($_SESSION['nombre'])) {
             if (result.isConfirmed) {
 
                 fetch('<?= BASE_URL ?>app/controllers/LoginController.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: new URLSearchParams({
-                            logout: 'true'
-                        })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        logout: 'true'
                     })
+                })
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);

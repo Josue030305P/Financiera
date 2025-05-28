@@ -286,11 +286,6 @@ CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFER
 )ENGINE=InnoDB;
 
 
-
-
-
-
-
 CREATE TABLE garantias(
 idgarantia				INT PRIMARY KEY AUTO_INCREMENT,
 tipogarantia			ENUM('Auto','Hipoteca','Letra') NOT NULL
