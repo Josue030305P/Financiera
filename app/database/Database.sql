@@ -206,6 +206,7 @@ CREATE TABLE versiones (
   fechafin     DATE        NULL
 ) ENGINE=InnoDB;
 
+ALTER TABLE condiciones MODIFY COLUMN condicion TEXT NOT NULL;
 INSERT INTO versiones(fechainicio) VALUES(NOW());
 SELECT * FROM versiones;
 

@@ -171,7 +171,7 @@ class DataTable {
     return "—";
   }
 
-renderizarAcciones(item) { // <--- CAMBIO IMPORTANTE: AHORA RECIBE EL OBJETO 'item' COMPLETO
+renderizarAcciones(item) { 
     let acciones = ``;
     const id = item[this.idField]; // Obtiene el ID del item
     console.log(id, 'id')
@@ -183,7 +183,7 @@ renderizarAcciones(item) { // <--- CAMBIO IMPORTANTE: AHORA RECIBE EL OBJETO 'it
 
       if (item.puede_ser_inversionista) {
             acciones += `
-                <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
+                <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}" style="background:red;">
                 <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
             </a>
             `;
