@@ -54,8 +54,7 @@
         constituidos.</p>
 
     <h5 class="text-left underline">DECIMO TERCERA: RENTA DE SEGUNDA CATEGORÍA</h5>
-    <p>EL MUTUATARIO devolverá la suma de dinero (objeto del préstamo) y su rentabilidad mensual, en la misma moneda, y
-        deberá ser depositado en la cuenta del MUTUANTE. El MUTUATARIO realizará la retención por el pago del impuesto a
+    <p><?=  htmlspecialchars($condicionesMutuatario[3]['condicion'])?>El MUTUATARIO realizará la retención por el pago del impuesto a
         la renta el cual asciende al 5% de la rentabilidad recibida mensualmente, y a la emisión del comprobante de pago
         que exige la ley el cual será enviado al mutuante.</p>
 

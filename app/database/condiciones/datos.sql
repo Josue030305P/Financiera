@@ -20,6 +20,8 @@ INSERT INTO condiciones(idversion,entidad, condicion)
             (1,'Mutuante', 'Que, en el caso de infracción de cualquiera de los numerales contenidos en este documento, eximo a la entidad de toda responsabilidad que se derive por información errónea, falsa o inexacta que yo hubiere proporcionado en este documento, o de la violación del mismo.')
 
 
+
+ALTER TABLE condiciones MODIFY COLUMN condicion TEXT NOT NULL;
 SELECT idversion, condicion FROM condiciones WHERE entidad = 'Mutuatario'; 
 
 SELECT idversion, condicion FROM condiciones WHERE entidad = 'Mutuante'; 

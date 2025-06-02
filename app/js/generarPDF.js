@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch(`${baseUrl}app/controllers/ContratoPDFController.php?idcontrato=${idcontrato}`);
         const data = await response.json();
 
+        const getCondicionesVersionActiva = await fetch(`${baseUrl}app/controllers/VersionController`);
+        const condiciones = await getCondicionesVersionActiva.json();
+
         if (data.error) {
             console.error('Error:', data.error);
             return;
@@ -42,7 +45,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             contrato: {
                 capital: data.capital,
                 cronograma: data.cronograma_pagos
-            }
+            },
+            condiciones
         };
 
         const input = document.createElement('input');

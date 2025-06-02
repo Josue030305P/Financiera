@@ -12,6 +12,7 @@ $cci = getDato('inversionista', 'cci');
 $capital = getDato('contrato', 'capital');
 $cronograma = getDato('contrato', 'cronograma');
 
+
 // Función para convertir número a letras
 function numeroALetras($numero) {
     $unidades = array('', 'UN', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE');
@@ -104,7 +105,7 @@ $capitalLetras = numeroALetras($capital);
       lo destine a los fines que considere convenientes.
     </p>
 
-    <p><strong>EL MUTUATARIO</strong>, por su parte, se obliga a devolver a <strong>EL MUTUANTE</strong> la referida suma de dinero en la forma y oportunidad pactadas en el presente documento.</p>
+    <p><strong>EL MUTUATARIO</strong>, <?=  htmlspecialchars($condicionesMutuatario[0]['condicion'])?></p>
 
     <p><strong>EL MUTUATARIO</strong> declara que conoce la tasa de rentabilidad mensual que pagará a favor del <strong>MUTUANTE</strong> y se encuentra conforme respecto de la misma, en todos sus aspectos; 
       y se compromete a mantener indemne a <strong>EL MUTUANTE</strong> respecto de cualquier acción de tipo civil o penal que tenga relación a la misma. 
@@ -117,7 +118,7 @@ $capitalLetras = numeroALetras($capital);
     <p>Las partes acuerdan una rentabilidad del 5% mensual calculado sobre el capital (monto del mutuo).</p>
 
     <h5 class="text-left underline bold">TERCERA. - DEVOLUCIÓN DEL MUTUO Y RENTABILIDAD</h5>
-    <p><strong>EL MUTUATARIO</strong> está obligado a devolver a <strong>EL MUTUANTE</strong> la suma del monto de capital invertido siendo de 
+    <p><strong>EL MUTUATARIO</strong> <?=  htmlspecialchars($condicionesMutuatario[1]['condicion'])?> siendo de 
       <strong>S/<?= number_format($capital, 2) ?> (<?= $capitalLetras ?> SOLES)</strong>, más la rentabilidad mensual en los plazos y en las fechas indicadas en el <strong class="underline">"Cronograma de Pago del Mutuatario al Mutuante"</strong>.
     </p>
 

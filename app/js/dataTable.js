@@ -183,7 +183,7 @@ renderizarAcciones(item) {
 
       if (item.puede_ser_inversionista) {
             acciones += `
-                <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}" style="background:red;">
+                <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
                 <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
             </a>
             `;
@@ -209,7 +209,7 @@ renderizarAcciones(item) {
             <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
                 <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
             </a>
-            <a href="#" class="ver-cronograma-modal" style="cursor: pointer; display: inline-block;" data-contrato-id="${id}">
+            <a href="#" class="ver-cronograma-modal" style="cursor: pointer;" data-contrato-id="${id}">
                 <img src="${this.baseUrl}app/img/png/cronograma-pagos.png" alt="Ver Cronograma" title="Ver cronograma">
             </a>
             <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank">

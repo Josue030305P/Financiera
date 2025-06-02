@@ -15,16 +15,16 @@ class VersionContrato {
 
 
     public function getCondicionesByVersionActiva() {
-         $result = [];
         try {
             $sql = "SELECT * FROM vista_condiciones_activas";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
-        return $result;
+     
     }
 }
 

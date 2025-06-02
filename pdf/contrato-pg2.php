@@ -30,16 +30,13 @@ $dni_conyuge = getDato('conyuge', 'documento');
     <div class="no-break">
       <p class="text-left"><strong>EL MUTUATARIO</strong> se obliga a:</p>
       <ol>
-        <li>Pagar puntualmente las cuotas acordadas de la forma y en los plazos señalados en el <strong
-            class="underline">“Cronograma de Pago del Mutuatario al Mutuante”</strong></li>
+        <li><?= htmlspecialchars($condicionesMutuatario[2]['condicion'])?></li>
       </ol>
 
       <p class="text-left"><strong>EL MUTUANTE</strong> se obliga:</p>
       <ol>
-        <li>Cumplir con la presentación de documentos contables requeridos, referente a sus facturas de renta de segunda
-          categoría.</li>
-        <li>Informar al MUTUATARIO cualquier situación referente a sus cuentas bancarias a recibir su rentabilidad con
-          anticipación.</li>
+        <li><?=htmlspecialchars($condicionesMutuante[0]['condicion'])?></li>
+        <li><?=htmlspecialchars($condicionesMutuante[1]['condicion'])?></li>
       </ol>
     </div>
 

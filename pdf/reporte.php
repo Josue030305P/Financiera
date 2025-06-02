@@ -17,6 +17,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 // Almacenar en sesión para todas las páginas
 $_SESSION['datos_contrato'] = $formData;
 
+
 try {
     ob_end_clean(); 
     ob_start();

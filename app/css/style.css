@@ -1944,7 +1944,6 @@ label {
 
 
 .table-header {
-  background-color: #0000cd;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1956,9 +1955,6 @@ label {
   width: 100%;
   box-sizing: border-box;
 }
-
-/* Estilos para el botón "Nuevo" */
-
 
 
 .btn-addInversionista {

@@ -12,10 +12,7 @@ if ($_SERVER["REQUEST_METHOD"]) {
 
             try {
                 $resultados = $versionContrato->getCondicionesByVersionActiva();
-                echo json_encode([
-                    "status" => "success",
-                    "data" => $resultados
-                ]);
+                echo json_encode($resultados);
             } catch (Exception $e) {
                 echo json_encode([
                     'success' => false,

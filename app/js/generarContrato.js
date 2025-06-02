@@ -205,7 +205,9 @@ document.addEventListener("DOMContentLoaded", () => {
         `${baseUrl}app/controllers/VersionController.php?`
       );
       const result = await response.json();
-      console.log(result.data[0].idversion); // Obtengo el idversion
+      const idversionActiva = result[0].idversion;
+      return idversionActiva;
+      // console.log('IDVERSION:', result.data[0].idversion); // Obtengo el idversion
     } catch (error) {
       console.error("Error al obtener idversion activa:", error);
       return null;
@@ -243,9 +245,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         // DE ESTA FORMA AGREGA UN CONTRATO - FALTA CAPTURAR EL IDCONYUGE SI ES QUE SE CREA
-
+        const versionActiva = await obtenerVersionActivaContrato();
+        // console.log('IDVERSION DESDE CONTRATO: ', await obtenerVersionActivaContrato());
         const formData = {
-          idversion: 1,
+          idversion: versionActiva,
           idasesor: inversionistaData.idasesor,
           idinversionista: inversionistaResult.idinversionista,
           idconyuge: idConyugeValidado,
@@ -263,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
           observacion: observacion.value,
         };
 
-        console.log("DATOS DEL CONTRATO:", formData);
+       // console.log("DATOS DEL CONTRATO:", formData);
 
         const response = await fetch(
           `${baseUrl}app/controllers/ContratoController.php`,
@@ -310,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           );
 
-          window.location.href = `${baseUrl}app/views/contratos/`;
+         // window.location.href = `${baseUrl}app/views/contratos/`;
         }
       } catch (error) {
         console.error(error);

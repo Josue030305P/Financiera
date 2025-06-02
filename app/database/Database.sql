@@ -218,6 +218,8 @@ condicion				VARCHAR(300) NOT NULL,
 CONSTRAINT fk_idversion_condicion FOREIGN KEY(idversion) REFERENCES versiones(idversion)
 )ENGINE=InnoDB;
 
+
+
 INSERT INTO condiciones(idversion,entidad,condicion)
 	VALUES(1,'Mutuante','DECLARACIÓN JURADA DE ORIGEN DE FONDOS'),
 		  (1,'Mutuante','Cumplir con la presentación de documentos contables requeridos, referente a sus facturas de renta de segunda categoría'),

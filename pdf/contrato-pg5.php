@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $jsonData = json_decode($_POST['jsonData'], true);
 
@@ -17,7 +17,7 @@ $inversionista = $jsonData['inversionista'];
     </p>
 
     <p>Yo, <strong class="uppercase"><?php echo $inversionista['nombre']  ?></strong>, identificado con el tipo de
-        documento,<strong>DNI N°<?php echo $inversionista['documento']?></strong> , obrando en
+        documento,<strong>DNI N°<?php echo $inversionista['documento'] ?></strong> , obrando en
         nombre propio de manera voluntaria y dando certeza de que todo lo aquí consignado es cierto, realizo la
         siguiente DECLARACION JURADA DE FUENTE U ORIGEN DE FONDOS a favor de <strong>YONDA & GRUPO HUARACA
             E.I.R.L.</strong>, con RUC
@@ -31,22 +31,11 @@ $inversionista = $jsonData['inversionista'];
     <div class="no-break">
 
         <ol>
-            <li>Que, los recursos que entrego para la(s) transacción(es) realizada provienen de fuentes de carácter
-                Profesional, Actividades de Negocios, Actividades Productivas, de Servicios u otras Actividades lícitas
-                referidas a........................................................y que dichos fondos proceden
-                de sus rentas de primera, segunda, tercera, cuarta y quinta categoría debidamente declaradas a la SUNAT
-                con el pago de los impuestos respectivos.</li>
-            <li>Que, los recursos que entrego no provienen de ninguna actividad ilícita contempladas en el Código Penal,
-                Código Civil o Código Tributario Peruano o en cualquier norma que los modifique o adicione.</li>
-            <li>
-                Que, no estoy efectuando transacciones provenientes de las actividades ilícitas contempladas en el
-                Código Penal, Código Civil o Código Tributario Peruano o en cualquier norma que lo modifique o adicione,
-                a favor de personas relacionadas con las mismas.
-            </li>
-            <li>Que, en el caso de infracción de cualquiera de los numerales contenidos en este documento, eximo a la
-                entidad de toda responsabilidad que se derive por información errónea, falsa o inexacta que yo hubiere
-                proporcionado en este documento, o de la violación del mismo.</li>
-        </ol>
+            <li><?= htmlspecialchars($condicionesMutuante[2]['condicion']) ?></li>
+            <li><?= htmlspecialchars($condicionesMutuante[3]['condicion']) ?></li>
+            <li> <?= htmlspecialchars($condicionesMutuante[4]['condicion']) ?></li>
+            <li><?=htmlspecialchars($condicionesMutuante[5]['condicion'])?>.</li>
+     </ol>
 
 
     </div>
@@ -71,7 +60,7 @@ $inversionista = $jsonData['inversionista'];
 
             </tr>
             <tr>
-                <td>dni n°<?php echo $inversionista['documento']?></td>
+                <td>dni n°<?php echo $inversionista['documento'] ?></td>
             </tr>
         </tbody>
     </table>
