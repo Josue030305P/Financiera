@@ -61,7 +61,17 @@ $links = [
             <?php require_once "../../includes/navbar.php"; ?>
             <?php require_once "../../includes/table.php" ?>
           
+              <div id="modal-cronograma" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>Cronograma de Pagos - Contrato <span id="modal-contrato-id"></span></h3>
+                <div id="modal-cronograma-body">
+                </div>
+            </div>
         </div>
+        </div>
+
+
     </div>
 
     <!-- Scripts -->

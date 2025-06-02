@@ -1937,67 +1937,8 @@ label {
   background-color: #6c757d;
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(27, 27, 27, 0.4);
-}
 
-.modal-content {
-  background-color: #fefefe;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
 
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#modal-cronograma-body table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-#modal-cronograma-body th,
-#modal-cronograma-body td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-#modal-cronograma-body th {
-  background-color: #f2f2f2;
-}
-
-.ver-cronograma-modal img {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-}
 
 .table-header {
   background-color: #0000cd;
@@ -2014,28 +1955,7 @@ label {
 }
 
 /* Estilos para el botón "Nuevo" */
-.create-lead {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  flex-shrink: 0;
-}
 
-.header-buttons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.header-buttons img {
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-}
 
 
 .btn-addInversionista {
@@ -2055,99 +1975,408 @@ label {
   border-collapse: collapse;
 }
 
-.users-table th,
-.users-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
 
 .users-table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-
+/* Estilos generales para el contenedor de la tabla */
 .table-wrapper {
-  overflow-x: auto;
-  width: 100%;
+  
+    overflow-x: auto;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 12px; /* Bordes redondeados para el contenedor */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada para un efecto flotante */
+    background-color: #ffffff;
+    padding: 15px; /* Espaciado interno */
 }
 
+/* Estilos para la tabla principal */
 .posts-table {
-  width: 100%;
-  text-align: left;
-  border-collapse: collapse;
-  line-height: 1.4;
-  letter-spacing: -0.3px;
-  color: #767676;
-  transition: none;
+    width: 100%;
+    border-collapse: separate; /* Permite bordes redondeados en las celdas */
+    border-spacing: 0; /* Elimina el espacio entre celdas */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+    color: #333;
 }
 
+/* Estilos de las cabeceras de la tabla */
 .users-table-info th {
-    background-color: #f8f9fa; 
-    color: #56677f; 
-    font-size: 0.9em; 
-    font-weight: bold; 
-    text-align: center;
-    padding: 15px ; 
-    border-bottom: 2px solid #e9ecef;
-    text-transform: uppercase; 
-    letter-spacing: 0.5px; 
-}
-
-.posts-table td {
-    background-color: #ffffff; 
-    border-top: none; 
-    padding: 8px; 
+    background-color: #eef2f7; /* Un color de fondo más suave para las cabeceras */
+    color: #4a5568;
     font-size: 0.95em;
-    color: #495057; 
-    vertical-align: middle; 
-    white-space: normal; 
+    font-weight: 600; /* Un poco más de peso en la fuente */
+    text-align: left; /* Alineación a la izquierda para mejor lectura */
+    padding: 15px 20px; /* Más padding para mayor espacio */
+    border-bottom: 3px solid #dee2e6; /* Borde inferior más definido */
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    position: sticky; /* Cabecera fija al hacer scroll horizontal */
+    top: 0;
+    z-index: 10;
 }
 
+/* Bordes redondeados para la primera y última cabecera */
+.users-table-info th:first-child {
+    border-top-left-radius: 10px;
+}
 
+.users-table-info th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* Estilos de las celdas del cuerpo de la tabla */
+.posts-table td {
+    background-color: #ffffff;
+    padding: 12px 20px; /* Padding consistente */
+    font-size: 0.9em;
+    color: #4f5f6f;
+    vertical-align: middle;
+    border-bottom: 1px solid #ebf2f7; /* Borde inferior sutil para las filas */
+    white-space: normal;
+    word-break: break-word; /* Rompe palabras largas para evitar desbordamiento */
+}
+
+/* Estilos de las filas impares (sin zebra stripping para un look más moderno) */
+/* .posts-table tbody tr:nth-child(even) {
+    background-color: #fcfdff;
+} */
+
+/* Estilos al pasar el ratón sobre las filas */
 .posts-table tr {
-    background-color: #ffffff; 
-    transition: all 0.2s ease-in-out;
-    border-radius: 8px; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+    transition: all 0.3s ease; /* Transición suave para el hover */
+    border-radius: 8px; /* Bordes redondeados para cada fila */
 }
 
 .posts-table tr:hover {
-    background-color: #f0f5ff; 
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); 
+    background-color: #e8f0fe; /* Fondo más claro al pasar el ratón */
+    transform: translateY(-3px); /* Efecto de elevación sutil */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* Sombra más intensa al pasar el ratón */
+    cursor: pointer;
 }
 
-
-.posts-table tr td:first-child {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.posts-table tbody {
-  font-size: 14px;
-}
-
+/* Estilos para la última celda de cada fila (acciones) */
 .posts-table tr td:last-child {
     display: flex;
-    height: 98px;
-    white-space: nowrap; 
-    justify-content: center; 
-    align-items: center; 
-    padding: 5px; 
+    justify-content: center; /* Centrar elementos de acción */
+    align-items: center;
+    padding: 10px;
+    min-height: 50px; /* Asegura una altura mínima para las acciones */
 }
 
+/* Iconos de acción */
+.icon-acciones {
+    width: 24px; /* Tamaño ligeramente más grande */
+    height: 24px;
+    margin: 0 8px; /* Espaciado entre iconos */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.icon-acciones:hover {
+    transform: scale(1.15); /* Efecto de crecimiento al pasar el ratón */
+    opacity: 0.8;
+}
+
+/* Estilos de los botones de exportación e importación */
 .export-excel,
 .import-excel {
-  width: 35px;
-  cursor: pointer;
+    width: 40px; /* Iconos un poco más grandes */
+    height: 40px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: transform 0.2s ease;
 }
 
-.icon-acciones {
-  width: 21px;
-  height: 21px;
+.export-excel:hover,
+.import-excel:hover {
+    transform: scale(1.1);
+}
+
+/* Contenedor de la cabecera de la tabla (botones y filtros) */
+.table-header {
+    display: flex;
+    justify-content: space-between; /* Espacio entre el botón de crear y los filtros */
+    align-items: center;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+    gap: 20px; /* Espacio entre elementos */
+    margin-bottom: 25px;
+    padding: 15px 20px;
+    background-color: #f7f9fc;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Botón de crear nuevo elemento */
+.create-lead {
+    background-color: #007bff; /* Color azul primario */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-lead:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Contenedor de filtros */
+.filters-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-size: 0.85em;
+    color: #555;
+    font-weight: 500;
+}
+
+.filters-container select,
+.filters-container input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: #495057;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-width: 150px; /* Ancho mínimo para los filtros */
+}
+
+.filters-container select:focus,
+.filters-container input[type="text"]:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.filter-actions button {
+    background-color: #6c757d; /* Color gris para botones de acción de filtro */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 10px;
+}
+
+.filter-actions button:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+#aplicar-filtros {
+    background-color: #28a745; /* Verde para aplicar filtros */
+}
+
+#aplicar-filtros:hover {
+    background-color: #218838;
+}
+
+#resetear-filtros, #resetear-filtros-lead {
+    background-color: #dc3545; /* Rojo para resetear filtros */
 }
 
 
+
+/* Estilos para los iconos de ordenamiento (ascendente/descendente) */
+.sort-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 8px;
+    vertical-align: middle;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #a0a0a0; /* Flecha hacia arriba por defecto */
+    opacity: 0.6;
+    transition: transform 0.2s ease;
+}
+
+.users-table-info th.asc .sort-icon {
+    border-bottom: 5px solid #007bff; /* Color para ascendente */
+    transform: rotate(0deg);
+    opacity: 1;
+}
+
+.users-table-info th.desc .sort-icon {
+    border-top: 5px solid #007bff; /* Color para descendente */
+    border-bottom: none;
+    transform: rotate(0deg);
+    opacity: 1;
+}
+
+/* Asegurar que la tabla ocupe todo el espacio dentro de su contenedor */
+.main.users.chart-page {
+    padding: 30px;
+    background-color: #f0f2f5; /* Un fondo general suave para la página */
+    min-height: 100vh;
+}
+
+.main-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+/* Estilos para el modal */
+.modal {
+    /* ¡¡¡IMPORTANTE!!! Sólo esta línea debe controlar la visibilidad inicial */
+    display: none; 
+    
+    position: fixed; /* Posición fija para cubrir toda la pantalla */
+    z-index: 1000; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+    
+    /* Estas propiedades de Flexbox SÓLO funcionarán cuando tu JavaScript cambie 'display' a 'flex' */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center;    /* Centra verticalmente el contenido */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco para el contenido del modal */
+    padding: 30px;
+    border-radius: 12px; /* Bordes ligeramente redondeados */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada para profundidad */
+    width: 90%; /* Un poco más de ancho en general */
+    max-width: 700px; /* Ancho máximo para que no sea demasiado grande en pantallas grandes */
+    position: relative;
+    animation: fadeIn 0.3s ease-out; /* Animación suave al aparecer */
+    opacity: 0; /* Inicia invisible para la animación */
+    transform: scale(0.95); /* Inicia un poco más pequeño para la animación */
+}
+
+/* Keyframes para la animación de entrada */
+@keyframes fadeIn {
+    to { opacity: 1; transform: scale(1); } /* Termina completamente visible y a tamaño normal */
+}
+
+/* Aplicar la animación al abrir el modal (esto lo haría el JS al añadir una clase, o el propio display:flex) */
+.modal.is-open .modal-content {
+    animation: fadeIn 0.3s ease-out forwards; /* 'forwards' mantiene el estado final de la animación */
+}
+
+.close-button {
+    color: #888; /* Color de cierre más sutil */
+    position: absolute;
+    top: 15px;
+    right: 20px; /* Ajuste para un mejor espaciado */
+    font-size: 36px; /* Tamaño de la 'X' un poco más grande */
+    font-weight: normal; /* No tan negrita */
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333; /* Más oscuro al pasar el ratón */
+    transform: rotate(90deg); /* Efecto de giro al pasar el ratón */
+    text-decoration: none;
+}
+
+.modal-content h3 {
+    color: #2c3e50;
+    margin-bottom: 25px; /* Más espacio debajo del título */
+    font-size: 2em; /* Título un poco más grande */
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0; /* Borde más claro */
+    padding-bottom: 15px;
+    font-weight: 600; /* Título un poco más fuerte */
+}
+
+#modal-cronograma-body {
+    max-height: 450px; /* Altura máxima ligeramente mayor para el contenido del cronograma */
+    overflow-y: auto; /* Scroll si el contenido excede la altura */
+    padding-right: 15px; /* Espacio para la barra de scroll */
+    line-height: 1.6; /* Mejor interlineado para el contenido */
+    color: #555;
+}
+
+/* Estilos para la tabla dentro del modal, si la hay */
+#modal-cronograma-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+#modal-cronograma-body th,
+#modal-cronograma-body td {
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    text-align: left;
+}
+
+#modal-cronograma-body th {
+    background-color: #f7f9fc;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+#modal-cronograma-body tr:nth-child(even) {
+    background-color: #fcfdff;
+}
+
+#modal-cronograma-body tr:hover {
+    background-color: #eef2f7;
+}
+
+
+/* Scrollbar moderno (mantengo los mismos) */
+#modal-cronograma-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+#modal-cronograma-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#modal-cronograma-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#modal-cronograma-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Media Queries para responsividad del modal */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .modal-content h3 {
+        font-size: 1.5em;
+    }
+    .close-button {
+        font-size: 30px;
+        top: 10px;
+        right: 15px;
+    }
+}
 /*-------------------------------------------------------------------------------------------------------*/
 
 .sidebar {

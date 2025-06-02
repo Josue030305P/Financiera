@@ -114,14 +114,7 @@
             </div>
         </div>
 
-        <div id="modal-cronograma" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h3>Cronograma de Pagos - Contrato <span id="modal-contrato-id"></span></h3>
-                <div id="modal-cronograma-body">
-                </div>
-            </div>
-        </div>
+      
 
 
 
