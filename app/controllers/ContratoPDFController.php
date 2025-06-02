@@ -10,10 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     if (isset($_GET['idcontrato'])) {
         try {
             $idcontrato = (int)$_GET['idcontrato'];
-            error_log("Buscando contrato ID: " . $idcontrato);
-            
+    
             $resultado = $contrato->getDatosPDF($idcontrato);
-            error_log("Resultado de la búsqueda: " . print_r($resultado, true));
+          
             
             if ($resultado) {
                 // Procesar el cronograma de pagos
@@ -35,15 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
                 error_log("Datos procesados: " . print_r($resultado, true));
                 echo json_encode($resultado);
             } else {
-                error_log("No se encontró el contrato con ID: " . $idcontrato);
+                
                 echo json_encode(['error' => 'No se encontró el contrato']);
             }
         } catch (Exception $e) {
-            error_log("Error en ContratoPDFController: " . $e->getMessage());
+            
             echo json_encode(['error' => $e->getMessage()]);
         }
     } else {
-        error_log("No se proporcionó ID de contrato");
+        
         echo json_encode(['error' => 'ID de contrato no proporcionado']);
     }
 } 

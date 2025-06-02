@@ -206,6 +206,7 @@ CREATE TABLE versiones (
   fechafin     DATE        NULL
 ) ENGINE=InnoDB;
 
+ALTER TABLE condiciones MODIFY COLUMN condicion TEXT NOT NULL;
 INSERT INTO versiones(fechainicio) VALUES(NOW());
 SELECT * FROM versiones;
 
@@ -284,11 +285,6 @@ CONSTRAINT fk_identidad FOREIGN KEY(identidad) REFERENCES entidades(identidad),
 CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
-
-
-
-
-
 
 
 CREATE TABLE garantias(

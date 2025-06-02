@@ -873,6 +873,9 @@ body {
 }
 
 .main-wrapper {
+  padding: 20px;
+  overflow-x: hidden;
+  flex-grow: 1;
   position: relative;
   width: 100%;
 }

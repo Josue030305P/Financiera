@@ -1,4 +1,8 @@
 
+#cronograma-page-content {
+    max-width: 100%;
+    margin-top: 40px;
+}
 #cronograma-page-content .container {
     background: #ffffff;
     border-radius: 10px;
@@ -30,19 +34,6 @@
     background: linear-gradient(90deg, #3498db, #2ecc71);
 }
 
-/* Diseño profesional para los filtros */
-#cronograma-page-content .filtros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-    gap: 15px; 
-    margin-bottom: 20px;
-    align-items: end;
-}
-
-#cronograma-page-content .filter-group {
-    display: flex;
-    flex-direction: column;
-}
 
 #cronograma-page-content .filtros label {
     color: #4a5568;
@@ -51,20 +42,6 @@
     margin-bottom: 6px;
     display: block;
 }
-
-#cronograma-page-content .filtros input,
-#cronograma-page-content .filtros select {
-    width: 70%;
-    padding: 10px 12px; 
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: #2d3748;
-    background-color: #fff;
-    transition: all 0.2s ease;
-    box-sizing: border-box; 
-}
-
 #cronograma-page-content .filtros input:focus,
 #cronograma-page-content .filtros select:focus {
     border-color: #4299e1;
@@ -96,7 +73,7 @@
     transform: translateY(-1px);
 }
 
-/* Estilos para la tabla */
+
 #cronograma-page-content .tabla-responsive {
     border-radius: 8px;
     overflow-x: auto; 
@@ -175,7 +152,7 @@
     transform: translateY(-1px);
 }
 
-/* Estados de pagos */
+
 #cronograma-page-content .estado-pendiente,
 #cronograma-page-content .estado-pagado,
 #cronograma-page-content .estado-vencido {
@@ -200,4 +177,62 @@
 #cronograma-page-content .estado-vencido {
     color: #e53e3e;
     background-color: #fff5f5;
+}  
+
+
+
+
+
+
+/* Descomenta estos estilos si los tenías comentados, son importantes */
+#cronograma-page-content .filtros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: end;
 }
+
+#cronograma-page-content .filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#cronograma-page-content .filtros label {
+    color: #4a5568;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+}
+
+#cronograma-page-content .filtros input,
+#cronograma-page-content .filtros select {
+    width: 100%; /* CAMBIO: Asegura que ocupen el 100% de su espacio en la celda del grid */
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #2d3748;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+
+
+
+#cronograma-page-content #tabla-cronograma {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9rem;
+}
+
+#cronograma-page-content .tabla-responsive {
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
