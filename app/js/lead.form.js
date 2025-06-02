@@ -69,48 +69,53 @@ class LeadForm {
             });
         }
     }
-
-    async cargarDatosLead() {
-        try {
-            const response = await fetch(`${this.baseUrl}app/controllers/LeadController.php?id=${this.leadId}`);
-            const result = await response.json();
+async cargarDatosLead() {
+    try {
+        const response = await fetch(`${this.baseUrl}app/controllers/LeadController.php?id=${this.leadId}`);
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+            const lead = result.data;
             
-            if (result.status === 'success') {
-                const lead = result.data;
-                console.log(lead);
-                document.getElementById('apellidos').value = lead.apellidos || '';
-                document.getElementById('nombres').value = lead.nombres || '';
-                document.getElementById('telefono').value = lead.telprincipal || '';
-                document.getElementById('correo').value = lead.email || '';
-                document.getElementById('pais').value = lead.idpais || '';
-                document.getElementById('prioridad').value = lead.prioridad || '';
-                document.getElementById('asesor').value = lead.idasesor || '';
-                document.getElementById('canal').value = lead.idcanal || '';
-                document.getElementById('ocupacion').value = lead.ocupacion || '';
-                document.getElementById('comentarios').value = lead.comentarios || '';
-                
-                const addBtn = this.form.querySelector('.add-btn');
-                addBtn.textContent = 'Actualizar lead';
+            // Cargar datos básicos
+            document.getElementById('apellidos').value = lead.apellidos || '';
+            document.getElementById('nombres').value = lead.nombres || '';
+            document.getElementById('telefono').value = lead.telprincipal || '';
+            document.getElementById('correo').value = lead.email || '';
+            document.getElementById('prioridad').value = lead.prioridad || '';
+            document.getElementById('asesor').value = lead.idasesor || '';
+            document.getElementById('canal').value = lead.idcanal || '';
+            document.getElementById('ocupacion').value = lead.ocupacion || '';
+            document.getElementById('comentarios').value = lead.comentarios || '';
+            
+         
+            if (typeof window.cargarUbigeoCompleto === 'function') {
+                window.cargarUbigeoCompleto(
+                    lead.idpais || '',
+                    lead.iddepartamento || '',
+                    lead.idprovincia || '', 
+                    lead.iddistrito || ''
+                );
             } else {
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error al cargar los datos del lead: ' + result.message,
-                    confirmButtonColor: '#3085d6'
-                });
-                window.location.href = `${this.baseUrl}app/`;
+                
+                document.getElementById('pais').value = lead.idpais || '';
             }
-        } catch (error) {
-            console.error('Error al cargar datos del lead:', error);
+            
+            const addBtn = this.form.querySelector('.add-btn');
+            addBtn.textContent = 'Actualizar lead';
+        } else {
             await Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Error al cargar los datos del lead',
+                text: 'Error al cargar los datos del lead: ' + result.message,
                 confirmButtonColor: '#3085d6'
             });
             window.location.href = `${this.baseUrl}app/`;
         }
+    } catch (error) {
+        console.error('Error al cargar datos del lead:', error);
     }
+}
 
     async initEventListeners() {
         const addBtn = this.form.querySelector('.add-btn');
@@ -249,7 +254,7 @@ class LeadForm {
                     timer: 1500,
                     timerProgressBar: true,
                   });
-
+                 console.log('Datos enviados: ', formData);
                   document.querySelector('.invertir-btn').classList.remove('d-none');
              
             } else {

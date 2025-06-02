@@ -4,7 +4,7 @@
 
 
 <meta name="base-url" content="<?= BASE_URL ?>">
-<link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css">
+<!-- <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/form.lead.css"> -->
 
 <body>
     <div class="page-flex">
@@ -23,18 +23,18 @@
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label>
                             <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" class="apellidos"
-                                required>
+                                required disabled>
                         </div>
 
                         <div class="form-group">
                             <label for="nombres">Nombres</label>
-                            <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres" required>
+                            <input type="text" id="nombres" placeholder="Ingrese sus nombres" class="nombres" required disabled>
                         </div>
 
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
                             <input type="tel" id="telefono" placeholder="Ingrese su teléfono" class="telefono"
-                                maxlength="9" required>
+                                maxlength="9" required disabled>
                         </div>
 
                         <div class="form-group">
@@ -46,12 +46,12 @@
 
                         <div class="form-group">
                             <label for="email">Correo</label>
-                            <input type="email" id="correo" name="email" placeholder="Ingrese su correo" class="correo" required>
+                            <input type="email" id="correo" name="email" placeholder="Ingrese su correo" class="correo" required disabled>
                         </div>
 
                         <div class="form-group">
                             <label for="pais">País</label>
-                            <select name="pais" id="pais" class="select-box" required>
+                            <select name="pais" id="pais" class="select-box" required disabled>
                                 <option value="">Seleccione un país</option>
                             </select>
                         </div>
@@ -180,13 +180,45 @@
 
     <script src="<?= BASE_URL ?>app/js/lead.form.js"></script>
     <script>
+        // Función para validar edad mínima
+        function validarEdadMinima(fechaNacimiento, edadMinima = 22) {
+            const hoy = new Date();
+            const fechaNac = new Date(fechaNacimiento);
+
+            // Calcular la edad
+            let edad = hoy.getFullYear() - fechaNac.getFullYear();
+            const diferenciaMeses = hoy.getMonth() - fechaNac.getMonth();
+
+            // Ajustar si aún no ha cumplido años este año
+            if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < fechaNac.getDate())) {
+                edad--;
+            }
+
+            return {
+                esValida: edad >= edadMinima,
+                edad: edad,
+                edadMinima: edadMinima
+            };
+        }
+
+        // Función para mostrar mensaje de error
+        function mostrarErrorEdad(edad, edadMinima) {
+            Swal.fire({
+                title: 'Edad no válida',
+                text: `La edad mínima requerida es ${edadMinima} años. Edad actual: ${edad} años.`,
+                icon: 'error',
+                confirmButtonText: 'Entendido'
+            });
+        }
+
+
         document.addEventListener('DOMContentLoaded', () => {
             let picker = new Pikaday({
                 field: document.getElementById('fechanacimiento'),
                 format: 'DD-MM-YYYY',
                 yearRange: [1900, 3000],
                 minDate: new Date(1900, 0, 1),
-                maxDate: new Date() + 500,
+                maxDate: new Date(),
                 i18n: {
                     previousMonth: 'Mes anterior',
                     nextMonth: 'Mes siguiente',
@@ -198,9 +230,45 @@
                     let fechaSeleccionada = this.getDate();
                     let fechaFormateada = fechaSeleccionada.toLocaleDateString('es-ES');
                     fechaFormateada = fechaFormateada.replace(/\//g, '-');
+
+
+                    const validacion = validarEdadMinima(fechaSeleccionada, 22);
+
+                    if (!validacion.esValida) {
+
+                        document.getElementById('fechanacimiento').value = '';
+                        mostrarErrorEdad(validacion.edad, validacion.edadMinima);
+                        return;
+                    }
+
                     document.getElementById('fechanacimiento').value = fechaFormateada;
                 }
             });
+
+
+            const btnActualizar = document.querySelector('.add-btn');
+            if (btnActualizar) {
+                btnActualizar.addEventListener('click', (e) => {
+                    const fechaNacimiento = document.getElementById('fechanacimiento').value;
+
+                    if (fechaNacimiento) {
+
+                        const partes = fechaNacimiento.split('-');
+                        const fecha = new Date(partes[2], partes[1] - 1, partes[0]);
+
+                        const validacion = validarEdadMinima(fecha, 22);
+
+                        if (!validacion.esValida) {
+                            e.preventDefault();
+                            mostrarErrorEdad(validacion.edad, validacion.edadMinima);
+                            return false;
+                        }
+                    }
+
+
+                });
+            }
+
 
             const urlParams = new URLSearchParams(window.location.search);
             const leadId = urlParams.get('id');
@@ -210,20 +278,16 @@
 
             if (leadId) {
                 new LeadForm(leadId, true);
-                leadIdInput.value = leadId; 
-            
+                leadIdInput.value = leadId;
+
                 btnContrato.addEventListener('click', function(e) {
                     e.preventDefault();
-                    invertirForm.submit(); 
+                    invertirForm.submit();
                 });
             } else {
                 alert('ID de lead no proporcionado');
-                window.location.href = '<?= BASE_URL ?>app/';
+                window.location.href = BASE_URL + 'app/';
             }
-
-
-
-
         });
     </script>
 </body>

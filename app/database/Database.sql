@@ -366,9 +366,10 @@ CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios
 
 
 
-
+USE financiera;
 SELECT * FROM entidades;
-
+SELECT * FROM inversionistas;
+SELECT * FROM personas;
 SELECT * FROM cronogramapagos;
 SELECT * FROM contratos;
 SELECT * FROM numcuentas;

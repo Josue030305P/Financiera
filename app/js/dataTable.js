@@ -232,6 +232,17 @@ renderizarAcciones(item) {
         `;
     }
 
+    if (this.tipo === "Inversionistas") {
+       acciones = `
+            <a href="${this.baseUrl}app/views/contactibilidad/inversionista.update.php?id=${id}">
+                <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
+            </a>
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
+                <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
+            </a>
+        `;
+    }
+
     return acciones;
 }
 
@@ -301,7 +312,7 @@ renderizarAcciones(item) {
       });
     }
   }
-
+// EVALUAR EL CRONOGRAMA
   abrirModalCronograma(idContrato) {
     if (
       this.modalCronograma &&

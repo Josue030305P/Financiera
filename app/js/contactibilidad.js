@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () =>  {
     const form = document.getElementById('addContactibilidadForm');
     const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fechaInput.value = now.toISOString().split('T')[0];
     horaInput.value = now.toTimeString().split(' ')[0].substring(0, 5);
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const formData = {
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     timerProgressBar: true,
                 });
 
-                window.location.href = `${baseUrl}app/views/contactibilidad/`; 
+                window.location.href = `${baseUrl}app/views/`; 
             } else {
                 await Swal.fire({
                     icon: 'error',
