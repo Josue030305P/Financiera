@@ -1,10 +1,35 @@
 <?php
+
+include_once 'formatearFecha.php';
+
 // Obtener los datos del JSON
 $jsonData = json_decode($_POST['jsonData'], true);
 $inversionista = $jsonData['inversionista'];
 $contrato = $jsonData['contrato'];
 $cronograma = $contrato['cronograma'];
 $tiporetorno = $inversionista['tiporetorno'];
+$capital = getDato('contrato', 'capital');
+
+$ultimaFechaCronograma = null;
+if (!empty($cronograma)) {
+    
+    $ultimaFecha = end($cronograma)['fecha']; 
+    $ultimaFechaCronograma = new DateTime($ultimaFecha);
+}
+
+$fechaDevolucionCapital = null;
+if ($ultimaFechaCronograma) {
+    
+    $fechaDevolucionCapital = clone $ultimaFechaCronograma;
+   
+    $fechaDevolucionCapital->modify('+1 month');
+   
+    $fechaDevolucionCapital->setDate($fechaDevolucionCapital->format('Y'), $fechaDevolucionCapital->format('m'), 15);
+}
+
+
+$capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
+
 //var_dump($jsonData);
 
 ?>
@@ -30,6 +55,12 @@ $tiporetorno = $inversionista['tiporetorno'];
                     <td>S/<?php echo number_format($pago['totalneto'], 2, '.', ','); ?></td>
                 </tr>
                 <?php endforeach; ?>
+                <?php if ($fechaDevolucionCapital): ?>
+                <tr class="total-row"> <td></td> <td><?php echo $fechaDevolucionCapital->format('d/m/Y'); ?></td>
+                    <td><?php echo $capitalFormateado; ?></td>
+                    <td>Devolución de Capital</td>
+                </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 
@@ -76,11 +107,12 @@ $tiporetorno = $inversionista['tiporetorno'];
                 </tr>
                 <tr>
                     <td>FECHA DE INVERSIÓN</td>
-                    <td><?php echo date('d \d\e F \d\e\l Y', strtotime($inversionista['fechainicio'])); ?></td>
+                   
+                    <td><?php echo fechaEnEspanol($inversionista['fechainicio']); ?></td>
                 </tr>
                 <tr>
                     <td>FECHA DE PAGO</td>
-                    <td><?php echo date('d \d\e F \d\e\l Y', strtotime($cronograma[0]['fecha'])); ?> - <?php echo date('d \d\e F \d\e\l Y', strtotime($cronograma[count($cronograma)-1]['fecha'])); ?></td>
+                    <td><?php echo fechaEnEspanol($cronograma[0]['fecha']); ?> - <?php echo fechaEnEspanol($cronograma[count($cronograma)-1]['fecha']); ?></td>
                 </tr>
                 <tr>
                     <td>TIPO DE INVERSIÓN</td>

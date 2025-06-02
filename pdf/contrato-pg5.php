@@ -45,7 +45,7 @@ $inversionista = $jsonData['inversionista'];
     </p>
 
 
-    <p style="text-align: right;">Lima, <?= date('d') ?> de <?= date('F') ?> de <?= date('Y') ?>.</p>
+    <p style="text-align: right;">Lima, <?= fechaEnEspanol(date('F'))?></p>
 
     <table class="firmas uppercase bold">
         <tbody>

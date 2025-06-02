@@ -1,4 +1,8 @@
 <?php
+
+include_once 'formatearFecha.php';
+
+
 // Obtener datos del inversionista
 $nombre = getDato('inversionista', 'nombre');
 $documento = getDato('inversionista', 'documento');
@@ -83,7 +87,7 @@ $capitalLetras = numeroALetras($capital);
 
 <div class="container">
     <h4 class="text-center uppercase bold">CONTRATO DE MUTUO DINERARIO </h4>
-    <p class="text-left bold">Lima, <?= date('d') ?> de <?= date('F') ?> de <?= date('Y') ?>.</p>
+    <p class="text-left bold">Lima, <?= fechaEnEspanol(date('F'))?></p>
 
     <p>
       Conste por el presente documento, el contrato de Mutuo Dinerario que celebran:
