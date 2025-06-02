@@ -47,8 +47,10 @@ require_once __DIR__ . "/../../includes/config.php";
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit">Actualizar Contacto</button>
+                            <button class="btn-add" type="submit">Actualizar Contacto</button>
                         </div>
+<!-- 
+                         <a href="<?= BASE_URL?>app/views/contactibilidad/" class="btn-cancelar"><button>Cancelar</button></a> -->
                     </form>
                 </div>
             </div>
