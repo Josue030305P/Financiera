@@ -1,7 +1,7 @@
 
 USE financiera;
 
--- CREATE VIEW lista_leads AS
+DROP VIEW lista_leads;
 -- SELECT
 --     l.idlead,
 --     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_completo,
@@ -20,7 +20,7 @@ USE financiera;
 -- LEFT JOIN personas pa ON co.idpersona = pa.idpersona 
 -- WHERE l.estado NOT IN ('Inactivo', 'Inversionista');
 
-ALTER VIEW lista_leads AS
+CREATE VIEW lista_leads AS
 SELECT
     l.idlead,
     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_completo,

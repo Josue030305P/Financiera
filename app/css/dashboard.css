@@ -1,0 +1,269 @@
+/* General Layout & Page Structure */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* Un fondo suave para toda la página */
+    color: #333;
+}
+
+.page-flex {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-wrapper {
+    flex-grow: 1;
+    padding: 20px; /* Espaciado general en el contenido principal */
+    background-color: #f0f2f5;
+}
+
+.content-area {
+    max-width: 1200px; /* Limita el ancho del contenido para mejor lectura */
+    margin: 0 auto; /* Centra el contenido */
+    padding: 20px;
+}
+
+/* Dashboard Titles */
+.dashboard-title {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    text-align: left; /* Alinea el título a la izquierda */
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0; /* Línea sutil debajo del título */
+    padding-bottom: 10px;
+}
+
+/* Section Divider */
+.section-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+    margin: 40px 0; /* Más espacio alrededor del divisor */
+}
+
+/* Summary Widgets Grid */
+.summary-widgets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas para widgets */
+    gap: 25px; /* Espacio entre los widgets */
+    margin-bottom: 30px;
+}
+
+/* Card Styles (for widgets and chart cards) */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px; /* Bordes redondeados para todas las tarjetas */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* Sombra más suave y moderna */
+    overflow: hidden; /* Asegura que los bordes redondeados se respeten */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Sombra más intensa al hover */
+}
+
+.card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eef2f7;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el icono y el título */
+    color: white; /* Texto blanco para todos los headers */
+    font-weight: 600;
+    border-top-left-radius: 12px; /* Bordes redondeados en la parte superior */
+    border-top-right-radius: 12px;
+}
+
+.card-header .card-title {
+    margin: 0;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+}
+
+.card-header .icon-margin {
+    margin-right: 8px; /* Espacio entre el icono y el texto del título */
+    font-size: 1.2em; /* Tamaño del icono */
+}
+
+/* Card Header Colors */
+.header-primary { background-color: #007bff; } /* Azul */
+.header-info { background-color: #17a2b8; } /* Azul claro */
+.header-warning { background-color: #ffc107; color: #333; } /* Amarillo, con texto oscuro para contraste */
+.header-danger { background-color: #dc3545; } /* Rojo */
+.header-success { background-color: #28a745; } /* Verde */
+.header-secondary { background-color: #6c757d; } /* Gris */
+
+.card-body {
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+/* Tables within the dashboard (for "Detalle Completo" sections) */
+.detalle-table-section {
+    margin-bottom: 30px; /* Espacio entre las secciones de tablas */
+}
+
+.list-sections-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Una columna por defecto */
+    gap: 30px; /* Espacio entre las tablas */
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .list-sections-grid {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* 2 columnas en pantallas medianas */
+    }
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: separate; /* Permite border-radius */
+    border-spacing: 0;
+    font-size: 0.9em;
+    table-layout: fixed; /* Ayuda a que las columnas se ajusten */
+}
+
+.dashboard-table thead th {
+    background-color: #f8f9fa; /* Fondo más claro para encabezados de tabla */
+    color: #495057;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap; /* Evita saltos de línea en th */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Anchos de columna para las tablas de detalle. Ajusta según tus datos. */
+/* Ejemplo para "Contratos Activos" y "Monto Total Invertido" */
+#detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(1),
+#detalle-monto_total_invertido-table-section .dashboard-table thead th:nth-child(1) { width: 25%; } /* Inversionista */
+#detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(2),
+#detalle-monto_total_invertido-table-section .dashboard-table thead th:nth-child(2) { width: 15%; } /* DNI */
+#detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(3),
+#detalle-monto_total_invertido-table-section .dashboard-table thead th:nth-child(3) { width: 20%; } /* Monto Invertido */
+#detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(4),
+#detalle-monto_total_invertido-table-section .dashboard-table thead th:nth-child(4) { width: 20%; } /* Inicio Contrato */
+#detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(5),
+#detalle-monto_total_invertido-table-section .dashboard-table thead th:nth-child(5) { width: 20%; } /* Fin Contrato */
+
+/* Ejemplo para "Próximos Pagos Pendientes" */
+#detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(1) { width: 25%; } /* Inversionista */
+#detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(2) { width: 15%; } /* DNI */
+#detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(3) { width: 15%; } /* N° Cuota */
+#detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(4) { width: 20%; } /* Monto Cuota */
+#detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(5) { width: 25%; } /* Fecha Vencimiento */
+
+/* Ejemplo para "Leads en Proceso" */
+#detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(1) { width: 30%; } /* Nombre Lead */
+#detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(2) { width: 20%; } /* Teléfono Lead */
+#detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(3) { width: 30%; } /* Asesor Asignado */
+#detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(4) { width: 20%; } /* Estado Lead */
+
+/* Ejemplo para "Contratos por Vencer Pronto" */
+#detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(1) { width: 30%; } /* Inversionista */
+#detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(2) { width: 20%; } /* DNI */
+#detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(3) { width: 30%; } /* Monto Invertido */
+#detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(4) { width: 20%; } /* Fecha Vencimiento */
+
+/* Ejemplo para "Colaboradores Activos" */
+#detalle-colaboradores_activos-table-section .dashboard-table thead th:nth-child(1) { width: 40%; } /* Colaborador */
+#detalle-colaboradores_activos-table-section .dashboard-table thead th:nth-child(2) { width: 30%; } /* DNI */
+#detalle-colaboradores_activos-table-section .dashboard-table thead th:nth-child(3) { width: 30%; } /* Rol */
+
+/* Ejemplo para "Pagos Realizados Hoy" */
+#detalle-pagos_hoy-table-section .dashboard-table thead th:nth-child(1) { width: 30%; } /* Inversionista */
+#detalle-pagos_hoy-table-section .dashboard-table thead th:nth-child(2) { width: 20%; } /* DNI */
+#detalle-pagos_hoy-table-section .dashboard-table thead th:nth-child(3) { width: 25%; } /* Monto Pagado */
+#detalle-pagos_hoy-table-section .dashboard-table thead th:nth-child(4) { width: 25%; } /* Fecha/Hora */
+
+
+.dashboard-table tbody td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f2f4f7;
+    vertical-align: middle;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.4;
+    color: #5a6268;
+}
+
+.dashboard-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.dashboard-table tbody tr:hover {
+    background-color: #fbfdff;
+}
+
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta según el tamaño de pantalla */
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+/* Specific Chart Card Styles */
+.chart-card .card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; /* Asegura un tamaño mínimo para el canvas */
+    position: relative; /* Para el canvas */
+}
+
+/* IMPORTANT: Force canvas to fill its parent */
+.chart-card .card-body canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* Responsive adjustments for overall layout */
+@media (max-width: 768px) {
+    .main-wrapper {
+        padding: 10px;
+    }
+
+    .content-area {
+        padding: 10px;
+    }
+
+    .dashboard-title {
+        font-size: 1.8em;
+        text-align: center;
+    }
+
+    .card-header {
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-title {
+        font-size: 1.5em;
+    }
+    .summary-widgets-grid,
+    .charts-grid,
+    .list-sections-grid {
+        grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
+    }
+    .card-body {
+        padding: 15px;
+    }
+    .dashboard-table thead th,
+    .dashboard-table tbody td {
+        padding: 8px 10px;
+        font-size: 0.85em;
+    }
+}

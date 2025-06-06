@@ -1941,47 +1941,9 @@ label {
 }
 
 
-
-
-.table-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-
-.btn-addInversionista {
-  background-color: #0061f7;
-  color: #fff;
-  border-radius: 5px;
-  width: 21px;
-}
-
-.icon-acciones:hover {
-  opacity: 0.7;
-  transform: scale(1.1);
-}
-
-.users-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-
-.users-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-/* Estilos generales para el contenedor de la tabla */
+/* --- ESTILOS GENERALES Y DE CONTENEDOR DE LA TABLA --- */
 .table-wrapper {
-  
-    overflow-x: auto;
+    overflow-x: auto; /* Permite scroll horizontal si la tabla es muy ancha */
     width: 100%;
     margin-top: 20px;
     border-radius: 12px; /* Bordes redondeados para el contenedor */
@@ -1990,7 +1952,7 @@ label {
     padding: 15px; /* Espaciado interno */
 }
 
-/* Estilos para la tabla principal */
+/* Renombrado de .users-table a .posts-table para consistencia con tu CSS proporcionado */
 .posts-table {
     width: 100%;
     border-collapse: separate; /* Permite bordes redondeados en las celdas */
@@ -1999,8 +1961,8 @@ label {
     color: #333;
 }
 
-/* Estilos de las cabeceras de la tabla */
-.users-table-info th {
+/* --- CABECERAS DE LA TABLA --- */
+.users-table-info th { /* Mantengo .users-table-info para las cabeceras como en tu código */
     background-color: #eef2f7; /* Un color de fondo más suave para las cabeceras */
     color: #4a5568;
     font-size: 0.95em;
@@ -2024,7 +1986,7 @@ label {
     border-top-right-radius: 10px;
 }
 
-/* Estilos de las celdas del cuerpo de la tabla */
+/* --- CUERPO DE LA TABLA (FILAS Y CELDAS) --- */
 .posts-table td {
     background-color: #ffffff;
     padding: 12px 20px; /* Padding consistente */
@@ -2032,19 +1994,14 @@ label {
     color: #4f5f6f;
     vertical-align: middle;
     border-bottom: 1px solid #ebf2f7; /* Borde inferior sutil para las filas */
-    white-space: normal;
+    white-space: normal; /* Permite que el texto se ajuste */
     word-break: break-word; /* Rompe palabras largas para evitar desbordamiento */
 }
-
-/* Estilos de las filas impares (sin zebra stripping para un look más moderno) */
-/* .posts-table tbody tr:nth-child(even) {
-    background-color: #fcfdff;
-} */
 
 /* Estilos al pasar el ratón sobre las filas */
 .posts-table tr {
     transition: all 0.3s ease; /* Transición suave para el hover */
-    border-radius: 8px; /* Bordes redondeados para cada fila */
+    /* border-radius: 8px; Esto no es visible directamente en <tr> con border-collapse */
 }
 
 .posts-table tr:hover {
@@ -2054,22 +2011,24 @@ label {
     cursor: pointer;
 }
 
-/* Estilos para la última celda de cada fila (acciones) */
+/* --- ESTILOS ESPECÍFICOS PARA LA COLUMNA DE ACCIONES --- */
 .posts-table tr td:last-child {
-    display: flex;
-    justify-content: center; /* Centrar elementos de acción */
-    align-items: center;
+    display: flex; /* Usamos flexbox para alinear los iconos */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    gap: 8px; /* Espacio entre los iconos */
     padding: 10px;
-    min-height: 50px; /* Asegura una altura mínima para las acciones */
+    min-height: 150px;
+    min-width: 150px; /* Asegura suficiente espacio para todos los iconos */
 }
 
-/* Iconos de acción */
+/* Estilos de los iconos de acción (generales) */
 .icon-acciones {
-    width: 24px; /* Tamaño ligeramente más grande */
+    width: 24px; /* Tamaño un poco más grande */
     height: 24px;
-    margin: 0 8px; /* Espaciado entre iconos */
     transition: transform 0.2s ease, opacity 0.2s ease;
     cursor: pointer;
+    /* Remover margin para usar gap del flexbox padre */
 }
 
 .icon-acciones:hover {
@@ -2077,33 +2036,67 @@ label {
     opacity: 0.8;
 }
 
-/* Estilos de los botones de exportación e importación */
-.export-excel,
-.import-excel {
-    width: 40px; /* Iconos un poco más grandes */
-    height: 40px;
+/* Estilo para el botón de "Añadir Inversionista" en Leads */
+.btn-addInversionista {
+    background-color: #0061f7; /* Color azul */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px; /* Padding para hacer el botón más visible */
+    display: flex; /* Para centrar el icono dentro del botón */
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    margin-left: 15px;
-    transition: transform 0.2s ease;
+    transition: background-color 0.3s ease;
+    min-width: unset; /* Reinicia el width si fue establecido */
+    width: auto; /* Ajusta el ancho al contenido */
 }
 
-.export-excel:hover,
-.import-excel:hover {
-    transform: scale(1.1);
+.btn-addInversionista:hover {
+    background-color: #004ac9;
 }
 
+.icon-inversionista {
+    width: 16px; /* Asegura el tamaño del icono dentro del botón */
+    height: 16px;
+    filter: brightness(0) invert(1); /* Hace el SVG blanco */
+}
+
+/* --- ESTILOS PARA LOS BADGES (PRIORIDAD, ESTADO) --- */
+.badge {
+    display: inline-flex; /* Alineación y centrado de texto */
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px; /* Bordes más redondeados para un look de "píldora" */
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white; /* Color de texto predeterminado para badges */
+    min-width: 80px; /* Asegura un ancho mínimo para la uniformidad */
+    text-align: center;
+}
+
+.badge-active { background-color: #28a745; } /* Verde para activo/vigente/realizado */
+.badge-pending { background-color: #ffc107; color: #333; } /* Amarillo para pendiente, texto oscuro */
+.badge-trashed { background-color: #dc3545; } /* Rojo para inactivo/trashed/completado */
+.badge-info { background-color: #17a2b8; } /* Azul claro para nuevo contacto */
+.badge-success { background-color: #28a745; } /* Verde para inversionista */
+.badge-default { background-color: #6c757d; } /* Gris por defecto */
 
 .table-header {
     display: flex;
-    justify-content: space-between; /* Espacio entre el botón de crear y los filtros */
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-    gap: 20px; /* Espacio entre elementos */
-    margin-bottom: 25px;
-    padding: 15px 20px;
-    background-color: #f7f9fc;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f7f9fc; /* Fondo del header */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra para el header */
 }
 
 /* Botón de crear nuevo elemento */
@@ -2117,6 +2110,7 @@ label {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* Quitar subrayado del enlace */
 }
 
 .create-lead:hover {
@@ -2193,33 +2187,6 @@ label {
 
 
 
-/* Estilos para los iconos de ordenamiento (ascendente/descendente) */
-.sort-icon {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 8px;
-    vertical-align: middle;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #a0a0a0; /* Flecha hacia arriba por defecto */
-    opacity: 0.6;
-    transition: transform 0.2s ease;
-}
-
-.users-table-info th.asc .sort-icon {
-    border-bottom: 5px solid #007bff; /* Color para ascendente */
-    transform: rotate(0deg);
-    opacity: 1;
-}
-
-.users-table-info th.desc .sort-icon {
-    border-top: 5px solid #007bff; /* Color para descendente */
-    border-bottom: none;
-    transform: rotate(0deg);
-    opacity: 1;
-}
-
 /* Asegurar que la tabla ocupe todo el espacio dentro de su contenedor */
 .main.users.chart-page {
     padding: 30px;
@@ -2234,6 +2201,7 @@ label {
     text-align: center;
     font-weight: 700;
 }
+
 /* Estilos para el modal */
 .modal {
     /* ¡¡¡IMPORTANTE!!! Sólo esta línea debe controlar la visibilidad inicial */
@@ -2252,6 +2220,8 @@ label {
     justify-content: center; /* Centra horizontalmente el contenido */
     align-items: center;    /* Centra verticalmente el contenido */
 }
+
+
 
 .modal-content {
     background-color: #fefefe; /* Fondo blanco para el contenido del modal */

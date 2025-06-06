@@ -144,7 +144,7 @@ async cargarDatosLead() {
             });
 
             if (result.isConfirmed) {
-                window.location.href = `${this.baseUrl}app/`;
+                window.location.href = `${this.baseUrl}app/views/leads/`;
             }
         });
     }

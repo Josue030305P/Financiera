@@ -27,75 +27,56 @@ if (!isset($_SESSION['nombre'])) {
         </div>
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
+
+            <li>
+                    <a class="" href="<?= BASE_URL ?>app/"><span class="icon document"
+                            aria-hidden="true"></span>Dashboard</a>
+                </li>
                 <li>
-                    <a class="active" href="<?= BASE_URL ?>app"><span class="icon user-white"
+                    <a class="" href="<?= BASE_URL ?>app/views/leads/"><span class="icon user-white"
                             aria-hidden="true"></span>Leads</a>
                 </li>
-                <li>
-                    <a class="show-cat-btn" href="##">
-                        <span class="icon document" aria-hidden="true"></span>Contratos
-                        <span class="category__btn transparent-btn" title="Open list">
-                            <span class="sr-only">Open list</span>
-                            <span class="icon arrow-down" aria-hidden="true"></span>
-                        </span>
-                    </a>
-                    <ul class="cat-sub-menu">
 
-                        <li>
-                            <a href="<?= BASE_URL ?>app/views/contratos/">Lista de contratos</a>
-                        </li>
-                    </ul>
+                 <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/contratos/"><span class="icon document"
+                            aria-hidden="true"></span>Contratos</a>
                 </li>
-                <li>
-                    <a class="show-cat-btn" href="./views//inversionistas/inversionistas-list.html">
-                        <span class="icon user-white" aria-hidden="true"></span>Inversionistas
-                        <span class="category__btn transparent-btn" title="Open list">
-                            <span class="sr-only">Open list</span>
-                            <span class="icon arrow-down" aria-hidden="true"></span>
-                        </span>
-                    </a>
-                    <ul class="cat-sub-menu">
-                        <li>
-                            <a href="<?= BASE_URL ?>app/views/inversionistas/">Lista de inversionistas</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="show-cat-btn" href="##">
-                        <span class="icon image" aria-hidden="true"></span>Contactibilidad
-                        <span class="category__btn transparent-btn" title="Open list">
-                            <span class="sr-only">Open list</span>
-                            <span class="icon arrow-down" aria-hidden="true"></span>
-                        </span>
-                    </a>
-                    <ul class="cat-sub-menu">
-                        <li>
-                            <a href="<?= BASE_URL . "app/views/contactibilidad/" ?>">Lista de contactos</a>
-                        </li>
 
-                    </ul>
+                 <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/inversionistas/"><span class="icon user-white"
+                            aria-hidden="true"></span>Inversionista</a>
                 </li>
-                <li>
-                    <a class="show-cat-btn" href="##">
-                        <span class="icon paper" aria-hidden="true"></span>Cronograma Pagos
-                        <span class="category__btn transparent-btn" title="Open list">
-                            <span class="sr-only">Open list</span>
-                            <span class="icon arrow-down" aria-hidden="true"></span>
-                        </span>
-                    </a>
-                    <ul class="cat-sub-menu">
-                        <li>
-                            <a href="<?= BASE_URL . "app/views/cronograma-pagos/" ?>">Lista de cronogramas</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="<?= BASE_URL . "app/views/detallepagos/" ?>">
-                        <span class="icon message" aria-hidden="true"></span>
-                        Detalle de pagos
-                    </a>
 
+
+                 <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/detallegarantias/"><span class="icon document"
+                            aria-hidden="true"></span>Detalle garantías</a>
                 </li>
+
+                 <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/contactibilidad/"><span class="icon user-white"
+                            aria-hidden="true"></span>Lista de contactos</a>
+                </li>
+
+                 <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/cronograma-pagos/"><span class="icon document"
+                            aria-hidden="true"></span>Lista de cronogramas</a>
+                </li>
+
+
+                 <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/detallepagos/"><span class="icon document"
+                            aria-hidden="true"></span>Detalle de pagos</a>
+                </li>
+
+
+
+
+                
+                
+
+               
+                
             </ul>
 
 

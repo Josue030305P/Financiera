@@ -1,3 +1,4 @@
+
 USE financiera;
 CREATE VIEW v_detalle_pagos AS
 
@@ -26,7 +27,7 @@ SELECT
         ELSE 'Pendiente'
     END AS estado_cuota, -- <-- CAMBIO: Estado calculado
     CONCAT(pu.nombres, ' ', pu.apellidos) AS usuario,
-    DATE_FORMAT(dp.fechahora, '%d-%m-%Y %H:%i:%s') AS fechapago,
+    DATE_FORMAT(dp.fechahora, '%d-%m-%Y %H:%i') AS fechapago,
     DATE_FORMAT(cp.fechavencimiento, '%d-%m-%Y') AS fechavencimiento_cuota -- Añadimos la fecha de vencimiento
 FROM
     detallepagos dp
@@ -54,3 +55,5 @@ CALL  v_detalle_pagos;
 DROP VIEW  v_detalle_pagos;
 SELECT * FROM v_detalle_pagos;
 SELECT * FROM detallepagos;
+
+SELECT * FROM usuarios;

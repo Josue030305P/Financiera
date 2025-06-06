@@ -9,12 +9,12 @@
     <div class="page-flex">
         <?php require_once __DIR__ . "/../../includes/sidebar.php"; ?>
         <div class="main-wrapper">
-            <?php require_once __DIR__ . "/../../includes/navbar.php"; ?>
+        
 
             <div id="lead-form" class="form-container form">
                 <h2 class="form-title">Agregar Nuevo Lead</h2>
                 <div class="form-header">
-                    <a href="<?=BASE_URL?>app/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
+                    <a href="<?=BASE_URL?>app/views/leads"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
                 </div>
 
                 <div class="form-body">
