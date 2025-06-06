@@ -15,7 +15,7 @@
             <div id="lead-form" class="form-container form">
                 <h2 class="form-title">Actualizar Lead</h2>
                 <div class="form-header">
-                    <a href="<?= BASE_URL ?>app/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
+                    <a href="<?= BASE_URL ?>app/views/leads/"><span class="regresar-btn"> ⬅️ Lista de leads</span></a>
                 </div>
 
                 <div class="form-body">

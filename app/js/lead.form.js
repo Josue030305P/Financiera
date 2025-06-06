@@ -254,7 +254,7 @@ async cargarDatosLead() {
                     timer: 1500,
                     timerProgressBar: true,
                   });
-                 console.log('Datos enviados: ', formData);
+                // console.log('Datos enviados: ', formData);
                   document.querySelector('.invertir-btn').classList.remove('d-none');
              
             } else {
