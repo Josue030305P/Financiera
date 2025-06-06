@@ -214,7 +214,7 @@ CREATE TABLE condiciones(
 idcondicion				INT AUTO_INCREMENT PRIMARY KEY,
 idversion				INT NOT NULL,
 entidad					ENUM('Mutuatario','Mutuante') COMMENT 'Mutuatario(Yonda) - Mutuante(Inversionista)',
-condicion				VARCHAR(300) NOT NULL,
+condicion				TEXT NOT NULL,
 CONSTRAINT fk_idversion_condicion FOREIGN KEY(idversion) REFERENCES versiones(idversion)
 )ENGINE=InnoDB;
 
@@ -288,6 +288,8 @@ CONSTRAINT fk_id_user_creacion_numcuenta FOREIGN KEY (idusuariocreacion ) REFERE
 CONSTRAINT fk_id_user_elimin_numcuenta FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+USE financiera;
+SELECT * FROM numcuentas;
 
 CREATE TABLE garantias(
 idgarantia				INT PRIMARY KEY AUTO_INCREMENT,
