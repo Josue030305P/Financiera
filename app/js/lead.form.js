@@ -189,7 +189,7 @@ async cargarDatosLead() {
                     timer: 1500,
                     timerProgressBar: true,
                   });
-                window.location.href = `${this.baseUrl}app/`;
+                window.location.href = `${this.baseUrl}app/views/leads/`;
             } else {
                 await Swal.fire({
                     icon: 'error',
