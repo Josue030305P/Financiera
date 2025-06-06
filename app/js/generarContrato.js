@@ -92,46 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // FUNCIONA DESDE LA VIEW CONTRATO
-
-  // async function agregarInversionista(inversionistaData) {
-  //   try {
-  //     const response = await fetch(
-  //       `${baseUrl}app/controllers/InversionistaController.php`,
-  //       {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(inversionistaData),
-  //       }
-  //     );
-
-  //     const result = await response.json();
-
-  //     if (result.status === "success" && result.idinversionista) {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: "Inversionista agregado",
-  //         text: `ID del inversionista: ${result.idinversionista}`,
-  //       });
-
-  //       return { idinversionista: result.idinversionista };
-  //     } else {
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "Error al agregar inversionista",
-  //         text: result.message || "Ocurrió un error.",
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error("Error al agregar inversionista:", error);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Error",
-  //       text: "Ocurrió un error al comunicarse con el servidor.",
-  //     });
-  //   }
-  // }
-
   // SI AGREGA EL INVERSIONISTA
 
   async function agregarInversionista(inversionistaData) {
@@ -300,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.duracionmeses,
             formData.fechainicio
           );
-          console.table(cronograma);
+         // console.table(cronograma);
           await fetch(
             `${baseUrl}app/controllers/CronogramaPago.Controller.php`,
             {
@@ -313,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           );
 
-         // window.location.href = `${baseUrl}app/views/contratos/`;
+         window.location.href = `${baseUrl}app/views/cronograma-pagos/`;
         }
       } catch (error) {
         console.error(error);

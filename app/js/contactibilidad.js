@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () =>  {
                     timerProgressBar: true,
                 });
 
-                window.location.href = `${baseUrl}app/views/`; 
+                window.location.href = `${baseUrl}app/views/leads/`; 
             } else {
                 await Swal.fire({
                     icon: 'error',

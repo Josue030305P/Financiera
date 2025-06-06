@@ -1,8 +1,8 @@
-/* General Layout & Page Structure */
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5; /* Un fondo suave para toda la página */
+    background-color: #f0f2f5; 
     color: #333;
 }
 
@@ -13,56 +13,54 @@ body {
 
 .main-wrapper {
     flex-grow: 1;
-    padding: 20px; /* Espaciado general en el contenido principal */
+    padding: 20px; 
     background-color: #f0f2f5;
 }
 
 .content-area {
-    max-width: 1200px; /* Limita el ancho del contenido para mejor lectura */
-    margin: 0 auto; /* Centra el contenido */
+    max-width: 1200px; 
+    margin: 0 auto; 
     padding: 20px;
 }
 
-/* Dashboard Titles */
 .dashboard-title {
     font-size: 2em;
     color: #2c3e50;
     margin-bottom: 25px;
     margin-top: 30px;
-    text-align: left; /* Alinea el título a la izquierda */
+    text-align: left; 
     font-weight: 700;
-    border-bottom: 2px solid #e2e8f0; /* Línea sutil debajo del título */
+    border-bottom: 2px solid #e2e8f0; 
     padding-bottom: 10px;
 }
 
-/* Section Divider */
+
 .section-divider {
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
-    margin: 40px 0; /* Más espacio alrededor del divisor */
+    margin: 40px 0;
 }
 
-/* Summary Widgets Grid */
+
 .summary-widgets-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas responsivas para widgets */
-    gap: 25px; /* Espacio entre los widgets */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 25px; 
     margin-bottom: 30px;
 }
 
-/* Card Styles (for widgets and chart cards) */
 .card {
     background-color: #ffffff;
-    border-radius: 12px; /* Bordes redondeados para todas las tarjetas */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* Sombra más suave y moderna */
-    overflow: hidden; /* Asegura que los bordes redondeados se respeten */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); 
+    overflow: hidden; 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Sombra más intensa al hover */
+    transform: translateY(-5px); 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); 
 }
 
 .card-header {
@@ -70,10 +68,10 @@ body {
     border-bottom: 1px solid #eef2f7;
     display: flex;
     align-items: center;
-    gap: 10px; /* Espacio entre el icono y el título */
-    color: white; /* Texto blanco para todos los headers */
+    gap: 10px; 
+    color: white;
     font-weight: 600;
-    border-top-left-radius: 12px; /* Bordes redondeados en la parte superior */
+    border-top-left-radius: 12px; 
     border-top-right-radius: 12px;
 }
 
@@ -85,14 +83,14 @@ body {
 }
 
 .card-header .icon-margin {
-    margin-right: 8px; /* Espacio entre el icono y el texto del título */
-    font-size: 1.2em; /* Tamaño del icono */
+    margin-right: 8px;
+    font-size: 1.2em;
 }
 
-/* Card Header Colors */
+
 .header-primary { background-color: #007bff; } /* Azul */
 .header-info { background-color: #17a2b8; } /* Azul claro */
-.header-warning { background-color: #ffc107; color: #333; } /* Amarillo, con texto oscuro para contraste */
+.header-warning { background-color: #ffc107; color: #333; }
 .header-danger { background-color: #dc3545; } /* Rojo */
 .header-success { background-color: #28a745; } /* Verde */
 .header-secondary { background-color: #6c757d; } /* Gris */
@@ -102,47 +100,46 @@ body {
     background-color: #ffffff;
 }
 
-/* Tables within the dashboard (for "Detalle Completo" sections) */
+
 .detalle-table-section {
-    margin-bottom: 30px; /* Espacio entre las secciones de tablas */
+    margin-bottom: 30px; 
 }
 
 .list-sections-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Una columna por defecto */
-    gap: 30px; /* Espacio entre las tablas */
+    grid-template-columns: 1fr;
+    gap: 30px; 
     margin-bottom: 40px;
 }
 
 @media (min-width: 768px) {
     .list-sections-grid {
-        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* 2 columnas en pantallas medianas */
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
     }
 }
 
 .dashboard-table {
     width: 100%;
-    border-collapse: separate; /* Permite border-radius */
+    border-collapse: separate; 
     border-spacing: 0;
     font-size: 0.9em;
-    table-layout: fixed; /* Ayuda a que las columnas se ajusten */
+    table-layout: fixed; 
 }
 
 .dashboard-table thead th {
-    background-color: #f8f9fa; /* Fondo más claro para encabezados de tabla */
+    background-color: #f8f9fa; 
     color: #495057;
     text-align: left;
     padding: 12px 15px;
     border-bottom: 2px solid #dee2e6;
     font-weight: 600;
     text-transform: uppercase;
-    white-space: nowrap; /* Evita saltos de línea en th */
+    white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Anchos de columna para las tablas de detalle. Ajusta según tus datos. */
-/* Ejemplo para "Contratos Activos" y "Monto Total Invertido" */
+
 #detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(1),
 #detalle-monto_total_invertido-table-section .dashboard-table thead th:nth-child(1) { width: 25%; } /* Inversionista */
 #detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(2),
@@ -154,31 +151,31 @@ body {
 #detalle-contratos_activos-table-section .dashboard-table thead th:nth-child(5),
 #detalle-monto_total_invertido-table-section .dashboard-table thead th:nth-child(5) { width: 20%; } /* Fin Contrato */
 
-/* Ejemplo para "Próximos Pagos Pendientes" */
+/* "Próximos Pagos Pendientes" */
 #detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(1) { width: 25%; } /* Inversionista */
 #detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(2) { width: 15%; } /* DNI */
 #detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(3) { width: 15%; } /* N° Cuota */
 #detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(4) { width: 20%; } /* Monto Cuota */
 #detalle-proximos_pagos-table-section .dashboard-table thead th:nth-child(5) { width: 25%; } /* Fecha Vencimiento */
 
-/* Ejemplo para "Leads en Proceso" */
+/* "Leads en Proceso" */
 #detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(1) { width: 30%; } /* Nombre Lead */
 #detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(2) { width: 20%; } /* Teléfono Lead */
 #detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(3) { width: 30%; } /* Asesor Asignado */
 #detalle-leads_en_proceso-table-section .dashboard-table thead th:nth-child(4) { width: 20%; } /* Estado Lead */
 
-/* Ejemplo para "Contratos por Vencer Pronto" */
+/* "Contratos por Vencer Pronto" */
 #detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(1) { width: 30%; } /* Inversionista */
 #detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(2) { width: 20%; } /* DNI */
 #detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(3) { width: 30%; } /* Monto Invertido */
 #detalle-contratos_por_vencer-table-section .dashboard-table thead th:nth-child(4) { width: 20%; } /* Fecha Vencimiento */
 
-/* Ejemplo para "Colaboradores Activos" */
+/* "Colaboradores Activos" */
 #detalle-colaboradores_activos-table-section .dashboard-table thead th:nth-child(1) { width: 40%; } /* Colaborador */
 #detalle-colaboradores_activos-table-section .dashboard-table thead th:nth-child(2) { width: 30%; } /* DNI */
 #detalle-colaboradores_activos-table-section .dashboard-table thead th:nth-child(3) { width: 30%; } /* Rol */
 
-/* Ejemplo para "Pagos Realizados Hoy" */
+/* "Pagos Realizados Hoy" */
 #detalle-pagos_hoy-table-section .dashboard-table thead th:nth-child(1) { width: 30%; } /* Inversionista */
 #detalle-pagos_hoy-table-section .dashboard-table thead th:nth-child(2) { width: 20%; } /* DNI */
 #detalle-pagos_hoy-table-section .dashboard-table thead th:nth-child(3) { width: 25%; } /* Monto Pagado */
@@ -207,28 +204,28 @@ body {
 /* Charts Grid */
 .charts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta según el tamaño de pantalla */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 25px;
     margin-bottom: 30px;
 }
 
-/* Specific Chart Card Styles */
+
 .chart-card .card-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300px; /* Asegura un tamaño mínimo para el canvas */
-    position: relative; /* Para el canvas */
+    min-height: 300px; 
+    position: relative; 
 }
 
-/* IMPORTANT: Force canvas to fill its parent */
+
 .chart-card .card-body canvas {
     width: 100% !important;
     height: 100% !important;
 }
 
 
-/* Responsive adjustments for overall layout */
+
 @media (max-width: 768px) {
     .main-wrapper {
         padding: 10px;
@@ -256,7 +253,7 @@ body {
     .summary-widgets-grid,
     .charts-grid,
     .list-sections-grid {
-        grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
+        grid-template-columns: 1fr; 
     }
     .card-body {
         padding: 15px;

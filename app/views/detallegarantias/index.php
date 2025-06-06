@@ -19,9 +19,9 @@
             <div class="table-container">
                 <div class="table-header-section">
                     <h2 class="table-title">Listado de Garantías</h2>
-                    <a href="<?= BASE_URL ?>app/views/detallegarantia/add.php" class="btn-add">
+                    <!-- <a href="<?= BASE_URL ?>app/views/detallegarantia/add.php" class="btn-add">
                         <i class="fas fa-plus-circle"></i> Nueva Garantía
-                    </a>
+                    </a> -->
                 </div>
 
                 <div id="message-container" class="message-container"></div>

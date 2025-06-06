@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mostrar el título y el contenedor de tablas de detalle
         detalleTablasTitulo.style.display = 'block';
-        detalleTablasContainer.style.display = 'grid'; // Asegura que el contenedor grid sea visible
+        detalleTablasContainer.style.display = 'grid'; 
 
         // Mostrar solo la tabla específica
         const targetTableSection = document.getElementById(tableId);
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await fetchDashboardData();
         if (data) {
             renderSummaryWidgets(data);
-            renderDetailTables(data); // Renderiza las tablas pero las deja ocultas inicialmente
+            renderDetailTables(data); 
         }
     };
 
