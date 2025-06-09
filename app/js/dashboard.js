@@ -1,23 +1,103 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+
     const baseUrl = document.querySelector('meta[name="base-url"]')?.content || "";
+    let activeTableSectionId = null; // Variable para rastrear la tabla actualmente abierta
 
     const fetchDashboardData = async () => {
         try {
             const response = await fetch(`${baseUrl}app/controllers/DashboardController.php`);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+              
+                throw new Error(`Error HTTP! Estado: ${response.status} - ${response.statusText}`);
             }
-            const data = await response.json();
-            return data;
+            const apiResponse = await response.json(); 
+
+            if (apiResponse && apiResponse.status === true && apiResponse.data) {
+                
+                const transformedData = {
+                    summary: {
+                        contratosActivos: apiResponse.data.resumen.contratos_activos || 0,
+                        montoTotalInvertido: apiResponse.data.resumen.monto_total_invertido || "0.00",
+                        proximosPagosPendientes: apiResponse.data.resumen.proximos_pagos_cantidad || 0,
+                        leadsEnProceso: apiResponse.data.resumen.leads_en_proceso || 0,
+                        contratosPorVencer: apiResponse.data.resumen.contratos_por_vencer || 0,
+                        colaboradoresActivos: apiResponse.data.resumen.colaboradores_activos || 0,
+                        pagosHoy: apiResponse.data.resumen.total_pagos_hoy || "0.00"
+                    },
+                    details: {
+                        contratosActivos: apiResponse.data.listados.contratos_activos.map(item => ({
+                            idcontrato: item.idcontrato,
+                            inversionista_nombre: `${item.inversionista_nombres} ${item.inversionista_apellidos}`,
+                            inversionista_dni: item.inversionista_dni,
+                            monto_invertido: item.monto_invertido,
+                            fecha_inicio: item.fecha_inicio_contrato,
+                            fecha_fin: item.fecha_fin_contrato,
+                            interes_contrato: item.interes_contrato
+                        })),
+                     
+                        montoTotalInvertido: apiResponse.data.listados.monto_total_invertido || [],
+                        proximosPagos: apiResponse.data.listados.proximos_pagos.map(item => ({
+                            idcronogramapago: item.idcronogramapago,
+                            inversionista_nombre: `${item.inversionista_nombres} ${item.inversionista_apellidos}`,
+                            inversionista_dni: item.inversionista_dni,
+                            numero_cuota: item.numcuota,
+                            monto_cuota: item.monto_cuota,
+                            fecha_vencimiento: item.fecha_vencimiento_cuota
+                        })),
+                        leadsEnProceso: apiResponse.data.listados.leads_en_proceso.map(item => ({
+                            idlead: item.idlead,
+                            nombre_lead: `${item.lead_nombres} ${item.lead_apellidos}`,
+                            telefono_lead: item.lead_telefono,
+                            prioridad: item.prioridad,
+                            estado_lead: item.estado_lead,
+                            asesor_asignado_nombre: item.asesor_asignado
+                        })),
+                        contratosPorVencer: apiResponse.data.listados.contratos_por_vencer.map(item => ({
+                            idcontrato: item.idcontrato,
+                            inversionista_nombre: `${item.inversionista_nombres} ${item.inversionista_apellidos}`,
+                            inversionista_dni: item.inversionista_dni,
+                            monto_invertido: item.monto_invertido,
+                            fecha_vencimiento: item.fecha_fin_contrato 
+                        })),
+                        colaboradoresActivos: apiResponse.data.listados.colaboradores_activos.map(item => ({
+                            idcolaborador: item.idcolaborador,
+                            nombre_colaborador: `${item.colaborador_nombres} ${item.colaborador_apellidos}`,
+                            dni_colaborador: item.colaborador_dni,
+                            rol_colaborador: item.rol_colaborador
+                        })),
+                        pagosHoy: apiResponse.data.listados.pagos_hoy.map(item => ({
+                            idpago: item.idpago,
+                            inversionista_nombre: `${item.inversionista_nombres} ${item.inversionista_apellidos}`,
+                            inversionista_dni: item.inversionista_dni,
+                            monto_pagado: item.monto_pagado,
+                            fecha_hora_pago: item.fecha_hora_pago
+                        }))
+                    }
+                };
+                return transformedData;
+            } else {
+                console.error("Formato de datos de dashboard inesperado o status falso:", apiResponse);
+                return null;
+            }
         } catch (error) {
-            console.error("Error fetching dashboard data:", error);
+            console.error("Error al obtener datos del dashboard:", error);
+            // Puedes mostrar una alerta al usuario si la carga inicial falla
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de carga',
+                text: 'No se pudieron cargar los datos del dashboard. Inténtalo de nuevo más tarde.'
+            });
             return null;
         }
     };
 
     const renderSummaryWidgets = (data) => {
         const summaryWidgetsGrid = document.getElementById('dashboard-summary-widgets');
-        if (!summaryWidgetsGrid || !data || !data.summary) return;
+        if (!summaryWidgetsGrid || !data || !data.summary) {
+            console.warn("No hay datos de resumen para renderizar los widgets.");
+            return;
+        }
 
         summaryWidgetsGrid.innerHTML = `
             <div class="card widget-card" data-target-table="detalle-contratos_activos-table-section">
@@ -82,51 +162,46 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.widget-card').forEach(card => {
             card.addEventListener('click', () => {
                 const targetTableId = card.dataset.targetTable;
-                showDetailTable(targetTableId);
+                toggleDetailTable(targetTableId, card); 
             });
         });
     };
 
-    const renderDetailTables = (data) => {
-        const detalleTablasTitulo = document.getElementById('detalle-tablas-titulo');
-        const detalleTablasContainer = document.getElementById('detalle-tablas-container');
-
-        // Ocultar todas las tablas al inicio
-        document.querySelectorAll('.detalle-table-section').forEach(section => {
-            section.style.display = 'none';
-        });
-
-        if (!data || !data.details || Object.keys(data.details).length === 0) {
-            detalleTablasTitulo.style.display = 'none';
-            detalleTablasContainer.style.display = 'none';
+    const fillTable = (tableBodyId, items, columns) => {
+        const tableBody = document.getElementById(tableBodyId);
+        if (!tableBody) {
+            console.warn(`Elemento con ID ${tableBodyId} no encontrado.`);
             return;
         }
-
-        const fillTable = (tableBodyId, items, columns) => {
-            const tableBody = document.getElementById(tableBodyId);
-            if (!tableBody) return;
-            tableBody.innerHTML = '';
-            if (!items || items.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="${columns.length}" style="text-align: center; padding: 15px;">No hay datos disponibles.</td></tr>`;
-                return;
-            }
-            items.forEach(item => {
-                const row = document.createElement('tr');
-                columns.forEach(col => {
-                    let value = item[col.key];
-                    if (col.format) {
-                        value = col.format(value);
-                    }
-                    row.innerHTML += `<td>${value || 'N/A'}</td>`;
-                });
-                tableBody.appendChild(row);
+        tableBody.innerHTML = '';
+        if (!items || items.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="${columns.length}" style="text-align: center; padding: 15px; color: #777;">No hay datos disponibles.</td></tr>`;
+            return;
+        }
+        items.forEach(item => {
+            const row = document.createElement('tr');
+            columns.forEach(col => {
+                let value = item[col.key];
+                if (col.format) {
+                    // Asegura que parseFloat reciba un número válido
+                    value = col.format(value === undefined || value === null ? 0 : value);
+                }
+                row.innerHTML += `<td>${value || 'N/A'}</td>`;
             });
-        };
+            tableBody.appendChild(row);
+        });
+    };
+
+    const renderDetailTables = (data) => {
+        if (!data || !data.details || Object.keys(data.details).length === 0) {
+            console.warn("No hay datos de detalle disponibles para renderizar las tablas.");
+            return;
+        }
 
         fillTable('detalle-contratos_activos-table-body', data.details.contratosActivos, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
-            { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val).toFixed(2)}` },
+            { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val || 0).toFixed(2)}` },
             { key: 'fecha_inicio' },
             { key: 'fecha_fin' }
         ]);
@@ -134,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fillTable('detalle-monto_total_invertido-table-body', data.details.montoTotalInvertido, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
-            { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val).toFixed(2)}` },
+            { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val || 0).toFixed(2)}` },
             { key: 'fecha_inicio' },
             { key: 'fecha_fin' }
         ]);
@@ -143,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
             { key: 'numero_cuota' },
-            { key: 'monto_cuota', format: (val) => `S/ ${parseFloat(val).toFixed(2)}` },
+            { key: 'monto_cuota', format: (val) => `S/ ${parseFloat(val || 0).toFixed(2)}` },
             { key: 'fecha_vencimiento' }
         ]);
 
@@ -157,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fillTable('detalle-contratos_por_vencer-table-body', data.details.contratosPorVencer, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
-            { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val).toFixed(2)}` },
+            { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val || 0).toFixed(2)}` },
             { key: 'fecha_vencimiento' }
         ]);
 
@@ -170,28 +245,39 @@ document.addEventListener('DOMContentLoaded', () => {
         fillTable('detalle-pagos_hoy-table-body', data.details.pagosHoy, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
-            { key: 'monto_pagado', format: (val) => `S/ ${parseFloat(val).toFixed(2)}` },
+            { key: 'monto_pagado', format: (val) => `S/ ${parseFloat(val || 0).toFixed(2)}` },
             { key: 'fecha_hora_pago' }
         ]);
     };
 
-    const showDetailTable = (tableId) => {
+    // Función para alternar la visibilidad de las tablas de detalle
+    const toggleDetailTable = (tableId, clickedCard) => {
         const detalleTablasTitulo = document.getElementById('detalle-tablas-titulo');
         const detalleTablasContainer = document.getElementById('detalle-tablas-container');
+        const targetTableSection = document.getElementById(tableId);
 
-        // Ocultar todas las tablas de detalle primero
+        // Ocultar todas las secciones de tabla de detalle y quitar la clase 'active' de todos los cards
         document.querySelectorAll('.detalle-table-section').forEach(section => {
             section.style.display = 'none';
         });
+        document.querySelectorAll('.widget-card').forEach(card => {
+            card.classList.remove('active-card');
+        });
 
-        // Mostrar el título y el contenedor de tablas de detalle
-        detalleTablasTitulo.style.display = 'block';
-        detalleTablasContainer.style.display = 'grid'; 
-
-        // Mostrar solo la tabla específica
-        const targetTableSection = document.getElementById(tableId);
-        if (targetTableSection) {
-            targetTableSection.style.display = 'block';
+        if (activeTableSectionId === tableId) {
+            // Si se hace clic en el mismo card, ocultar el título y el contenedor, y limpiar el estado activo
+            detalleTablasTitulo.style.display = 'none';
+            detalleTablasContainer.style.display = 'none';
+            activeTableSectionId = null;
+        } else {
+            // Mostrar la tabla objetivo y establecer el estado activo
+            if (targetTableSection) {
+                targetTableSection.style.display = 'block'; 
+                detalleTablasTitulo.style.display = 'block';
+                detalleTablasContainer.style.display = 'grid'; 
+                clickedCard.classList.add('active-card'); // Añadir clase 'active' al card
+                activeTableSectionId = tableId; // Establecer la tabla activa
+            }
         }
     };
 
@@ -199,7 +285,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await fetchDashboardData();
         if (data) {
             renderSummaryWidgets(data);
-            renderDetailTables(data); 
+            renderDetailTables(data);
+            // Ocultar las tablas de detalle y el título al cargar la página inicialmente
+            document.getElementById('detalle-tablas-titulo').style.display = 'none';
+            document.getElementById('detalle-tablas-container').style.display = 'none';
         }
     };
 
