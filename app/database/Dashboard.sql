@@ -225,9 +225,6 @@ SELECT * FROM v_total_pagos_realizados_hoy;
 
 
 
-
-
-
 CREATE VIEW v_garantias_asociadas AS
 SELECT
     dg.iddetallegarantia,        

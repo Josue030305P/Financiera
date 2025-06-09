@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h5 class="card-title"><i class="fas fa-money-bill-wave icon-margin"></i>Pagos Realizados Hoy</h5>
                 </div>
                 <div class="card-body text-center">
-                    <p class="widget-value">S/ ${parseFloat(data.summary.pagosHoy || 0).toFixed(2)}</p>
+                    <p class="widget-value">${parseInt(data.summary.pagosHoy || 0)}</p>
                 </div>
             </div>
             <div class="card widget-card" data-target-table="detalle-leads_en_proceso-table-section">
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'fecha_fin' }
         ]);
 
-        fillTable('detalle-monto_total_invertido-table-body', data.details.montoTotalInvertido, [
+        fillTable('detalle-monto_total_invertido-table-body', data.details.contratosActivos, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
             { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val || 0).toFixed(2)}` },
