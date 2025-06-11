@@ -1,11 +1,10 @@
-
 :root {
-    --primary-color: #007bff; /* Azul vibrante */
+    --primary-color: #007bff;
     --primary-dark: #0056b3;
-    --secondary-color: #6c757d; /* Gris para botones secundarios */
+    --secondary-color: #6c757d;
     --secondary-dark: #5a6268;
-    --background-light: #f4f7f6; /* Fondo muy claro */
-    --card-background: #ffffff; /* Fondo de tarjeta blanco */
+    --background-light: #f4f7f6;
+    --card-background: #ffffff;
     --text-color: #333;
     --border-color: #e0e0e0;
     --shadow-light: rgba(0, 0, 0, 0.08);
@@ -27,7 +26,6 @@ body {
     margin: 0;
 }
 
-
 .page-flex {
     display: flex;
     flex-grow: 1;
@@ -41,18 +39,22 @@ body {
     align-items: flex-start; 
 }
 
+.container-form-pago {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
 
-.form-container {
+.card-pago {
     background-color: var(--card-background);
     border-radius: 15px; 
     box-shadow: 0 10px 30px var(--shadow-medium); 
-    width: 100%;
-    max-width: 650px;
     overflow: hidden; 
     transition: all 0.3s ease;
+    padding: 40px; /* Adjust padding for the card body directly */
 }
 
-.form-header {
+.form-title {
     background: linear-gradient(135deg, #007bff 0%, #00d4ff 100%); 
     color: white;
     text-align: center;
@@ -63,14 +65,26 @@ body {
     letter-spacing: 1.5px; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     border-bottom: 5px solid rgba(255, 255, 255, 0.2); 
+    margin: -40px -40px 40px -40px; /* Adjust margins to extend background to edges */
 }
 
-.form-body {
-    padding: 40px; 
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+
+@media (min-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .form-group-full-width {
+        grid-column: span 2;
+    }
 }
 
 .form-group {
-    margin-bottom: 25px; 
+    margin-bottom: 0; 
 }
 
 .form-label {
@@ -81,9 +95,7 @@ body {
     font-size: 1.1rem;
 }
 
-.form-input,
-.form-select,
-.form-textarea {
+.form-control {
     width: calc(100% - 20px); 
     padding: 12px 15px;
     border: 1px solid var(--border-color);
@@ -95,34 +107,71 @@ body {
     box-sizing: border-box; 
 }
 
-.form-input::placeholder,
-.form-textarea::placeholder {
+.form-control::placeholder {
     color: #a0a0a0;
 }
 
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
+.form-control:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15); 
     outline: none;
     transform: translateY(-2px); 
 }
 
-.form-textarea {
+.form-control.textarea-large {
     resize: vertical; 
     min-height: 100px;
 }
 
-.button-group {
+/* Specific styling for file input */
+input[type="file"].form-control {
+    padding: 10px 15px; /* Adjust padding for file input */
+    line-height: 1.5; /* Ensure text aligns well */
+    cursor: pointer;
+    background-color: #fcfcfc;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Style for the file input button (pseudo-element) */
+input[type="file"].form-control::-webkit-file-upload-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+input[type="file"].form-control::file-selector-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+input[type="file"].form-control::-webkit-file-upload-button:hover,
+input[type="file"].form-control::file-selector-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.form-actions {
     display: flex;
     flex-direction: column; 
     gap: 15px; 
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.btn-submit,
-.btn-secondary-link {
+.btn {
     display: flex; 
     align-items: center;
     justify-content: center;
@@ -136,35 +185,29 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.btn-submit {
+.btn-primary {
     background-color: var(--primary-color);
     color: white;
     border: none;
 }
 
-.btn-submit:hover {
+.btn-primary:hover {
     background-color: var(--primary-dark);
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
 }
 
-.btn-secondary-link {
+.btn-secondary {
     background-color: var(--secondary-color);
     color: white;
     border: none;
 }
 
-.btn-secondary-link:hover {
+.btn-secondary:hover {
     background-color: var(--secondary-dark);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+    box-shadow: 0 8gpx 20px rgba(108, 117, 125, 0.3);
 }
-
-.btn-submit i,
-.btn-secondary-link i {
-    margin-right: 10px;
-}
-
 
 .form-message {
     padding: 15px 20px;
@@ -178,50 +221,50 @@ body {
 .form-message.success {
     background-color: var(--success-bg);
     color: var(--success-text);
-    border: 1px solid darken(var(--success-bg), 10%);
+    border: 1px solid #c3e6cb;
 }
 
 .form-message.error {
     background-color: var(--danger-bg);
     color: var(--danger-text);
-    border: 1px solid darken(var(--danger-bg), 10%);
+    border: 1px solid #f5c6cb;
 }
 
 .form-message.warning {
     background-color: var(--warning-bg);
     color: var(--warning-text);
-    border: 1px solid darken(var(--warning-bg), 10%);
+    border: 1px solid #ffeeba;
 }
 
-/* Responsividad */
 @media (min-width: 768px) {
-    .button-group {
+    .form-actions {
         flex-direction: row; 
         justify-content: space-between;
     }
-    .btn-submit,
-    .btn-secondary-link {
+    .btn {
         flex-grow: 1; 
         max-width: 48%; 
     }
 }
 
 @media (max-width: 480px) {
-    .form-body {
+    .card-pago {
         padding: 25px;
     }
-    .form-header {
+    .form-title {
         font-size: 1.8rem;
         padding: 20px 15px;
+        margin: -25px -25px 25px -25px;
     }
-    .form-input,
-    .form-select,
-    .form-textarea {
+    .form-control {
         padding: 10px 12px;
     }
-    .btn-submit,
-    .btn-secondary-link {
+    .btn {
         font-size: 1rem;
         padding: 12px 20px;
+    }
+    input[type="file"].form-control::-webkit-file-upload-button,
+    input[type="file"].form-control::file-selector-button {
+        padding: 6px 12px;
     }
 }

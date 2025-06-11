@@ -119,11 +119,15 @@
     align-items: center;
 }
 
+
+
+
 #cronograma-page-content .btn-expandir {
-    width: 32px; 
-    height: 32px; 
-    border-radius: 50%;
-    background: #4299e1;
+    width: 25px;
+    height: 25px; 
+    padding: 0;
+    border-radius: 5px;
+    background: #4299e1; 
     color: white;
     border: none;
     display: flex;
@@ -134,16 +138,96 @@
     font-size: 1.1rem; 
 }
 
+#cronograma-page-content .btn-expandir:hover {
+    background: #3182ce; 
+}
+
+
+
 #cronograma-page-content .btn-exportar-excel {
-    background: #38a169;
-    color: white;
+    width: 25px; 
+    height: 25px; 
+    padding: 0; 
+    border-radius: 5px; 
+    background: #38A169; 
+    color: white; 
     border: none;
-    border-radius: 4px;
-    padding: 8px 12px; 
-    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-size: 1.1rem; 
     white-space: nowrap; 
+}
+
+#cronograma-page-content .btn-exportar-excel:hover {
+    background: #2f855a; 
+}
+
+
+#cronograma-page-content .btn-pagar-cuota {
+    width: 25px; 
+    height: 25px; 
+    padding: 0; 
+    border-radius: 5px; 
+    background: rgb(255, 138, 3); 
+    color: white; 
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem; 
+}
+
+#cronograma-page-content .btn-pagar-cuota:hover {
+    background: #218838; 
+}
+
+
+#cronograma-page-content .btn-ver-cronograma {
+    width: 25px; 
+    height: 25px; 
+    padding: 0;
+    border-radius: 5px;
+    background: #007bff; 
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem; 
+    text-decoration: none;
+}
+
+#cronograma-page-content .btn-ver-cronograma:hover {
+    background: #0056b3;
+}
+
+
+#cronograma-page-content .btn-historial-pagos {
+    width: 25px; 
+    height: 25px; 
+    padding: 0;
+    border-radius: 5px;
+    background: #343a40; 
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem; 
+    text-decoration: none;
+}
+
+#cronograma-page-content .btn-historial-pagos:hover {
+    background: #1d2124;
 }
 
 #cronograma-page-content .btn-expandir:hover,
@@ -184,7 +268,6 @@
 
 
 
-/* Descomenta estos estilos si los tenías comentados, son importantes */
 #cronograma-page-content .filtros {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -208,7 +291,7 @@
 
 #cronograma-page-content .filtros input,
 #cronograma-page-content .filtros select {
-    width: 100%; /* CAMBIO: Asegura que ocupen el 100% de su espacio en la celda del grid */
+    width: 100%; 
     padding: 10px 12px;
     border: 1px solid #e2e8f0;
     border-radius: 6px;

@@ -28,28 +28,43 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
       
       break;
 
-    case 'POST':
-      $input = file_get_contents('php://input');
-      $dataJSON = json_decode($input, true);
 
-      $registro = [
-        'idcronogramapago' => htmlspecialchars($dataJSON['idcronogramapago']),
-        'idnumcuenta' => htmlspecialchars($dataJSON['idnumcuenta']),
-        'numtransaccion' => htmlspecialchars($dataJSON['numtransaccion']),
-        'fechahora' => htmlspecialchars($dataJSON['fechahora']),
-        'monto' => htmlspecialchars($dataJSON['monto']),
-        'observaciones' => htmlspecialchars($dataJSON['observaciones'] ?? null)
-      ];
 
-      try {
-        $result = $detallePago->add($registro);
-        echo json_encode([
-          "status" => true,
-          "Se ha registrado el pago",
-        ]);
-      } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => 'Error al agregar el pago: ' . $e->getMessage()]);
-      }
-      break;
+        case 'POST':
+            $input = file_get_contents('php://input');
+            $dataJSON = json_decode($input, true);
+
+           
+            $idcronogramapago = $dataJSON['idcronogramapago'];
+            $idnumcuenta = $dataJSON['idnumcuenta'] ;
+            $numtransaccion = $dataJSON['numtransaccion'] ;
+            $fechahora = $dataJSON['fechahora'] ;
+            $monto = $dataJSON['monto'];
+            $observaciones = $dataJSON['observaciones'] ?? null;
+            $comprobante_base64 = $dataJSON['comprobante'] ?? null; 
+
+         
+
+            $registro = [
+                'idcronogramapago' => htmlspecialchars($idcronogramapago),
+                'idnumcuenta' => htmlspecialchars($idnumcuenta),
+                'numtransaccion' => htmlspecialchars($numtransaccion),
+                'fechahora' => htmlspecialchars($fechahora),
+                'monto' => htmlspecialchars($monto),
+                'observaciones' => htmlspecialchars($observaciones),
+                'comprobante' => $comprobante_base64 
+            ];
+
+            try {
+                $result = $detallePago->add($registro);
+                echo json_encode([
+                    "status" => $result['status'],
+                    "message" => $result['message']
+                ]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error al agregar el pago: ' . $e->getMessage()]);
+            }
+            break;
+
   }
 }

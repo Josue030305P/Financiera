@@ -29,6 +29,7 @@ BEGIN
 
     SELECT idnumcuentas, numcuenta FROM numcuentas WHERE idcontrato = idcontrato_;
 
+
 END //
 
 DELIMITER ;
@@ -36,3 +37,29 @@ DELIMITER ;
     DROP PROCEDURE sp_numcuenta_by_idcontrato;
 
 CALL sp_numcuenta_by_idcontrato(4);
+SELECT * FROM numcuentas
+
+SELECT * FROM entidades
+
+
+DELIMITER //
+CREATE PROCEDURE sp_numcuenta_by_idcontrato(
+    IN idcontrato_ INT
+)
+BEGIN
+
+    SELECT 
+    
+    nc.idnumcuentas , 
+    nc.numcuenta,
+    ent.entidad
+    
+    FROM numcuentas  nc
+    INNER JOIN entidades ent ON  nc.identidad = ent.identidad
+    WHERE nc.idcontrato = idcontrato_;
+
+END //
+
+DELIMITER ;
+CALL sp_numcuenta_by_idcontrato(4);
+

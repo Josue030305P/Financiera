@@ -41,7 +41,7 @@ class DataTable {
         if (this.modalCronograma) {
             const closeModalButton =
                 this.modalCronograma.querySelector(".close-button");
-            const modalContent = this.modalCronograma.querySelector(".modal-content"); // ¡Obtener el contenido del modal!
+            const modalContent = this.modalCronograma.querySelector(".modal-content"); 
 
             if (closeModalButton) {
                 closeModalButton.addEventListener("click", () => {
@@ -49,17 +49,14 @@ class DataTable {
                 });
             }
 
-            // Cierra el modal si se hace clic fuera del contenido del modal (en el overlay)
-            // Se ejecuta solo si el target del click es directamente el modal (el fondo oscuro)
+          
             window.addEventListener("click", (event) => {
                 if (event.target == this.modalCronograma) {
                     this.modalCronograma.style.display = "none";
                 }
             });
 
-            // ¡IMPORTANTE! Detener la propagación de clics dentro del contenido del modal
-            // Esto evita que un clic dentro del modal (ej. en la tabla) se propague al 'window'
-            // y sea erróneamente interpretado como un clic en el overlay.
+            
             if (modalContent) {
                 modalContent.addEventListener("click", (event) => {
                     event.stopPropagation();

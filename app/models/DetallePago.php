@@ -30,7 +30,6 @@ class DetallePago
     return $result;
   }
 
-
   public function add($params = []): array
   {
 
@@ -43,7 +42,7 @@ class DetallePago
       }
 
       $idusuariocreacion = $_SESSION['idusuario'];
-      $sql = "CALL sp_add_detallepago_cronograma(?,?,?,?,?,?,?)";
+      $sql = "CALL sp_add_detallepago_cronograma(?,?,?,?,?,?,?,?)";
       $stmt = $this->conexion->prepare($sql);
       $stmt->execute(array(
         $params["idcronogramapago"],
@@ -52,7 +51,8 @@ class DetallePago
         $params["numtransaccion"],
         $params["fechahora"],
         $params["monto"],
-        $params["observaciones"]
+        $params["observaciones"],
+        $params["comprobante"]
 
       ));
 
@@ -67,6 +67,44 @@ class DetallePago
       throw new Exception($e->getMessage());
     }
   }
+
+
+  // public function add($params = []): array
+  // {
+
+  //   try {
+
+  //     $this->conexion->beginTransaction();
+
+  //     if (!isset($_SESSION['idusuario'])) {
+  //       return ['success' => false, 'message' => 'No se encontró el ID de usuairo en la sesión.'];
+  //     }
+
+  //     $idusuariocreacion = $_SESSION['idusuario'];
+  //     $sql = "CALL sp_add_detallepago_cronograma(?,?,?,?,?,?,?)";
+  //     $stmt = $this->conexion->prepare($sql);
+  //     $stmt->execute(array(
+  //       $params["idcronogramapago"],
+  //       $idusuariocreacion,
+  //       $params["idnumcuenta"],
+  //       $params["numtransaccion"],
+  //       $params["fechahora"],
+  //       $params["monto"],
+  //       $params["observaciones"]
+
+  //     ));
+
+  //     $this->conexion->commit();
+
+  //     return [
+  //       'status' => true,
+  //       'message' => 'Se ha insertado el pago'
+  //     ];
+  //   } catch (PDOException $e) {
+  //     $this->conexion->rollBack();
+  //     throw new Exception($e->getMessage());
+  //   }
+  // }
 }
 
 // $detallepago  = new DetallePago();

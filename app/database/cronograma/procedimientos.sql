@@ -1,3 +1,4 @@
+USE financiera
 DELIMITER //
 
 CREATE PROCEDURE sp_generar_cronograma(
@@ -30,7 +31,7 @@ BEGIN
     WHERE idcontrato = idcontrato_;
 END //
 DELIMITER ;
-CALL  obtener_cronogramas_por_contrato(1);
+CALL  obtener_cronogramas_por_contrato(16);
 
 
 
