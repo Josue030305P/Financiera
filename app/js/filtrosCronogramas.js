@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const botonesContainerGrupo = document.createElement("div");
                 botonesContainerGrupo.className = "botones-accion";
                 botonesContainerGrupo.style.display = "flex";
-                botonesContainerGrupo.style.gap = "4px"; // Reducido el gap para más espacio
+                botonesContainerGrupo.style.gap = "4px"; 
                 botonesContainerGrupo.style.justifyContent = "center";
 
                 const btnExpandir = document.createElement("button");
@@ -152,25 +152,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 btnVerCronograma.className = "btn-ver-cronograma btn btn-sm btn-primary";
                 btnVerCronograma.dataset.contratoId = contratoId;
                 const iconVerCronograma = document.createElement('i');
-                iconVerCronograma.className = 'fas fa-calendar-alt'; // Icono de calendario o lista
+                iconVerCronograma.className = 'fas fa-calendar-alt'; 
                 btnVerCronograma.appendChild(iconVerCronograma);
-                btnVerCronograma.title = "Ver Cronograma Completo"; // Tooltip
+                btnVerCronograma.title = "Ver Cronograma Completo";
                 btnVerCronograma.addEventListener('click', () => {
-                    // Redirige a la página de cronograma con el ID del contrato
-                    window.location.href = `${baseUrl}app/views/cronograma/index.php?idcontrato=${contratoId}`;
+                  
+                    window.location.href = `${baseUrl}app/views/cronograma-pagos/cronograma.actualizado?idcontrato=${contratoId}`;
                 });
 
 
                 // Nuevo botón para ver el historial de pagos
                 const btnHistorialPagos = document.createElement("button");
-                btnHistorialPagos.className = "btn-historial-pagos btn btn-sm btn-dark"; // Usamos btn-dark para diferenciar
+                btnHistorialPagos.className = "btn-historial-pagos btn btn-sm btn-dark"; 
                 btnHistorialPagos.dataset.contratoId = contratoId;
                 const iconHistorialPagos = document.createElement('i');
-                iconHistorialPagos.className = 'fas fa-history'; // Icono de historial o detalles
+                iconHistorialPagos.className = 'fas fa-history'; 
                 btnHistorialPagos.appendChild(iconHistorialPagos);
-                btnHistorialPagos.title = "Ver Historial de Pagos"; // Tooltip
+                btnHistorialPagos.title = "Ver Historial de Pagos"; 
                 btnHistorialPagos.addEventListener('click', () => {
-                    // Redirige a la página de historial de pagos con el ID del contrato
+                    
                     window.location.href = `${baseUrl}app/views/historialpagos/index.php?idcontrato=${contratoId}`;
                 });
 
