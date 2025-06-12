@@ -108,6 +108,21 @@ class Contrato
         }
     }
 
+    public function delete($idcontrato): array
+    {
+        try {
+            $this->conexion->beginTransaction();
+            $sql = "CALL sp_delete_contrato(?)";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$idcontrato]);
+            $this->conexion->commit();
+            return ["success" => true, "message" => "Contrato eliminado exitosamente"];
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 
 

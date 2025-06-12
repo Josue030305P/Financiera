@@ -22,6 +22,8 @@ END //
 
 DELIMITER;
 
+DROP PROCEDURE sp_add_detallepago_cronograma;
+
 -- USE financiera;
 
 -- DELIMITER / /

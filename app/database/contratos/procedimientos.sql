@@ -32,3 +32,24 @@ BEGIN
                         SELECT LAST_INSERT_ID() AS idcontrato;
 END //
 DELIMITER ;
+
+
+DROP PROCEDURE sp_delete_contrato
+
+DELIMITER //
+CREATE PROCEDURE sp_delete_contrato(
+IN idcontrato_ INT
+)
+BEGIN
+    UPDATE contratos SET 
+    estado = 'Eliminado'
+    WHERE idcontrato = idcontrato_;
+END //
+DELIMITER ;
+
+CALL sp_delete_contrato(1);
+SELECT * FROM contratos;
+SHOW COLUMNS FROM contratos LIKE 'estado';
+
+
+SELECT * FROM contratos WHERE idcontrato = 1;

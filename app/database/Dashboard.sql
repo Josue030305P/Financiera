@@ -1,4 +1,6 @@
+
 USE financiera;
+
 
 DROP VIEW IF EXISTS v_listado_contratos_activos;
 CREATE VIEW v_listado_contratos_activos AS
@@ -48,6 +50,7 @@ WHERE
 ORDER BY
     cp.fechavencimiento ASC
 LIMIT 10;
+SELECT * FROM v_listado_proximos_pagos_pendientes;
 
 DROP VIEW IF EXISTS v_listado_leads_en_proceso;
 CREATE VIEW v_listado_leads_en_proceso AS

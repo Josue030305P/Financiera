@@ -22,17 +22,17 @@ DELIMITER $
 
 
 
-CREATE PROCEDURE sp_numcuenta_by_idcontrato(
-    IN idcontrato_ INT
-)
-BEGIN
+-- CREATE PROCEDURE sp_numcuenta_by_idcontrato(
+--     IN idcontrato_ INT
+-- )
+-- BEGIN
 
-    SELECT idnumcuentas, numcuenta FROM numcuentas WHERE idcontrato = idcontrato_;
+--     SELECT idnumcuentas, numcuenta FROM numcuentas WHERE idcontrato = idcontrato_;
 
 
-END //
+-- END //
 
-DELIMITER ;
+-- DELIMITER ;
 
     DROP PROCEDURE sp_numcuenta_by_idcontrato;
 

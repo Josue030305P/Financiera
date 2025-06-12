@@ -251,7 +251,7 @@ observacion				VARCHAR(100) NULL,
 fechahoraeliminacion	DATETIME NULL,
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
-estado 				ENUM('Vigente','Completado') DEFAULT 'Vigente',
+estado 				ENUM('Vigente','Completado', 'Eliminado') DEFAULT 'Vigente',
 CONSTRAINT fk_idusuario_asesor FOREIGN KEY(idasesor) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idversion FOREIGN KEY(idversion) REFERENCES versiones(idversion),
 CONSTRAINT fk_idinversionista_contrato FOREIGN KEY(idinversionista) REFERENCES inversionistas(idinversionista),
@@ -261,7 +261,8 @@ CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFEREN
 )ENGINE=InnoDB;
 
 SELECT * FROM numcuentas;
-
+USE financiera;
+ALTER TABLE contratos MODIFY COLUMN estado ENUM('Vigente','Completado', 'Eliminado') DEFAULT 'Vigente';
 
 SELECT * FROM contratos;
 -- PREGUNTAR LUEGO SI UN INVERSIONISTA PUEDE TENER SOLO UN CONTRATO:
@@ -352,8 +353,10 @@ SELECT * FROM detallepagos;
 USE financiera
 
 SELECT * FROM cronogramapagos;
- DROP TABLE detallepagos;
-ALTER TABLE detallepagos MODIFY COLUMN comprobante VARCHAR(255) NULL;
+
+--  DROP TABLE detallepagos;
+--  ALTER TABLE detallepagos ADD COLUMN comprobante VARCHAR(255) NULL;
+-- ALTER TABLE detallepagos MODIFY COLUMN comprobante VARCHAR(255) NULL;
 
 
 CREATE TABLE accesos(
