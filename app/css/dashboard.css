@@ -94,6 +94,43 @@ body {
     background-color: #ffffff;
 }
 
+.card-header {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .btn-export-pdf {
+            background-color: #dc3545; 
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-export-pdf:hover {
+            background-color: #c82333;
+        }
+
+      
+        .widget-card.active-card {
+            border: 2px solid var(--active-border-color, #007bff); 
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        
+        .widget-card.active-card .header-primary { --active-border-color: #007bff; } /* Azul */
+        .widget-card.active-card .header-info { --active-border-color: #17a2b8; }    /* Cyan */
+        .widget-card.active-card .header-warning { --active-border-color: #ffc107; }  /* Amarillo */
+        .widget-card.active-card .header-success { --active-border-color: #28a745; }  /* Verde */
+        .widget-card.active-card .header-secondary { --active-border-color: #6c757d; } /* Gris */
+        .widget-card.active-card .header-danger { --active-border-color: #dc3545; }   /* Rojo */
+
 .widget-value {
     font-size: 2.5em; 
     font-weight: 700;
