@@ -1943,21 +1943,21 @@ label {
 
 /* --- ESTILOS GENERALES Y DE CONTENEDOR DE LA TABLA --- */
 .table-wrapper {
-    overflow-x: auto; /* Permite scroll horizontal si la tabla es muy ancha */
+    overflow-x: auto; 
     width: 100%;
     margin-top: 20px;
-    border-radius: 12px; /* Bordes redondeados para el contenedor */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada para un efecto flotante */
+    border-radius: 12px; 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
     background-color: #ffffff;
-    padding: 15px; /* Espaciado interno */
+    padding: 15px; 
 }
 
-/* Renombrado de .users-table a .posts-table para consistencia con tu CSS proporcionado */
+
 .posts-table {
     width: 100%;
-    border-collapse: separate; /* Permite bordes redondeados en las celdas */
-    border-spacing: 0; /* Elimina el espacio entre celdas */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+    border-collapse: separate; 
+    border-spacing: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     color: #333;
 }
 
@@ -1986,40 +1986,38 @@ label {
     border-top-right-radius: 10px;
 }
 
-/* --- CUERPO DE LA TABLA (FILAS Y CELDAS) --- */
+
 .posts-table td {
     background-color: #ffffff;
-    padding: 12px 20px; /* Padding consistente */
+    padding: 12px 20px; 
     font-size: 0.9em;
     color: #4f5f6f;
     vertical-align: middle;
-    border-bottom: 1px solid #ebf2f7; /* Borde inferior sutil para las filas */
-    white-space: normal; /* Permite que el texto se ajuste */
-    word-break: break-word; /* Rompe palabras largas para evitar desbordamiento */
+    border-bottom: 1px solid #ebf2f7; 
+    white-space: normal; 
+    word-break: break-word; 
 }
-
-/* Estilos al pasar el ratón sobre las filas */
 .posts-table tr {
-    transition: all 0.3s ease; /* Transición suave para el hover */
-    /* border-radius: 8px; Esto no es visible directamente en <tr> con border-collapse */
+    transition: all 0.3s ease; 
+   
 }
 
 .posts-table tr:hover {
-    background-color: #e8f0fe; /* Fondo más claro al pasar el ratón */
-    transform: translateY(-3px); /* Efecto de elevación sutil */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); /* Sombra más intensa al pasar el ratón */
+    background-color: #e8f0fe;
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); 
     cursor: pointer;
 }
 
-/* --- ESTILOS ESPECÍFICOS PARA LA COLUMNA DE ACCIONES --- */
+
 .posts-table tr td:last-child {
-    display: flex; /* Usamos flexbox para alinear los iconos */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    gap: 8px; /* Espacio entre los iconos */
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    gap: 8px; 
     padding: 10px;
     min-height: 150px;
-    min-width: 150px; /* Asegura suficiente espacio para todos los iconos */
+    min-width: 150px;
 }
 
 /* Estilos de los iconos de acción (generales) */
@@ -2062,18 +2060,18 @@ label {
     filter: brightness(0) invert(1); /* Hace el SVG blanco */
 }
 
-/* --- ESTILOS PARA LOS BADGES (PRIORIDAD, ESTADO) --- */
+
 .badge {
-    display: inline-flex; /* Alineación y centrado de texto */
+    display: inline-flex; 
     justify-content: center;
     align-items: center;
     padding: 6px 12px;
-    border-radius: 20px; /* Bordes más redondeados para un look de "píldora" */
+    border-radius: 20px; 
     font-size: 0.8em;
     font-weight: 600;
     text-transform: uppercase;
-    color: white; /* Color de texto predeterminado para badges */
-    min-width: 80px; /* Asegura un ancho mínimo para la uniformidad */
+    color: white; 
+    min-width: 80px; 
     text-align: center;
 }
 
@@ -2146,7 +2144,7 @@ label {
     font-size: 0.9em;
     color: #495057;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    min-width: 150px; /* Ancho mínimo para los filtros */
+    min-width: 150px;
 }
 
 .filters-container select:focus,
@@ -2157,7 +2155,7 @@ label {
 }
 
 .filter-actions button {
-    background-color: #6c757d; /* Color gris para botones de acción de filtro */
+    background-color: #6c757d; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -2174,7 +2172,7 @@ label {
 }
 
 #aplicar-filtros {
-    background-color: #28a745; /* Verde para aplicar filtros */
+    background-color: #28a745; 
 }
 
 #aplicar-filtros:hover {
@@ -2182,7 +2180,7 @@ label {
 }
 
 #resetear-filtros, #resetear-filtros-lead {
-    background-color: #dc3545; /* Rojo para resetear filtros */
+    background-color: #dc3545; 
 }
 
 
@@ -2202,150 +2200,6 @@ label {
     font-weight: 700;
 }
 
-/* Estilos para el modal */
-.modal {
-    /* ¡¡¡IMPORTANTE!!! Sólo esta línea debe controlar la visibilidad inicial */
-    display: none; 
-    
-    position: fixed; /* Posición fija para cubrir toda la pantalla */
-    z-index: 1000; /* Por encima de otros elementos */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Permite scroll si el contenido es muy grande */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
-    
-    /* Estas propiedades de Flexbox SÓLO funcionarán cuando tu JavaScript cambie 'display' a 'flex' */
-    justify-content: center; /* Centra horizontalmente el contenido */
-    align-items: center;    /* Centra verticalmente el contenido */
-}
-
-
-
-.modal-content {
-    background-color: #fefefe; /* Fondo blanco para el contenido del modal */
-    padding: 30px;
-    border-radius: 12px; /* Bordes ligeramente redondeados */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada para profundidad */
-    width: 90%; /* Un poco más de ancho en general */
-    max-width: 700px; /* Ancho máximo para que no sea demasiado grande en pantallas grandes */
-    position: relative;
-    animation: fadeIn 0.3s ease-out; /* Animación suave al aparecer */
-    opacity: 0; /* Inicia invisible para la animación */
-    transform: scale(0.95); /* Inicia un poco más pequeño para la animación */
-}
-
-/* Keyframes para la animación de entrada */
-@keyframes fadeIn {
-    to { opacity: 1; transform: scale(1); } /* Termina completamente visible y a tamaño normal */
-}
-
-/* Aplicar la animación al abrir el modal (esto lo haría el JS al añadir una clase, o el propio display:flex) */
-.modal.is-open .modal-content {
-    animation: fadeIn 0.3s ease-out forwards; /* 'forwards' mantiene el estado final de la animación */
-}
-
-.close-button {
-    color: #888; /* Color de cierre más sutil */
-    position: absolute;
-    top: 15px;
-    right: 20px; /* Ajuste para un mejor espaciado */
-    font-size: 36px; /* Tamaño de la 'X' un poco más grande */
-    font-weight: normal; /* No tan negrita */
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: #333; /* Más oscuro al pasar el ratón */
-    transform: rotate(90deg); /* Efecto de giro al pasar el ratón */
-    text-decoration: none;
-}
-
-.modal-content h3 {
-    color: #2c3e50;
-    margin-bottom: 25px; /* Más espacio debajo del título */
-    font-size: 2em; /* Título un poco más grande */
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0; /* Borde más claro */
-    padding-bottom: 15px;
-    font-weight: 600; /* Título un poco más fuerte */
-}
-
-#modal-cronograma-body {
-    max-height: 450px; /* Altura máxima ligeramente mayor para el contenido del cronograma */
-    overflow-y: auto; /* Scroll si el contenido excede la altura */
-    padding-right: 15px; /* Espacio para la barra de scroll */
-    line-height: 1.6; /* Mejor interlineado para el contenido */
-    color: #555;
-}
-
-/* Estilos para la tabla dentro del modal, si la hay */
-#modal-cronograma-body table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    font-size: 0.9em;
-}
-
-#modal-cronograma-body th,
-#modal-cronograma-body td {
-    border: 1px solid #eee;
-    padding: 10px 15px;
-    text-align: left;
-}
-
-#modal-cronograma-body th {
-    background-color: #f7f9fc;
-    font-weight: 600;
-    color: #4a5568;
-}
-
-#modal-cronograma-body tr:nth-child(even) {
-    background-color: #fcfdff;
-}
-
-#modal-cronograma-body tr:hover {
-    background-color: #eef2f7;
-}
-
-
-/* Scrollbar moderno (mantengo los mismos) */
-#modal-cronograma-body::-webkit-scrollbar {
-    width: 8px;
-}
-
-#modal-cronograma-body::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-#modal-cronograma-body::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-}
-
-#modal-cronograma-body::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* Media Queries para responsividad del modal */
-@media (max-width: 600px) {
-    .modal-content {
-        width: 95%;
-        padding: 20px;
-    }
-    .modal-content h3 {
-        font-size: 1.5em;
-    }
-    .close-button {
-        font-size: 30px;
-        top: 10px;
-        right: 15px;
-    }
-}
 /*-------------------------------------------------------------------------------------------------------*/
 
 .sidebar {

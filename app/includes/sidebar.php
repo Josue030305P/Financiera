@@ -47,11 +47,11 @@ if (!isset($_SESSION['nombre'])) {
                             aria-hidden="true"></span>Inversionista</a>
                 </li>
 
-
+<!-- 
                  <li>
                     <a class="" href="<?= BASE_URL ?>app/views/detallegarantias/"><span class="icon document"
                             aria-hidden="true"></span>Detalle garantías</a>
-                </li>
+                </li> -->
 
                  <li>
                     <a class="" href="<?= BASE_URL ?>app/views/contactibilidad/"><span class="icon user-white"
@@ -63,11 +63,11 @@ if (!isset($_SESSION['nombre'])) {
                             aria-hidden="true"></span>Lista de cronogramas</a>
                 </li>
 
-
+<!-- 
                  <li>
                     <a class="" href="<?= BASE_URL ?>app/views/detallepagos/"><span class="icon document"
                             aria-hidden="true"></span>Detalle de pagos</a>
-                </li>
+                </li> -->
 
 
 

@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("formPagoCuota");
     const numCuentaSelect = document.getElementById("numcuenta");
     const comprobanteInput = document.getElementById("comprobantepago");
+    const montoInput = document.getElementById("monto");
+    const restanteInput = document.getElementById("restante");
+    const comprobanteFileNameSpan = document.getElementById("comprobanteFileName"); 
+    const customFileButton = document.querySelector(".custom-file-button"); 
 
     const idcontrato = document.getElementById("hidden-id-contrato")?.value || "";
     const idcronogramapago = document.getElementById("hidden-id-cronograma")?.value || "";
@@ -25,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     async function obtenerNumCuentas() {
-        
         if (!idcontrato) {
             numCuentaSelect.innerHTML = '<option value="">Error: ID de contrato no disponible</option>';
             showToast("error", "ID de contrato no disponible para cargar cuentas");
@@ -42,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const data = await response.json();
-            console.log("Datos de cuentas recibidos:", data);
 
             if (data.status === "success" && data.data.length > 0) {
                 numCuentaSelect.innerHTML = '<option value="">Selecciona una cuenta</option>';
@@ -63,13 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-  
     async function agregarDetallePago() {
         const idnumcuenta = numCuentaSelect.value;
         const numtransaccion = document.getElementById("numtransaccion").value;
         const fechahora = document.getElementById("fechahora").value;
-        const monto = document.getElementById("monto").value;
+        const monto = parseFloat(montoInput.value); 
+        const restante = parseFloat(restanteInput.value); 
         const observaciones = document.getElementById("observaciones").value;
 
         if (!idnumcuenta) {
@@ -82,46 +83,46 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let comprobanteBase64 = null;
-
-        // Si hay un archivo seleccionado, lo leemos como Base64
-        if (comprobanteInput.files.length > 0) {
-            const file = comprobanteInput.files[0];
-            const reader = new FileReader();
-
-            // Esto es una promesa para esperar que el archivo se lea
-            comprobanteBase64 = await new Promise((resolve, reject) => {
-                reader.onloadend = () => resolve(reader.result); // result es el Base64
-                reader.onerror = reject;
-                reader.readAsDataURL(file); // Lee el archivo como Data URL (Base64)
-            });
+        if (isNaN(monto) || monto <= 0) {
+            showToast("error", "El monto a pagar debe ser mayor que 0.");
+            return;
         }
 
-        const datosEnviar = {
-            idcronogramapago: idcronogramapago,
-            idnumcuenta: idnumcuenta,
-            numtransaccion: numtransaccion,
-            fechahora: fechahora,
-            monto: monto,
-            observaciones: observaciones ?? null,
-            comprobante: comprobanteBase64 ?? null 
-        };
+        if (monto > restante) {
+            showToast("error", `El monto a pagar (${monto.toFixed(2)}) no puede ser mayor que el monto restante (${restante.toFixed(2)}).`);
+            return;
+        }
+        
+        if (comprobanteInput.hasAttribute('required') && comprobanteInput.files.length === 0) {
+            showToast("error", "Por favor, selecciona un comprobante de pago.");
+            return;
+        }
+
+
+        const formData = new FormData();
+        formData.append('idcronogramapago', idcronogramapago);
+        formData.append('idnumcuenta', idnumcuenta);
+        formData.append('numtransaccion', numtransaccion);
+        formData.append('fechahora', fechahora);
+        formData.append('monto', monto);
+        formData.append('observaciones', observaciones);
+
+        if (comprobanteInput.files.length > 0) {
+            formData.append('comprobante', comprobanteInput.files[0]);
+        } else {
+            formData.append('comprobante', null); 
+        }
 
         try {
             const response = await fetch(
                 `${baseUrl}app/controllers/DetallePagoController.php`,
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json", 
-                    },
-                    body: JSON.stringify(datosEnviar), 
+                    body: formData, 
                 }
             );
 
-           
             const result = await response.json();
-            console.log("Respuesta del servidor:", result);
 
             if (result.status) {
                 showToast("success", "Pago registrado correctamente");
@@ -139,22 +140,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     obtenerNumCuentas();
 
-    form.addEventListener('submit', async (e) => { 
+
+    customFileButton.addEventListener('click', () => {
+        comprobanteInput.click();
+    });
+
+    
+    comprobanteInput.addEventListener('change', function() {
+        if (this.files.length > 0) {
+            comprobanteFileNameSpan.textContent = this.files[0].name;
+        } else {
+            comprobanteFileNameSpan.textContent = 'Ningún archivo seleccionado';
+        }
+    });
+
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        await agregarDetallePago(); 
+        await agregarDetallePago();
     });
 });
-
-
-
-
-
-
-
-
-
-
-
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const baseUrl = document.querySelector('meta[name="base-url"]')?.content || "";

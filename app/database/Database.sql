@@ -341,19 +341,19 @@ numtransaccion			VARCHAR(30) NOT NULL,
 fechahora				DATETIME NOT NULL,
 monto					DECIMAL(10,2) NOT NULL,
 observaciones			VARCHAR(180) NULL,
-comprobante				TEXT NULL,
+comprobante				VARCHAR(255),
 CONSTRAINT fk_idcronogramapago FOREIGN KEY(idcronogramapago) REFERENCES cronogramapagos(idcronogramapago),
 CONSTRAINT fk_idusuariopago	FOREIGN KEY(idusuariopago) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcuentas)
 )ENGINE=InnoDB;
 
-ALTER TABLE detallepagos ADD COLUMN comprobante TEXT NULL;
-SELECT * FROM detallepagos;
 
+SELECT * FROM detallepagos;
+USE financiera
 
 SELECT * FROM cronogramapagos;
  DROP TABLE detallepagos;
-ALTER TABLE detallepagos DROP CONSTRAINT fk_idnumcuenta;
+ALTER TABLE detallepagos MODIFY COLUMN comprobante VARCHAR(255) NULL;
 
 
 CREATE TABLE accesos(

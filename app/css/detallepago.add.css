@@ -132,6 +132,96 @@
 }
 
 
+/* Estilos para el campo de archivo (comprobante de pago) */
+.form-group.comprobante-upload {
+    grid-column: 1 / -1; 
+    display: flex;
+    flex-direction: column;
+}
+
+.comprobante-upload label {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    color: #555;
+    font-weight: 500;
+}
+
+.comprobante-upload input[type="file"] {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+    cursor: pointer;
+    z-index: 1;
+}
+
+.custom-file-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0; 
+    cursor: pointer; 
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+    position: relative; 
+    overflow: hidden; 
+}
+
+.custom-file-input-wrapper:hover {
+    border-color: #007bff;
+    background-color: #e9ecef;
+}
+
+.custom-file-input-wrapper:focus-within {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.custom-file-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 15px; 
+    border-radius: 8px 0 0 8px; 
+    cursor: inherit; 
+    font-size: 1em; 
+    font-weight: 600; 
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; 
+    width: auto; 
+ 
+}
+
+.custom-file-button:hover {
+    background-color: #0056b3;
+}
+
+.custom-file-text {
+    flex-grow: 1;
+    color: #6c757d;
+    font-size: 0.95em; 
+    padding: 12px 15px; 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    pointer-events: none; 
+}
+
+
+@media (max-width: 768px) {
+    .form-group.comprobante-upload {
+        grid-column: 1 / -1; 
+    }
+    .custom-file-button {
+        border-radius: 8px; 
+    }
+}
+
 @media (max-width: 768px) {
     .form-grid {
         grid-template-columns: 1fr; 

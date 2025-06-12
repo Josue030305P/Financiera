@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const iconExcel = document.createElement('i');
                 iconExcel.className = 'fas fa-file-excel';
                 btnExcel.appendChild(iconExcel);
-                // No se necesita textSpanExcel si solo se mostrará el icono
+              
 
                 // Nuevo botón para ver cronograma completo del contrato
                 const btnVerCronograma = document.createElement("button");
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 btnHistorialPagos.title = "Ver Historial de Pagos"; 
                 btnHistorialPagos.addEventListener('click', () => {
                     
-                    window.location.href = `${baseUrl}app/views/historialpagos/index.php?idcontrato=${contratoId}`;
+                    window.location.href = `${baseUrl}app/views/cronograma-pagos/historial-pagos?idcontrato=${contratoId}`;
                 });
 
 

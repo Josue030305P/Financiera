@@ -5,14 +5,14 @@
 <?php
 
 $idcontrato = $_POST['idcontrato'] ?? '';
-$idcronogramapago = $_POST['idcronograma'] ?? ''; 
+$idcronogramapago = $_POST['idcronograma'] ?? '';
 $numcuota = $_POST['numcuota'] ?? '';
-$totalneto_val = $_POST['totalneto'] ?? ''; 
-$restante_val = $_POST['restante'] ?? '';  
+$totalneto_val = $_POST['totalneto'] ?? '';
+$restante_val = $_POST['restante'] ?? '';
 
 if (empty($idcontrato) || empty($idcronogramapago)) {
-   
-    error_log("Error: Missing idcontrato or idcronogramapago in POST data for detallepago.add");
+
+  error_log("Error: Missing idcontrato or idcronogramapago in POST data for detallepago.add");
 }
 ?>
 
@@ -31,7 +31,7 @@ if (empty($idcontrato) || empty($idcronogramapago)) {
           <h1 class="form-title">Registrar Pago de Cuota</h1>
           <form id="formPagoCuota" class="form-grid">
 
-          
+
             <input type="hidden" id="hidden-id-contrato" value="<?= htmlspecialchars($idcontrato); ?>">
             <input type="hidden" id="hidden-id-cronograma" value="<?= htmlspecialchars($idcronogramapago); ?>">
             <input type="hidden" id="hidden-num-cuota" value="<?= htmlspecialchars($numcuota); ?>">
@@ -54,7 +54,7 @@ if (empty($idcontrato) || empty($idcronogramapago)) {
             <div class="form-group">
               <label for="totalneto">Total de cuota</label>
               <input type="number" id="totalneto" name="totalneto" class="form-control" step="0.01" placeholder="Ej: 880.65"
-                value="<?= htmlspecialchars($totalneto_val); ?>" readonly required> 
+                value="<?= htmlspecialchars($totalneto_val); ?>" readonly required>
             </div>
 
             <div class="form-group">
@@ -71,14 +71,17 @@ if (empty($idcontrato) || empty($idcronogramapago)) {
             <div class="form-group">
               <label for="monto">Monto</label>
               <input type="number" id="monto" name="monto" class="form-control" step="0.01" placeholder="Ej: 880.65"
-                required>
+                required value="<?= htmlspecialchars($restante_val) ?>">
             </div>
 
-             <div class="">
+            <div class="form-group comprobante-upload">
               <label for="comprobantepago">Comprobante de Pago</label>
-              <input type="file" id="comprobantepago" name="comprobantepago">
+              <div class="custom-file-input-wrapper">
+                <span class="custom-file-button">Seleccionar archivo</span>
+                <span class="custom-file-text" id="comprobanteFileName">Ningún archivo seleccionado</span>
+                <input type="file" id="comprobantepago" name="comprobantepago" required>
+              </div>
             </div>
-
 
             <div class="form-group form-group-full-width">
               <label for="observaciones">Observaciones</label>

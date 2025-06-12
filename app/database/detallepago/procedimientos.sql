@@ -11,7 +11,7 @@ IN numtransaccion_ VARCHAR(30),
 IN fechahora_    DATETIME,
 IN monto_    DECIMAL(10,2),
 IN observaciones_ VARCHAR(180),
-IN comprobante_ TEXT
+IN comprobante_ VARCHAR(255)
 
 )
 BEGIN
