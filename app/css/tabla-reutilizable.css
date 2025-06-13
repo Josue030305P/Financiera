@@ -1,140 +1,136 @@
+
 /* --- ESTILOS GENERALES Y DE CONTENEDOR DE LA TABLA --- */
 .table-wrapper {
-    overflow-x: auto; /* Permite desplazamiento horizontal en pantallas pequeñas */
+    overflow-x: auto; 
     width: 100%;
-    margin-top: 30px; /* Más espacio superior */
-    border-radius: 15px; /* Bordes más redondeados */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    margin-top: 20px;
+    border-radius: 12px; 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
     background-color: #ffffff;
-    padding: 20px; /* Más padding para airear el contenido */
-    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
+    padding: 15px; 
 }
+
 
 .posts-table {
     width: 100%;
-    border-collapse: separate; /* Permite border-radius en las celdas */
-    border-spacing: 0; /* Elimina el espacio entre celdas */
-    font-family: 'Inter', sans-serif; /* Fuente moderna y legible */
-    color: #34495e; /* Color de texto suave */
-    min-width: 1200px; /* Aumentado para asegurar más espacio para columnas largas */
+    border-collapse: separate; 
+    border-spacing: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    color: #333;
 }
 
 /* --- CABECERAS DE LA TABLA --- */
-.users-table-info th {
-    background-color: #f0f4f7; /* Un color de fondo muy suave para las cabeceras */
+.users-table-info th { /* Mantengo .users-table-info para las cabeceras como en tu código */
+    background-color: #eef2f7; /* Un color de fondo más suave para las cabeceras */
     color: #4a5568;
-    font-size: 0.95em; /* Tamaño de fuente ligeramente más pequeño para mayor profesionalismo */
-    font-weight: 700; /* Negrita para resaltar */
-    text-align: left;
-    padding: 20px 25px; /* Más padding para mayor espacio */
-    border-bottom: 4px solid #e2e8f0; /* Borde inferior más definido y sutil */
+    font-size: 0.95em;
+    font-weight: 600; /* Un poco más de peso en la fuente */
+    text-align: left; /* Alineación a la izquierda para mejor lectura */
+    padding: 15px 20px; /* Más padding para mayor espacio */
+    border-bottom: 3px solid #dee2e6; /* Borde inferior más definido */
     text-transform: uppercase;
-    letter-spacing: 0.7px;
-    position: sticky;
+    letter-spacing: 0.8px;
+    position: sticky; /* Cabecera fija al hacer scroll horizontal */
     top: 0;
     z-index: 10;
-    white-space: nowrap; /* Evita que los encabezados se rompan en varias líneas */
 }
 
 /* Bordes redondeados para la primera y última cabecera */
 .users-table-info th:first-child {
-    border-top-left-radius: 12px;
+    border-top-left-radius: 10px;
 }
 
 .users-table-info th:last-child {
-    border-top-right-radius: 12px;
+    border-top-right-radius: 10px;
 }
 
-/* --- CELDAS Y FILAS DE LA TABLA --- */
+
 .posts-table td {
     background-color: #ffffff;
-    padding: 18px 25px; /* Aumentado el padding para más espacio alrededor del texto */
+    padding: 12px 20px; 
     font-size: 0.9em;
-    color: #5a6b7d; /* Color de texto ligeramente más oscuro */
+    color: #4f5f6f;
     vertical-align: middle;
-    border-bottom: 1px solid #edf2f7; /* Líneas divisorias más finas */
-    white-space: normal; /* Permite que el texto se ajuste si es necesario */
-    word-break: break-word; /* Rompe palabras largas para evitar desbordamiento */
+    border-bottom: 1px solid #ebf2f7; 
+    white-space: normal; 
+    word-break: break-word; 
 }
-
 .posts-table tr {
-    transition: all 0.3s ease-in-out; /* Transición más suave para el hover */
+    transition: all 0.3s ease; 
+   
 }
 
 .posts-table tr:hover {
-    background-color: #f7fafd; /* Color de fondo suave al pasar el ratón */
-    transform: translateY(-2px); /* Efecto de "levantar" la fila */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Sombra más definida al hacer hover */
+    background-color: #e8f0fe;
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); 
+    cursor: pointer;
 }
 
-/* Última celda de cada fila (Acciones) */
+
 .posts-table tr td:last-child {
-    display: flex;
-    justify-content: center; /* Centra los iconos horizontalmente */
-    align-items: center;
-    gap: 15px; /* Mayor espacio entre iconos */
-    padding: 15px 25px; /* Ajusta el padding para la columna de acciones */
-    min-height: 60px; /* Un min-height ligeramente mayor para filas con acciones */
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    gap: 8px; 
+    padding: 10px;
+    min-height: 150px;
+    min-width: 150px;
 }
 
 /* Estilos de los iconos de acción (generales) */
 .icon-acciones {
-    width: 30px; /* Tamaño más grande para mayor visibilidad */
-    height: 30px;
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    width: 24px; /* Tamaño un poco más grande */
+    height: 24px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
     cursor: pointer;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1)); /* Sombra sutil para los iconos */
+    /* Remover margin para usar gap del flexbox padre */
 }
 
 .icon-acciones:hover {
-    transform: scale(1.2); /* Efecto de crecimiento más pronunciado */
-    opacity: 0.9;
+    transform: scale(1.15); /* Efecto de crecimiento al pasar el ratón */
+    opacity: 0.8;
 }
 
 /* Estilo para el botón de "Añadir Inversionista" en Leads */
 .btn-addInversionista {
-    background-color: #007bff; /* Color azul primario */
+    background-color: #0061f7; /* Color azul */
     color: #fff;
     border: none;
-    border-radius: 6px; /* Bordes ligeramente más definidos */
-    padding: 10px 18px; /* Más padding para un botón más robusto */
-    display: inline-flex; /* Usa inline-flex para mejor alineación con texto/iconos */
+    border-radius: 5px;
+    padding: 6px 10px; /* Padding para hacer el botón más visible */
+    display: flex; /* Para centrar el icono dentro del botón */
     justify-content: center;
     align-items: center;
-    gap: 8px; /* Espacio entre icono y texto si hubiera */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* Sombra para el botón */
-    font-size: 0.9em;
-    font-weight: 500;
+    transition: background-color 0.3s ease;
+    min-width: unset; /* Reinicia el width si fue establecido */
+    width: auto; /* Ajusta el ancho al contenido */
 }
 
 .btn-addInversionista:hover {
-    background-color: #0056b3;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+    background-color: #004ac9;
 }
 
 .icon-inversionista {
-    width: 20px; /* Asegura el tamaño del icono dentro del botón */
-    height: 20px;
-    filter: brightness(0) invert(1); /* Mantiene el SVG blanco */
+    width: 16px; /* Asegura el tamaño del icono dentro del botón */
+    height: 16px;
+    filter: brightness(0) invert(1); /* Hace el SVG blanco */
 }
 
-/* --- ESTILOS DE BADGES (ETIQUETAS DE ESTADO/PRIORIDAD) --- */
+
 .badge {
-    display: inline-flex;
+    display: inline-flex; 
     justify-content: center;
     align-items: center;
-    padding: 10px 18px; /* Más padding para hacerlos más prominentes */
-    border-radius: 25px; /* Más redondeados */
-    font-size: 0.8em; /* Ligeramente más pequeño para badges */
-    font-weight: 700; /* Más negrita */
+    padding: 6px 12px;
+    border-radius: 20px; 
+    font-size: 0.8em;
+    font-weight: 600;
     text-transform: uppercase;
-    color: white;
-    min-width: 100px; /* Asegura un ancho mínimo para todos los badges */
+    color: white; 
+    min-width: 80px; 
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para badges */
 }
 
 .badge-active { background-color: #28a745; } /* Verde para activo/vigente/realizado */
@@ -144,108 +140,97 @@
 .badge-success { background-color: #28a745; } /* Verde para inversionista */
 .badge-default { background-color: #6c757d; } /* Gris por defecto */
 
-/* --- ESTILOS DEL ENCABEZADO DE LA TABLA (HEADER CON BOTONES Y FILTROS) --- */
 .table-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px; /* Más espacio inferior */
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
-    gap: 25px; /* Más espacio entre elementos */
-    padding: 15px 25px; /* Más padding para el contenedor */
-    border-radius: 12px; /* Bordes redondeados */
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
     background-color: #f7f9fc; /* Fondo del header */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra más definida */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra para el header */
 }
 
 /* Botón de crear nuevo elemento */
 .create-lead {
     background-color: #007bff; /* Color azul primario */
     color: white;
-    padding: 14px 30px; /* Mayor padding para un botón prominente */
+    padding: 12px 25px;
     border: none;
-    border-radius: 10px; /* Más redondeado */
-    font-size: 1.05em; /* Tamaño de fuente ligeramente mayor */
-    font-weight: 600;
+    border-radius: 8px;
+    font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.25); /* Sombra para el botón */
-    text-decoration: none;
-    display: inline-block; /* Para que funcione el padding y margin */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* Quitar subrayado del enlace */
 }
 
 .create-lead:hover {
     background-color: #0056b3;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    transform: translateY(-2px);
 }
 
 /* Contenedor de filtros */
 .filters-container {
     display: flex;
-    gap: 20px; /* Mayor espacio entre grupos de filtros */
-    align-items: flex-end; /* Alinea los botones con los inputs */
+    gap: 15px;
+    align-items: center;
     flex-wrap: wrap;
 }
 
 .filter-group {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Más espacio entre label y select/input */
+    gap: 5px;
 }
 
 .filter-group label {
-    font-size: 0.9em; /* Ligeramente más grande */
+    font-size: 0.85em;
     color: #555;
-    font-weight: 600; /* Más negrita */
+    font-weight: 500;
 }
 
 .filters-container select,
 .filters-container input[type="text"] {
-    padding: 12px 15px; /* Más padding para inputs y selects */
-    border: 1px solid #c2cbd5; /* Borde más suave */
-    border-radius: 10px; /* Más redondeado */
-    font-size: 0.95em; /* Tamaño de fuente ligeramente mayor */
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 0.9em;
     color: #495057;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    min-width: 180px; /* Aumentado el ancho mínimo para campos de filtro */
+    min-width: 150px;
 }
 
 .filters-container select:focus,
 .filters-container input[type="text"]:focus {
-    border-color: #007bff; /* Color de enfoque primario */
-    outline: none; /* Eliminar el contorno por defecto */
-    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.3); /* Sombra de enfoque */
-}
-
-.filter-actions {
-    display: flex;
-    gap: 10px; /* Espacio entre los botones de acción */
-    align-items: center; /* Alinea los botones verticalmente */
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .filter-actions button {
-    background-color: #6c757d; /* Gris para botones por defecto */
+    background-color: #6c757d; 
     color: white;
-    padding: 12px 22px; /* Padding consistente */
+    padding: 10px 20px;
     border: none;
-    border-radius: 10px; /* Más redondeado */
-    font-size: 0.95em;
+    border-radius: 8px;
+    font-size: 0.9em;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 10px;
 }
 
 .filter-actions button:hover {
     background-color: #5a6268;
     transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 #aplicar-filtros {
-    background-color: #28a745; /* Verde para aplicar */
+    background-color: #28a745; 
 }
 
 #aplicar-filtros:hover {
@@ -253,199 +238,23 @@
 }
 
 #resetear-filtros, #resetear-filtros-lead {
-    background-color: #dc3545; /* Rojo para resetear */
-}
-#resetear-filtros:hover, #resetear-filtros-lead:hover {
-    background-color: #c82333;
+    background-color: #dc3545; 
 }
 
 
-/* Estilos del contenedor de la página principal */
+
+/* Asegurar que la tabla ocupe todo el espacio dentro de su contenedor */
 .main.users.chart-page {
     padding: 30px;
-    background-color: #ecf0f3; /* Un fondo general suave para la página */
+    background-color: #f0f2f5; /* Un fondo general suave para la página */
     min-height: 100vh;
-    box-sizing: border-box; /* Incluir padding en el alto */
 }
 
 .main-title {
-    font-size: 2.8em; /* Título más grande */
+    font-size: 2.5em;
     color: #2c3e50;
-    margin-bottom: 35px; /* Más espacio inferior */
+    margin-bottom: 30px;
     text-align: center;
-    font-weight: 800; /* Más negrita */
-    letter-spacing: -0.5px; /* Ajuste para títulos grandes */
+    font-weight: 700;
 }
 
-/* Estilos para los botones de Exportar/Importar Excel */
-.header-buttons {
-    display: flex;
-    gap: 15px; /* Espacio entre iconos de Excel */
-    align-items: center;
-}
-
-.header-buttons img {
-    width: 32px; /* Tamaño generoso para los iconos de Excel */
-    height: 32px;
-    cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
-}
-
-.header-buttons img:hover {
-    transform: scale(1.1);
-    opacity: 0.8;
-}
-
-/* ------------------------------------------------------------------------------------------------------- */
-
-/* --- MEDIA QUERIES PARA RESPONSIVIDAD --- */
-@media (max-width: 1024px) {
-    .table-wrapper {
-        padding: 15px;
-    }
-    .users-table-info th, .posts-table td {
-        padding: 15px 18px;
-        font-size: 0.88em;
-    }
-    .create-lead {
-        padding: 12px 20px;
-        font-size: 0.95em;
-    }
-    .filters-container {
-        gap: 15px;
-    }
-    .filters-container select, .filters-container input[type="text"], .filter-actions button {
-        padding: 10px 12px;
-        font-size: 0.9em;
-        min-width: 150px; /* Reducir mín-width para pantallas medianas */
-    }
-    .icon-acciones {
-        width: 26px;
-        height: 26px;
-    }
-    .badge {
-        padding: 7px 14px;
-        font-size: 0.7em;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-title {
-        font-size: 2em;
-        margin-bottom: 25px;
-    }
-    .table-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-        padding: 15px;
-    }
-    .filters-container {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
-    .filter-group {
-        width: 100%;
-    }
-    .filters-container select, .filters-container input[type="text"] {
-        width: 100%;
-        min-width: unset;
-    }
-    .filter-actions {
-        width: 100%;
-        justify-content: space-around;
-        gap: 10px;
-    }
-    .filter-actions button {
-        flex: 1; /* Distribuye los botones equitativamente */
-    }
-    .posts-table {
-        min-width: unset; /* Permite que la tabla se encoja en móviles */
-    }
-    /* Estilos para que la tabla se apile en pantallas pequeñas */
-    .posts-table, .posts-table thead, .posts-table tbody, .posts-table th, .posts-table td, .posts-table tr {
-        display: block;
-    }
-    .posts-table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-    .posts-table tr {
-        margin-bottom: 20px;
-        border: 1px solid #e0e0e0;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        overflow: hidden;
-    }
-    .posts-table td {
-        border: none;
-        border-bottom: 1px solid #f0f0f0;
-        position: relative;
-        padding-left: 45%; /* Espacio para la etiqueta */
-        text-align: right;
-    }
-    .posts-table td:last-child {
-        border-bottom: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 15px; /* Más padding para la columna de acciones en móvil */
-    }
-    .posts-table td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        width: calc(45% - 30px); /* Ajusta el ancho de la etiqueta */
-        white-space: nowrap;
-        text-align: left;
-        font-weight: 700;
-        color: #666;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .badge {
-        font-size: 0.65em;
-        padding: 6px 10px;
-    }
-    .icon-acciones {
-        width: 24px;
-        height: 24px;
-    }
-    .header-buttons {
-        width: 100%;
-        justify-content: flex-end;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-title {
-        font-size: 1.6em;
-    }
-    .table-wrapper {
-        padding: 10px;
-    }
-    .posts-table td {
-        font-size: 0.8em;
-        padding: 10px 15px;
-    }
-    .posts-table td:before {
-        left: 10px;
-        width: calc(45% - 20px);
-    }
-    .create-lead {
-        padding: 10px 15px;
-        font-size: 0.85em;
-    }
-    .filters-container select, .filters-container input[type="text"], .filter-actions button {
-        padding: 8px 10px;
-        font-size: 0.8em;
-    }
-    .icon-acciones {
-        width: 20px;
-        height: 20px;
-    }
-}

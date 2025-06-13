@@ -26,11 +26,8 @@ if ($ultimaFechaCronograma) {
    
     $fechaDevolucionCapital->setDate($fechaDevolucionCapital->format('Y'), $fechaDevolucionCapital->format('m'), 15);
 }
-
-
 $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
 
-//var_dump($jsonData);
 
 ?>
 <div class="container">

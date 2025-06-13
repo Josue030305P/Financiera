@@ -260,6 +260,14 @@ CONSTRAINT fk_id_user_creacion_contrat FOREIGN KEY (idusuariocreacion ) REFERENC
 CONSTRAINT fk_id_user_elimin_contrat FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
+SELECT * FROM personas;
+SELECT * FROM inversionistas;
+INSERT INTO inversionistas(idpersona, idasesor, idusuariocreacion)
+	VALUES(13,1,1);
+INSERT INTO contratos(idversion, idasesor, idinversionista, idconyuge, idusuariocreacion, fechainicio, fechafin, impuestorenta, toleranciadias, duracionmeses, moneda, diapago, interes, capital, tiporetorno, periodopago, observacion)
+	VALUES(1,1,5,NULL,NULL,'2024-06-14','2025-06-14',5.00,5,12,'PEN',15,2.50,1000.00,'Fijo','Mensual','Contrato de prueba');
+
+
 SELECT * FROM numcuentas;
 USE financiera;
 ALTER TABLE contratos MODIFY COLUMN estado ENUM('Vigente','Completado', 'Eliminado') DEFAULT 'Vigente';
