@@ -1,6 +1,5 @@
 
-
-
+<link rel="stylesheet" href="<?= BASE_URL?>app/css/tabla-reutilizable.css">
 <main class="main users chart-page" id="skip-target">
     <div class="container">
         <h2 class="main-title">Lista de <?= htmlspecialchars($tipo) ?></h2>

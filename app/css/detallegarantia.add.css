@@ -51,7 +51,7 @@ body {
     box-shadow: 0 10px 30px var(--shadow-medium); 
     overflow: hidden; 
     transition: all 0.3s ease;
-    padding: 40px; /* Adjust padding for the card body directly */
+    padding: 40px; 
 }
 
 .form-title {
@@ -65,7 +65,7 @@ body {
     letter-spacing: 1.5px; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     border-bottom: 5px solid rgba(255, 255, 255, 0.2); 
-    margin: -40px -40px 40px -40px; /* Adjust margins to extend background to edges */
+    margin: -40px -40px 40px -40px; 
 }
 
 .form-grid {
@@ -123,10 +123,10 @@ body {
     min-height: 100px;
 }
 
-/* Specific styling for file input */
+
 input[type="file"].form-control {
-    padding: 10px 15px; /* Adjust padding for file input */
-    line-height: 1.5; /* Ensure text aligns well */
+    padding: 10px 15px; 
+    line-height: 1.5; 
     cursor: pointer;
     background-color: #fcfcfc;
     color: var(--text-color);
@@ -135,7 +135,7 @@ input[type="file"].form-control {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Style for the file input button (pseudo-element) */
+
 input[type="file"].form-control::-webkit-file-upload-button {
     background-color: var(--primary-color);
     color: white;
