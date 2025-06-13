@@ -38,45 +38,64 @@ if ($_SERVER["REQUEST_METHOD"]) {
                 }
             } else {
                 echo json_encode($contrato->getAll());
-             
+
 
             }
             break;
 
-            case 'POST':
-                $input = file_get_contents('php://input');
-                $dataJSON = json_decode($input, true);
+        case 'POST':
+            $input = file_get_contents('php://input');
+            $dataJSON = json_decode($input, true);
 
-                $registro = [
-                    'idversion' => $dataJSON['idversion'],
-                    'idasesor'=> $dataJSON['idasesor'],
-                    'idinversionista'=> $dataJSON['idinversionista'],
-                    'idconyuge'=> $dataJSON['idconyuge'] ?? null,
-                    'fechainicio'=> $dataJSON['fechainicio'],
-                    'fechafin'=> $dataJSON['fechafin'],
-                    'impuestorenta'=> $dataJSON['impuestorenta'],
-                    'toleranciadias'=> $dataJSON['toleranciadias'],
-                    'duracionmeses' => $dataJSON['duracionmeses'],
-                    'moneda'=> $dataJSON['moneda'],
-                    'diapago'=> $dataJSON['diapago'],
-                    'interes'=> $dataJSON['interes'],
-                    'capital'=> $dataJSON['capital'],
-                    'tiporetorno'=> $dataJSON['tiporetorno'],
-                    'periodopago'=> $dataJSON['periodopago'],
-                    'observacion'=> $dataJSON['observacion'],
+            $registro = [
+                'idversion' => $dataJSON['idversion'],
+                'idasesor' => $dataJSON['idasesor'],
+                'idinversionista' => $dataJSON['idinversionista'],
+                'idconyuge' => $dataJSON['idconyuge'] ?? null,
+                'fechainicio' => $dataJSON['fechainicio'],
+                'fechafin' => $dataJSON['fechafin'],
+                'impuestorenta' => $dataJSON['impuestorenta'],
+                'toleranciadias' => $dataJSON['toleranciadias'],
+                'duracionmeses' => $dataJSON['duracionmeses'],
+                'moneda' => $dataJSON['moneda'],
+                'diapago' => $dataJSON['diapago'],
+                'interes' => $dataJSON['interes'],
+                'capital' => $dataJSON['capital'],
+                'tiporetorno' => $dataJSON['tiporetorno'],
+                'periodopago' => $dataJSON['periodopago'],
+                'observacion' => $dataJSON['observacion'],
 
-                ];
+            ];
 
-                try {
-                    $result = $contrato->add($registro);
-                    echo json_encode($result);
-                    
-                } catch (Exception $e) {
-                    echo json_encode(['success' => false, 'message' => 'Error al generar contrato', $e->getMessage()]);
-                }
-                
+            try {
+                $result = $contrato->add($registro);
+                echo json_encode($result);
 
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error al generar contrato', $e->getMessage()]);
+            }
 
+       case 'DELETE':
+            $idcontrato = $_GET['id'] ?? null;
+
+            if ($idcontrato === null) {
+                echo json_encode([
+                    'status' => false,
+                    'message' => 'ID de contrato no proporcionado para la eliminación.'
+                ]);
+                break;
+            }
+
+            try {
+                $result = $contrato->delete((int) $idcontrato);
+                echo json_encode($result);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'status' => false,
+                    'message' => 'Error al eliminar el contrato: ' . $e->getMessage()
+                ]);
+            }
+            break;
 
 
     }

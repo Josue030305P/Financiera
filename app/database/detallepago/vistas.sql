@@ -128,7 +128,7 @@
 
 
 
-
+USE financiera;
 DROP VIEW IF EXISTS v_detalle_pagos;
 
 

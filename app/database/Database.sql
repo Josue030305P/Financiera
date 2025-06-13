@@ -349,6 +349,8 @@ CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcu
 )ENGINE=InnoDB;
 
 
+ALTER TABLE detallepagos ADD COLUMN comprobante VARCHAR(255);
+
 SELECT * FROM detallepagos;
 USE financiera
 

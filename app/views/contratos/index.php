@@ -53,6 +53,7 @@ $links = [
 ];
 
 ?>
+<link rel="stylesheet" href="<?= BASE_URL?>app/css/cronograma-contratos.css">
 
 <body>
     <div class="page-flex">

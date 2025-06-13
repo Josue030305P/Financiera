@@ -288,7 +288,7 @@ class DataTable {
             );
             const result = await response.json();
 
-            if (result.status === "success") {
+            if (result.status === "success" || result.success == true) {
                 await Swal.fire({
                     icon: "success",
                     title: "Éxito",
@@ -330,6 +330,7 @@ class DataTable {
             });
         }
     }
+    
     // EVALUAR EL CRONOGRAMA
     abrirModalCronograma(idContrato) {
         if (
