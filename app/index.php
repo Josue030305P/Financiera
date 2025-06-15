@@ -17,10 +17,8 @@ require_once './includes/header.php';
     <meta charset="UTF-8">
     <meta name="base-url" content="<?= BASE_URL ?>" charset="UTF-8">
     <title>Dashboard | Plataforma de Inversiones</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= BASE_URL ?>app/css/dashboard.css">
-
-
 
 </head>
 
@@ -28,8 +26,6 @@ require_once './includes/header.php';
     <div class="page-flex">
         <?php require_once "./includes/sidebar.php"; ?>
         <div class="main-wrapper">
-
-
             <div class="content-area">
 
                 <h2 class="dashboard-title">DASHBOARD</h2>
@@ -38,10 +34,8 @@ require_once './includes/header.php';
 
                 <hr class="section-divider">
 
-
                 <h2 class="dashboard-title" id="detalle-tablas-titulo" style="display: none;">Detalle Completo</h2>
                 <div id="detalle-tablas-container" class="list-sections-grid" style="display: none;">
-
 
                     <div id="detalle-contratos_activos-table-section" class="detalle-table-section">
                         <div class="card-header header-primary">
@@ -63,38 +57,27 @@ require_once './includes/header.php';
                                         </tr>
                                     </thead>
                                     <tbody id="detalle-contratos_activos-table-body">
+                                        <!-- Table rows will be filled by JS -->
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-
-                    <div id="detalle-monto_total_invertido-table-section" class="detalle-table-section">
+                    <!-- SECCIÓN PARA EL GRÁFICO DE MONTO TOTAL INVERTIDO (ANTES ERA UNA TABLA) -->
+                    <div id="detalle-monto_total_invertido-chart-section" class="detalle-chart-section" style="display: none;">
                         <div class="card-header header-info">
-                            <h5 class="card-title"><i class="fas fa-wallet icon-margin"></i>Detalle de Inversiones (Contratos Activos)</h5>
-                            <button class="btn btn-export-pdf" data-table-id="detalle-monto_total_invertido-table-body" data-title="Monto_Total_Invertido">
-                                <i class="fas fa-file-pdf"></i> Exportar PDF
-                            </button>
+                            <h5 class="card-title"><i class="fas fa-wallet icon-margin"></i>Monto Invertido por Contrato Activo</h5>
+                            <!-- No hay botón de exportar PDF directo para el gráfico, si se necesita se implementaría una exportación de imagen -->
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="dashboard-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Inversionista</th>
-                                            <th>DNI</th>
-                                            <th>Monto Invertido</th>
-                                            <th>Inicio Contrato</th>
-                                            <th>Fin Contrato</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="detalle-monto_total_invertido-table-body">
-                                    </tbody>
-                                </table>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%;">
+                                <!-- El canvas donde se dibujará el gráfico -->
+                                <canvas id="montoTotalInvertidoChart"></canvas>
                             </div>
                         </div>
                     </div>
+                    <!-- FIN SECCIÓN GRÁFICO -->
 
                     <div id="detalle-proximos_pagos-table-section" class="detalle-table-section">
                         <div class="card-header header-warning">
@@ -122,7 +105,6 @@ require_once './includes/header.php';
                         </div>
                     </div>
 
-
                     <div id="detalle-leads_en_proceso-table-section" class="detalle-table-section">
                         <div class="card-header header-secondary">
                             <h5 class="card-title"><i class="fas fa-handshake icon-margin"></i>Detalle de Leads en Proceso</h5>
@@ -147,7 +129,6 @@ require_once './includes/header.php';
                             </div>
                         </div>
                     </div>
-
 
                     <div id="detalle-contratos_por_vencer-table-section" class="detalle-table-section">
                         <div class="card-header header-danger">
@@ -174,7 +155,6 @@ require_once './includes/header.php';
                         </div>
                     </div>
 
-
                     <div id="detalle-colaboradores_activos-table-section" class="detalle-table-section">
                         <div class="card-header header-info">
                             <h5 class="card-title"><i class="fas fa-user-tie icon-margin"></i>Detalle de Colaboradores Activos</h5>
@@ -198,7 +178,6 @@ require_once './includes/header.php';
                             </div>
                         </div>
                     </div>
-
 
                     <div id="detalle-pagos_hoy-table-section" class="detalle-table-section">
                         <div class="card-header header-success">
@@ -226,19 +205,18 @@ require_once './includes/header.php';
                     </div>
 
                 </div>
-
-
             </div>
         </div>
     </div>
 
-
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.js"></script>
+    <!-- Incluye Chart.js antes de tu script de dashboard.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
     <script src="<?= BASE_URL ?>app/js/dashboard.js"></script>
-
 
 </body>
 

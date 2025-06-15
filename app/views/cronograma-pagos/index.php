@@ -65,23 +65,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <!-- <td>1</td>
-                                    <td>1 pagos</td>
-                                    <td>865.00</td>
-                                    <td>Estrella Xiomara Saravia Guerrero</td>
-                                    <td>44433322</td>
-                                    <td>1</td>
-                                    <td>12-08-2025</td>
-                                    <td>865.00</td>
-                                    <td>0.00</td>
-                                    <td>865.00</td>
-                                    <td><span class="estado-pendiente">Pendiente</span></td>
-                                    <td>
-                                        <div class="acciones-tabla">
-                                            <button class="btn-expandir">+</button>
-                                            <button class="btn-exportar-excel">Excel</button>
-                                        </div>
-                                    </td> -->
+                                   
                                 </tr>
                             </tbody>
                         </table>

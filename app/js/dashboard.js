@@ -1,19 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const baseUrl = document.querySelector('meta[name="base-url"]')?.content || "";
-    let activeTableSectionId = null; // Variable para rastrear la tabla actualmente abierta
+    let activeSectionId = null; 
+    let montoTotalInvertidoChartInstance = null; 
 
     const fetchDashboardData = async () => {
         try {
             const response = await fetch(`${baseUrl}app/controllers/DashboardController.php`);
             if (!response.ok) {
                 
-                throw new Error(`Error HTTP! Estado: ${response.status} - ${response.statusText}`);
+                const errorText = await response.text();
+                throw new Error(`HTTP Error! Status: ${response.status} - ${response.statusText}. Server response: ${errorText}`);
             }
-            const apiResponse = await response.json(); // Parsea la respuesta JSON
+            const apiResponse = await response.json(); 
 
             if (apiResponse && apiResponse.status === true && apiResponse.data) {
-                // Transforma los datos de la API para un formato más fácil de usar en el frontend
+                
                 const transformedData = {
                     summary: {
                         contratosActivos: apiResponse.data.resumen.contratos_activos || 0,
@@ -25,18 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         pagosHoy: apiResponse.data.resumen.total_pagos_hoy || "0.00"
                     },
                     details: {
+                       
                         contratosActivos: apiResponse.data.listados.contratos_activos.map(item => ({
-                            idcontrato: item.idcontrato,
-                            inversionista_nombre: `${item.inversionista_nombres} ${item.inversionista_apellidos}`,
-                            inversionista_dni: item.inversionista_dni,
-                            monto_invertido: item.monto_invertido,
-                            fecha_inicio: item.fecha_inicio_contrato,
-                            fecha_fin: item.fecha_fin_contrato,
-                            interes_contrato: item.interes_contrato
-                        })),
-
-                        // montoTotalInvertido usa los mismos datos que contratosActivos para esta vista de detalle
-                        montoTotalInvertido: apiResponse.data.listados.contratos_activos.map(item => ({
                             idcontrato: item.idcontrato,
                             inversionista_nombre: `${item.inversionista_nombres} ${item.inversionista_apellidos}`,
                             inversionista_dni: item.inversionista_dni,
@@ -85,16 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 return transformedData;
             } else {
-                console.error("Formato de datos de dashboard inesperado o status falso:", apiResponse);
+                console.error("Unexpected dashboard data format or false status:", apiResponse);
                 return null;
             }
         } catch (error) {
-            console.error("Error al obtener datos del dashboard:", error);
-            // Puedes mostrar una alerta al usuario si la carga inicial falla
+            console.error("Error fetching dashboard data:", error);
             Swal.fire({
                 icon: 'error',
-                title: 'Error de carga',
-                text: 'No se pudieron cargar los datos del dashboard. Inténtalo de nuevo más tarde.'
+                title: 'Load Error',
+                text: 'Could not load dashboard data. Please try again later.'
             });
             return null;
         }
@@ -103,12 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderSummaryWidgets = (data) => {
         const summaryWidgetsGrid = document.getElementById('dashboard-summary-widgets');
         if (!summaryWidgetsGrid || !data || !data.summary) {
-            console.warn("No hay datos de resumen para renderizar los widgets.");
+            console.warn("No summary data to render widgets.");
             return;
         }
 
+        
         summaryWidgetsGrid.innerHTML = `
-            <div class="card widget-card" data-target-table="detalle-contratos_activos-table-section">
+            <div class="card widget-card" data-target-section="detalle-contratos_activos-table-section">
                 <div class="card-header header-primary">
                     <h5 class="card-title"><i class="fas fa-file-contract icon-margin"></i>Contratos Activos</h5>
                 </div>
@@ -116,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="widget-value">${data.summary.contratosActivos || 0}</p>
                 </div>
             </div>
-            <div class="card widget-card" data-target-table="detalle-monto_total_invertido-table-section">
+            <div class="card widget-card" data-target-section="detalle-monto_total_invertido-chart-section">
                 <div class="card-header header-info">
                     <h5 class="card-title"><i class="fas fa-wallet icon-margin"></i>Monto Total Invertido</h5>
                 </div>
@@ -124,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="widget-value">S/ ${parseFloat(data.summary.montoTotalInvertido || 0).toFixed(2)}</p>
                 </div>
             </div>
-            <div class="card widget-card" data-target-table="detalle-proximos_pagos-table-section">
+            <div class="card widget-card" data-target-section="detalle-proximos_pagos-table-section">
                 <div class="card-header header-warning">
                     <h5 class="card-title"><i class="fas fa-calendar-alt icon-margin"></i>Próximos Pagos Pendientes</h5>
                 </div>
@@ -132,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="widget-value">${data.summary.proximosPagosPendientes || 0}</p>
                 </div>
             </div>
-            <div class="card widget-card" data-target-table="detalle-pagos_hoy-table-section">
+            <div class="card widget-card" data-target-section="detalle-pagos_hoy-table-section">
                 <div class="card-header header-success">
                     <h5 class="card-title"><i class="fas fa-money-bill-wave icon-margin"></i>Pagos Realizados Hoy</h5>
                 </div>
@@ -140,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="widget-value">${parseInt(data.summary.pagosHoy || 0)}</p>
                 </div>
             </div>
-            <div class="card widget-card" data-target-table="detalle-leads_en_proceso-table-section">
+            <div class="card widget-card" data-target-section="detalle-leads_en_proceso-table-section">
                 <div class="card-header header-secondary">
                     <h5 class="card-title"><i class="fas fa-handshake icon-margin"></i>Leads en Proceso</h5>
                 </div>
@@ -148,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="widget-value">${data.summary.leadsEnProceso || 0}</p>
                 </div>
             </div>
-            <div class="card widget-card" data-target-table="detalle-contratos_por_vencer-table-section">
+            <div class="card widget-card" data-target-section="detalle-contratos_por_vencer-table-section">
                 <div class="card-header header-danger">
                     <h5 class="card-title"><i class="fas fa-hourglass-end icon-margin"></i>Contratos por Vencer</h5>
                 </div>
@@ -156,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="widget-value">${data.summary.contratosPorVencer || 0}</p>
                 </div>
             </div>
-            <div class="card widget-card" data-target-table="detalle-colaboradores_activos-table-section">
+            <div class="card widget-card" data-target-section="detalle-colaboradores_activos-table-section">
                 <div class="card-header header-info">
                     <h5 class="card-title"><i class="fas fa-user-tie icon-margin"></i>Colaboradores Activos</h5>
                 </div>
@@ -166,11 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Añadir event listeners a los nuevos widgets
+        
         document.querySelectorAll('.widget-card').forEach(card => {
             card.addEventListener('click', () => {
-                const targetTableId = card.dataset.targetTable;
-                toggleDetailTable(targetTableId, card);
+                const targetSectionId = card.dataset.targetSection;
+                toggleDetailSection(targetSectionId, card, data); 
             });
         });
     };
@@ -178,12 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const fillTable = (tableBodyId, items, columns) => {
         const tableBody = document.getElementById(tableBodyId);
         if (!tableBody) {
-            console.warn(`Elemento con ID ${tableBodyId} no encontrado.`);
+            console.warn(`Element with ID ${tableBodyId} not found.`);
             return;
         }
-        tableBody.innerHTML = ''; // Limpia el contenido actual de la tabla
+        tableBody.innerHTML = ''; 
         if (!items || items.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="${columns.length}" style="text-align: center; padding: 15px; color: #777;">No hay datos disponibles.</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="${columns.length}" style="text-align: center; padding: 15px; color: #777;">No data available.</td></tr>`;
             return;
         }
         items.forEach(item => {
@@ -191,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             columns.forEach(col => {
                 let value = item[col.key];
                 if (col.format) {
-                    // Asegura que parseFloat reciba un número válido o un 0 si es undefined/null
+                    
                     value = col.format(value === undefined || value === null ? 0 : value);
                 }
                 row.innerHTML += `<td>${value || 'N/A'}</td>`;
@@ -200,13 +192,115 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const renderDetailTables = (data) => {
-        if (!data || !data.details || Object.keys(data.details).length === 0) {
-            console.warn("No hay datos de detalle disponibles para renderizar las tablas.");
+    
+    const renderMontoTotalInvertidoChart = (contratosData) => {
+        let canvas = document.getElementById('montoTotalInvertidoChart'); 
+        const chartContainer = canvas ? canvas.closest('.chart-container') : null;
+
+        if (!chartContainer) { 
+            console.error("Chart container 'montoTotalInvertidoChart' not found.");
             return;
         }
 
-        // Detalle de Contratos Activos
+        
+        if (montoTotalInvertidoChartInstance) {
+            montoTotalInvertidoChartInstance.destroy();
+            montoTotalInvertidoChartInstance = null; 
+        }
+
+        
+        if (!contratosData || contratosData.length === 0) {
+            chartContainer.innerHTML = '<p class="text-center py-4 text-gray-500">No hay datos de contratos activos para mostrar el gráfico de monto invertido.</p>';
+           
+            if (canvas) {
+                canvas.remove(); 
+            }
+            return; 
+        } else {
+             
+             if (!canvas || chartContainer.querySelector('p.text-gray-500')) {
+                chartContainer.innerHTML = ''; 
+                const newCanvas = document.createElement('canvas');
+                newCanvas.id = 'montoTotalInvertidoChart';
+                chartContainer.appendChild(newCanvas);
+                canvas = newCanvas; 
+            }
+        }
+        
+        
+        const dataByYear = {};
+        let totalInvestedAmount = 0; 
+        contratosData.forEach(item => {
+            const year = new Date(item.fecha_inicio).getFullYear();
+            const monto = parseFloat(item.monto_invertido || 0);
+            if (!isNaN(monto)) {
+                dataByYear[year] = (dataByYear[year] || 0) + monto;
+                totalInvestedAmount += monto; 
+            }
+        });
+
+        // Sort years and prepare labels and data values
+        const sortedYears = Object.keys(dataByYear).sort((a, b) => parseInt(a) - parseInt(b));
+        const labels = sortedYears.map(year => `Año ${year}`);
+        const dataValues = sortedYears.map(year => dataByYear[year]);
+
+        montoTotalInvertidoChartInstance = new Chart(canvas, { 
+            type: 'line', 
+            data: {
+                labels: labels, 
+                datasets: [{
+                    label: 'Monto Total Invertido (S/)', 
+                    data: dataValues, 
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', 
+                    borderColor: 'rgba(54, 162, 235, 1)', 
+                    borderWidth: 2, 
+                    tension: 0.4, 
+                    fill: true, 
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)', 
+                    pointBorderColor: '#fff', 
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, 
+                scales: {
+                    y: {
+                        beginAtZero: true, 
+                        title: {
+                            display: true,
+                            text: 'Monto (S/)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Año' 
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true 
+                    },
+                    title: {
+                        display: true,
+                        
+                        text: `Evolución del Monto Total Invertido por Año (Total: S/ ${totalInvestedAmount.toFixed(2)})` // Main chart title
+                    }
+                }
+            }
+        });
+    };
+
+    const renderDetailSections = (data) => { 
+        if (!data || !data.details || Object.keys(data.details).length === 0) {
+            console.warn("No detail data available to render sections.");
+            return;
+        }
+
+        
         fillTable('detalle-contratos_activos-table-body', data.details.contratosActivos, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
@@ -215,16 +309,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'fecha_fin' }
         ]);
 
-        // Detalle de Monto Total Invertido (usa los mismos datos que contratos activos)
-        fillTable('detalle-monto_total_invertido-table-body', data.details.montoTotalInvertido, [
-            { key: 'inversionista_nombre' },
-            { key: 'inversionista_dni' },
-            { key: 'monto_invertido', format: (val) => `S/ ${parseFloat(val || 0).toFixed(2)}` },
-            { key: 'fecha_inicio' },
-            { key: 'fecha_fin' }
-        ]);
-
-        // Detalle de Próximos Pagos Pendientes
+        
+        
         fillTable('detalle-proximos_pagos-table-body', data.details.proximosPagos, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
@@ -233,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'fecha_vencimiento' }
         ]);
 
-        // Detalle de Leads en Proceso
+        
         fillTable('detalle-leads_en_proceso-table-body', data.details.leadsEnProceso, [
             { key: 'nombre_lead' },
             { key: 'telefono_lead' },
@@ -241,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'estado_lead' }
         ]);
 
-        // Detalle de Contratos por Vencer
+        
         fillTable('detalle-contratos_por_vencer-table-body', data.details.contratosPorVencer, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
@@ -249,14 +335,14 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'fecha_vencimiento' }
         ]);
 
-        // Detalle de Colaboradores Activos
+        
         fillTable('detalle-colaboradores_activos-table-body', data.details.colaboradoresActivos, [
             { key: 'nombre_colaborador' },
             { key: 'dni_colaborador' },
             { key: 'rol_colaborador' }
         ]);
 
-        // Detalle de Pagos Realizados Hoy
+        
         fillTable('detalle-pagos_hoy-table-body', data.details.pagosHoy, [
             { key: 'inversionista_nombre' },
             { key: 'inversionista_dni' },
@@ -265,53 +351,62 @@ document.addEventListener('DOMContentLoaded', () => {
         ]);
     };
 
-    // Función para alternar la visibilidad de las tablas de detalle
-    const toggleDetailTable = (tableId, clickedCard) => {
+    
+    const toggleDetailSection = (sectionId, clickedCard, allDashboardData) => { 
         const detalleTablasTitulo = document.getElementById('detalle-tablas-titulo');
         const detalleTablasContainer = document.getElementById('detalle-tablas-container');
-        const targetTableSection = document.getElementById(tableId);
 
-        // Ocultar todas las secciones de tabla de detalle y quitar la clase 'active' de todos los cards
-        document.querySelectorAll('.detalle-table-section').forEach(section => {
+        
+        document.querySelectorAll('.detalle-table-section, .detalle-chart-section').forEach(section => {
             section.style.display = 'none';
         });
         document.querySelectorAll('.widget-card').forEach(card => {
             card.classList.remove('active-card');
         });
 
-        if (activeTableSectionId === tableId) {
-            // Si se hace clic en el mismo card, ocultar el título y el contenedor, y limpiar el estado activo
+        
+        if (montoTotalInvertidoChartInstance) {
+            montoTotalInvertidoChartInstance.destroy();
+            montoTotalInvertidoChartInstance = null;
+        }
+
+        if (activeSectionId === sectionId) {
+            
             detalleTablasTitulo.style.display = 'none';
             detalleTablasContainer.style.display = 'none';
-            activeTableSectionId = null;
+            activeSectionId = null;
         } else {
-            // Mostrar la tabla objetivo y establecer el estado activo
-            if (targetTableSection) {
-                targetTableSection.style.display = 'block';
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
                 detalleTablasTitulo.style.display = 'block';
-                detalleTablasContainer.style.display = 'grid'; // Asegura que el contenedor se muestre como grid
-                clickedCard.classList.add('active-card'); // Añadir clase 'active' al card
-                activeTableSectionId = tableId; // Establecer la tabla activa
-                // Desplazarse suavemente a la sección de tablas
+                detalleTablasContainer.style.display = 'grid'; 
+
+                
+                if (sectionId === 'detalle-monto_total_invertido-chart-section') {
+                    renderMontoTotalInvertidoChart(allDashboardData.details.contratosActivos); 
+                }
+
+                clickedCard.classList.add('active-card');
+                activeSectionId = sectionId;
+                
                 detalleTablasTitulo.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     };
 
-    // Función para mostrar alertas iniciales al cargar la aplicación
+    
     const showInitialAlerts = (summaryData) => {
         let alertMessage = "";
         let showWarning = false;
 
-        // Alerta para Contratos por Vencer
         if (summaryData.contratosPorVencer > 0) {
             alertMessage += `¡ATENCIÓN! Hay <span style="font-weight: bold; color: #dc3545;">${summaryData.contratosPorVencer}</span> contrato(s) por vencer pronto.`;
             showWarning = true;
         }
 
-        // Alerta para Próximos Pagos Pendientes
         if (summaryData.proximosPagosPendientes > 0) {
-            if (alertMessage !== "") alertMessage += "<br><br>"; // Nueva línea si ya hay un mensaje
+            if (alertMessage !== "") alertMessage += "<br><br>";
             alertMessage += `Tienes <span style="font-weight: bold; color: #ffc107;">${summaryData.proximosPagosPendientes}</span> pago(s) pendiente(s) próximo(s) a vencer.`;
             showWarning = true;
         }
@@ -320,59 +415,55 @@ document.addEventListener('DOMContentLoaded', () => {
             Swal.fire({
                 icon: 'warning',
                 title: 'Notificaciones Importantes',
-                html: alertMessage, // SweetAlert2 interpreta <br> en 'html'
+                html: alertMessage,
                 confirmButtonText: 'Ver Detalles',
                 showCancelButton: true,
                 cancelButtonText: 'Entendido',
                 customClass: {
-                    container: 'alert-container-class', // Clase CSS opcional para el contenedor
-                    popup: 'alert-popup-class',         // Clase CSS opcional para el popup
-                    confirmButton: 'alert-confirm-button', // Clase CSS opcional para el botón de confirmar
-                    cancelButton: 'alert-cancel-button'   // Clase CSS opcional para el botón de cancelar
+                    container: 'alert-container-class',
+                    popup: 'alert-popup-class',
+                    confirmButton: 'alert-confirm-button',
+                    cancelButton: 'alert-cancel-button'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Decide a qué sección llevar al usuario
-                    // Prioridad: Contratos por Vencer > Próximos Pagos Pendientes
+                    const dataToPass = initialDashboardData; 
                     if (summaryData.contratosPorVencer > 0) {
-                        const card = document.querySelector('.widget-card[data-target-table="detalle-contratos_por_vencer-table-section"]');
-                        if (card) toggleDetailTable('detalle-contratos_por_vencer-table-section', card);
+                        const card = document.querySelector('.widget-card[data-target-section="detalle-contratos_por_vencer-table-section"]');
+                        if (card) toggleDetailSection('detalle-contratos_por_vencer-table-section', card, dataToPass); 
                     } else if (summaryData.proximosPagosPendientes > 0) {
-                        const card = document.querySelector('.widget-card[data-target-table="detalle-proximos_pagos-table-section"]');
-                        if (card) toggleDetailTable('detalle-proximos_pagos-table-section', card);
+                        const card = document.querySelector('.widget-card[data-target-section="detalle-proximos_pagos-table-section"]');
+                        if (card) toggleDetailSection('detalle-proximos_pagos-table-section', card, dataToPass); 
                     }
                 }
             });
         }
     };
 
-    // Función para exportar la tabla a PDF
+    
     const exportTableToPdf = (tableBodyId, title) => {
         const tableBody = document.getElementById(tableBodyId);
         if (!tableBody) {
             Swal.fire({
                 icon: 'error',
-                title: 'Error de exportación',
-                text: 'No se encontró la tabla para exportar.'
+                title: 'Export Error',
+                text: 'Table not found for export.'
             });
             return;
         }
 
-        const { jsPDF } = window.jspdf; // Obtener jsPDF del objeto global
-        const doc = new jsPDF('p', 'pt', 'letter'); // 'p' para retrato, 'pt' para puntos, 'letter' tamaño de papel
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'pt', 'letter');
 
-        // Obtener encabezados de la tabla (asumiendo que están en el thead justo antes del tbody)
         const headers = Array.from(tableBody.previousElementSibling.querySelectorAll('th')).map(th => th.innerText);
 
-        // Obtener datos de la tabla (tbody)
         const data = [];
-        // Verificar si la tabla tiene el mensaje de "No hay datos disponibles"
         const noDataRow = tableBody.querySelector('tr td[colspan]');
-        if (noDataRow && noDataRow.innerText.includes("No hay datos disponibles")) {
+        if (noDataRow && noDataRow.innerText.includes("No data available")) {
             Swal.fire({
                 icon: 'info',
-                title: 'Tabla Vacía',
-                text: 'No hay datos para exportar en esta tabla.'
+                title: 'Empty Table',
+                text: 'No data to export in this table.'
             });
             return;
         }
@@ -386,50 +477,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         doc.setFontSize(16);
-        doc.text(title.replace(/_/g, ' '), 40, 40); // Título del documento, reemplaza guiones bajos por espacios
+        doc.text(title.replace(/_/g, ' '), 40, 40);
 
         doc.autoTable({
-            startY: 60, // Comienza la tabla debajo del título
+            startY: 60,
             head: [headers],
             body: data,
-            theme: 'striped', // Tema de la tabla (opcional: 'striped', 'grid', 'plain')
+            theme: 'striped',
             styles: {
                 font: 'helvetica',
-                fontSize: 9, // Reducir un poco el tamaño de la fuente para más contenido
+                fontSize: 9,
                 cellPadding: 4,
                 textColor: [30, 30, 30],
                 lineColor: [200, 200, 200],
                 lineWidth: 0.5
             },
             headStyles: {
-                fillColor: [52, 152, 219], // Color de cabecera (azul)
+                fillColor: [52, 152, 219],
                 textColor: [255, 255, 255],
                 fontStyle: 'bold'
             },
             alternateRowStyles: {
-                fillColor: [240, 240, 240] // Color de filas alternas
+                fillColor: [240, 240, 240]
             },
-            margin: { top: 50 } // Margen para la tabla, si necesitas más espacio
+            margin: { top: 50 }
         });
 
-        doc.save(`${title}.pdf`); // Descargar el PDF con el título proporcionado
+        doc.save(`${title}.pdf`);
     };
 
+    let initialDashboardData = null; 
 
     const loadDashboard = async () => {
-        const data = await fetchDashboardData();
-        if (data) {
-            renderSummaryWidgets(data);
-            renderDetailTables(data);
+        initialDashboardData = await fetchDashboardData(); 
+        if (initialDashboardData) {
+            renderSummaryWidgets(initialDashboardData);
+            renderDetailSections(initialDashboardData); 
 
-            // Ocultar las tablas de detalle y el título al cargar la página inicialmente
+            
             document.getElementById('detalle-tablas-titulo').style.display = 'none';
             document.getElementById('detalle-tablas-container').style.display = 'none';
 
-            // Mostrar alertas iniciales
-            showInitialAlerts(data.summary);
+            
+            showInitialAlerts(initialDashboardData.summary);
 
-            // Añadir event listeners para los botones de exportar PDF después de que se rendericen las tablas
+
             document.querySelectorAll('.btn-export-pdf').forEach(button => {
                 button.addEventListener('click', function() {
                     const tableId = this.dataset.tableId;
