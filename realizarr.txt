@@ -1,0 +1,23 @@
+1 .- CREAR LAS VIATSS NUEVAS PARA EL DASHBOARD . UBICADA EN DATOS Y TOTAL.SQL
+2- PONER CMAPO VENCIDO A LA TABLA CRONOGRAMAPAGOS
+3 - CREAR LOS EVENTOS PARA EL CONTARTO Y CUOTA VENCIDO EN La db, esta en archivo triggers
+4 - ACTUYLIZAR EL MYSQL.INI DE XAMPP CON ESTO -> event_scheduler = ON - SHOW VARIABLES LIKE 'event_scheduler';
+
+
+[mysqld]
+port=3306
+socket="C:/xampp/mysql/mysql.sock"
+basedir="C:/xampp/mysql"
+tmpdir="C:/xampp/tmp"
+datadir="C:/xampp/mysql/data"
+pid_file="mysql.pid"
+# enable-named-pipe
+key_buffer=16M
+max_allowed_packet=1M
+sort_buffer_size=512K
+net_buffer_length=8K
+read_buffer_size=256K
+read_rnd_buffer_size=512K
+myisam_sort_buffer_size=8M
+log_error="mysql_error.log"
+event_scheduler = ON --ACTUALIZAR PAR LOS EVENTOS.
