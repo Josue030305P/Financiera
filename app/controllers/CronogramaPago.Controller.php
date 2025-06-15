@@ -11,10 +11,10 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
         case 'POST':
             $input = file_get_contents('php://input');
             $dataJSON = json_decode($input, true);
-
+            error_log("Datos recibidos: " . print_r($dataJSON, true));
             $idcontrato = $dataJSON['idcontrato'];
             $cuotas = $dataJSON['cuotas'];
-
+            error_log("Primera cuota: " . print_r($cuotas[0] ?? 'Sin cuotas', true));
             try {
                 $result = $cronograma->add($idcontrato, $cuotas);
                 echo json_encode([
@@ -22,11 +22,13 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                     "message" => "Cronograma generado correctamente",
                     "data" => $result
                 ]);
+                exit();
             } catch (Exception $e) {
                 echo json_encode([
-                    'success' => false,
+                    'status' => "error",
                     'message' => 'Error al generar el cronograma: ' . $e->getMessage()
                 ]);
+
             }
             break;
 

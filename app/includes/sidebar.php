@@ -13,7 +13,7 @@ if (!isset($_SESSION['nombre'])) {
         <div class="sidebar-head">
             <a href="/" class="logo-wrapper" title="Home">
                 <span class="sr-only">Home</span>
-                <span class="icon logo" aria-hidden="true"></span>
+                <span class="icon" aria-hidden="true"><img src="<?= BASE_URL?>app/img/png/yonda_peru_logo.jpeg" alt="" width="50px" height="50px" style="margin-right: 10px;border-radius: 8px;"></span>
                 <div class="logo-text">
                     <span class="logo-title">Yonda</span>
                     <span class="logo-subtitle">Leads</span>

@@ -70,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"]) {
             try {
                 $result = $contrato->add($registro);
                 echo json_encode($result);
+                exit();
 
             } catch (Exception $e) {
                 echo json_encode(['success' => false, 'message' => 'Error al generar contrato', $e->getMessage()]);

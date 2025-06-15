@@ -1,4 +1,6 @@
+
 USE financiera
+
 DELIMITER //
 
 CREATE PROCEDURE sp_generar_cronograma(
@@ -19,7 +21,7 @@ DELIMITER ;
 CALL sp_generar_cronograma(1,1,988,865,'2025-08-12');
 
 
-
+SELECT * FROM cronogramapagos;
 
 DELIMITER //
 CREATE PROCEDURE obtener_cronogramas_por_contrato (

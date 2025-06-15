@@ -1,4 +1,5 @@
 
+USE financiera;
 
 DELIMITER //
 CREATE PROCEDURE sp_add_contrato(

@@ -1,18 +1,21 @@
-<?php 
+<?php
 
 require_once '../config/Database.php';
 
 
-class CronogramaPago {
+class CronogramaPago
+{
 
     private $conexion;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->conexion = Database::getConexion();
     }
 
 
-     public function obtenerTodosFiltrado($filtros = []) : array {
+    public function obtenerTodosFiltrado($filtros = []): array
+    {
         try {
             $filtroEstado = isset($filtros['estado']) && $filtros['estado'] !== '' ? "'" . $filtros['estado'] . "'" : 'NULL';
             $filtroIdContrato = isset($filtros['idcontrato']) && $filtros['idcontrato'] !== '' ? intval($filtros['idcontrato']) : 'NULL';
@@ -30,18 +33,19 @@ class CronogramaPago {
 
 
 
-    public function add($idcontrato, $cuotas = []) : array {
+    public function add($idcontrato, $cuotas = []): array
+    {
         try {
             $this->conexion->beginTransaction();
 
-            $sql = "CALL sp_generar_cronograma(?, ?, ?, ?, ?)";
+            $sql = "CALL sp_generar_cronograma(?,?,?,?,?)";
             $stmt = $this->conexion->prepare($sql);
 
             foreach ($cuotas as $cuota) {
-                $numcuota = $cuota['Cuota'];
-                $totalbruto = $cuota['Total_Bruto'];
-                $totalneto = $cuota['Total_Neto'];
-                $fechavencimiento = DateTime::createFromFormat('d/m/Y', $cuota['Fecha'])->format('Y-m-d');
+                $numcuota = $cuota['numcuota'];
+                $totalbruto = $cuota['totalbruto'];
+                $totalneto = $cuota['totalneto'];
+                $fechavencimiento = DateTime::createFromFormat('d/m/Y', $cuota['fechavencimiento'])->format('Y-m-d');
 
                 $stmt->execute([
                     $idcontrato,
@@ -68,7 +72,8 @@ class CronogramaPago {
 
 
 
-       public function obtenerPorContrato(int $idContrato) : array {
+    public function obtenerPorContrato(int $idContrato): array
+    {
         try {
             $sql = "CALL obtener_cronogramas_por_contrato(" . intval($idContrato) . ")";
             $stmt = $this->conexion->prepare($sql);
@@ -82,5 +87,12 @@ class CronogramaPago {
 }
 
 // $cronograma = new CronogramaPago();
-//  $result = $cronograma->obtenerTodosFiltrado(['fechainicio'=> '11-05-2025']);
-// var_dump($result);
+
+// $datos = [
+//     'idcontrato' => 19,
+//     'totalbruto' => 477,
+//     'totalneto' => 453.15,
+//     'fechavencimiento' => '2026-06-15'
+// ];
+
+// var_dump($cronograma->add($datos));
