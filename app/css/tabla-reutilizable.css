@@ -1,185 +1,166 @@
 
-/* --- ESTILOS GENERALES Y DE CONTENEDOR DE LA TABLA --- */
-.table-wrapper {
-    overflow-x: auto; 
-    width: 100%;
-    margin-top: 20px;
-    border-radius: 12px; 
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); 
-    background-color: #ffffff;
-    padding: 15px; 
+:root {
+    --primary-color: #3498db; /* Azul vibrante */
+    --secondary-color: #2ecc71; /* Verde para éxito/énfasis */
+    --warning-color: #f39c12; /* Naranja para advertencia */
+    --danger-color: #e74c3c; /* Rojo para peligro/error */
+    --info-color: #9b59b6; /* Morado/info */
+    --text-color: #333;
+    --light-text-color: #666;
+    --border-color: #e0e0e0;
+    --bg-light: #f8f9fa; /* Fondo claro */
+    --card-bg: #ffffff;
+    --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --font-family: 'Inter', sans-serif; /* Usar Inter como fuente principal */
 }
 
-
-.posts-table {
-    width: 100%;
-    border-collapse: separate; 
-    border-spacing: 0; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    color: #333;
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--bg-light);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
 }
 
-/* --- CABECERAS DE LA TABLA --- */
-.users-table-info th { /* Mantengo .users-table-info para las cabeceras como en tu código */
-    background-color: #eef2f7; /* Un color de fondo más suave para las cabeceras */
-    color: #4a5568;
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    box-sizing: border-box; /* Asegura que el padding no añada ancho */
+}
+
+.main-title {
+    font-size: 2.2em;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 25px;
+    overflow: hidden; /* Para que el contenido no se desborde del border-radius */
+}
+
+/* Header de la tabla y controles generales */
+.table-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fcfcfc;
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente por defecto */
+    gap: 20px; /* Espacio entre los grupos de elementos */
+}
+
+.header-controls {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+    justify-content: space-between; /* Espacio entre el botón de crear y los de exportar */
+    align-items: center;
+    gap: 15px; /* Espacio entre los elementos de control */
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-button {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 0.95em;
-    font-weight: 600; /* Un poco más de peso en la fuente */
-    text-align: left; /* Alineación a la izquierda para mejor lectura */
-    padding: 15px 20px; /* Más padding para mayor espacio */
-    border-bottom: 3px solid #dee2e6; /* Borde inferior más definido */
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    position: sticky; /* Cabecera fija al hacer scroll horizontal */
-    top: 0;
-    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-light);
 }
 
-/* Bordes redondeados para la primera y última cabecera */
-.users-table-info th:first-child {
-    border-top-left-radius: 10px;
+.icon-button:hover {
+    background-color: var(--primary-color);
+    color: var(--card-bg);
+    box-shadow: var(--shadow-medium);
 }
 
-.users-table-info th:last-child {
-    border-top-right-radius: 10px;
+.icon-button i {
+    font-size: 1.1em;
 }
 
-
-.posts-table td {
-    background-color: #ffffff;
-    padding: 12px 20px; 
-    font-size: 0.9em;
-    color: #4f5f6f;
-    vertical-align: middle;
-    border-bottom: 1px solid #ebf2f7; 
-    white-space: normal; 
-    word-break: break-word; 
-}
-.posts-table tr {
-    transition: all 0.3s ease; 
-   
-}
-
-.posts-table tr:hover {
-    background-color: #e8f0fe;
-    transform: translateY(-3px); 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); 
-    cursor: pointer;
-}
-
-
-.posts-table tr td:last-child {
-    display: flex; 
-    justify-content: center;
-    align-items: center; 
-    gap: 8px; 
-    padding: 10px;
-    min-height: 150px;
-    min-width: 150px;
-}
-
-/* Estilos de los iconos de acción (generales) */
-.icon-acciones {
-    width: 24px; /* Tamaño un poco más grande */
-    height: 24px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    cursor: pointer;
-    /* Remover margin para usar gap del flexbox padre */
-}
-
-.icon-acciones:hover {
-    transform: scale(1.15); /* Efecto de crecimiento al pasar el ratón */
-    opacity: 0.8;
-}
-
-/* Estilo para el botón de "Añadir Inversionista" en Leads */
-.btn-addInversionista {
-    background-color: #0061f7; /* Color azul */
-    color: #fff;
+/* Estilos de botones generales */
+.button-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    padding: 6px 10px; /* Padding para hacer el botón más visible */
-    display: flex; /* Para centrar el icono dentro del botón */
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    min-width: unset; /* Reinicia el width si fue establecido */
-    width: auto; /* Ajusta el ancho al contenido */
-}
-
-.btn-addInversionista:hover {
-    background-color: #004ac9;
-}
-
-.icon-inversionista {
-    width: 16px; /* Asegura el tamaño del icono dentro del botón */
-    height: 16px;
-    filter: brightness(0) invert(1); /* Hace el SVG blanco */
-}
-
-
-.badge {
-    display: inline-flex; 
-    justify-content: center;
-    align-items: center;
-    padding: 6px 12px;
-    border-radius: 20px; 
-    font-size: 0.8em;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: white; 
-    min-width: 80px; 
-    text-align: center;
-}
-
-.badge-active { background-color: #28a745; } /* Verde para activo/vigente/realizado */
-.badge-pending { background-color: #ffc107; color: #333; } /* Amarillo para pendiente, texto oscuro */
-.badge-trashed { background-color: #dc3545; } /* Rojo para inactivo/trashed/completado */
-.badge-info { background-color: #17a2b8; } /* Azul claro para nuevo contacto */
-.badge-success { background-color: #28a745; } /* Verde para inversionista */
-.badge-default { background-color: #6c757d; } /* Gris por defecto */
-
-.table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 10px;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #f7f9fc; /* Fondo del header */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra para el header */
-}
-
-/* Botón de crear nuevo elemento */
-.create-lead {
-    background-color: #007bff; /* Color azul primario */
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
     font-size: 1em;
-    cursor: pointer;
+    font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-decoration: none; /* Quitar subrayado del enlace */
+    box-shadow: var(--shadow-light);
 }
 
-.create-lead:hover {
-    background-color: #0056b3;
+.button-primary:hover {
+    background-color: #2980b9; /* Un tono más oscuro */
     transform: translateY(-2px);
 }
 
+.button-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: var(--shadow-light);
+}
+
+.button-secondary:hover {
+    background-color: #27ae60;
+    transform: translateY(-1px);
+}
+
+.button-ghost {
+    background-color: transparent;
+    color: var(--text-color);
+    padding: 8px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.button-ghost:hover {
+    background-color: var(--bg-light);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+
 /* Contenedor de filtros */
 .filters-container {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    /* Por defecto, una columna por filtro. Esto se ajustará con media queries */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 15px; /* Espacio entre los grupos de filtros */
+    padding-top: 15px; /* Espacio entre los controles superiores y los filtros */
+    border-top: 1px dashed var(--border-color); /* Separador visual */
 }
 
 .filter-group {
@@ -189,72 +170,283 @@
 }
 
 .filter-group label {
-    font-size: 0.85em;
-    color: #555;
-    font-weight: 500;
+    font-size: 0.9em;
+    color: var(--light-text-color);
+    font-weight: 600;
 }
 
-.filters-container select,
-.filters-container input[type="text"] {
+.filter-input,
+.filter-select {
+    width: 100%; /* Ocupa el 100% de su columna en la grid */
     padding: 10px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    font-size: 0.9em;
-    color: #495057;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    min-width: 150px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 0.95em;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Crucial para que el padding no afecte el ancho total */
 }
 
-.filters-container select:focus,
-.filters-container input[type="text"]:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+.filter-input:focus,
+.filter-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Sombra de enfoque */
+    outline: none;
 }
 
-.filter-actions button {
-    background-color: #6c757d; 
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end; /* Alinea los botones con la parte inferior de los inputs */
+    padding-top: 20px; /* Para empujar los botones si los labels son más largos */
+}
+
+
+/* Tabla */
+.table-wrapper {
+    overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 20px 0; /* Padding interno, el overflow-x maneja el scroll */
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.02); /* Sombra interna sutil */
+}
+
+.posts-table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina espacios entre celdas */
+    min-width: 700px; /* Ancho mínimo para evitar que la tabla se colapse demasiado */
+}
+
+.posts-table thead tr {
+    background-color: var(--primary-color);
     color: white;
-    padding: 10px 20px;
+    text-align: left;
+    height: 50px;
+}
+
+.posts-table th,
+.posts-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
+
+.posts-table th {
+    font-weight: 600;
+    font-size: 0.95em;
+    position: relative; /* Para el icono de ordenamiento */
+}
+
+.posts-table tbody tr:hover {
+    background-color: #f0f8ff; /* Resaltado al pasar el ratón */
+}
+
+.posts-table tbody tr:last-child td {
+    border-bottom: none; /* Elimina el borde inferior de la última fila */
+}
+
+/* Estilo para las celdas de acciones */
+.posts-table td .actions {
+    display: flex;
+    gap: 8px; /* Espacio entre botones de acción */
+    align-items: center;
+    justify-content: center; /* Centrar acciones si es necesario */
+}
+
+.posts-table td .actions button {
+    background: none;
     border: none;
-    border-radius: 8px;
-    font-size: 0.9em;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-left: 10px;
+    padding: 5px;
+    font-size: 1.1em;
+    color: var(--light-text-color);
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.filter-actions button:hover {
-    background-color: #5a6268;
-    transform: translateY(-1px);
+.posts-table td .actions button:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
 }
 
-#aplicar-filtros {
-    background-color: #28a745; 
+/* Iconos de estado (ej. VIGENTE) */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    display: inline-block; /* Para que tome el padding */
 }
 
-#aplicar-filtros:hover {
-    background-color: #218838;
+.status-badge.vigente {
+    background-color: var(--secondary-color); /* Verde */
+}
+.status-badge.completado {
+    background-color: var(--info-color); /* Morado */
+}
+.status-badge.cancelado {
+    background-color: var(--danger-color); /* Rojo */
+}
+.status-badge.en-proceso {
+    background-color: var(--warning-color); /* Naranja */
+}
+.status-badge.nuevo-contacto {
+    background-color: #3498db; /* Azul */
 }
 
-#resetear-filtros, #resetear-filtros-lead {
-    background-color: #dc3545; 
+
+/* Media Queries para Responsividad */
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .main-title {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .header-controls {
+        flex-direction: column; /* Apila los botones si no hay espacio */
+        align-items: stretch; /* Estira los botones para ocupar el ancho completo */
+    }
+
+    .header-buttons {
+        width: 100%; /* Ocupa el ancho completo */
+        justify-content: space-around; /* Distribuye los botones */
+    }
+
+    .icon-button {
+        flex: 1; /* Permite que los botones se expandan */
+        justify-content: center;
+        padding: 10px; /* Aumenta el área táctil */
+    }
+
+    .filters-container {
+        /* Fuerza una columna en pantallas pequeñas para mayor espacio */
+        grid-template-columns: 1fr; 
+        padding-top: 10px;
+        gap: 10px;
+    }
+
+    .filter-actions {
+        flex-direction: column; /* Apila los botones de filtro */
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .filter-actions button {
+        width: 100%;
+        padding: 12px; /* Mayor área táctil */
+    }
+
+    .table-wrapper {
+        padding: 10px;
+    }
+
+    .posts-table th,
+    .posts-table td {
+        font-size: 0.85em; /* Reduce el tamaño de fuente para tablas */
+        padding: 10px;
+    }
+
+    .posts-table .actions button {
+        font-size: 1em; /* Ajusta el tamaño de los iconos de acción */
+        padding: 3px;
+    }
 }
 
+/* Pantallas medianas (tabletas) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
 
+    .main-title {
+        font-size: 2em;
+    }
 
-/* Asegurar que la tabla ocupe todo el espacio dentro de su contenedor */
-.main.users.chart-page {
-    padding: 30px;
-    background-color: #f0f2f5; /* Un fondo general suave para la página */
-    min-height: 100vh;
+    .header-controls {
+        flex-direction: row; /* Vuelve a la disposición en fila */
+    }
+
+    .filters-container {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 2 o 3 columnas */
+        gap: 15px;
+    }
 }
 
-.main-title {
-    font-size: 2.5em;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    text-align: center;
-    font-weight: 700;
+/* Ajustes adicionales para el icono de ordenamiento (span.sort-icon) */
+.sort-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    margin-left: 5px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
 }
 
+/* Estilos para indicar ordenamiento (si implementas la lógica JS) */
+.posts-table th.asc .sort-icon {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid white;
+}
+
+.posts-table th.desc .sort-icon {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+}
+
+.fa-edit {
+    color: #fff;
+    background-color: rgb(243, 138, 17);
+    padding: 3px;
+    border-radius: 5px;
+
+}
+.fa-trash-alt {
+    color: #f8f9fa;
+    background-color: red;
+    padding: 3px;
+    border-radius: 5px;
+}
+.fa-user-plus {
+    color: #f0f8ff;
+    background-color: #2980b9;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.fa-calendar-alt{
+    color: #f0f8ff;
+    background-color: #2980b9;
+    padding: 3px;
+    border-radius: 5px;
+}
+.fa-file-pdf{
+    color: #f0f8ff;
+    background-color:rgba(236, 0, 0, 0.87);
+    padding: 3px;
+    border-radius: 5px;
+}
+.fa-credit-card{
+    color: #f0f8ff;
+    background-color:green;
+    padding: 3px;
+    border-radius: 5px;
+}
+.fa-shield-alt {
+    color: #f0f8ff;
+    background-color:coral;
+    padding: 3px;
+    border-radius: 5px;
+}

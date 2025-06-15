@@ -181,87 +181,74 @@ class DataTable {
         }
         return "—";
     }
+renderizarAcciones(item) {
+    let acciones = `<div class="actions">`; // Aseguramos el contenedor flex
 
-    renderizarAcciones(item) {
-        
-        let acciones = ``;
-        const id = item[this.idField]; 
-        console.log(id, 'id')
+    const id = item[this.idField]; 
 
-
-
-        if (this.tipo === "leads") {
-
-
-            if (item.puede_ser_inversionista) {
-                acciones += `
-                        <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}">
-                        <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
-                    </a>
-                    `;
-            }
-
+    if (this.tipo === "leads") {
+        if (item.puede_ser_inversionista) {
             acciones += `
-                    
-                    <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
-                        <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
-                    </a>
-                    <a href="${this.baseUrl}app/views/contactibilidad/contacto.add?idlead=${id}">
-                        <button class="btn-addInversionista">
-                            <img src="${this.baseUrl}app/img/svg/Bulk/3-User-white.svg" alt="Contactibilidad" class="icon-inversionista">
-                        </button>
-                    </a>
-                `;
-
-
+                <a href="${this.baseUrl}app/views/${this.tipo}/${this.tipo}.update.php?id=${id}" class="action-button" title="Editar">
+                    <i class="fas fa-edit"></i>
+                </a>
+            `;
         }
-
-        if (this.tipo === "contratos") {
-            acciones = `
-                    <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
-                        <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
-                    </a>
-                    <a href="#" class="ver-cronograma-modal" style="cursor: pointer;" data-contrato-id="${id}">
-                        <img src="${this.baseUrl}app/img/png/cronograma-pagos.png" alt="Ver Cronograma" title="Ver cronograma">
-                    </a>
-                    <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank">
-                        <img src="${this.baseUrl}app/img/png/pdf.png" alt="Generar PDF" class="icon-acciones" title="Generar PDF">
-                    </a>
-                    <a href="${this.baseUrl}app/views/numcuentas/numcuenta.add.php?idcontrato=${id}">
-                        <img src="${this.baseUrl}app/img/png/tarjeta-banco.png" alt="Asociar número de cuenta" class="icon-acciones" title="Asociar número de cuenta">
-                    </a>
-
-                    <a href="${this.baseUrl}app/views/detallegarantias/detallegarantias.add.php?idcontrato=${id}">
-                        <img src="${this.baseUrl}app/img/png/garantia.png" alt="Asociar garantía" class="icon-acciones" title="Asociar garantía">
-                    </a>
-                `;
-        }
-
-        if (this.tipo === "contactos") {
-            acciones = `
-                    <a href="${this.baseUrl}app/views/contactibilidad/contactos.update.php?id=${id}">
-                        <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
-                    </a>
-                    <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
-                        <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
-                    </a>
-                `;
-        }
-
-        if (this.tipo === "Inversionistas") {
-            acciones = `
-                    <a href="${this.baseUrl}app/views/contactibilidad/inversionista.update.php?id=${id}">
-                        <img src="${this.baseUrl}app/img/png/editar.png" alt="Editar" class="icon-acciones">
-                    </a>
-                    <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;">
-                        <img src="${this.baseUrl}app/img/png/eliminar.png" alt="Eliminar" class="icon-acciones">
-                    </a>
-                `;
-        }
-
-        return acciones;
+        acciones += `
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;" class="action-button" title="Eliminar">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+            <a href="${this.baseUrl}app/views/contactibilidad/contacto.add?idlead=${id}" class="action-button" title="Contactibilidad">
+                <i class="fas fa-user-plus"></i> 
+            </a>
+        `;
     }
 
+    if (this.tipo === "contratos") {
+        acciones += `
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;" class="action-button" title="Eliminar">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+            <a href="#" class="action-button ver-cronograma-modal" style="cursor: pointer;" data-contrato-id="${id}" title="Ver Cronograma">
+                <i class="fas fa-calendar-alt"></i> 
+            </a>
+            <a href="${this.baseUrl}app/views/contratos/generar-pdf.php?idcontrato=${id}" target="_blank" class="action-button" title="Generar PDF">
+                <i class="fas fa-file-pdf"></i>
+            </a>
+            <a href="${this.baseUrl}app/views/numcuentas/numcuenta.add.php?idcontrato=${id}" class="action-button" title="Asociar número de cuenta">
+                <i class="fas fa-credit-card"></i> 
+            </a>
+            <a href="${this.baseUrl}app/views/detallegarantias/detallegarantias.add.php?idcontrato=${id}" class="action-button" title="Asociar garantía">
+                <i class="fas fa-shield-alt"></i> 
+            </a>
+        `;
+    }
+
+    if (this.tipo === "contactos") {
+        acciones += `
+            <a href="${this.baseUrl}app/views/contactibilidad/contactos.update.php?id=${id}" class="action-button" title="Editar">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;" class="action-button" title="Eliminar">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+        `;
+    }
+
+    if (this.tipo === "Inversionistas") {
+        acciones += `
+            <a href="${this.baseUrl}app/views/contactibilidad/inversionista.update.php?id=${id}" class="action-button" title="Editar">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;" class="action-button" title="Eliminar">
+                <i class="fas fa-trash-alt"></i>
+            </a>
+        `;
+    }
+
+    acciones += `</div>`; // Cerrar el contenedor flex
+    return acciones;
+}
     async confirmarEliminacion(id) {
         const result = await Swal.fire({
             title: "¿Eliminar?",
