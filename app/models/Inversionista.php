@@ -97,6 +97,21 @@ class Inversionista
 
   }
 
+   public function delete($idinversionista): array
+    {
+        try {
+            $this->conexion->beginTransaction();
+            $sql = "CALL sp_delete_inversionista(?)";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([$idinversionista]);
+            $this->conexion->commit();
+            return ["success" => true, "message" => "Inversionista eliminado exitosamente"];
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 // $inv = new Inversionista();
 //     $dato = [

@@ -258,9 +258,7 @@ class DataTable {
 
         if (this.tipo === "Inversionistas") {
             acciones += `
-                <a href="${this.baseUrl}app/views/contactibilidad/inversionista.update.php?id=${id}" class="action-button" title="Editar">
-                    <i class="fas fa-edit"></i>
-                </a>
+                
                 <a href="#" onclick="window.dataTable.confirmarEliminacion(${id}); return false;" class="action-button" title="Eliminar">
                     <i class="fas fa-trash-alt"></i>
                 </a>

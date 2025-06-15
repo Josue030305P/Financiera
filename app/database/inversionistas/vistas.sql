@@ -1,4 +1,5 @@
 
+DROP VIEW  list_inversionistas;
 CREATE VIEW list_inversionistas AS
 SELECT
     inv.idinversionista,
@@ -8,7 +9,6 @@ SELECT
     GROUP_CONCAT(DISTINCT nc.cci SEPARATOR ', ') AS cci_cuentas,
     GROUP_CONCAT(DISTINCT ent.tipo SEPARATOR ', ') AS tipos_entidad,
     GROUP_CONCAT(DISTINCT ent.entidad SEPARATOR ', ') AS nombres_entidad,
-
     CONCAT(p_asesor.nombres, ' ', p_asesor.apellidos) AS nombre_completo_asesor
 FROM
     inversionistas inv
@@ -25,16 +25,17 @@ LEFT JOIN
 LEFT JOIN
     colaboradores col ON u.idcolaborador = col.idcolaborador
 LEFT JOIN
-    personas p_asesor ON col.idpersona = p_asesor.idpersona 
+    personas p_asesor ON col.idpersona = p_asesor.idpersona
+WHERE LOWER(inv.estado) = 'activo' 
 GROUP BY
     inv.idinversionista,
     p.nombres,
     p.apellidos,
     cont.capital,
-   
-    p_asesor.nombres,
-    p_asesor.apellidos;
+    p_asesor.nombres;
 
+
+-- VOLVER A CREAR LA VISTA  LIST_INVERSIONSITAS
 
 
 CREATE VIEW vista_inversionistas_resumida_profesional AS

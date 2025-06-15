@@ -11,7 +11,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
     switch ($_SERVER['REQUEST_METHOD']) {
         case 'GET':
-           if (isset($_GET['lead_id'])) {
+            if (isset($_GET['lead_id'])) {
                 try {
                     $leadData = $lead->getById($_GET['lead_id']);
                     echo json_encode([
@@ -37,7 +37,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 $idpersona = $inversionistaData['idpersona'] ?? null;
                 $idempresa = $inversionistaData['idempresa'] ?? null;
                 $idasesor = $inversionistaData['idasesor'] ?? null;
-              
+
 
                 if (($idpersona !== null || $idempresa !== null) && $idasesor !== null) {
                     $params = [
@@ -74,12 +74,32 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             break;
 
 
-        case 'PUT' :
+        case 'DELETE':
+            $idinversionista = $_GET['id'] ?? null;
+
+            if ($idinversionista === null) {
+                echo json_encode([
+                    'status' => false,
+                    'message' => 'ID de inversionista no proporcionado para la eliminación.'
+                ]);
+                break;
+            }
+
+            try {
+                $result = $inversionista->delete((int) $idinversionista);
+                echo json_encode($result);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'status' => false,
+                    'message' => 'Error al eliminar el contrato: ' . $e->getMessage()
+                ]);
+            }
+            break;
 
 
 
 
-            
+
 
     }
 

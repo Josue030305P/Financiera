@@ -13,3 +13,17 @@ BEGIN
          SELECT LAST_INSERT_ID() AS idinversionista;
 END //
 DELIMITER ;
+
+USE financiera;
+DELIMITER //
+CREATE PROCEDURE sp_delete_inversionista(
+	IN idinversionista_ INT
+)
+BEGIN
+	UPDATE inversionistas SET estado = 'Inactivo' WHERE idinversionista = idinversionista_ ;
+END //
+
+DELIMITER ;
+
+SELECT * FROM inversionistas;
+CALL sp_delete_inversionista(1);
