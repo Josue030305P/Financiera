@@ -1,33 +1,28 @@
 <?php
 
-include_once 'formatearFecha.php';
+require_once 'formatearFecha.php';
 
-// Obtener los datos del JSON
-$jsonData = json_decode($_POST['jsonData'], true);
-$inversionista = $jsonData['inversionista'];
-$contrato = $jsonData['contrato'];
-$cronograma = $contrato['cronograma'];
+// ✅ CORRECCIÓN: Usar datos de sesión en lugar de $_POST
+$datosContrato = $_SESSION['datos_contrato'];
+$inversionista = $datosContrato['inversionista'];
+$contrato = $datosContrato['contrato'];
+$cronograma = $contrato['cronograma']; // Aquí están los cronograma_pagos
 $tiporetorno = $inversionista['tiporetorno'];
-$capital = getDato('contrato', 'capital');
+$capital = $contrato['capital']; // ✅ Usar directamente desde $contrato
 
 $ultimaFechaCronograma = null;
 if (!empty($cronograma)) {
-    
     $ultimaFecha = end($cronograma)['fecha']; 
     $ultimaFechaCronograma = new DateTime($ultimaFecha);
 }
 
 $fechaDevolucionCapital = null;
 if ($ultimaFechaCronograma) {
-    
     $fechaDevolucionCapital = clone $ultimaFechaCronograma;
-   
     $fechaDevolucionCapital->modify('+1 month');
-   
     $fechaDevolucionCapital->setDate($fechaDevolucionCapital->format('Y'), $fechaDevolucionCapital->format('m'), 15);
 }
 $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
-
 
 ?>
 <div class="container">
@@ -44,16 +39,25 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($cronograma as $pago): ?>
-                <tr>
-                    <td><?php echo $pago['numcuota']; ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($pago['fecha'])); ?></td>
-                    <td>S/<?php echo number_format($pago['totalbruto'], 2, '.', ','); ?></td>
-                    <td>S/<?php echo number_format($pago['totalneto'], 2, '.', ','); ?></td>
-                </tr>
-                <?php endforeach; ?>
+                <?php if (!empty($cronograma)): ?>
+                    <?php foreach ($cronograma as $pago): ?>
+                    <tr>
+                        <td><?php echo $pago['numcuota']; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($pago['fecha'])); ?></td>
+                        <td>S/<?php echo number_format($pago['totalbruto'], 2, '.', ','); ?></td>
+                        <td>S/<?php echo number_format($pago['totalneto'], 2, '.', ','); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="4">No hay cronograma disponible</td>
+                    </tr>
+                <?php endif; ?>
+                
                 <?php if ($fechaDevolucionCapital): ?>
-                <tr class="total-row"> <td></td> <td><?php echo $fechaDevolucionCapital->format('d/m/Y'); ?></td>
+                <tr class="total-row">
+                    <td></td>
+                    <td><?php echo $fechaDevolucionCapital->format('d/m/Y'); ?></td>
                     <td><?php echo $capitalFormateado; ?></td>
                     <td>Devolución de Capital</td>
                 </tr>
@@ -84,19 +88,19 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
                 ?>
                 <tr>
                     <td>DISTRITO</td>
-                    <td><?php echo $ubicacion[0]; ?></td>
+                    <td><?php echo $ubicacion[0] ?? ''; ?></td>
                 </tr>
                 <tr>
                     <td>PROVINCIA</td>
-                    <td><?php echo $ubicacion[1]; ?></td>
+                    <td><?php echo $ubicacion[1] ?? ''; ?></td>
                 </tr>
                 <tr>
                     <td>DEPARTAMENTO</td>
-                    <td><?php echo $ubicacion[2]; ?></td>
+                    <td><?php echo $ubicacion[2] ?? ''; ?></td>
                 </tr>
                 <tr>
                     <td>NACIONALIDAD</td>
-                    <td>peruana</td>
+                    <td>eruana</td>
                 </tr>
                 <tr>
                     <td>MONTO DE INVERSIÓN</td>
@@ -104,7 +108,6 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
                 </tr>
                 <tr>
                     <td>FECHA DE INVERSIÓN</td>
-                   
                     <td><?php echo fechaEnEspanol($inversionista['fechainicio']); ?></td>
                 </tr>
                 <tr>
@@ -129,7 +132,7 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
                 </tr>
                 <tr>
                     <td>MONTO DE PAGO</td>
-                    <td><?php echo $tiporetorno ?></td>
+                    <td><?php echo $tiporetorno; ?></td>
                 </tr>
                 <?php if ($inversionista['banco']): ?>
                 <tr>
@@ -144,19 +147,14 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
             </tbody>
         </table>
 
-
         <table class="firmas uppercase bold">
             <tbody>
-
-            <tr>
+                <tr>
                     <td>______________________</td>
                     <td>______________________</td>
                 </tr>
-               
                 <tr>
-                    <td class="mutuante">
-                        mutuante
-                    </td>
+                    <td class="mutuante">mutuante</td>
                     <td class="mutuatario">mutuatario</td>
                 </tr>
                 <tr>
@@ -164,11 +162,10 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
                     <td>YHON KENNIDEY MENDOZA HUARACA</td>
                 </tr>
                 <tr>
-                    <td><?php echo $inversionista['documento'] ?></td>
+                    <td><?php echo $inversionista['documento']; ?></td>
                     <td>dni n° 40971062</td>
                 </tr>
             </tbody>
         </table>
-
     </div>
 </div>
