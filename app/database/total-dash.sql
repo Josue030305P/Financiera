@@ -66,3 +66,38 @@ CREATE VIEW v_total_pagos_realizados_hoy AS
 SELECT COUNT(iddetallepago) AS total_pagos_hoy
 FROM detallepagos
 WHERE DATE(fechahora) = CURDATE();
+
+
+
+
+
+
+USE financiera
+
+-- Vista para el total de pagos realizados AYER (suma el monto)
+DROP VIEW IF EXISTS v_total_pagos_realizados_ayer;
+CREATE VIEW v_total_pagos_realizados_ayer AS
+SELECT SUM(dp.monto) AS total_monto_pagado_ayer
+FROM detallepagos dp
+WHERE DATE(dp.fechahora) = CURDATE() - INTERVAL 1 DAY;
+
+-- Vista para el total de pagos realizados en la SEMANA ACTUAL (suma el monto)
+DROP VIEW IF EXISTS v_total_pagos_realizados_semana_actual;
+CREATE VIEW v_total_pagos_realizados_semana_actual AS
+SELECT SUM(dp.monto) AS total_monto_pagado_semana_actual
+FROM detallepagos dp
+WHERE DATE(dp.fechahora) BETWEEN DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
+AND DATE_ADD(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 6 DAY);
+
+
+
+-- Nueva vista para el total de pagos realizados en el MES ACTUAL (suma el monto)
+DROP VIEW IF EXISTS v_total_pagos_realizados_mes_actual;
+CREATE VIEW v_total_pagos_realizados_mes_actual AS
+SELECT SUM(dp.monto) AS total_monto_pagado_mes_actual
+FROM detallepagos dp
+WHERE YEAR(dp.fechahora) = YEAR(CURDATE()) AND MONTH(dp.fechahora) = MONTH(CURDATE());
+
+
+
+

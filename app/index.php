@@ -30,6 +30,7 @@ require_once './includes/header.php';
 
                 <h2 class="dashboard-title">DASHBOARD</h2>
                 <div class="summary-widgets-grid" id="dashboard-summary-widgets">
+                    <!-- Las tarjetas de resumen se cargarán aquí dinámicamente con JS -->
                 </div>
 
                 <hr class="section-divider">
@@ -204,6 +205,83 @@ require_once './includes/header.php';
                         </div>
                     </div>
 
+                    <!-- NUEVAS SECCIONES DE TABLA PARA PAGOS DE AYER, SEMANA ACTUAL Y MES ACTUAL -->
+                    <div id="detalle-pagos_ayer-table-section" class="detalle-table-section">
+                        <div class="card-header header-success">
+                            <h5 class="card-title"><i class="fas fa-calendar-day icon-margin"></i>Detalle de Pagos Realizados Ayer</h5>
+                            <button class="btn btn-export-pdf" data-table-id="detalle-pagos_ayer-table-body" data-title="Pagos_Realizados_Ayer">
+                                <i class="fas fa-file-pdf"></i> Exportar PDF
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="dashboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Inversionista</th>
+                                            <th>DNI</th>
+                                            <th>Monto Pagado</th>
+                                            <th>Fecha/Hora</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalle-pagos_ayer-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="detalle-pagos_semana_actual-table-section" class="detalle-table-section">
+                        <div class="card-header header-success">
+                            <h5 class="card-title"><i class="fas fa-calendar-week icon-margin"></i>Detalle de Pagos Realizados Semana Actual</h5>
+                            <button class="btn btn-export-pdf" data-table-id="detalle-pagos_semana_actual-table-body" data-title="Pagos_Realizados_Semana_Actual">
+                                <i class="fas fa-file-pdf"></i> Exportar PDF
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="dashboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Inversionista</th>
+                                            <th>DNI</th>
+                                            <th>Monto Pagado</th>
+                                            <th>Fecha/Hora</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalle-pagos_semana_actual-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="detalle-pagos_mes_actual-table-section" class="detalle-table-section">
+                        <div class="card-header header-success">
+                            <h5 class="card-title"><i class="fas fa-calendar-alt icon-margin"></i>Detalle de Pagos Realizados Mes Actual</h5>
+                            <button class="btn btn-export-pdf" data-table-id="detalle-pagos_mes_actual-table-body" data-title="Pagos_Realizados_Mes_Actual">
+                                <i class="fas fa-file-pdf"></i> Exportar PDF
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="dashboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Inversionista</th>
+                                            <th>DNI</th>
+                                            <th>Monto Pagado</th>
+                                            <th>Fecha/Hora</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalle-pagos_mes_actual-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIN NUEVAS SECCIONES DE TABLA -->
+
                 </div>
             </div>
         </div>
@@ -214,7 +292,7 @@ require_once './includes/header.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.js"></script>
     <!-- Incluye Chart.js antes de tu script de dashboard.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?= BASE_URL ?>app/js/script.js"></script>
     <script src="<?= BASE_URL ?>app/js/dashboard.js"></script>
 

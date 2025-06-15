@@ -22,19 +22,25 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 $listadoContratosPorVencer = $dashboardModel->obtenerListadoContratosPorVencer();
                 $listadoColaboradoresActivos = $dashboardModel->obtenerListadoColaboradoresActivos();
                 $listadoPagosRealizadosHoy = $dashboardModel->obtenerListadoPagosRealizadosHoy(); // Nueva lista
+                $listadoPagosAyer = $dashboardModel->obtenerListadoPagosRealizadosAyer();
+                $listadoPagosSemanaActual = $dashboardModel->obtenerListadoPagosSemanaActual();
+                $listadoPagosMesActual = $dashboardModel->obtenerListadoPagosMesActual();
 
                 // Responde con un JSON que contiene tanto las métricas como los listados.
                 echo json_encode([
                     "status" => true,
                     "data" => [
-                        "resumen" => $metricasResumen, // Cambiado 'summary' a 'resumen'
+                        "resumen" => $metricasResumen, 
                         "listados" => [ // Cambiado 'lists' a 'listados'
                             "contratos_activos" => $listadoContratosActivos,
                             "proximos_pagos" => $listadoProximosPagosPendientes,
                             "leads_en_proceso" => $listadoLeadsEnProceso,
                             "contratos_por_vencer" => $listadoContratosPorVencer,
                             "colaboradores_activos" => $listadoColaboradoresActivos,
-                            "pagos_hoy" => $listadoPagosRealizadosHoy // Nombre en español para la lista
+                            "pagos_hoy" => $listadoPagosRealizadosHoy, // Nombre en español para la lista
+                            "pagos_ayer" => $listadoPagosAyer,
+                            "pagos_semana_actual" => $listadoPagosSemanaActual,
+                            "pagos_mes_actual" => $listadoPagosMesActual
                         ]
                     ]
                 ]);

@@ -45,6 +45,20 @@ class Dashboard
             $stmt = $this->conexion->query("SELECT total_pagos_hoy FROM v_total_pagos_realizados_hoy");
             $metrics['total_pagos_hoy'] = $stmt->fetch(PDO::FETCH_ASSOC)['total_pagos_hoy'];
 
+             // NUEVA MÉTRICA DE RESUMEN: Total de pagos realizados ayer
+            $stmt = $this->conexion->query("SELECT total_monto_pagado_ayer FROM v_total_pagos_realizados_ayer");
+            $metrics['total_monto_pagado_ayer'] = $stmt->fetch(PDO::FETCH_ASSOC)['total_monto_pagado_ayer'];
+
+             // NUEVA MÉTRICA DE RESUMEN: Total de pagos realizados en la semana
+            $stmt = $this->conexion->query("SELECT total_monto_pagado_semana_actual FROM v_total_pagos_realizados_semana_actual ");
+            $metrics['total_monto_pagado_semana_actual'] = $stmt->fetch(PDO::FETCH_ASSOC)['total_monto_pagado_semana_actual'];
+
+            // NUEVA MÉTRICA DE RESUMEN: Total de pagos realizados en el mes actual
+            $stmt = $this->conexion->query("SELECT total_monto_pagado_mes_actual FROM v_total_pagos_realizados_mes_actual ");
+            $metrics['total_monto_pagado_mes_actual'] = $stmt->fetch(PDO::FETCH_ASSOC)['total_monto_pagado_mes_actual'];
+
+
+
 
         } catch (PDOException $e) {
             error_log("Error en Dashboard::obtenerMetricasResumen: " . $e->getMessage());
@@ -146,6 +160,40 @@ class Dashboard
         } catch (PDOException $e) {
             error_log("Error en Dashboard::obtenerListadoPagosRealizadosHoy: " . $e->getMessage());
             throw new Exception("Error al obtener la lista de pagos realizados hoy.");
+        }
+    }
+
+    public function obtenerListadoPagosRealizadosAyer()
+    {
+        try {
+            $stmt = $this->conexion->query("SELECT * FROM v_listado_pagos_realizados_ayer");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en Dashboard::obtenerListadoPagosRealizadosHoy: " . $e->getMessage());
+            throw new Exception("Error al obtener la lista de pagos realizados ayer.");
+        }
+    }
+
+     public function obtenerListadoPagosSemanaActual()
+    {
+        try {
+            $stmt = $this->conexion->query("SELECT * FROM v_listado_pagos_realizados_semana_actual");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en Dashboard::obtenerListadoPagosRealizadosHoy: " . $e->getMessage());
+            throw new Exception("Error al obtener la lista de pagos realizados en la semana actual.");
+        }
+    }
+    
+
+    public function obtenerListadoPagosMesActual()
+    {
+        try {
+            $stmt = $this->conexion->query("SELECT * FROM v_listado_pagos_realizados_mes_actual");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en Dashboard::obtenerListadoPagosRealizadosHoy: " . $e->getMessage());
+            throw new Exception("Error al obtener la lista de pagos realizados en el mes actual.");
         }
     }
 }

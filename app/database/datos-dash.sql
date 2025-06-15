@@ -1,3 +1,4 @@
+
 USE financiera;
 
 -- Vista para listar contratos activos (limitado a 10)
@@ -146,3 +147,96 @@ WHERE
     DATE(dp.fechahora) = CURDATE()
 ORDER BY
     dp.fechahora DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP VIEW IF EXISTS v_listado_pagos_realizados_ayer;
+CREATE VIEW v_listado_pagos_realizados_ayer AS
+SELECT
+    dp.iddetallepago,
+    p.nombres AS inversionista_nombres,
+    p.apellidos AS inversionista_apellidos,
+    p.numdocumento AS inversionista_dni,
+    dp.monto AS monto_pagado,
+    DATE_FORMAT(dp.fechahora, '%d-%m-%Y %H:%i') AS fecha_hora_pago
+FROM
+    detallepagos dp
+JOIN
+    cronogramapagos cp ON dp.idcronogramapago = cp.idcronogramapago
+JOIN
+    contratos c ON cp.idcontrato = c.idcontrato
+JOIN
+    inversionistas inv ON c.idinversionista = inv.idinversionista
+JOIN
+    personas p ON inv.idpersona = p.idpersona
+WHERE
+    DATE(dp.fechahora) = CURDATE() - INTERVAL 1 DAY
+ORDER BY
+    dp.fechahora DESC;
+
+-- Nueva vista para listar pagos realizados en la SEMANA ACTUAL (con detalles)
+DROP VIEW IF EXISTS v_listado_pagos_realizados_semana_actual;
+CREATE VIEW v_listado_pagos_realizados_semana_actual AS
+SELECT
+    dp.iddetallepago,
+    p.nombres AS inversionista_nombres,
+    p.apellidos AS inversionista_apellidos,
+    p.numdocumento AS inversionista_dni,
+    dp.monto AS monto_pagado,
+    DATE_FORMAT(dp.fechahora, '%d-%m-%Y %H:%i') AS fecha_hora_pago
+FROM
+    detallepagos dp
+JOIN
+    cronogramapagos cp ON dp.idcronogramapago = cp.idcronogramapago
+JOIN
+    contratos c ON cp.idcontrato = c.idcontrato
+JOIN
+    inversionistas inv ON c.idinversionista = inv.idinversionista
+JOIN
+    personas p ON inv.idpersona = p.idpersona
+WHERE
+    DATE(dp.fechahora) BETWEEN DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
+    AND DATE_ADD(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 6 DAY)
+ORDER BY
+    dp.fechahora DESC;    
+
+
+
+
+
+
+-- Nueva vista para listar pagos realizados en el MES ACTUAL (con detalles)
+DROP VIEW IF EXISTS v_listado_pagos_realizados_mes_actual;
+CREATE VIEW v_listado_pagos_realizados_mes_actual AS
+SELECT
+    dp.iddetallepago,
+    p.nombres AS inversionista_nombres,
+    p.apellidos AS inversionista_apellidos,
+    p.numdocumento AS inversionista_dni,
+    dp.monto AS monto_pagado,
+    DATE_FORMAT(dp.fechahora, '%d-%m-%Y %H:%i') AS fecha_hora_pago
+FROM
+    detallepagos dp
+JOIN
+    cronogramapagos cp ON dp.idcronogramapago = cp.idcronogramapago
+JOIN
+    contratos c ON cp.idcontrato = c.idcontrato
+JOIN
+    inversionistas inv ON c.idinversionista = inv.idinversionista
+JOIN
+    personas p ON inv.idpersona = p.idpersona
+WHERE
+    YEAR(dp.fechahora) = YEAR(CURDATE()) AND MONTH(dp.fechahora) = MONTH(CURDATE())
+ORDER BY
+    dp.fechahora DESC;
+
