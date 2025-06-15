@@ -331,7 +331,7 @@ totalneto			DECIMAL(10,2) NOT NULL,
 amortizacion			DECIMAL(10,2) NOT NULL DEFAULT 0,
 restante				DECIMAL(10,2) GENERATED ALWAYS AS (totalneto - amortizacion) STORED,
 fechavencimiento		DATE NOT NULL, -- Para identificar hasta que fecha hay plazo para pagar
-estado					ENUM('Pagado','Pendiente') DEFAULT 'Pendiente',
+estado					ENUM('Pagado','Pendiente','Vencido') DEFAULT 'Pendiente',
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcontrato_crono_pag FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato) 

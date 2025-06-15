@@ -26,8 +26,8 @@ ORDER BY
 LIMIT 10;
 
 USE financiera;
-DROP VIEW IF EXISTS v_listado_proximos_pagos_pendientes;
 
+DROP VIEW IF EXISTS v_listado_proximos_pagos_pendientes;
 CREATE VIEW v_listado_proximos_pagos_pendientes AS
 SELECT
     cp.idcronogramapago,
@@ -46,13 +46,12 @@ JOIN
 JOIN
     personas p ON inv.idpersona = p.idpersona
 WHERE
-    cp.estado = 'Pendiente'
+    cp.estado = 'Pendiente' -- CAMBIO CLAVE AQUÍ
     AND cp.fechavencimiento >= CURDATE()
-    AND cp.fechavencimiento <= DATE_ADD(CURDATE(), INTERVAL 60 DAY) 
+    AND cp.fechavencimiento <= DATE_ADD(CURDATE(), INTERVAL 60 DAY)
     AND c.estado = 'Vigente'
 ORDER BY
     cp.fechavencimiento ASC;
-
 
 -- Para probar la vista:
 SELECT * FROM v_listado_proximos_pagos_pendientes;
@@ -175,20 +174,21 @@ SELECT COUNT(*) AS contratos_activos
 FROM contratos
 WHERE estado = 'Vigente';
 
+
 DROP VIEW IF EXISTS v_monto_total_invertido;
 CREATE VIEW v_monto_total_invertido AS
 SELECT SUM(capital) AS monto_total_invertido
 FROM contratos
 WHERE estado = 'Vigente';
 
-DROP VIEW IF EXISTS v_proximos_pagos_cantidad_30d;
 
--- Este va con v_proximos_pagos_fecha-cercana;
-CREATE VIEW v_proximos_pagos_cantidad_30d AS
+
+DROP VIEW IF EXISTS v_proximos_pagos_cantidad_30d;
+CREATE VIEW v_proximos_pagos_cantidad_60d AS
 SELECT COUNT(*) AS proximos_pagos_cantidad
 FROM cronogramapagos cp
 JOIN contratos c ON cp.idcontrato = c.idcontrato
-WHERE cp.estado != 'Pagado'
+WHERE cp.estado = 'Pendiente' -- CAMBIO CLAVE AQUÍ: Filtrar por estado 'Pendiente'
 AND cp.fechavencimiento BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 60 DAY)
 AND c.estado = 'Vigente';
 
@@ -264,3 +264,11 @@ JOIN
     inversionistas AS i ON c.idinversionista = i.idinversionista
 JOIN
     personas AS p ON i.idpersona = p.idpersona;
+
+
+
+use financiera;
+SELECT * FROM inversionistas;
+
+SELECT * FROM cronogramapagos;
+SELeCT * FROM contratos;

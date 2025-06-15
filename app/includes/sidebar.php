@@ -46,6 +46,8 @@ if (!isset($_SESSION['nombre'])) {
                     <a class="" href="<?= BASE_URL ?>app/views/inversionistas/"><span class="icon user-white"
                             aria-hidden="true"></span>Inversionista</a>
                 </li>
+                
+
 
 <!-- 
                  <li>
@@ -62,6 +64,11 @@ if (!isset($_SESSION['nombre'])) {
                     <a class="" href="<?= BASE_URL ?>app/views/cronograma-pagos/"><span class="icon document"
                             aria-hidden="true"></span>Lista de cronogramas</a>
                 </li>
+
+                <!-- <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/contratos/historial.php"><span class="icon document"
+                            aria-hidden="true"></span>Historial de contratos</a>
+                </li> -->
 
 <!-- 
                  <li>

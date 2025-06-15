@@ -83,3 +83,38 @@ LEFT JOIN
 
 SELECT * FROM vista_contratos_resumida;
 SELECT * FROM contratos;
+
+
+
+
+
+USE financiera;
+
+-- Eliminar la vista si ya existe
+DROP VIEW IF EXISTS v_historial_contratos_completados;
+
+-- Crear la vista para el historial de contratos completados
+CREATE VIEW v_historial_contratos_completados AS
+SELECT
+    c.idcontrato,
+    -- Concatena el nombre y apellido del inversionista
+    CONCAT(p.nombres, ' ', p.apellidos) AS inversionista_nombre_completo,
+    DATE_FORMAT(c.fechainicio, '%d/%m/%Y') AS fecha_inicio_contrato,
+    DATE_FORMAT(c.fechafin, '%d/%m/%Y') AS fecha_fin_contrato,
+    c.capital AS monto_invertido,
+    c.interes AS tasa_retorno, -- Asumiendo que 'interes' es la tasa de retorno
+    c.moneda,
+    c.estado AS estado_contrato
+FROM
+    contratos c
+JOIN
+    inversionistas inv ON c.idinversionista = inv.idinversionista
+JOIN
+    personas p ON inv.idpersona = p.idpersona
+WHERE
+    c.estado = 'Completado' -- Filtra solo los contratos con estado 'Completado'
+ORDER BY
+    c.fechafin DESC; -- Ordena por fecha de fin para ver los más recientes primero
+
+-- Para probar la vista (opcional):
+SELECT * FROM v_historial_contratos_completados;

@@ -26,7 +26,7 @@ class Dashboard
             $stmt = $this->conexion->query("SELECT monto_total_invertido FROM v_monto_total_invertido");
             $metrics['monto_total_invertido'] = $stmt->fetch(PDO::FETCH_ASSOC)['monto_total_invertido'];
 
-            $stmt = $this->conexion->query("SELECT proximos_pagos_cantidad FROM v_proximos_pagos_cantidad_30d");
+            $stmt = $this->conexion->query("SELECT proximos_pagos_cantidad FROM v_proximos_pagos_cantidad_60d");
             $metrics['proximos_pagos_cantidad'] = $stmt->fetch(PDO::FETCH_ASSOC)['proximos_pagos_cantidad'];
 
             $stmt = $this->conexion->query("SELECT proximo_pago_fecha FROM v_proximo_pago_fecha_cercana");
