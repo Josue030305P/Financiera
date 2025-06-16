@@ -76,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"]) {
                 echo json_encode(['success' => false, 'message' => 'Error al generar contrato', $e->getMessage()]);
             }
 
+
        case 'DELETE':
             $idcontrato = $_GET['id'] ?? null;
 
@@ -97,7 +98,6 @@ if ($_SERVER["REQUEST_METHOD"]) {
                 ]);
             }
             break;
-
 
     }
 

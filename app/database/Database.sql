@@ -1,3 +1,4 @@
+
 CREATE DATABASE financiera;
 -- DROP DATABASE financiera;
 USE financiera;
@@ -64,13 +65,15 @@ domicilio			VARCHAR(100) NULL,
 telprincipal		VARCHAR(15) NOT NULL UNIQUE,
 telsecundario		VARCHAR(15) NULL,
 referencia			VARCHAR(150) NULL,
-estado				ENUM('Activo','Inactivo') DEFAULT 'Activo',
+estado				ENUM('Activo','Inactivo', 'Usuario') DEFAULT 'Activo',
 CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un numero de documento y amarrarlo a un tipo de documento
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 )ENGINE=InnoDB;
 
+ALTER TABLE personas MODIFY COLUMN estado ENUM('Activo','Inactivo','Usuario') DEFAULT 'Activo';
 SELECT * FROM personas;
+SELECT * FROM colaboradores;
 SELECT * FROM leads;
 
 
@@ -87,7 +90,7 @@ updated_at			DATETIME NULL
 
 CREATE TABLE colaboradores(
 idcolaborador   	INT PRIMARY KEY AUTO_INCREMENT,
-idpersona			INT NOT NULL,
+idpersona			INT NOT NULL UNIQUE,
 idrol				INT NOT NULL,
 idusuariocreacion     INT  NULL, -- FK
 idusuarioeliminacion	INT NULL, -- FK
@@ -105,6 +108,7 @@ CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 )ENGINE=InnoDB;
 
 ALTER TABLE colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
+ALTER TABLE colaboradores MODIFY COLUMN idpersona INT NOT NULL UNIQUE;
 
 ALTER TABLE colaboradores
 ADD CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario);
@@ -118,12 +122,18 @@ idcolaborador    	INT NOT NULL,
 usuario				VARCHAR(40) NOT NULL,
 passworduser		VARCHAR(255) NOT NULL,
 fotoperfil			VARCHAR(140) NULL,
-estado				VARCHAR(18) NULL,
+estado				ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo'
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcolaborador FOREIGN KEY(idcolaborador) REFERENCES colaboradores(idcolaborador)
 )ENGINE=InnoDB;
+
+USE financiera;
+SELECT * FROM personas;
+-- SHOW COLUMNS FROM usuarios;
 SELECT * FROM usuarios;
+SELECT * FROM colaboradores;
+--ALTER TABLE usuarios MODIFY COLUMN estado  ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo'
 
 
 CREATE TABLE inversionistas(
@@ -192,14 +202,14 @@ fecha					DATE NOT NULL,
 hora					TIME NOT NULL,
 comentarios				VARCHAR(120) NULL,
 fechahoraeliminacion	DATETIME NULL,
-estado					ENUM('Realizado','Pendiente','Reprogramado') NOT NULL,
+estado					ENUM('Realizado','Pendiente','Reprogramado','Elimninado') NOT NULL,
 CONSTRAINT fk_idlead FOREIGN KEY(idlead) REFERENCES leads(idlead),
 CONSTRAINT fk_id_user_creacion_contact FOREIGN KEY (idusuariocreacion ) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_contact FOREIGN KEY (idusuarioeliminacion ) REFERENCES usuarios(idusuario)
 )ENGINE=InnoDB;
 
-ALTER TABLE contactibilidad MODIFY COLUMN estado ENUM('Realizado','Pendiente','Reprogramado') NOT NULL;
-
+ALTER TABLE contactibilidad MODIFY COLUMN estado ENUM('Realizado','Pendiente','Reprogramado','Eliminado') NOT NULL;
+SELECT * FROM contactibilidad;
 CREATE TABLE versiones (
   idversion    INT AUTO_INCREMENT PRIMARY KEY,
   fechainicio  DATETIME    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -337,7 +347,7 @@ updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcontrato_crono_pag FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato) 
 ) ENGINE=InnoDB; 
 
--- ALTER TABLE cronogramapagos MODIFY COLUMN estado ENUM('Pagado','Pendiente', 'Vencido') DEFAULT 'Pendiente';
+--- ALTER TABLE cronogramapagos MODIFY COLUMN estado ENUM('Pagado','Pendiente', 'Vencido') DEFAULT 'Pendiente';
 
 -- ALTER TABLE cronogramapagos DROP CONSTRAINT fk_idcontrato_crono_pag;
 

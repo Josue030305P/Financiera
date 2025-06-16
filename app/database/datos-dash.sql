@@ -27,7 +27,6 @@ ORDER BY
 -- Vista para listar próximos pagos pendientes (intervalo de 60 días)
 DROP VIEW IF EXISTS v_listado_proximos_pagos_pendientes;
 CREATE VIEW v_listado_proximos_pagos_pendientes AS
-
 SELECT
     cp.idcronogramapago,
     p.nombres AS inversionista_nombres,
@@ -119,7 +118,7 @@ JOIN
 JOIN
     roles r ON col.idrol = r.idrol
 WHERE
-    p.estado = 'Activo'
+    p.estado = 'Usuario'
 ORDER BY
     p.apellidos ASC;
 

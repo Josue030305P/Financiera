@@ -49,3 +49,20 @@ DELIMITER ;
 
 SELECT * FROM contactibilidad;
 SELECT * FROM leads;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE sp_delete_contactibilidad(
+IN  idcontactibilidad_  INT,
+IN  idusuarioeliminacion_ INT
+)
+BEGIN 
+    UPDATE contactibilidad SET estado = 'Eliminado', fechahoraeliminacion = NOW(), idusuarioeliminacion =  idusuarioeliminacion_ WHERE idcontactibilidad =  idcontactibilidad_;
+
+END //
+
+DELIMITER ; 
+
+CALL sp_delete_contactibilidad(1,1);

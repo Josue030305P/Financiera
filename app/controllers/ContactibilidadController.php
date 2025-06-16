@@ -88,5 +88,29 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             }
             break;
 
+
+            
+       case 'DELETE':
+            $idcontactibilidad = $_GET['id'] ?? null;
+
+            if ($idcontactibilidad === null) {
+                echo json_encode([
+                    'status' => false,
+                    'message' => 'ID de contacto no proporcionado para la eliminación.'
+                ]);
+                break;
+            }
+
+            try {
+                $result = $contacto->delete((int) $idcontactibilidad);
+                echo json_encode($result);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'status' => false,
+                    'message' => 'Error al eliminar el contacto: ' . $e->getMessage()
+                ]);
+            }
+            break;
+
     }
 }

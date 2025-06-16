@@ -1,3 +1,4 @@
+
 USE financiera;
 
 -- Vista para el total de contratos activos
@@ -58,7 +59,7 @@ CREATE VIEW v_total_colaboradores_activos AS
 SELECT COUNT(col.idcolaborador) AS colaboradores_activos
 FROM colaboradores col
 JOIN personas p ON col.idpersona = p.idpersona
-WHERE p.estado = 'Activo';
+WHERE p.estado = 'Usuario';
 
 -- Vista para el total de pagos realizados hoy
 DROP VIEW IF EXISTS v_total_pagos_realizados_hoy;

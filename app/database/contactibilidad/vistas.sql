@@ -1,4 +1,6 @@
 
+USE financiera;
+DROP VIEW list_contactibilidad ;
 CREATE VIEW list_contactibilidad AS
 	SELECT 
 	cont.idcontactibilidad,
@@ -14,5 +16,10 @@ CREATE VIEW list_contactibilidad AS
     FROM contactibilidad cont
     JOIN leads l ON l.idlead = cont.idlead 
     JOIN personas per ON l.idpersona = per.idpersona
-    JOIN usuarios u ON l.idasesor = u.idusuario;
+    JOIN usuarios u ON l.idasesor = u.idusuario
+    WHERE cont.estado NOT IN ('Eliminado');
     
+SELECT * FROM contactibilidad;
+select * from usuarios;
+
+SELECT * FROM personas;

@@ -120,7 +120,25 @@ class Contactibilidad
             throw new Exception("Error al obtener la contactibilidad por ID: " . $e->getMessage());
         }
     }
-
+    
+     public function delete($idcontactibilidad): array
+    {
+        try {
+            $this->conexion->beginTransaction();
+            $idusuarioeliminacion = $_SESSION['idusuario'];
+            $sql = "CALL sp_delete_contactibilidad(?,?)";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute([
+                $idcontactibilidad,
+                $idusuarioeliminacion
+            ]);
+            $this->conexion->commit();
+            return ["success" => true, "message" => "Contacto eliminado exitosamente"];
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            throw new Exception($e->getMessage());
+        }
+    }
 
 
 
@@ -128,10 +146,6 @@ class Contactibilidad
 
 // $ts = new Contactibilidad();
 // var_dump($ts->getById(1));
-
-
-
-
 
 
 
