@@ -65,6 +65,11 @@ if (!isset($_SESSION['nombre'])) {
                             aria-hidden="true"></span>Lista de cronogramas</a>
                 </li>
 
+                <li>
+                    <a class="" href="<?= BASE_URL ?>app/views/usuarios/"><span class="icon user-white"
+                            aria-hidden="true"></span>Agregar usuario</a>
+                </li>
+
                 <!-- <li>
                     <a class="" href="<?= BASE_URL ?>app/views/contratos/historial.php"><span class="icon document"
                             aria-hidden="true"></span>Historial de contratos</a>
@@ -99,7 +104,7 @@ if (!isset($_SESSION['nombre'])) {
             </span>
             <div class="sidebar-user-info">
                 <span class="sidebar-user__title"><?= $_SESSION['nombre'] ?></span>
-                <span class="sidebar-user__subtitle">Soporte</span>
+            
             </div>
         </a>
 

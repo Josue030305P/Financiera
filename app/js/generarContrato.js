@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // FUNCIÓN PARA AGREGAR EL CRONOGRAMA DE PAGOS
     function generarCronograma(capital, interes, duracionMeses, fechaInicio) {
-        console.log("Iniciando generarCronograma con:", { capital, interes, duracionMeses, fechaInicio });
+        //console.log("Iniciando generarCronograma con:", { capital, interes, duracionMeses, fechaInicio });
 
         const cuotas = [];
         const interesDecimal = interes / 100;
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 1; i <= duracionMeses; i++) {
             let fechaPago = new Date(fecha);
             const diaInicioContrato = new Date(fechaInicio).getDate();
-            fechaPago.setDate(diaInicioContrato);
+            fechaPago.setDate(diaInicioContrato + 5);
 
             while (fechaPago.getMonth() !== fecha.getMonth() && fechaPago.getDate() < diaInicioContrato) {
                 fechaPago.setDate(fechaPago.getDate() - 1);

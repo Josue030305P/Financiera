@@ -12,7 +12,7 @@
     for (let i = 1; i <= duracionMeses; i++) {
       let fechaPago = new Date(fecha);
       const diaInicioContrato = new Date(fechaInicio).getDate() + 1; // Obtenemos el día en cada iteración
-      fechaPago.setDate(diaInicioContrato); // Establecemos el día del mes al día de inicio del contrato
+      fechaPago.setDate(diaInicioContrato + 4); // Establecemos el día del mes al día de inicio del contrato
 
       // Manejo de fin de mes: si el día de inicio es mayor que los días del mes actual
       if (fechaPago.getMonth() !== fecha.getMonth() && diaInicioContrato > 28) {
@@ -21,10 +21,11 @@
 
       // Formatear fecha a dd/mm/yyyy
       const fechaStr = fechaPago.toLocaleDateString("es-ES");
+      
       console.log("FECHA STR:", fechaStr);
       cuotas.push({
         Cuota: i,
-        Fecha: fechaStr,
+        Fecha: fechaStr ,
         Total_Bruto: Number(cuotaBase.toFixed(2)),
         Total_Neto: totalBruto,
       });

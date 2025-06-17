@@ -8,7 +8,7 @@ idpais 				INT PRIMARY KEY AUTO_INCREMENT,
 pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 )ENGINE=InnoDB;
 
-
+INSERT INTO pais(pais)VALUES('Argentina');
 
 CREATE TABLE departamentos(
 iddepartamento		INT PRIMARY KEY AUTO_INCREMENT,
@@ -65,13 +65,13 @@ domicilio			VARCHAR(100) NULL,
 telprincipal		VARCHAR(15) NOT NULL UNIQUE,
 telsecundario		VARCHAR(15) NULL,
 referencia			VARCHAR(150) NULL,
-estado				ENUM('Activo','Inactivo', 'Usuario') DEFAULT 'Activo',
+estado				ENUM('Activo','Inactivo', 'Usuario','Colaborador') DEFAULT 'Activo',
 CONSTRAINT uk_numdocumento UNIQUE(tipodocumento,numdocumento),  -- Manejar un numero de documento y amarrarlo a un tipo de documento
 CONSTRAINT fk_idpais	FOREIGN KEY(idpais) REFERENCES pais(idpais),
 CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 )ENGINE=InnoDB;
 
-ALTER TABLE personas MODIFY COLUMN estado ENUM('Activo','Inactivo','Usuario') DEFAULT 'Activo';
+ALTER TABLE personas MODIFY COLUMN estado ENUM('Activo','Inactivo','Usuario','Colaborador') DEFAULT 'Activo';
 SELECT * FROM personas;
 SELECT * FROM colaboradores;
 SELECT * FROM leads;
@@ -100,12 +100,14 @@ observaciones		VARCHAR(100) NULL,
 fechahoraeliminacion	DATETIME NULL,
 created_at			DATETIME NOT NULL DEFAULT NOW(),
 updated_at			DATETIME NULL,
+
 CONSTRAINT fk_idpersona FOREIGN KEY(idpersona) REFERENCES personas(idpersona),
 CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES usuarios(idusuario),
 CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
+--ALTER TABLE colaboradores DROP COLUMN esUsuario;
 
 ALTER TABLE colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
 ALTER TABLE colaboradores MODIFY COLUMN idpersona INT NOT NULL UNIQUE;

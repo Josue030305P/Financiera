@@ -52,6 +52,7 @@ FROM contratos
 WHERE fechafin IS NOT NULL
 AND fechafin BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 60 DAY)
 AND estado = 'Vigente';
+SELECT * FROM v_total_contratos_por_vencer_60d;
 
 -- Vista para el total de colaboradores activos
 DROP VIEW IF EXISTS v_total_colaboradores_activos;
@@ -59,7 +60,7 @@ CREATE VIEW v_total_colaboradores_activos AS
 SELECT COUNT(col.idcolaborador) AS colaboradores_activos
 FROM colaboradores col
 JOIN personas p ON col.idpersona = p.idpersona
-WHERE p.estado = 'Usuario';
+WHERE p.estado = 'Colaborador';
 
 -- Vista para el total de pagos realizados hoy
 DROP VIEW IF EXISTS v_total_pagos_realizados_hoy;

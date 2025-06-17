@@ -36,4 +36,5 @@ UBICACIÓN EN  WAMP64 -> C:\wamp64\bin\mysql\mysql9.1.0/mysql
 6. Agregar en la tabla colaborades , que el campo idpersona sea UNIQUE.
 7. MODIFCAR LAAS VISTAS DEL DASHBOARD DE COLABORADORES ACTIVOS EN DATOS.SQL Y TOTAL.SQL -> EL ESTADO SERA 'USUARIO'.
 8. ACTULIZAR LOS USAIROS EN LA TABLA PERSONAS -> UPDATE personas SET estado = 'Usuario' WHERE idpersona = 4;  ID:  idpersona = 1, 2, 3 ,4 , 31
+9. 
 

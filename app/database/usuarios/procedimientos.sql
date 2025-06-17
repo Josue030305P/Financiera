@@ -1,3 +1,4 @@
+
 USE financiera;
 
 SELECT * FROM personas;
@@ -5,7 +6,7 @@ SELECT * FROM colaboradores;
 
 SELECT * FROM roles;
 SELECT * FROM usuarios;
-SHOW COLUMNS FROM usuarios;
+SHOW COLUMNS FROM colaboradores;
 
 DELIMITER //
 CREATE PROCEDURE sp_add_persona_usuario(
@@ -29,29 +30,39 @@ END //
 
 DELIMITER ;
 
--- CALL sp_add_persona_usuario(1,'Jiarafales', 'Pedro','1990-06-18','DNI','66777655','pedrojirafe@gmail.com','966585596','AV CARRIZO #554 - GROCIO PRADO - CHINCHA');
+CALL sp_add_persona_usuario(1,'SancheZ Sanchez', 'Milenka','1990-06-18','DNI','66633366','milenka67@gmail.com','900000223','AV CARRIZO #554 - GROCIO PRADO - CHINCHA');
 
 DROP PROCEDURE sp_add_colaborador_usuario
 
 DELIMITER //
+
+-- Procedimiento para agregar un colaborador y actualizar el estado de la persona
 CREATE PROCEDURE sp_add_colaborador_usuario(
-IN idpersona_ INT,
-IN idrol_    INT,
-IN idusuariocreacion_ INT,
-IN fechainicio_ DATE,
-IN fechafin_    DATE,
-IN observaciones_ VARCHAR(100)
+    IN idpersona_ INT,
+    IN idrol_ INT,
+    IN idusuariocreacion_ INT,
+    IN fechainicio_ DATE,
+    IN fechafin_ DATE,
+    IN observaciones_ VARCHAR(100)
 )
 BEGIN
+    -- 1. Insertar el nuevo registro en la tabla 'colaboradores'
+    INSERT INTO colaboradores(idpersona, idrol, idusuariocreacion, fechainicio, fechafin, observaciones)
+    VALUES(idpersona_, idrol_, idusuariocreacion_, fechainicio_, fechafin_, observaciones_);
 
-	INSERT INTO colaboradores(idpersona,idrol,idusuariocreacion,fechainicio,fechafin,observaciones)
-		VALUES(idpersona_,idrol_,idusuariocreacion_,fechainicio_,fechafin_,observaciones_);
+    -- 2. Actualizar el estado de la persona en la tabla 'personas'
+    -- Una vez que la persona es asignada como colaborador, su estado cambia
+    -- para no ser seleccionada nuevamente para un rol de colaborador.
+    UPDATE personas
+    SET estado = 'Colaborador' -- Cambiamos el estado a 'Colaborador'
+    WHERE idpersona = idpersona_;
 
 END //
 
 DELIMITER ;
 
--- CALL sp_add_colaborador_usuario(31,1,1,'2025-06-16','2026-06-16','Contrato de un año');
+
+CALL sp_add_colaborador_usuario(35,1,1,'2025-06-16','2026-06-16','Contrato de un año');
 
 
 
@@ -78,3 +89,60 @@ SELECT * FROM detallepagos;
 
 
 -- idpersona = 1, 2, 3 ,4 , 31
+
+DROP PROCEDURE   sp_getpersona_to_colaborador;
+DELIMITER //
+
+-- Procedimiento para obtener personas que están disponibles para ser asignadas como colaborador
+-- Es decir, personas cuyo estado es 'Usuario' y que NO están ya en la tabla 'colaboradores'.
+CREATE PROCEDURE sp_getpersona_to_colaborador()
+BEGIN
+    SELECT
+        p.idpersona,
+        -- Concatenamos apellidos y nombres para una mejor presentación
+        CONCAT(p.apellidos, ' ', p.nombres) AS nombrecompleto
+    FROM
+        personas p
+    LEFT JOIN
+        colaboradores c ON p.idpersona = c.idpersona
+    WHERE
+        p.estado = 'Usuario' -- Filtramos por el estado inicial 'Usuario' que tú definiste
+        AND c.idpersona IS NULL; -- ¡CLAVE! Excluimos aquellas personas que YA TIENEN un registro en 'colaboradores'
+
+END //
+
+DELIMITER ;
+
+CALL sp_getpersona_to_colaborador();
+
+
+
+DELIMITER //
+
+-- Procedimiento para obtener los colaboradores que aún no tienen una cuenta de usuario
+-- Esto se determina buscando colaboradores que NO existen en la tabla 'usuarios'.
+CREATE PROCEDURE sp_getcolaborador_to_add_usuario()
+BEGIN
+    SELECT
+        col.idcolaborador,
+        -- Concatena el nombre y apellido de la persona asociada al colaborador para una mejor visualización
+        CONCAT(p.nombres, ' ', p.apellidos) AS nombrecompleto
+    FROM
+        colaboradores col
+    JOIN
+        personas p ON col.idpersona = p.idpersona -- Unimos con 'personas' para obtener los nombres
+    LEFT JOIN
+        usuarios u ON col.idcolaborador = u.idcolaborador -- Hacemos un LEFT JOIN con 'usuarios'
+    WHERE
+        u.idcolaborador IS NULL; -- Filtramos para incluir solo aquellos colaboradores que NO tienen una entrada en 'usuarios'
+        -- Si el campo 'esUsuario' en la tabla 'colaboradores' realmente indica si se ha creado (o se debe crear) una cuenta de usuario,
+        -- podrías añadir aquí también: AND col.esUsuario = 'Si' si solo quieres seleccionar aquellos marcados como 'Si'.
+        -- Sin embargo, la condición IS NULL en la tabla 'usuarios' es la más directa para "aún no está grabado a la tabla usuarios".
+
+END //
+
+DELIMITER ;
+
+-- Para probar el procedimiento:
+CALL sp_getcolaborador_to_add_usuario();
+

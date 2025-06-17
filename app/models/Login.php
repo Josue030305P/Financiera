@@ -11,32 +11,36 @@ class Login {
 
     public function login($params = []): array {
         try {
-            
-            $sql = "SELECT * FROM usuarios WHERE usuario = ? AND passworduser = ?";
+            // 1. Buscar al usuario por su nombre de usuario para obtener su contraseña hasheada
+            $sql = "SELECT idusuario, usuario, passworduser FROM usuarios WHERE usuario = ?";
             $smt = $this->conexion->prepare($sql);
-            $smt->execute([$params["usuario"], $params["passworduser"]]);
+            $smt->execute([$params["usuario"]]);
+            $user = $smt->fetch(PDO::FETCH_ASSOC);
 
-            if ($smt->rowCount() == 1) {
-                
-                $row = $smt->fetch(PDO::FETCH_ASSOC);
-           
-                $_SESSION['idusuario'] = $row['idusuario'];
-
-                
-                $this->registrarAcceso($row['idusuario']);
+            // 2. Verificar si se encontró el usuario y si la contraseña ingresada coincide con el hash almacenado
+            if ($user && password_verify($params["passworduser"], $user["passworduser"])) {
+                // Las credenciales son correctas
+                $_SESSION['idusuario'] = $user['idusuario'];
+                $this->registrarAcceso($user['idusuario']);
                 
                 return [
                     'success' => true,
-                    'nombre' => $row['usuario'],
-                    'idusuario' => $row['idusuario']
+                    'nombre' => $user['usuario'],
+                    'idusuario' => $user['idusuario']
                 ];
             } else {
-                return ['success' => false];
+                // Usuario no encontrado o contraseña incorrecta
+                return ['success' => false, 'message' => 'Credenciales incorrectas.'];
             }
         } catch(PDOException $e) {
-            throw new Exception($e->getMessage());
+            // Captura errores de la base de datos
+            throw new Exception("Error de base de datos: " . $e->getMessage());
+        } catch(Exception $e) {
+            // Captura otros errores generales
+            throw new Exception("Error inesperado: " . $e->getMessage());
         }
     }
+
 
     // public function registrarse($params = []) : array {
 

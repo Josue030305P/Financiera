@@ -53,3 +53,5 @@ DELIMITER ;
 --SHOW VARIABLES LIKE 'event_scheduler';
 
 SHOW EVENTS;
+
+UPDATE contratos SET estado = 'Completado' WHERE idcontrato = 1;

@@ -97,7 +97,7 @@ $links = [
     
 </script>
 
-<script src="<?= BASE_URL ?>app/js/contratoFiltros.js"></script>
+
 
 
 

@@ -1,9 +1,6 @@
 <?php
 // DetallePagoController.php
 
-
-
-
 require_once '../models/DetallePago.php';
 define('UPLOAD_DIR', '../../public/uploads/comprobantes/');
 define('WEB_UPLOAD_DIR', 'uploads/comprobantes/');

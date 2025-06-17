@@ -546,7 +546,7 @@ class DataTable {
         }
         if (filtroAnio) {
             datosFiltrados = datosFiltrados.filter(contrato => {
-                const anioContrato = new Date(this.obtenerValorCampo(contrato, 'Registro')).getFullYear();
+                const anioContrato = new Date(this.obtenerValorCampo(contrato, 'Inicio')).getFullYear();
                 return String(anioContrato) === filtroAnio;
             });
         }

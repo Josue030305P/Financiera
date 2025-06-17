@@ -2,13 +2,13 @@
 
 require_once 'formatearFecha.php';
 
-// ✅ CORRECCIÓN: Usar datos de sesión en lugar de $_POST
+
 $datosContrato = $_SESSION['datos_contrato'];
 $inversionista = $datosContrato['inversionista'];
 $contrato = $datosContrato['contrato'];
 $cronograma = $contrato['cronograma']; // Aquí están los cronograma_pagos
 $tiporetorno = $inversionista['tiporetorno'];
-$capital = $contrato['capital']; // ✅ Usar directamente desde $contrato
+$capital = $contrato['capital']; //  Usar directamente desde $contrato
 
 $ultimaFechaCronograma = null;
 if (!empty($cronograma)) {
@@ -132,7 +132,7 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
                 </tr>
                 <tr>
                     <td>MONTO DE PAGO</td>
-                    <td><?php echo $tiporetorno; ?></td>
+                    <td><?php echo $cronograma[0]['totalneto'];?> SOLES CADA MES</td>
                 </tr>
                 <?php if ($inversionista['banco']): ?>
                 <tr>

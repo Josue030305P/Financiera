@@ -42,9 +42,7 @@ CREATE PROCEDURE sp_delete_contrato(
 IN idcontrato_ INT
 )
 BEGIN
-    UPDATE contratos SET 
-    estado = 'Eliminado'
-    WHERE idcontrato = idcontrato_;
+    UPDATE contratos SET estado = 'Eliminado' WHERE idcontrato = idcontrato_;
 END //
 DELIMITER ;
 

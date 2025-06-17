@@ -28,8 +28,8 @@
           <input class="form-input" type="password" placeholder="Ingresa tu contraseña" required="true"
             name="passworduser">
         </label>
-        <a class="link-info forget-link" href="##">No recuerdas tu contraseña?</a>
-        <a class="link-info forget-link" style="display: block;" href="<?= BASE_URL ?>signup">Registrarse</a>
+        <!-- <a class="link-info forget-link" href="##">No recuerdas tu contraseña?</a>
+        <a class="link-info forget-link" style="display: block;" href="<?= BASE_URL ?>signup">Registrarse</a> -->
         <label class="form-checkbox-wrapper">
           <input class="form-checkbox" type="checkbox" required>
           <span class="form-checkbox-label">Recordarme</span>

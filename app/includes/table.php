@@ -42,7 +42,7 @@
                             <label for="filtro-asesor-lead">Filtrar por Asesor:</label>
                             <select id="filtro-asesor-lead" class="filter-select">
                                 <option value="">Todos</option>
-                                <!-- Opciones de asesores se cargarán con JavaScript -->
+                               
                             </select>
                         </div>
 
@@ -60,7 +60,7 @@
                             <label for="filtro-asesor-contrato">Filtrar por Asesor:</label>
                             <select id="filtro-asesor-contrato" class="filter-select">
                                 <option value="">Todos</option>
-                                <!-- Las opciones de asesores se cargarán con JavaScript -->
+                            
                             </select>
                         </div>
                         <div class="filter-group">

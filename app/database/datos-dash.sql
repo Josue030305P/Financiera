@@ -118,7 +118,7 @@ JOIN
 JOIN
     roles r ON col.idrol = r.idrol
 WHERE
-    p.estado = 'Usuario'
+    p.estado = 'Colaborador'
 ORDER BY
     p.apellidos ASC;
 
