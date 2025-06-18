@@ -118,7 +118,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 'tipodocumento' => htmlspecialchars($dataJSON['tipodocumento']),
                 'numdocumento'=> htmlspecialchars($dataJSON['numdocumento']),
                 'idpais' => htmlspecialchars($dataJSON['idpais']),
-                'iddistrito'=> htmlspecialchars($dataJSON['iddistrito']),
+                'iddistrito'=> htmlspecialchars($dataJSON['iddistrito']) ?? null,
                 'apellidos' => htmlspecialchars($dataJSON['apellidos']),
                 'nombres' => htmlspecialchars($dataJSON['nombres']),
                 'fechanacimiento'=> htmlspecialchars($dataJSON['fechanacimiento']),

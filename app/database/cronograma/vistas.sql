@@ -25,6 +25,8 @@ DROP VIEW vista_cronogramapagos;
 -- VISTA PARA UTILIZAR EN LA VISTA DE CRONOGRAMA DE PAGOS
 
 
+DROP VIEW IF EXISTS vista_cronogramas_detallado;
+
 CREATE VIEW vista_cronogramas_detallado AS
 SELECT
     cp.idcronogramapago,
@@ -39,12 +41,11 @@ SELECT
     cp.totalbruto,
     cp.totalneto,
     cp.amortizacion,
-	(cp.totalneto - cp.amortizacion) as restante,
+    (cp.totalneto - cp.amortizacion) as restante,
     cp.estado AS estado_pago,
     c.moneda AS moneda_contrato,
-	DATE_FORMAT(c.fechainicio, '%d-%m-%Y') AS fecha_inicio_contrato,
+    DATE_FORMAT(c.fechainicio, '%d-%m-%Y') AS fecha_inicio_contrato,
     DATE_FORMAT(c.fechafin, '%d-%m-%Y') AS fecha_fin_contrato
- 
 FROM
     cronogramapagos cp
 JOIN
@@ -52,8 +53,9 @@ JOIN
 JOIN
     inversionistas i ON c.idinversionista = i.idinversionista
 LEFT JOIN
-    personas p ON i.idpersona = p.idpersona;
-    
+    personas p ON i.idpersona = p.idpersona
+WHERE
+    cp.estado <> 'Eliminado';
     
 
 

@@ -2,6 +2,9 @@
 CREATE DATABASE financiera;
 -- DROP DATABASE financiera;
 USE financiera;
+SELECT * FROM usuarios
+
+--UPDATE usuarios SET passworduser='$2y$10$wv2310nlHt7yRcNXqdahBuxfkVUnIEqdocHYQ62ypkxER95RNXr5C' WHERE idusuario =1
 
 CREATE TABLE pais(
 idpais 				INT PRIMARY KEY AUTO_INCREMENT,
@@ -75,6 +78,7 @@ ALTER TABLE personas MODIFY COLUMN estado ENUM('Activo','Inactivo','Usuario','Co
 SELECT * FROM personas;
 SELECT * FROM colaboradores;
 SELECT * FROM leads;
+SELECT * FROM contratos;
 
 
 CREATE TABLE empresas(
@@ -135,7 +139,7 @@ SELECT * FROM personas;
 -- SHOW COLUMNS FROM usuarios;
 SELECT * FROM usuarios;
 SELECT * FROM colaboradores;
---ALTER TABLE usuarios MODIFY COLUMN estado  ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo'
+/* ALTER TABLE usuarios MODIFY COLUMN estado  ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo' */
 
 
 CREATE TABLE inversionistas(
@@ -285,8 +289,7 @@ USE financiera;
 ALTER TABLE contratos MODIFY COLUMN estado ENUM('Vigente','Completado', 'Eliminado') DEFAULT 'Vigente';
 
 SELECT * FROM contratos;
--- PREGUNTAR LUEGO SI UN INVERSIONISTA PUEDE TENER SOLO UN CONTRATO:
--- ALTER TABLE contratos MODIFY COLUMN idinversionista INT NOT NULL  UNIQUE;
+
 
 
 CREATE TABLE numcuentas(
@@ -343,13 +346,13 @@ totalneto			DECIMAL(10,2) NOT NULL,
 amortizacion			DECIMAL(10,2) NOT NULL DEFAULT 0,
 restante				DECIMAL(10,2) GENERATED ALWAYS AS (totalneto - amortizacion) STORED,
 fechavencimiento		DATE NOT NULL, -- Para identificar hasta que fecha hay plazo para pagar
-estado					ENUM('Pagado','Pendiente','Vencido') DEFAULT 'Pendiente',
+estado					ENUM('Pagado','Pendiente','Vencido','Eliminado') DEFAULT 'Pendiente',
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcontrato_crono_pag FOREIGN KEY(idcontrato) REFERENCES contratos(idcontrato) 
 ) ENGINE=InnoDB; 
 
---- ALTER TABLE cronogramapagos MODIFY COLUMN estado ENUM('Pagado','Pendiente', 'Vencido') DEFAULT 'Pendiente';
+ALTER TABLE cronogramapagos MODIFY COLUMN estado ENUM('Pagado','Pendiente', 'Vencido','Eliminado') DEFAULT 'Pendiente';
 
 -- ALTER TABLE cronogramapagos DROP CONSTRAINT fk_idcontrato_crono_pag;
 
@@ -369,7 +372,7 @@ CONSTRAINT fk_idnumcuenta FOREIGN KEY(idnumcuenta) REFERENCES numcuentas(idnumcu
 )ENGINE=InnoDB;
 
 
-ALTER TABLE detallepagos ADD COLUMN comprobante VARCHAR(255);
+--ALTER TABLE detallepagos ADD COLUMN comprobante VARCHAR(255);
 
 SELECT * FROM detallepagos;
 USE financiera

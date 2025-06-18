@@ -18,6 +18,11 @@ class LeadForm {
         }
         
         this.initEventListeners();
+
+         const paisSelect = document.getElementById('pais');
+        if (paisSelect) {
+            paisSelect.dispatchEvent(new Event('change'));
+        }
     }
 
     async cargarAsesores() {
@@ -69,53 +74,65 @@ class LeadForm {
             });
         }
     }
-async cargarDatosLead() {
-    try {
-        const response = await fetch(`${this.baseUrl}app/controllers/LeadController.php?id=${this.leadId}`);
-        const result = await response.json();
-        
-        if (result.status === 'success') {
-            const lead = result.data;
+    async cargarDatosLead() {
+        try {
+            const response = await fetch(`${this.baseUrl}app/controllers/LeadController.php?id=${this.leadId}`);
+            const result = await response.json();
             
-            // Cargar datos básicos
-            document.getElementById('apellidos').value = lead.apellidos || '';
-            document.getElementById('nombres').value = lead.nombres || '';
-            document.getElementById('telefono').value = lead.telprincipal || '';
-            document.getElementById('correo').value = lead.email || '';
-            document.getElementById('prioridad').value = lead.prioridad || '';
-            document.getElementById('asesor').value = lead.idasesor || '';
-            document.getElementById('canal').value = lead.idcanal || '';
-            document.getElementById('ocupacion').value = lead.ocupacion || '';
-            document.getElementById('comentarios').value = lead.comentarios || '';
-            
-         
-            if (typeof window.cargarUbigeoCompleto === 'function') {
-                window.cargarUbigeoCompleto(
-                    lead.idpais || '',
-                    lead.iddepartamento || '',
-                    lead.idprovincia || '', 
-                    lead.iddistrito || ''
-                );
-            } else {
+            if (result.status === 'success') {
+                const lead = result.data;
                 
+                // Cargar datos básicos
+                document.getElementById('apellidos').value = lead.apellidos || '';
+                document.getElementById('nombres').value = lead.nombres || '';
+                document.getElementById('telefono').value = lead.telprincipal || '';
+                document.getElementById('correo').value = lead.email || '';
+                document.getElementById('prioridad').value = lead.prioridad || '';
+                document.getElementById('asesor').value = lead.idasesor || '';
+                document.getElementById('canal').value = lead.idcanal || '';
+                document.getElementById('ocupacion').value = lead.ocupacion || '';
+                document.getElementById('comentarios').value = lead.comentarios || '';
+                document.getElementById('fechanacimiento').value = lead.fechanacimiento || ''; // Asegurarse de cargar la fecha de nacimiento
+                document.getElementById('tipodocumento').value = lead.tipodocumento || ''; // Asegurarse de cargar el tipo de documento
+                document.getElementById('numdocumento').value = lead.numdocumento || ''; // Asegurarse de cargar el número de documento
+                document.getElementById('domicilio').value = lead.domicilio || ''; // Asegurarse de cargar el domicilio
+                document.getElementById('telsecundario').value = lead.telsecundario || ''; // Asegurarse de cargar el telsecundario
+                document.getElementById('referencia').value = lead.referencia || ''; // Asegurarse de cargar la referencia
+                
+                // Cargar país y activar ubigeo si es necesario
                 document.getElementById('pais').value = lead.idpais || '';
+                if (typeof window.cargarUbigeoCompleto === 'function') {
+                    // Espera a que el select de país se haya establecido antes de cargar el ubigeo
+                    // y asegúrate de que 'iddistrito' sea un número o null, no una cadena vacía si no aplica
+                    window.cargarUbigeoCompleto(
+                        lead.idpais || '',
+                        lead.iddepartamento || '',
+                        lead.idprovincia || '', 
+                        lead.iddistrito || '' // Pasa el iddistrito como está, el ubigeo lo manejará
+                    );
+                }
+                
+                const addBtn = this.form.querySelector('.add-btn');
+                addBtn.textContent = 'Actualizar lead';
+            } else {
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al cargar los datos del lead: ' + result.message,
+                    confirmButtonColor: '#3085d6'
+                });
+                window.location.href = `${this.baseUrl}app/`;
             }
-            
-            const addBtn = this.form.querySelector('.add-btn');
-            addBtn.textContent = 'Actualizar lead';
-        } else {
-            await Swal.fire({
+        } catch (error) {
+            console.error('Error al cargar datos del lead:', error);
+            Swal.fire({ // Agregado Swal.fire para errores de fetch
                 icon: 'error',
-                title: 'Error',
-                text: 'Error al cargar los datos del lead: ' + result.message,
+                title: 'Error de Red',
+                text: 'No se pudo conectar para cargar los datos del lead.',
                 confirmButtonColor: '#3085d6'
             });
-            window.location.href = `${this.baseUrl}app/`;
         }
-    } catch (error) {
-        console.error('Error al cargar datos del lead:', error);
     }
-}
 
     async initEventListeners() {
         const addBtn = this.form.querySelector('.add-btn');
@@ -217,7 +234,7 @@ async cargarDatosLead() {
                 tipodocumento: document.getElementById('tipodocumento').value,
                 numdocumento: document.getElementById('numdocumento').value,
                 idpais: document.getElementById('pais').value,
-                iddistrito: document.getElementById('distrito').value,
+                iddistrito: document.getElementById('distrito').value ?? null,
                 apellidos: document.getElementById('apellidos').value,
                 nombres: document.getElementById('nombres').value,
                 fechanacimiento: document.getElementById('fechanacimiento').value,

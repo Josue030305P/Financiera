@@ -4,8 +4,13 @@ USE financiera;
 SELECT * FROM personas;
 SELECT * FROM colaboradores;
 
+SELECT * FROM contratos;
+UPDATE contratos SET fechafin = '2026-05-29	' WHERE idcontrato = 9;
 SELECT * FROM roles;
+ UPDATE contratos SET estado = 'Completado' WHERE idcontrato = 9;
+
 SELECT * FROM usuarios;
+UPDATE usuarios SET passworduser = '$2y$10$DbtIbwxMk215n9BIuChY3.M2.N/E7qdk91aLW9H3G/4PCW7qZWS7e';
 SHOW COLUMNS FROM colaboradores;
 
 DELIMITER //
@@ -61,8 +66,9 @@ END //
 
 DELIMITER ;
 
+/* UPDATE personas SET estado = 'Colaborador' WHERE idpersona = 4;  */
 
-CALL sp_add_colaborador_usuario(35,1,1,'2025-06-16','2026-06-16','Contrato de un año');
+CALL sp_add_colaborador_usuario(38,1,1,'2025-06-16','2026-06-16','Contrato de un año');
 
 
 
@@ -80,9 +86,8 @@ BEGIN
 END //
 
 DELIMITER ;
-CALL sp_add_usuario(5,'jirafales2025','12345','uploads/perfilusuario/jirafales.jpg');
+CALL sp_add_usuario(5,'milenka123','12345','uploads/fotoperfil/jirafales.jpg');
 
-SELECT * FROM detallepagos; 
 
 -- UPDATE personas SET estado = 'Usuario' WHERE idpersona = 4;
 
@@ -136,9 +141,7 @@ BEGIN
     WHERE
         u.idcolaborador IS NULL; -- Filtramos para incluir solo aquellos colaboradores que NO tienen una entrada en 'usuarios'
         -- Si el campo 'esUsuario' en la tabla 'colaboradores' realmente indica si se ha creado (o se debe crear) una cuenta de usuario,
-        -- podrías añadir aquí también: AND col.esUsuario = 'Si' si solo quieres seleccionar aquellos marcados como 'Si'.
-        -- Sin embargo, la condición IS NULL en la tabla 'usuarios' es la más directa para "aún no está grabado a la tabla usuarios".
-
+        
 END //
 
 DELIMITER ;
@@ -146,3 +149,10 @@ DELIMITER ;
 -- Para probar el procedimiento:
 CALL sp_getcolaborador_to_add_usuario();
 
+
+
+
+
+
+
+UPDATE personas SET estado = 'Usuario' WHERE idpersona = 1

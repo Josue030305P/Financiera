@@ -6,7 +6,7 @@ $password = '12345';
 
 $passwordHasheado = password_hash($password, PASSWORD_BCRYPT);
 
-// echo json_encode($passwordHasheado);
+echo json_encode($passwordHasheado);
 
 
 // Supongamos que esta es la contraseña que el usuario ingresó
