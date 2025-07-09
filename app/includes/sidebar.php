@@ -18,14 +18,10 @@ if (!isset($_SESSION['nombre'])) {
     border: none; 
     cursor: pointer; 
     font-size: 16px; 
-    padding: 10px 15px; /
+    padding: 8px; 
     border-radius: 5px; 
     transition: background-color 0.3s ease; 
-
-    
     color: #dc3545; 
-    display: flex;
-    align-items: center;
 }
 
 #logoutBtn:hover {
@@ -85,7 +81,7 @@ if (!isset($_SESSION['nombre'])) {
         </div>
     </div>
 
-    <div class="sidebar-footer">
+    <div class="sidebar-footer" style="margin-top: 10px;">
         <a href="#" class="sidebar-user">
             <span class="sidebar-user-img">
                 <picture>
