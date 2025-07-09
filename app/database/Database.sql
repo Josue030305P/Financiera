@@ -2,16 +2,16 @@
 CREATE DATABASE financiera;
 -- DROP DATABASE financiera;
 USE financiera;
-SELECT * FROM usuarios
+SELECT * FROM usuarios;
 
---UPDATE usuarios SET passworduser='$2y$10$wv2310nlHt7yRcNXqdahBuxfkVUnIEqdocHYQ62ypkxER95RNXr5C' WHERE idusuario =1
+-- UPDATE usuarios SET passworduser='$2y$10$wv2310nlHt7yRcNXqdahBuxfkVUnIEqdocHYQ62ypkxER95RNXr5C' WHERE idusuario =1
 
 CREATE TABLE pais(
 idpais 				INT PRIMARY KEY AUTO_INCREMENT,
 pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 )ENGINE=InnoDB;
 
-INSERT INTO pais(pais)VALUES('Argentina');
+
 
 CREATE TABLE departamentos(
 iddepartamento		INT PRIMARY KEY AUTO_INCREMENT,
@@ -378,7 +378,9 @@ SELECT * FROM detallepagos;
 USE financiera
 
 SELECT * FROM cronogramapagos;
-
+SHOW COLUMNS FROM cronogramapagos;
+SHOW COLUMNS FROM contratos;
+SELECT * FROM contratos;
 --  DROP TABLE detallepagos;
 --  ALTER TABLE detallepagos ADD COLUMN comprobante VARCHAR(255) NULL;
 -- ALTER TABLE detallepagos MODIFY COLUMN comprobante VARCHAR(255) NULL;
@@ -389,19 +391,20 @@ idacceso				INT PRIMARY KEY AUTO_INCREMENT,
 idusuario_acceso 		INT NOT NULL,
 fechahora				DATETIME NOT NULL DEFAULT NOW(),
 fechafin					DATETIME NULL,
-status_					ENUM('Activo','In
-activo') NOT NULL,
+status_					ENUM('Activo','Inactivo') NOT NULL,
 CONSTRAINT fk_idusuario_acceso FOREIGN KEY(idusuario_acceso) REFERENCES usuarios(idusuario) -- Aclarar leugo si es en colabordores o usuarios;
 )ENGINE=InnoDB;
 
+SHOW COLUMNS FROM accesos;
 
-
+ALTER TABLE accesos MODIFY COLUMN status_ ENUM('Activo','Inactivo') NOT NULL;
 
 
 
 
 
 USE financiera;
+
 SELECT * FROM entidades;
 SELECT * FROM inversionistas;
 SELECT * FROM personas;

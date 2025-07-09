@@ -100,7 +100,7 @@ $capitalFormateado = 'S/' . number_format($capital, 2, '.', ',');
                 </tr>
                 <tr>
                     <td>NACIONALIDAD</td>
-                    <td>eruana</td>
+                    <td>Peruana</td>
                 </tr>
                 <tr>
                     <td>MONTO DE INVERSIÓN</td>

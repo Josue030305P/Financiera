@@ -54,9 +54,11 @@ JOIN
     inversionistas i ON c.idinversionista = i.idinversionista
 LEFT JOIN
     personas p ON i.idpersona = p.idpersona
-WHERE
-    cp.estado <> 'Eliminado';
     
+WHERE
+    cp.estado NOT IN ('Eliminado')
+ORDER BY
+    c.idcontrato DESC;
 
 
 

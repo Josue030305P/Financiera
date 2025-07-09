@@ -12,7 +12,7 @@ class Login {
     public function login($params = []): array {
         try {
             // 1. Buscar al usuario por su nombre de usuario para obtener su contraseña hasheada
-            $sql = "SELECT idusuario, usuario, passworduser FROM usuarios WHERE usuario = ?";
+            $sql = "SELECT idusuario, usuario, passworduser, fotoperfil FROM usuarios WHERE usuario = ?";
             $smt = $this->conexion->prepare($sql);
             $smt->execute([$params["usuario"]]);
             $user = $smt->fetch(PDO::FETCH_ASSOC);
@@ -21,12 +21,14 @@ class Login {
             if ($user && password_verify($params["passworduser"], $user["passworduser"])) {
                 // Las credenciales son correctas
                 $_SESSION['idusuario'] = $user['idusuario'];
+                $_SESSION['fotoperfil'] = $user['fotoperfil'];
                 $this->registrarAcceso($user['idusuario']);
                 
                 return [
                     'success' => true,
                     'nombre' => $user['usuario'],
-                    'idusuario' => $user['idusuario']
+                    'idusuario' => $user['idusuario'],
+                    'fotoperfil' => $user['fotoperfil']
                 ];
             } else {
                 // Usuario no encontrado o contraseña incorrecta
@@ -39,9 +41,8 @@ class Login {
             // Captura otros errores generales
             throw new Exception("Error inesperado: " . $e->getMessage());
         }
+
     }
-
-
     // public function registrarse($params = []) : array {
 
     //     try {

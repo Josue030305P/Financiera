@@ -73,10 +73,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
-    <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
-    <script src="<?= BASE_URL ?>app/js/script.js"></script>
     <script src="<?= BASE_URL ?>app/js/detallepago.index.js"></script>
+    <script src="<?= BASE_URL ?>app/js/inactividad.js"></script>
 
 </body>
 

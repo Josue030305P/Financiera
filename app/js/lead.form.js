@@ -92,12 +92,7 @@ class LeadForm {
                 document.getElementById('canal').value = lead.idcanal || '';
                 document.getElementById('ocupacion').value = lead.ocupacion || '';
                 document.getElementById('comentarios').value = lead.comentarios || '';
-                document.getElementById('fechanacimiento').value = lead.fechanacimiento || ''; // Asegurarse de cargar la fecha de nacimiento
-                document.getElementById('tipodocumento').value = lead.tipodocumento || ''; // Asegurarse de cargar el tipo de documento
-                document.getElementById('numdocumento').value = lead.numdocumento || ''; // Asegurarse de cargar el número de documento
-                document.getElementById('domicilio').value = lead.domicilio || ''; // Asegurarse de cargar el domicilio
-                document.getElementById('telsecundario').value = lead.telsecundario || ''; // Asegurarse de cargar el telsecundario
-                document.getElementById('referencia').value = lead.referencia || ''; // Asegurarse de cargar la referencia
+             
                 
                 // Cargar país y activar ubigeo si es necesario
                 document.getElementById('pais').value = lead.idpais || '';
@@ -125,12 +120,6 @@ class LeadForm {
             }
         } catch (error) {
             console.error('Error al cargar datos del lead:', error);
-            Swal.fire({ // Agregado Swal.fire para errores de fetch
-                icon: 'error',
-                title: 'Error de Red',
-                text: 'No se pudo conectar para cargar los datos del lead.',
-                confirmButtonColor: '#3085d6'
-            });
         }
     }
 

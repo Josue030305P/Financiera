@@ -26,16 +26,32 @@ LEFT JOIN
     colaboradores col ON u.idcolaborador = col.idcolaborador
 LEFT JOIN
     personas p_asesor ON col.idpersona = p_asesor.idpersona
-WHERE LOWER(inv.estado) = 'activo' 
-GROUP BY
+   
+    WHERE LOWER(inv.estado) = 'activo' 
+    GROUP BY
     inv.idinversionista,
     p.nombres,
     p.apellidos,
     cont.capital,
-    p_asesor.nombres;
+    p_asesor.nombres
+
+    ORDER BY inv.idinversionista DESC;
 
 
 -- VOLVER A CREAR LA VISTA  LIST_INVERSIONSITAS
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 CREATE VIEW vista_inversionistas_resumida_profesional AS

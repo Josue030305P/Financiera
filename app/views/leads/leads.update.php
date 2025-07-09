@@ -117,7 +117,7 @@
 
                         <div class="form-group">
                             <label for="prioridad">Prioridad</label>
-                            <select name="prioridad" id="prioridad" class="select-box" required>
+                            <select name="prioridad" id="prioridad" class="select-box" required disabled>
                                 <option value="">Seleccione prioridad</option>
                                 <option value="Alto">Alto</option>
                                 <option value="Medio">Medio</option>
@@ -127,14 +127,14 @@
 
                         <div class="form-group">
                             <label for="asesor">Asesor</label>
-                            <select name="asesor" id="asesor" class="select-box" required>
+                            <select name="asesor" id="asesor" class="select-box" required disabled>
                                 <option value="">Seleccione un asesor</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="canal">Canal</label>
-                            <select name="canal" id="canal" class="select-box" required>
+                            <select name="canal" id="canal" class="select-box" required disabled>
                                 <option value="">Seleccione un canal</option>
                                 <option value="1">Facebook</option>
                                 <option value="2">WhatsApp</option>
@@ -144,7 +144,7 @@
 
                         <div class="form-group">
                             <label for="ocupacion">Ocupación</label>
-                            <input type="text" id="ocupacion" name=ocupacion placeholder="Ingrese una ocupación" class="ocupacion">
+                            <input type="text" id="ocupacion" name=ocupacion placeholder="Ingrese una ocupación" class="ocupacion" disabled>
                         </div>
 
                         <div class="form-group full-width">

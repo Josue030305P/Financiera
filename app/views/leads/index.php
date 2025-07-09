@@ -83,13 +83,15 @@ $links = [
 </script>
 
 <script src="<?= BASE_URL ?>app/js/leadsFiltros.js"></script>
+
+
+
  
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?= BASE_URL ?>app/plugins/chart.min.js"></script>
-    <script src="<?= BASE_URL ?>app/plugins/feather.min.js"></script>
-    <script src="<?= BASE_URL ?>app/js/test-cronograma.js"></script>
-    <script src="<?= BASE_URL ?>app/js/script.js"></script>
+   
+    <!-- <script src="<?= BASE_URL ?>app/js/test-cronograma.js"></script> -->
+    
 
     
 </body>

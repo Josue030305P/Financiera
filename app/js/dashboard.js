@@ -8,6 +8,53 @@ document.addEventListener('DOMContentLoaded', () => {
         return parseFloat(value || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     };
 
+    // Instancia global (fuera de funciones)
+const notyf = new Notyf({
+  duration: 6000,
+  ripple: true,
+  position: { x: 'right', y: 'top' },
+  types: [
+    {
+      type: 'warning',
+      background: '#f59e0b',
+      icon: {
+        className: 'fas fa-exclamation-triangle',
+        tagName: 'i',
+        color: 'white'
+      }
+    },
+    {
+      type: 'error',
+      background: '#dc2626',
+      icon: {
+        className: 'fas fa-exclamation-circle',
+        tagName: 'i',
+        color: 'white'
+      }
+    }
+  ]
+});
+
+
+    
+    const formatDateForPdf = (type) => {
+        const today = new Date();
+        if (type === 'hoy') {
+            return today.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        } else if (type === 'ayer') {
+            const yesterday = new Date(today);
+            yesterday.setDate(today.getDate() - 1);
+            return yesterday.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        } else if (type === 'semana_actual') {
+            const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 1));
+            const lastDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+            return `${firstDayOfWeek.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })} - ${lastDayOfWeek.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
+        } else if (type === 'mes_actual') {
+            return today.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+        }
+        return '';
+    };
+
     const fetchDashboardData = async () => {
         try {
             const response = await fetch(`${baseUrl}app/controllers/DashboardController.php`);
@@ -26,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         leadsEnProceso: apiResponse.data.resumen.leads_en_proceso || 0,
                         contratosPorVencer: apiResponse.data.resumen.contratos_por_vencer || 0,
                         colaboradoresActivos: apiResponse.data.resumen.colaboradores_activos || 0,
-                        pagosHoy: apiResponse.data.resumen.total_pagos_hoy || "0.00", // This is now count
+                        pagosHoy: apiResponse.data.resumen.total_pagos_hoy || "0.00", 
                         pagosAyer: apiResponse.data.resumen.total_monto_pagado_ayer || "0.00",
                         pagosSemanaActual: apiResponse.data.resumen.total_monto_pagado_semana_actual || "0.00",
                         pagosMesActual: apiResponse.data.resumen.total_monto_pagado_mes_actual || "0.00"
@@ -102,15 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 return transformedData;
             } else {
-                console.error("Unexpected dashboard data format or false status:", apiResponse);
+                
                 return null;
             }
         } catch (error) {
-            console.error("Error fetching dashboard data:", error);
+            
             Swal.fire({
                 icon: 'error',
-                title: 'Load Error',
-                text: 'Could not load dashboard data. Please try again later.'
+                title: 'Error al cargar datos',
+                text: 'No se han cargado los datos.'
             });
             return null;
         }
@@ -119,12 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderSummaryWidgets = (data) => {
         const summaryWidgetsGrid = document.getElementById('dashboard-summary-widgets');
         if (!summaryWidgetsGrid || !data || !data.summary) {
-            console.warn("No summary data to render widgets.");
             return;
         }
 
-        summaryWidgetsGrid.innerHTML = `
-            <div class="card widget-card" data-target-section="detalle-contratos_activos-table-section">
+        summaryWidgetsGrid.innerHTML = `<div class="card widget-card" data-target-section="detalle-contratos_activos-table-section">
                 <div class="card-header header-primary">
                     <h5 class="card-title"><i class="fas fa-file-contract icon-margin"></i>Contratos Activos</h5>
                 </div>
@@ -205,9 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="card-body text-center">
                     <p class="widget-value">${data.summary.colaboradoresActivos || 0}</p>
                 </div>
-            </div>
-        `;
-
+            </div>`;
         document.querySelectorAll('.widget-card').forEach(card => {
             card.addEventListener('click', () => {
                 const targetSectionId = card.dataset.targetSection;
@@ -222,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tableBody.innerHTML = '';
         if (!items || items.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="${columns.length}" style="text-align: center; padding: 15px; color: #777;">No data available.</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="${columns.length}" style="text-align: center; padding: 15px; color: #777;">No hay datos para mostrar.</td></tr>`;
             return;
         }
         items.forEach(item => {
@@ -238,122 +281,106 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const renderMontoTotalInvertidoChart = (contratosData) => {
-        let canvas = document.getElementById('montoTotalInvertidoChart');
-        const chartContainer = canvas ? canvas.closest('.chart-container') : null;
+const renderMontoTotalInvertidoChart = (contratosData) => {
+    const chartContainer = document.querySelector('#detalle-monto_total_invertido-chart-section .chart-container');
+    if (!chartContainer) return;
 
-        if (!chartContainer) {
-            console.error("Chart container 'montoTotalInvertidoChart' not found.");
-            return;
+    // Eliminar div anterior si existe
+    const existingChartDiv = document.getElementById('montoTotalInvertidoChartApex');
+    if (existingChartDiv) {
+        existingChartDiv.remove();
+    }
+
+    // Crear nuevo div para el gráfico
+    const chartDiv = document.createElement('div');
+    chartDiv.id = 'montoTotalInvertidoChartApex';
+    chartDiv.style.height = '350px';
+    chartContainer.appendChild(chartDiv);
+
+    // Procesar datos
+    const dataByYear = {};
+    let totalInvertido = 0;
+
+    contratosData.forEach(item => {
+        const year = new Date(item.fecha_inicio).getFullYear();
+        const monto = parseFloat(item.monto_invertido || 0);
+        if (!isNaN(monto)) {
+            dataByYear[year] = (dataByYear[year] || 0) + monto;
+            totalInvertido += monto;
         }
+    });
 
-        if (montoTotalInvertidoChartInstance) {
-            montoTotalInvertidoChartInstance.destroy();
-            montoTotalInvertidoChartInstance = null;
-        }
+    const sortedYears = Object.keys(dataByYear).sort((a, b) => a - b);
+    const labels = sortedYears.map(year => `Año ${year}`);
+    const dataValues = sortedYears.map(year => parseFloat(dataByYear[year].toFixed(2)));
 
-        if (!contratosData || contratosData.length === 0) {
-            chartContainer.innerHTML = '<p class="text-center py-4 text-gray-500">No hay datos de contratos activos para mostrar el gráfico de monto invertido.</p>';
-            if (canvas) {
-                canvas.remove();
-            }
-            return;
-        } else {
-            if (!canvas || chartContainer.querySelector('p.text-gray-500')) {
-                chartContainer.innerHTML = '';
-                const newCanvas = document.createElement('canvas');
-                newCanvas.id = 'montoTotalInvertidoChart';
-                chartContainer.appendChild(newCanvas);
-                canvas = newCanvas;
-            }
-        }
-        
-        const dataByYear = {};
-        let totalInvestedAmount = 0;
-        contratosData.forEach(item => {
-            const year = new Date(item.fecha_inicio).getFullYear();
-            const monto = parseFloat(item.monto_invertido || 0);
-            if (!isNaN(monto)) {
-                dataByYear[year] = (dataByYear[year] || 0) + monto;
-                totalInvestedAmount += monto;
-            }
-        });
-
-        const sortedYears = Object.keys(dataByYear).sort((a, b) => parseInt(a) - parseInt(b));
-        const labels = sortedYears.map(year => `Año ${year}`);
-        const dataValues = sortedYears.map(year => dataByYear[year]);
-
-        montoTotalInvertidoChartInstance = new Chart(canvas, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Monto Total Invertido (S/)',
-                    data: dataValues,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgb(240, 102, 47)',
-                    borderWidth: 2,
-                    tension: 0.4,
-                    fill: true,
-                    pointBackgroundColor: 'rgb(235, 54, 54)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(235, 54, 54)'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Monto (S/)'
-                        },
-                        ticks: {
-                            callback: function(value) {
-                                return `S/ ${formatCurrency(value)}`;
-                            }
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Año'
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                    title: {
-                        display: true,
-                        text: `Evolución del Monto Total Invertido por Año (Total: S/ ${formatCurrency(totalInvestedAmount)})`
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed.y !== null) {
-                                    label += `S/ ${formatCurrency(context.parsed.y)}`;
-                                }
-                                return label;
-                            }
-                        }
-                    }
+    // Crear gráfico
+    montoTotalInvertidoChartInstance = new ApexCharts(chartDiv, {
+        chart: {
+            type: 'area',
+            height: 350,
+            toolbar: {
+                show: true,
+                tools: {
+                    download: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    reset: true
                 }
             }
-        });
-    };
+        },
+        series: [{
+            name: 'Monto Invertido (S/)',
+            data: dataValues
+        }],
+        xaxis: {
+            categories: labels,
+            title: { text: 'Año' }
+        },
+        yaxis: {
+            title: { text: 'Monto (S/)' },
+            labels: {
+                formatter: val => `S/ ${formatCurrency(val)}`
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: val => `S/ ${formatCurrency(val)}`
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.4,
+                opacityTo: 0.1,
+                stops: [0, 90, 100]
+            }
+        },
+        colors: ['#00BFFF'],
+        title: {
+            text: `Evolución del Monto Total Invertido por Año (Total: S/ ${formatCurrency(totalInvertido)})`,
+            align: 'center',
+            style: {
+                fontSize: '16px'
+            }
+        },
+        tooltip: {
+            y: {
+                formatter: val => `S/ ${formatCurrency(val)}`
+            }
+        }
+    });
+
+    montoTotalInvertidoChartInstance.render();
+};
+
 
     const renderDetailSections = (data) => {
         if (!data || !data.details || Object.keys(data.details).length === 0) {
-            console.warn("No detail data available to render sections.");
             return;
         }
 
@@ -421,145 +448,134 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'fecha_hora_pago' }
         ]);
     };
+const toggleDetailSection = (sectionId, clickedCard, allDashboardData) => {
+    const detalleTablasTitulo = document.getElementById('detalle-tablas-titulo');
+    const detalleTablasContainer = document.getElementById('detalle-tablas-container');
 
-    const toggleDetailSection = (sectionId, clickedCard, allDashboardData) => {
-        const detalleTablasTitulo = document.getElementById('detalle-tablas-titulo');
-        const detalleTablasContainer = document.getElementById('detalle-tablas-container');
+    // Ocultar todas las secciones y quitar clases activas
+    document.querySelectorAll('.detalle-table-section, .detalle-chart-section').forEach(section => {
+        section.style.display = 'none';
+    });
+    document.querySelectorAll('.widget-card').forEach(card => {
+        card.classList.remove('active-card');
+    });
 
-        document.querySelectorAll('.detalle-table-section, .detalle-chart-section').forEach(section => {
-            section.style.display = 'none';
+    // Destruir gráfico si existe
+    if (montoTotalInvertidoChartInstance) {
+        montoTotalInvertidoChartInstance.destroy();
+        montoTotalInvertidoChartInstance = null;
+    }
+
+    const targetSection = document.getElementById(sectionId);
+
+    if (activeSectionId === sectionId) {
+        detalleTablasTitulo.style.display = 'none';
+        detalleTablasContainer.style.display = 'none';
+        activeSectionId = null;
+        return; // Salimos si ya está activo (para ocultarlo)
+    }
+
+    if (targetSection) {
+        // Mostrar sección
+        targetSection.style.display = 'block';
+        detalleTablasTitulo.style.display = 'block';
+        detalleTablasContainer.style.display = 'grid';
+
+        // Eliminar parrafo de total anterior si existe
+        const existingTotalParagraph = targetSection.querySelector('.total-amount-display');
+        if (existingTotalParagraph) {
+            existingTotalParagraph.remove();
+        }
+
+        // Mostrar totales dependiendo del tipo
+        let totalValue = "0.00";
+        let titleText = "";
+        let isCurrency = true;
+
+        if (sectionId === 'detalle-pagos_hoy-table-section') {
+            const sumHoy = allDashboardData.details.pagosHoy.reduce((sum, item) => sum + parseFloat(item.monto_pagado || 0), 0);
+            totalValue = sumHoy.toFixed(2);
+            titleText = "Monto Total Pagado Hoy";
+        } else if (sectionId === 'detalle-pagos_ayer-table-section') {
+            totalValue = allDashboardData.summary.pagosAyer;
+            titleText = "Total Pagado Ayer";
+        } else if (sectionId === 'detalle-pagos_semana_actual-table-section') {
+            totalValue = allDashboardData.summary.pagosSemanaActual;
+            titleText = "Total Pagado Esta Semana";
+        } else if (sectionId === 'detalle-pagos_mes_actual-table-section') {
+            totalValue = allDashboardData.summary.pagosMesActual;
+            titleText = "Total Pagado Este Mes";
+        }
+
+        if (sectionId.startsWith('detalle-pagos_') && parseFloat(totalValue) !== 0) {
+            const totalParagraph = document.createElement('p');
+            totalParagraph.classList.add('total-amount-display');
+            totalParagraph.style.cssText = `
+                text-align: center;
+                font-size: 1.2em;
+                font-weight: bold;
+                color: rgba(49, 43, 41, 0.64);
+                margin: 20px 0 15px 0;
+                padding: 10px;
+                border: 1px solid #007bff;
+                border-radius: 8px;
+                background-color: #e7f3ff;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            `;
+            totalParagraph.innerHTML = `<strong>${titleText}:</strong> S/ ${formatCurrency(totalValue)}`;
+            targetSection.querySelector('.card-body').prepend(totalParagraph);
+        }
+
+        // Renderizar el gráfico si es la sección correspondiente
+        if (sectionId === 'detalle-monto_total_invertido-chart-section') {
+            renderMontoTotalInvertidoChart(allDashboardData.details.contratosActivos);
+        }
+
+        clickedCard.classList.add('active-card');
+        activeSectionId = sectionId;
+
+        detalleTablasTitulo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+};
+const showInitialAlerts = (summaryData) => {
+    if (!summaryData) return;
+
+    const { contratosPorVencer, proximosPagosPendientes } = summaryData;
+
+    if (contratosPorVencer > 0) {
+        notyf.open({
+            type: 'error',
+            message: `⚠️ Hay ${contratosPorVencer} contrato(s) por vencer pronto.`,
+            background: '#dc3545'
         });
-        document.querySelectorAll('.widget-card').forEach(card => {
-            card.classList.remove('active-card');
+
+        setTimeout(() => {
+            const card = document.querySelector('.widget-card[data-target-section="detalle-contratos_por_vencer-table-section"]');
+            if (card) toggleDetailSection('detalle-contratos_por_vencer-table-section', card, initialDashboardData);
+        }, 1500);
+    }
+
+    if (proximosPagosPendientes > 0) {
+        notyf.open({
+            type: 'warning',
+            message: `📅 Tienes ${proximosPagosPendientes} pago(s) próximo(s) a vencer.`,
+            background: '#f59e0b'
         });
 
-        if (montoTotalInvertidoChartInstance) {
-            montoTotalInvertidoChartInstance.destroy();
-            montoTotalInvertidoChartInstance = null;
-        }
+        setTimeout(() => {
+            const card = document.querySelector('.widget-card[data-target-section="detalle-proximos_pagos-table-section"]');
+            if (card) toggleDetailSection('detalle-proximos_pagos-table-section', card, initialDashboardData);
+        }, 2000);
+    }
+};
 
-        if (activeSectionId === sectionId) {
-            detalleTablasTitulo.style.display = 'none';
-            detalleTablasContainer.style.display = 'none';
-            activeSectionId = null;
-        } else {
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-                detalleTablasTitulo.style.display = 'block';
-                detalleTablasContainer.style.display = 'grid';
-
-                const existingTotalParagraph = targetSection.querySelector('.total-amount-display');
-                if (existingTotalParagraph) {
-                    existingTotalParagraph.remove();
-                }
-
-                let totalValue = "0.00"; 
-                let titleText = "";
-                let isCurrency = true; 
-
-                if (sectionId === 'detalle-pagos_hoy-table-section') {
-                    
-                    const sumHoy = allDashboardData.details.pagosHoy.reduce((sum, item) => sum + parseFloat(item.monto_pagado || 0), 0);
-                    totalValue = sumHoy.toFixed(2); 
-                    titleText = "Monto Total Pagado Hoy";
-                    isCurrency = true; 
-                } else if (sectionId === 'detalle-pagos_ayer-table-section') {
-                    totalValue = allDashboardData.summary.pagosAyer;
-                    titleText = "Total Pagado Ayer";
-                    isCurrency = true;
-                } else if (sectionId === 'detalle-pagos_semana_actual-table-section') {
-                    totalValue = allDashboardData.summary.pagosSemanaActual;
-                    titleText = "Total Pagado Esta Semana";
-                    isCurrency = true;
-                } else if (sectionId === 'detalle-pagos_mes_actual-table-section') {
-                    totalValue = allDashboardData.summary.pagosMesActual;
-                    titleText = "Total Pagado Este Mes";
-                    isCurrency = true;
-                }
-
-                if (sectionId.startsWith('detalle-pagos_') && parseFloat(totalValue) !== 0) { 
-                    const totalParagraph = document.createElement('p');
-                    totalParagraph.classList.add('total-amount-display');
-                    totalParagraph.style.cssText = `
-                        text-align: center;
-                        font-size: 1.2em;
-                        font-weight: bold;
-                        color:rgb(255, 51, 0);
-                        margin: 20px 0 15px 0;
-                        padding: 10px;
-                        border: 1px solid #007bff;
-                        border-radius: 8px;
-                        background-color: #e7f3ff;
-                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                    `;
-                    totalParagraph.innerHTML = `<strong>${titleText}:</strong> S/ ${formatCurrency(totalValue)}`;
-                    targetSection.querySelector('.card-body').prepend(totalParagraph);
-                }
-
-                if (sectionId === 'detalle-monto_total_invertido-chart-section') {
-                    renderMontoTotalInvertidoChart(allDashboardData.details.contratosActivos);
-                }
-
-                clickedCard.classList.add('active-card');
-                activeSectionId = sectionId;
-                
-                detalleTablasTitulo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-    };
-
-    const showInitialAlerts = (summaryData) => {
-        let alertMessage = "";
-        let showWarning = false;
-
-        if (summaryData.contratosPorVencer > 0) {
-            alertMessage += `¡ATENCIÓN! Hay <span style="font-weight: bold; color: #dc3545;">${summaryData.contratosPorVencer}</span> contrato(s) por vencer pronto.`;
-            showWarning = true;
-        }
-
-        if (summaryData.proximosPagosPendientes > 0) {
-            if (alertMessage !== "") alertMessage += "<br><br>";
-            alertMessage += `Tienes <span style="font-weight: bold; color: #ffc107;">${summaryData.proximosPagosPendientes}</span> pago(s) pendiente(s) próximo(s) a vencer.`;
-            showWarning = true;
-        }
-
-        if (showWarning) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Notificaciones Importantes',
-                html: alertMessage,
-                confirmButtonText: 'Ver Detalles',
-                showCancelButton: true,
-                cancelButtonText: 'Entendido',
-                customClass: {
-                    container: 'alert-container-class',
-                    popup: 'alert-popup-class',
-                    confirmButton: 'alert-confirm-button',
-                    cancelButton: 'alert-cancel-button'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const dataToPass = initialDashboardData;
-                    if (summaryData.contratosPorVencer > 0) {
-                        const card = document.querySelector('.widget-card[data-target-section="detalle-contratos_por_vencer-table-section"]');
-                        if (card) toggleDetailSection('detalle-contratos_por_vencer-table-section', card, dataToPass);
-                    } else if (summaryData.proximosPagosPendientes > 0) {
-                        const card = document.querySelector('.widget-card[data-target-section="detalle-proximos_pagos-table-section"]');
-                        if (card) toggleDetailSection('detalle-proximos_pagos-table-section', card, dataToPass);
-                    }
-                }
-            });
-        }
-    };
-
-    const exportTableToPdf = (tableBodyId, title, totalAmountToExport = null, isCount = false) => {
+    const exportTableToPdf = (tableBodyId, title, allDashboardData) => {
         const tableBody = document.getElementById(tableBodyId);
         if (!tableBody) {
             Swal.fire({
                 icon: 'error',
                 title: 'Export Error',
-                text: 'Table not found for export.'
+                text: 'La tabla no tiene datos para exportar.'
             });
             return;
         }
@@ -571,11 +587,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = [];
         const noDataRow = tableBody.querySelector('tr td[colspan]');
-        if (noDataRow && noDataRow.innerText.includes("No data available")) {
+        if (noDataRow && noDataRow.innerText.includes("No hay datos para mostrar.")) {
             Swal.fire({
                 icon: 'info',
-                title: 'Empty Table',
-                text: 'No data to export in this table.'
+                title: 'Tabla vacía',
+                text: 'No hya datos para exporatr.'
             });
             return;
         }
@@ -590,18 +606,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let currentY = 40;
         doc.setFontSize(16);
-        doc.text(title.replace(/_/g, ' '), 40, currentY);
+        let pdfTitle = title.replace(/_/g, ' ');
+
+        let totalAmountToExport = null;
+        let dateString = '';
+        let showTotal = false;
+
+        if (tableBodyId === 'detalle-pagos_hoy-table-body') {
+            const sumHoy = allDashboardData.details.pagosHoy.reduce((sum, item) => sum + parseFloat(item.monto_pagado || 0), 0);
+            totalAmountToExport = sumHoy.toFixed(2);
+            dateString = formatDateForPdf('hoy');
+            pdfTitle = `Pagos Realizados Hoy - ${dateString}`;
+            showTotal = true;
+        } else if (tableBodyId === 'detalle-pagos_ayer-table-body') {
+            totalAmountToExport = allDashboardData.summary.pagosAyer;
+            dateString = formatDateForPdf('ayer');
+            pdfTitle = `Pagos Realizados Ayer - ${dateString}`;
+            showTotal = true;
+        } else if (tableBodyId === 'detalle-pagos_semana_actual-table-body') {
+            totalAmountToExport = allDashboardData.summary.pagosSemanaActual;
+            dateString = formatDateForPdf('semana_actual');
+            pdfTitle = `Pagos Esta Semana - ${dateString}`;
+            showTotal = true;
+        } else if (tableBodyId === 'detalle-pagos_mes_actual-table-body') {
+            totalAmountToExport = allDashboardData.summary.pagosMesActual;
+            dateString = formatDateForPdf('mes_actual');
+            pdfTitle = `Pagos Este Mes - ${dateString}`;
+            showTotal = true;
+        }
+
+        doc.text(pdfTitle, 40, currentY);
         currentY += 20;
 
-        if (totalAmountToExport !== null) {
+        if (showTotal && totalAmountToExport !== null) {
             doc.setFontSize(12);
             doc.setTextColor(0, 123, 255);
-            let displayText = '';
-            if (isCount) {
-                displayText = `Cantidad Total: ${totalAmountToExport}`;
-            } else {
-                displayText = `Monto Total: S/ ${formatCurrency(totalAmountToExport)}`;
-            }
+            let displayText = `Monto Total: S/ ${formatCurrency(totalAmountToExport)}`;
             doc.text(displayText, 40, currentY);
             currentY += 20;
             doc.setTextColor(30, 30, 30);
@@ -631,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
             margin: { top: currentY + 10 }
         });
 
-        doc.save(`${title}.pdf`);
+        doc.save(`${pdfTitle}.pdf`);
     };
 
     let initialDashboardData = null;
@@ -651,25 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 button.addEventListener('click', function() {
                     const tableId = this.dataset.tableId;
                     const title = this.dataset.title;
-                    let totalAmount = null;
-                    let isCount = false;
-
-                    if (tableId === 'detalle-pagos_hoy-table-body') {
-                        
-                        const sumHoy = initialDashboardData.details.pagosHoy.reduce((sum, item) => sum + parseFloat(item.monto_pagado || 0), 0);
-                        totalAmount = sumHoy.toFixed(2);
-                        isCount = false; // It's a sum of amounts, not a count of payments
-                    } else if (tableId === 'detalle-pagos_ayer-table-body') {
-                        totalAmount = initialDashboardData.summary.pagosAyer;
-                        isCount = false;
-                    } else if (tableId === 'detalle-pagos_semana_actual-table-body') {
-                        totalAmount = initialDashboardData.summary.pagosSemanaActual;
-                        isCount = false;
-                    } else if (tableId === 'detalle-pagos_mes_actual-table-body') {
-                        totalAmount = initialDashboardData.summary.pagosMesActual;
-                        isCount = false;
-                    }
-                    exportTableToPdf(tableId, title, totalAmount, isCount);
+                    exportTableToPdf(tableId, title, initialDashboardData);
                 });
             });
         }

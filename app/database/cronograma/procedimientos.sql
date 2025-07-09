@@ -37,6 +37,7 @@ CALL  obtener_cronogramas_por_contrato(16);
 
 
 
+DROP PROCEDURE IF EXISTS obtener_cronogramas_filtrado;
 DELIMITER //
 CREATE PROCEDURE obtener_cronogramas_filtrado (
     IN filtro_estado VARCHAR(20),
@@ -48,7 +49,8 @@ BEGIN
     FROM vista_cronogramas_detallado
     WHERE (filtro_estado IS NULL OR estado_pago = filtro_estado)
     AND (filtro_id_contrato IS NULL OR idcontrato = filtro_id_contrato)
-    AND (filtro_dni IS NULL OR dni = filtro_dni);
+    AND (filtro_dni IS NULL OR dni = filtro_dni)
+    ORDER BY idcontrato DESC;
 END //
 DELIMITER ;
 

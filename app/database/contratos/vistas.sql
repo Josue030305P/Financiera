@@ -49,6 +49,9 @@ USE financiera;
 DROP VIEW vista_contratos_resumida;
 -- PROCEDIMIENTO PARA LA VISTA DE CONTRATOS
 
+
+
+
 CREATE VIEW vista_contratos_resumida AS
 SELECT
     c.idcontrato AS ID_Contrato,
@@ -78,7 +81,8 @@ LEFT JOIN
 LEFT JOIN
     empresas e_inver ON i.idempresa = e_inver.idempresa
 
-    WHERE c.estado NOT IN ('Eliminado');
+    WHERE c.estado NOT IN ('Eliminado')
+    ORDER BY c.idcontrato DESC;
 
 
 SELECT * FROM vista_contratos_resumida;

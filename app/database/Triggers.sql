@@ -1,3 +1,4 @@
+
 USE financiera;
 DELIMITER //
 CREATE TRIGGER check_unica_version_activa_insert
