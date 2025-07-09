@@ -89,6 +89,7 @@ $links = [
 
   <script src="<?= BASE_URL ?>app/js/script.js"></script>
   <script src="<?= BASE_URL ?>app/js/export-excel.js"></script>
+  <script src="<?= BASE_URL ?>app/js/inactividad.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', e => {
       exportExcel("<?= $tipo  ?>");

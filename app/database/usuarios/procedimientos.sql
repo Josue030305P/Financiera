@@ -86,7 +86,7 @@ BEGIN
 END //
 
 DELIMITER ;
-CALL sp_add_usuario(5,'milenka123','12345','uploads/fotoperfil/jirafales.jpg');
+CALL sp_add_usuario(9,'yessenia123','12345','uploads/fotoperfil/jirafales.jpg');
 
 
 -- UPDATE personas SET estado = 'Usuario' WHERE idpersona = 4;

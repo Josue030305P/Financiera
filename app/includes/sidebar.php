@@ -71,10 +71,10 @@ if (!isset($_SESSION['nombre'])) {
                             style="margin-right: 8px;"></i>Inversionista</a></li>
 
                 <li><a href="<?= BASE_URL ?>app/views/contactibilidad/"><i class="fas fa-address-book"
-                            style="margin-right: 8px;"></i>Lista de contactos</a></li>
+                            style="margin-right: 8px;"></i>Contactos</a></li>
 
                 <li><a href="<?= BASE_URL ?>app/views/cronograma-pagos/"><i class="fas fa-calendar-alt"
-                            style="margin-right: 8px;"></i>Lista de cronogramas</a></li>
+                            style="margin-right: 8px;"></i>Cronogramas</a></li>
 
                 <li><a href="<?= BASE_URL ?>app/views/estadistica/estadistica-leads"><i class="fas fa-chart-line"
                             style="margin-right: 8px;"></i>Estádisticas</a></li>
@@ -91,7 +91,7 @@ if (!isset($_SESSION['nombre'])) {
                 <picture>
                     <source srcset="<?= BASE_URL . 'public/' . $_SESSION['fotoperfil'] ?>">
                     <img src="<?= BASE_URL . 'public/' . $_SESSION['fotoperfil'] ?>" alt="Foto de perfil"
-                        style="width: 100px; height: 100px; object-fit: cover; object-position: center top; border-radius: 50%;">
+                        style="width: 100px; height: 50px; object-fit: cover; object-position: center top; border-radius: 50%;">
                 </picture>
             </span>
             <div class="sidebar-user-info">

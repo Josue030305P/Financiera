@@ -3,6 +3,7 @@ CREATE DATABASE financiera;
 -- DROP DATABASE financiera;
 USE financiera;
 SELECT * FROM usuarios;
+SELECT * FROM vista_cronogramas_detallado;
 
 -- UPDATE usuarios SET passworduser='$2y$10$wv2310nlHt7yRcNXqdahBuxfkVUnIEqdocHYQ62ypkxER95RNXr5C' WHERE idusuario =1
 
@@ -77,6 +78,7 @@ CONSTRAINT fk_distrito  FOREIGN KEY(iddistrito) REFERENCES distritos(iddistrito)
 ALTER TABLE personas MODIFY COLUMN estado ENUM('Activo','Inactivo','Usuario','Colaborador') DEFAULT 'Activo';
 SELECT * FROM personas;
 SELECT * FROM colaboradores;
+SELECT * FROM usuarios;
 SELECT * FROM leads;
 SELECT * FROM contratos;
 
@@ -111,7 +113,7 @@ CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERENCES
 CONSTRAINT fk_idrol FOREIGN KEY(idrol) REFERENCES roles(idrol)
 
 )ENGINE=InnoDB;
---ALTER TABLE colaboradores DROP COLUMN esUsuario;
+-- ALTER TABLE colaboradores DROP COLUMN esUsuario;
 
 ALTER TABLE colaboradores ADD CONSTRAINT fk_id_user_creacion_colab FOREIGN KEY (idusuariocreacion) REFERENCES usuarios(idusuario);
 ALTER TABLE colaboradores MODIFY COLUMN idpersona INT NOT NULL UNIQUE;
@@ -121,6 +123,9 @@ ADD CONSTRAINT fk_id_user_elimin_colab FOREIGN KEY (idusuarioeliminacion) REFERE
 
 
 
+SELECT *  FROM colaboradores;
+SELECT * FROM usuarios;
+SELECT * FROM personas;
 
 CREATE TABLE  usuarios(
 idusuario	 		INT PRIMARY KEY AUTO_INCREMENT,
@@ -128,7 +133,7 @@ idcolaborador    	INT NOT NULL,
 usuario				VARCHAR(40) NOT NULL,
 passworduser		VARCHAR(255) NOT NULL,
 fotoperfil			VARCHAR(140) NULL,
-estado				ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo'
+estado				ENUM('Activo', 'Inactivo') NOT NULL DEFAULT 'Activo',
 created_at 			DATETIME NOT NULL DEFAULT NOW() ,
 updated_at 			DATETIME NULL,
 CONSTRAINT fk_idcolaborador FOREIGN KEY(idcolaborador) REFERENCES colaboradores(idcolaborador)
