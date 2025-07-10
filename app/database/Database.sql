@@ -9,7 +9,7 @@ DELETE FROM pais WHERE idpais = 2;
 SELECT * FROM pais;
 SELECT * FROM personas;
 SELECT * FROM contratos;
-UPDATE contratos SET fechafin = '2025-07-10' WHERE idcontrato = 5;
+UPDATE contratos SET fechafin = '2025-07-11' WHERE idcontrato = 5;
 
 -- UPDATE usuarios SET passworduser='$2y$10$wv2310nlHt7yRcNXqdahBuxfkVUnIEqdocHYQ62ypkxER95RNXr5C' WHERE idusuario =1
 
