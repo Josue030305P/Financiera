@@ -26,6 +26,7 @@ body {
 }
 
 .container {
+    font-family: var(--font-family);
     max-width: 1500px;
     margin: 30px auto;
     padding: 20px;
@@ -205,6 +206,7 @@ body {
 
 /* Tabla */
 .table-wrapper {
+    font-family: var(--font-family);
     overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
@@ -219,6 +221,7 @@ body {
 }
 
 .posts-table thead tr {
+    font-family: var(--font-family);
     background-color: var(--primary-color);
     color: white;
     text-align: left;

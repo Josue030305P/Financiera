@@ -49,8 +49,7 @@ BEGIN
     FROM vista_cronogramas_detallado
     WHERE (filtro_estado IS NULL OR estado_pago = filtro_estado)
     AND (filtro_id_contrato IS NULL OR idcontrato = filtro_id_contrato)
-    AND (filtro_dni IS NULL OR dni = filtro_dni)
-    ORDER BY idcontrato DESC;
+    AND (filtro_dni IS NULL OR dni = filtro_dni);
 END //
 DELIMITER ;
 

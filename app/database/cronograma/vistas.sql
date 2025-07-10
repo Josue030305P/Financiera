@@ -56,9 +56,8 @@ LEFT JOIN
     personas p ON i.idpersona = p.idpersona
     
 WHERE
-    cp.estado NOT IN ('Eliminado')
-ORDER BY
-    c.idcontrato DESC;
+    cp.estado NOT IN ('Eliminado') AND c.estado NOT IN ('Eliminado')
+
 
 
 

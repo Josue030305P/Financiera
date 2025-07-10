@@ -4,6 +4,12 @@ CREATE DATABASE financiera;
 USE financiera;
 SELECT * FROM usuarios;
 SELECT * FROM vista_cronogramas_detallado;
+DELETE FROM pais WHERE idpais = 2;
+-- UPDATE personas SET idpais=1 WHERE idpais=2;
+SELECT * FROM pais;
+SELECT * FROM personas;
+SELECT * FROM contratos;
+UPDATE contratos SET fechafin = '2025-07-10' WHERE idcontrato = 5;
 
 -- UPDATE usuarios SET passworduser='$2y$10$wv2310nlHt7yRcNXqdahBuxfkVUnIEqdocHYQ62ypkxER95RNXr5C' WHERE idusuario =1
 
@@ -12,6 +18,7 @@ idpais 				INT PRIMARY KEY AUTO_INCREMENT,
 pais				VARCHAR(40) NOT NULL DEFAULT 'Perú' UNIQUE
 )ENGINE=InnoDB;
 
+SELECT * FROM paises;
 
 
 CREATE TABLE departamentos(
